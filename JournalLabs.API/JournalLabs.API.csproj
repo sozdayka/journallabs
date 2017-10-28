@@ -111,7 +111,6 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Journal.cs" />
     <Compile Include="Models\LabBlock.cs" />
-    <Compile Include="Models\Lesson.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

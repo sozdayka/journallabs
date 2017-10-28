@@ -10,6 +10,7 @@ namespace JournalLabs.API.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(JournalLabs.API.DAL.ApplicationContext context)

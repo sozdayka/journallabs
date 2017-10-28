@@ -197,3 +197,5 @@ C:\Users\Anuitex-15\source\repos\journallabsbitbucket\JournalLabs.API\obj\Debug\
 C:\Users\Anuitex-15\source\repos\journallabsbitbucket\JournalLabs.API\obj\Debug\JournalLabs.API.csproj.CoreCompileInputs.cache
 C:\Users\Anuitex-15\source\repos\journallabsbitbucket\JournalLabs.API\obj\Debug\JournalLabs.API.dll
 C:\Users\Anuitex-15\source\repos\journallabsbitbucket\JournalLabs.API\obj\Debug\JournalLabs.API.pdb
+C:\Users\Anuitex-15\source\repos\journallabsbitbucket\JournalLabs.API\bin\Dapper.dll
+C:\Users\Anuitex-15\source\repos\journallabsbitbucket\JournalLabs.API\bin\Dapper.xml
