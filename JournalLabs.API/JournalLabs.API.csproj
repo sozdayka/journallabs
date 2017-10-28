@@ -95,11 +95,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BLL\JournalService.cs" />
+    <Compile Include="BLL\LabBlockService.cs" />
+    <Compile Include="BLL\UserService.cs" />
     <Compile Include="Controllers\JournalController.cs" />
+    <Compile Include="Controllers\LabBlockController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\ApplicationContext.cs" />
     <Compile Include="DAL\Repositories\JournalRepository.cs" />
     <Compile Include="DAL\Repositories\LabBlockRepository.cs" />
-    <Compile Include="DAL\Repositories\LessonRepository.cs" />
     <Compile Include="DAL\Repositories\UserRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -122,7 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="BLL\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
