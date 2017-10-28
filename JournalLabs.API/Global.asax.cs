@@ -11,6 +11,7 @@ namespace JournalLabs.API
     {
         protected void Application_Start()
         {
+            AppDomain.CurrentDomain.SetData("DataDirectory", AppDomain.CurrentDomain.BaseDirectory);
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }
