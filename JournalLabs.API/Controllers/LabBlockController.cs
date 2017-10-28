@@ -9,6 +9,7 @@ using JournalLabs.API.Models;
 
 namespace JournalLabs.API.Controllers
 {
+    [RoutePrefix("api/LabBlock")]
     public class LabBlockController : ApiController
     {
         public LabBlockService _labBlockService;

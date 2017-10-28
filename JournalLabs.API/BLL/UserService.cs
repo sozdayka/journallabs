@@ -18,6 +18,7 @@ namespace JournalLabs.API.BLL
 
         public void CreateUser(User userModel)
         {
+            userModel.Id = Guid.NewGuid();
             _userRepository.CreateUser(userModel);
         }
 

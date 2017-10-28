@@ -1,4 +1,4 @@
-﻿import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -30,7 +30,8 @@ export function getOriginUrl() {
 
 export function getRequest() {
   // the Request object only lives on the server
-  return { cookie: document.cookie };
+  //return { cookie: document.cookie };
+  return "http://localhost:54466";
 }
 
 @NgModule({

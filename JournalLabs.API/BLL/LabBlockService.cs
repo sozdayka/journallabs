@@ -18,6 +18,7 @@ namespace JournalLabs.API.BLL
 
         public void CreateLabBlock(LabBlock labBlockModel)
         {
+            labBlockModel.Id = Guid.NewGuid();
             _labBlockRepository.CreateLabBlock(labBlockModel);
         }
 

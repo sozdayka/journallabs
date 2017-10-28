@@ -27,6 +27,8 @@ import { NgxBootstrapComponent } from './containers/ngx-bootstrap-demo/ngx-boots
 
 import { LinkService } from './shared/link.service';
 import { UserService } from './shared/user.service';
+import { LabBlockService } from './shared/lab-block.service';
+import { JournalService } from './shared/journal.service';
 import { ConnectionResolver } from './shared/route.resolver';
 import { ORIGIN_URL } from './shared/constants/baseurl.constants';
 import { TransferHttpModule } from '../modules/transfer-http/transfer-http.module';
@@ -195,7 +197,9 @@ export const SERVER_RENDER_PROVIDERS = [
     UserService,
     ConnectionResolver,
     TranslateModule,
-    SERVER_RENDER_PROVIDERS
+    SERVER_RENDER_PROVIDERS,
+    LabBlockService,
+    JournalService
   ]
 })
 export class AppModuleShared {

@@ -19,6 +19,7 @@ namespace JournalLabs.API.BLL
         }
         public void CreateJournal(Journal journalModel)
         {
+            journalModel.Id = Guid.NewGuid();
             _journalRepository.CreateJournal(journalModel);
         }
 

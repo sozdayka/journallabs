@@ -9,6 +9,7 @@ using JournalLabs.API.Models;
 
 namespace JournalLabs.API.Controllers
 {
+    [RoutePrefix("api/User")]
     public class UserController : ApiController
     {
         public UserService _userService;

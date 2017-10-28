@@ -1,4 +1,4 @@
-﻿import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { ORIGIN_URL } from './constants/baseurl.constants';
@@ -21,22 +21,22 @@ export class UserService {
         //      The Client then re-uses this Http result instead of hitting the server again!
 
         //  NOTE : transferHttp also automatically does .map(res => res.json()) for you, so no need for these calls
-        return this.transferHttp.get(`${this.baseUrl}/api/users`);
+      return this.transferHttp.get(`${this.baseUrl}/api/User/GetUsers`);
     }
 
-    getUser(user: IUser): Observable<IUser> {
-        return this.transferHttp.get(`${this.baseUrl}/api/users/` + user.id);
+    getUser(id: string): Observable<IUser> {
+      return this.transferHttp.get(`${this.baseUrl}/api/User/GetUserById` + id);
     }
 
-    deleteUser(user: IUser): Observable<any> {
-        return this.http.delete(`${this.baseUrl}/api/users/` + user.id);
+    deleteUser(id: string): Observable<any> {
+      return this.http.delete(`${this.baseUrl}/api/User/DeleteUserById` + id);
     }
 
     updateUser(user: IUser): Observable<any> {
-        return this.http.put(`${this.baseUrl}/api/users/` + user.id, user);
+      return this.http.post(`${this.baseUrl}/api/User/UpdateUser`, user);
     }
 
-    addUser(newUserName: string): Observable<any> {
-        return this.http.post(`${this.baseUrl}/api/users`, { name: newUserName })
+    addUser(user: IUser): Observable<any> {
+      return this.http.post(`${this.baseUrl}/api/User/CreateUser`, user)
     }
 }
