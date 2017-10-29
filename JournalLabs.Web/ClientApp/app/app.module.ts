@@ -30,6 +30,8 @@ import { JournalComponent } from './containers/journal/journal.component';
 import { RowContentComponent } from './containers/journal/row-content.component';
 import { LabBlockService } from './shared/lab-block.service';
 import { JournalService } from './shared/journal.service';
+import { KindOfWorkService } from './shared/kind-of-work.service';
+import { StudentService } from './shared/student.service';
 
 export function createTranslateLoader(http: Http, baseHref) {
     // Temporary Azure hack
@@ -169,7 +171,9 @@ export function createTranslateLoader(http: Http, baseHref) {
         // ConnectionResolver,
         TranslateModule,
         LabBlockService,
-        JournalService
+        JournalService,
+        StudentService,
+        LabBlockService
     ]
 })
 export class AppModuleShared {

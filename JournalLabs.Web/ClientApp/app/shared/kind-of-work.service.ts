@@ -7,7 +7,7 @@ import { TransferHttp } from '../../modules/transfer-http/transfer-http';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class LabBlockService {
+export class KindOfWorkService {
   constructor(
     private transferHttp: TransferHttp, // Use only for GETS that you want re-used between Server render -> Client render
     private http: Http, // Use for everything else
