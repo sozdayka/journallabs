@@ -9,6 +9,7 @@ namespace JournalLabs.API.Models
     {
         public Guid Id { get; set; }
         public Guid TeacherId { get; set; }
+        public string LessonName { get; set; }
         public virtual List<LabBlock> LabBlocks { get; set; }
         public virtual User Teacher { get; set; }
     }

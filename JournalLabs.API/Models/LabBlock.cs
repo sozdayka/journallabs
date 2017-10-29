@@ -12,9 +12,11 @@ namespace JournalLabs.API.Models
         public int FirstMark { get; set; }
         public DateTime SecondDate { get; set; }
         public int SecondMark { get; set; }
-        public string UserFIO { get; set; }
-        public string LessonName { get; set; }
+        public Guid StudentId { get; set; }
+        public Guid KindOfWorkId { get; set; }
         public Guid JournalId { get; set; }
         public virtual Journal Journal { get; set; }
+        public virtual Student Student { get; set; }
+        public virtual KindOfWork KindOfWork { get; set; }
     }
 }
