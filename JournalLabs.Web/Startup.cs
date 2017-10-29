@@ -7,10 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using JournalLabs.Web.Data;
+using AspCoreServer.Data;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace JournalLabs.Web
+namespace AspCoreServer
 {
   public class Startup
   {

@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using JournalLabs.Web.Models;
-using JournalLabs.Web;
+using AspCoreServer.Models;
+using AspCoreServer;
 
-namespace JournalLabs.Web.Data
+namespace AspCoreServer.Data
 {
     public static class DbInitializer
     {

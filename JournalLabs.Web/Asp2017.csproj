@@ -4,8 +4,6 @@
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
-    <AssemblyName>JournalLabs.Web</AssemblyName>
-    <RootNamespace>JournalLabs.Web</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
   <!-- New Meta Package has SpaServices in It -->
@@ -17,13 +15,6 @@
   </ItemGroup>
   <ItemGroup>
     <!-- Files not to show in IDE -->
-    <None Remove="ClientApp\app\containers\journal.component.ts" />
-    <None Remove="ClientApp\app\containers\journal\row-content.component.ts" />
-    <None Remove="ClientApp\app\containers\journal\table-data.ts" />
-    <None Remove="ClientApp\app\models\Journal.ts" />
-    <None Remove="ClientApp\app\models\LabBlock.ts" />
-    <None Remove="ClientApp\app\shared\journal.service.ts" />
-    <None Remove="ClientApp\app\shared\lab-block.service.ts" />
     <None Remove="yarn.lock" />
     <Content Remove="wwwroot\dist\**" />
     <None Remove="ClientApp\dist\**" />
@@ -31,15 +22,6 @@
 
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
     <Content Remove="ClientApp\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\app\containers\journal\journal.component.ts" />
-    <TypeScriptCompile Include="ClientApp\app\containers\journal\row-content.component.ts" />
-    <TypeScriptCompile Include="ClientApp\app\containers\journal\table-data.ts" />
-    <TypeScriptCompile Include="ClientApp\app\models\Journal.ts" />
-    <TypeScriptCompile Include="ClientApp\app\models\LabBlock.ts" />
-    <TypeScriptCompile Include="ClientApp\app\shared\journal.service.ts" />
-    <TypeScriptCompile Include="ClientApp\app\shared\lab-block.service.ts" />
   </ItemGroup>
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
     <!-- Ensure Node.js is installed -->

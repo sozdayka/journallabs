@@ -1,7 +1,7 @@
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace JournalLabs.Web.Models
+namespace AspCoreServer.Models
 {
     public class User
     {

@@ -1,5 +1,7 @@
 # ASP.NET Core 2.0 & Angular 4 (+) advanced starter - with Server-side prerendering (for Angular SEO)!
 
+> [(upcoming) Angular 5.0 demo Branch Here](https://github.com/MarkPieszak/aspnetcore-angular2-universal/tree/angular-5.0-updates)
+
 <p align="center">
     <img src="./docs/architecture.png" alt="ASP.NET Core 2.0 Angular 4+ Starter" title="ASP.NET Core 2.0 Angular 4+ Starter">
 </p>
@@ -337,7 +339,7 @@ Well now, your Client-side Angular will take over, and you'll have a fully funct
  - **`window`**, **`document`**, **`navigator`**, and other browser types - _do not exist on the server_ - so using them, or any library that uses them (jQuery for example) will not work. You do have some options, if you truly need some of this functionality:
     - If you need to use them, consider limiting them to only your client and wrapping them situationally. You can use the Object injected using the PLATFORM_ID token to check whether the current platform is browser or server. 
     
-    ```
+    ```typescript
      import { PLATFORM_ID } from '@angular/core';
      import { isPlatformBrowser, isPlatformServer } from '@angular/common';
      
@@ -358,9 +360,9 @@ Well now, your Client-side Angular will take over, and you'll have a fully funct
      - Try to *limit or* **avoid** using **`setTimeout`**. It will slow down the server-side rendering process. Make sure to remove them [`ngOnDestroy`](https://angular.io/docs/ts/latest/api/core/index/OnDestroy-class.html) in Components.
    - Also for RxJs timeouts, make sure to _cancel_ their stream on success, for they can slow down rendering as well.
  - **Don't manipulate the nativeElement directly**. Use the _Renderer2_. We do this to ensure that in any environment we're able to change our view.
-```
-constructor(element: ElementRef, renderer: Renderer) {
-  renderer.setElementStyle(element.nativeElement, 'font-size', 'x-large');
+```typescript
+constructor(element: ElementRef, renderer: Renderer2) {
+  this.renderer.setStyle(element.nativeElement, 'font-size', 'x-large');
 }
 ```
  - The application runs XHR requests on the server & once again on the Client-side (when the application bootstraps)
@@ -442,9 +444,11 @@ Copyright (c) 2016-2017 [Mark Pieszak](https://github.com/MarkPieszak)
 
 ----
 
-# Looking for Angular & ASP.NET Consulting / Training / support?
+# DevHelp.Online - Angular & ASP.NET - Consulting | Training | Development
 
-Contact me at <mpieszak84@gmail.com>, and let's talk about your projects needs!
+Check out **[www.DevHelp.Online](http://DevHelp.Online)** for more info!
+
+Contact us at <hello@devhelp.online>, and let's talk about your projects needs.
 
 ----
 

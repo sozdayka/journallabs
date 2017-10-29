@@ -1,7 +1,7 @@
-using JournalLabs.Web.Models;
+﻿using AspCoreServer.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace JournalLabs.Web.Data
+namespace AspCoreServer.Data
 {
     public class SpaDbContext : DbContext
     {

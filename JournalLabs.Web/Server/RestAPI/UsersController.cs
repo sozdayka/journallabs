@@ -1,12 +1,12 @@
-using JournalLabs.Web.Data;
-using JournalLabs.Web.Models;
+﻿using AspCoreServer.Data;
+using AspCoreServer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JournalLabs.Web.Controllers
+namespace AspCoreServer.Controllers
 {
   [Route("api/[controller]")]
   public class UsersController : Controller

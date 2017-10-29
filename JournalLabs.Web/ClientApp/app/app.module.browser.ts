@@ -1,9 +1,7 @@
-import { NgModule } from '@angular/core';
+﻿import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { SignalRModule, SignalRConfiguration } from 'ng2-signalr';
 
 import { ORIGIN_URL } from './shared/constants/baseurl.constants';
 import { AppModuleShared } from './app.module';
@@ -13,25 +11,13 @@ import { BrowserTransferStateModule } from '../modules/transfer-state/browser-tr
 
 import { BrowserPrebootModule } from 'preboot/browser';
 
-export function createConfig(): SignalRConfiguration {
-    const signalRConfig = new SignalRConfiguration();
-
-    signalRConfig.hubName = 'Ng2SignalRHub';
-    signalRConfig.qs = { user: 'donald' };
-    signalRConfig.url = 'http://ng2-signalr-backend.azurewebsites.net/';
-    signalRConfig.logging = true;
-
-    return signalRConfig;
-}
-
 export function getOriginUrl() {
   return window.location.origin;
 }
 
 export function getRequest() {
   // the Request object only lives on the server
-  //return { cookie: document.cookie };
-  return "http://localhost:54466";
+  return { cookie: document.cookie };
 }
 
 @NgModule({
@@ -45,9 +31,8 @@ export function getRequest() {
         BrowserTransferStateModule,
 
         // Our Common AppModule
-        AppModuleShared,
+        AppModuleShared
 
-        SignalRModule.forRoot(createConfig)
     ],
     providers: [
         {
