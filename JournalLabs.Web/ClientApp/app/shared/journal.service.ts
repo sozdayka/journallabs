@@ -15,7 +15,7 @@ export class JournalService {
 
   }
 
-  getJournals(): Observable<IJournal[]> {
+  getJournals(): Observable<any> {
     // ** TransferHttp example / concept **
     //    - Here we make an Http call on the server, save the result on the window object and pass it down with the SSR,
     //      The Client then re-uses this Http result instead of hitting the server again!
@@ -24,7 +24,7 @@ export class JournalService {
     return this.transferHttp.get(`${this.baseUrl}/api/Journal/GetJournals`);
   }
 
-  getJournal(id: string): Observable<IJournal> {
+  getJournal(id: string): Observable<any> {
     return this.transferHttp.get(`${this.baseUrl}/api/Journal/GetJournalById` + id);
   }
 

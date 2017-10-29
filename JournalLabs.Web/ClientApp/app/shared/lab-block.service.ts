@@ -15,7 +15,7 @@ export class LabBlockService {
 
   }
 
-  getLabBlocks(): Observable<ILabBlock[]> {
+  getLabBlocks(): Observable<any> {
     // ** TransferHttp example / concept **
     //    - Here we make an Http call on the server, save the result on the window object and pass it down with the SSR,
     //      The Client then re-uses this Http result instead of hitting the server again!
@@ -24,7 +24,7 @@ export class LabBlockService {
     return this.transferHttp.get(`${this.baseUrl}/api/LabBlock/GetLabBlocks`);
   }
 
-  getLabBlock(id: string): Observable<ILabBlock> {
+  getLabBlock(id: string): Observable<any> {
     return this.transferHttp.get(`${this.baseUrl}/api/LabBlock/GetLabBlockById` + id);
   }
 

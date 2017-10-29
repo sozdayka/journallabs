@@ -199,3 +199,9 @@ C:\Users\Anuitex-15\source\repos\journallabsbitbucket\JournalLabs.API\obj\Debug\
 C:\Users\Anuitex-15\source\repos\journallabsbitbucket\JournalLabs.API\obj\Debug\JournalLabs.API.pdb
 C:\Users\Anuitex-15\source\repos\journallabsbitbucket\JournalLabs.API\bin\Dapper.dll
 C:\Users\Anuitex-15\source\repos\journallabsbitbucket\JournalLabs.API\bin\Dapper.xml
+C:\Users\Anuitex-15\Source\Repos\journallabs\JournalLabs.API\bin\Dapper.dll
+C:\Users\Anuitex-15\Source\Repos\journallabs\JournalLabs.API\bin\EntityFramework.dll
+C:\Users\Anuitex-15\Source\Repos\journallabs\JournalLabs.API\bin\EntityFramework.SqlServer.dll
+C:\Users\Anuitex-15\Source\Repos\journallabs\JournalLabs.API\bin\Dapper.xml
+C:\Users\Anuitex-15\Source\Repos\journallabs\JournalLabs.API\bin\EntityFramework.xml
+C:\Users\Anuitex-15\Source\Repos\journallabs\JournalLabs.API\bin\EntityFramework.SqlServer.xml

@@ -15,7 +15,7 @@ export class UserService {
 
     }
 
-    getUsers(): Observable<IUser[]> {
+    getUsers(): Observable<any> {
         // ** TransferHttp example / concept **
         //    - Here we make an Http call on the server, save the result on the window object and pass it down with the SSR,
         //      The Client then re-uses this Http result instead of hitting the server again!
@@ -24,7 +24,7 @@ export class UserService {
       return this.transferHttp.get(`${this.baseUrl}/api/User/GetUsers`);
     }
 
-    getUser(id: string): Observable<IUser> {
+    getUser(id: string): Observable<any> {
       return this.transferHttp.get(`${this.baseUrl}/api/User/GetUserById` + id);
     }
 
