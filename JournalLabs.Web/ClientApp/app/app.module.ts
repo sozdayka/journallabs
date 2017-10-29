@@ -32,6 +32,9 @@ import { JournalService } from './shared/journal.service';
 import { ConnectionResolver } from './shared/route.resolver';
 import { ORIGIN_URL } from './shared/constants/baseurl.constants';
 import { TransferHttpModule } from '../modules/transfer-http/transfer-http.module';
+import { Ng2TableModule } from 'ng2-expanding-table/components/ng-table-module';
+import { JournalComponent } from './containers/journal/journal.component'; 
+import { RowContentComponent } from './containers/journal/row-content.component';
 
 export function createTranslateLoader(http: Http, baseHref) {
   // Temporary Azure hack
@@ -80,7 +83,9 @@ export const SERVER_RENDER_PROVIDERS = [
     HomeComponent,
     ChatComponent,
     NotFoundComponent,
-    NgxBootstrapComponent
+    NgxBootstrapComponent,
+    JournalComponent,
+    RowContentComponent
   ],
   imports: [
     CommonModule,
@@ -89,7 +94,7 @@ export const SERVER_RENDER_PROVIDERS = [
     ServerModule,
     BrowserAnimationsModule,
     Ng2BootstrapModule.forRoot(), // You could also split this up if you don't want the Entire Module imported
-
+    Ng2TableModule,
     TransferHttpModule, // Our Http TransferData method
 
     // i18n support
@@ -126,10 +131,10 @@ export const SERVER_RENDER_PROVIDERS = [
         }
       },
       {
-        path: 'counter', component: CounterComponent,
+        path: 'journal', component: JournalComponent,
         data: {
-          title: 'Counter',
-          meta: [{ name: 'description', content: 'This is an Counter page Description!' }],
+          title: 'Journal',
+          meta: [{ name: 'description', content: 'This is an Journal page Description!' }],
           links: [
             { rel: 'canonical', href: 'http://blogs.example.com/counter/something' },
             { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/counter' }

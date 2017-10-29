@@ -17,6 +17,9 @@
   </ItemGroup>
   <ItemGroup>
     <!-- Files not to show in IDE -->
+    <None Remove="ClientApp\app\containers\journal.component.ts" />
+    <None Remove="ClientApp\app\containers\journal\row-content.component.ts" />
+    <None Remove="ClientApp\app\containers\journal\table-data.ts" />
     <None Remove="ClientApp\app\models\Journal.ts" />
     <None Remove="ClientApp\app\models\LabBlock.ts" />
     <None Remove="ClientApp\app\shared\journal.service.ts" />
@@ -30,6 +33,9 @@
     <Content Remove="ClientApp\**" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\containers\journal\journal.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\containers\journal\row-content.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\containers\journal\table-data.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\Journal.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\LabBlock.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\journal.service.ts" />
