@@ -18,28 +18,32 @@ namespace JournalLabs.API.Controllers
             _userService = new UserService();
         }
         [Route("GetUsers")]
-        public IHttpActionResult GetJournals()
+        public IHttpActionResult GetUsers()
         {
             return Ok("Good");
         }
         [Route("CreateUser")]
         public IHttpActionResult CreateUser(User user)
         {
+            _userService.CreateUser(user);
             return Ok("Good");
         }
         [Route("UpdateUser")]
         public IHttpActionResult UpdateUser(User user)
         {
+            _userService.UpdateUser(user);
             return Ok("Good");
         }
         [Route("GetUserById")]
         public IHttpActionResult GetUserById(string Id)
         {
-            return Ok("Good");
+            var result = _userService.GetUserById(Id);
+            return Ok(result);
         }
         [Route("DeleteUserById")]
         public IHttpActionResult DeleteUserById(string Id)
         {
+            _userService.DeleteUserById(Id);
             return Ok("Good");
         }
     }

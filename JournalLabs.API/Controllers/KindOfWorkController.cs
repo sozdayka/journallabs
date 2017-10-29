@@ -18,28 +18,32 @@ namespace JournalLabs.API.Controllers
             _kindOfWorkService = new KindOfWorkService();
         }
         [Route("GetKindOfWorks")]
-        public IHttpActionResult GetJournals()
+        public IHttpActionResult GetKindOfWorks()
         {
             return Ok("Good");
         }
         [Route("CreateKindOfWork")]
         public IHttpActionResult CreateKindOfWork(KindOfWork kindOfWork)
         {
+            _kindOfWorkService.CreateKindOfWork(kindOfWork);
             return Ok("Good");
         }
         [Route("UpdateKindOfWork")]
         public IHttpActionResult UpdateKindOfWork(KindOfWork kindOfWork)
         {
+            _kindOfWorkService.UpdateKindOfWork(kindOfWork);
             return Ok("Good");
         }
         [Route("GetKindOfWorkById")]
         public IHttpActionResult GetKindOfWorkById(string Id)
         {
-            return Ok("Good");
+            var result = _kindOfWorkService.GetKindOfWorkById(Id);
+            return Ok(result);
         }
         [Route("DeleteKindOfWorkById")]
         public IHttpActionResult DeleteKindOfWorkById(string Id)
         {
+            _kindOfWorkService.DeleteKindOfWorkById(Id);
             return Ok("Good");
         }
     }

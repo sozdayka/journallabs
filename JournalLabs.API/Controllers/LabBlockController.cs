@@ -18,28 +18,32 @@ namespace JournalLabs.API.Controllers
             _labBlockService = new LabBlockService();
         }
         [Route("GetLabBlocks")]
-        public IHttpActionResult GetJournals()
+        public IHttpActionResult GetLabBlocks()
         {
             return Ok("Good");
         }
         [Route("CreateLabBlock")]
         public IHttpActionResult CreateLabBlock(LabBlock labBlock)
         {
+            _labBlockService.CreateLabBlock(labBlock);
             return Ok("Good");
         }
         [Route("UpdateLabBlock")]
         public IHttpActionResult UpdateLabBlock(LabBlock labBlock)
         {
+            _labBlockService.UpdateLabBlock(labBlock);
             return Ok("Good");
         }
         [Route("GetLabBlockById")]
         public IHttpActionResult GetLabBlockById(string Id)
         {
-            return Ok("Good");
+            var result = _labBlockService.GetLabBlockById(Id);
+            return Ok(result);
         }
         [Route("DeleteLabBlockById")]
         public IHttpActionResult DeleteLabBlockById(string Id)
         {
+            _labBlockService.DeleteLabBlockById(Id);
             return Ok("Good");
         }
     }

@@ -19,27 +19,31 @@ namespace JournalLabs.API.Controllers
         }
         [Route("GetJournals")]
         public IHttpActionResult GetJournals()
-        {
+        {           
             return Ok("Good");
         }
         [Route("CreateJournal")]
         public IHttpActionResult CreateJournal(Journal journal)
         {
+             _journalService.CreateJournal(journal);
             return Ok("Good");
         }
         [Route("UpdateJournal")]
         public IHttpActionResult UpdateJournal(Journal journal)
         {
+            _journalService.UpdateJournal(journal);
             return Ok("Good");
         }
         [Route("GetJournalById")]
         public IHttpActionResult GetJournalById(string Id)
         {
-            return Ok("Good");
+            var result = _journalService.GetJournalById(Id);
+            return Ok(result);
         }
         [Route("DeleteJournalById")]
         public IHttpActionResult DeleteJournalById(string Id)
         {
+            _journalService.DeleteJournalById(Id);
             return Ok("Good");
         }
     }
