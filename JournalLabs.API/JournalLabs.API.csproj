@@ -96,14 +96,20 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BLL\JournalService.cs" />
+    <Compile Include="BLL\StudentService.cs" />
     <Compile Include="BLL\LabBlockService.cs" />
+    <Compile Include="BLL\KindOfWorkService.cs" />
     <Compile Include="BLL\UserService.cs" />
     <Compile Include="Controllers\JournalController.cs" />
+    <Compile Include="Controllers\KindOfWorkController.cs" />
     <Compile Include="Controllers\LabBlockController.cs" />
+    <Compile Include="Controllers\SudentController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\ApplicationContext.cs" />
     <Compile Include="DAL\Repositories\JournalRepository.cs" />
+    <Compile Include="DAL\Repositories\StudentRepository.cs" />
     <Compile Include="DAL\Repositories\LabBlockRepository.cs" />
+    <Compile Include="DAL\Repositories\KindOfWorkRepository.cs" />
     <Compile Include="DAL\Repositories\UserRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
