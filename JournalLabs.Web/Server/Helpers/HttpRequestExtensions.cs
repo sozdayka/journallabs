@@ -1,4 +1,4 @@
-using Asp2017.Server.Models;
+using JournalLabs.Web.Server.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Asp2017.Server.Helpers
+namespace JournalLabs.Web.Server.Helpers
 {
     public static class HttpRequestExtensions
     {

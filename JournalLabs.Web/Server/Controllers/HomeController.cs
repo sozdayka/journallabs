@@ -1,4 +1,4 @@
-using Asp2017.Server.Helpers;
+using JournalLabs.Web.Server.Helpers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Http;
 using System.Diagnostics;
 using System;
-using Asp2017.Server.Models;
+using JournalLabs.Web.Server.Models;
 
 namespace AspCoreServer.Controllers
 {

@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JournalLabs.API", "JournalLabs.API\JournalLabs.API.csproj", "{6C5ACFE3-9609-4396-BD1B-6A4B9B284AE7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asp2017", "JournalLabs.Web\Asp2017.csproj", "{71D3AD41-E8EF-4B89-808D-AEAABA30EBAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JournalLabs.Web", "JournalLabs.Web\JournalLabs.Web.csproj", "{71D3AD41-E8EF-4B89-808D-AEAABA30EBAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
