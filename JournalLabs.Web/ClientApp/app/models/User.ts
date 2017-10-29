@@ -1,4 +1,6 @@
-﻿export interface IUser {
-    id: number;
-    name: string;
+export interface IUser {
+   Id: string;
+   Login: string;
+   Password: string;
+   Role: string;
 }

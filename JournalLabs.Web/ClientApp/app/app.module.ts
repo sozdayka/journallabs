@@ -19,12 +19,17 @@ import { CounterComponent } from './containers/counter/counter.component';
 // import { ChatComponent } from './containers/chat/chat.component';
 import { NotFoundComponent } from './containers/not-found/not-found.component';
 import { NgxBootstrapComponent } from './containers/ngx-bootstrap-demo/ngx-bootstrap.component';
+import { Ng2TableModule } from 'ng2-expanding-table/components/ng-table-module';
 
 import { LinkService } from './shared/link.service';
 import { UserService } from './shared/user.service';
 // import { ConnectionResolver } from './shared/route.resolver';
 import { ORIGIN_URL } from './shared/constants/baseurl.constants';
 import { TransferHttpModule } from '../modules/transfer-http/transfer-http.module';
+import { JournalComponent } from './containers/journal/journal.component';
+import { RowContentComponent } from './containers/journal/row-content.component';
+import { LabBlockService } from './shared/lab-block.service';
+import { JournalService } from './shared/journal.service';
 
 export function createTranslateLoader(http: Http, baseHref) {
     // Temporary Azure hack
@@ -45,7 +50,9 @@ export function createTranslateLoader(http: Http, baseHref) {
         HomeComponent,
         // ChatComponent,
         NotFoundComponent,
-        NgxBootstrapComponent
+      NgxBootstrapComponent,
+      JournalComponent,
+      RowContentComponent
     ],
     imports: [
         CommonModule,
@@ -54,6 +61,7 @@ export function createTranslateLoader(http: Http, baseHref) {
         Ng2BootstrapModule.forRoot(), // You could also split this up if you don't want the Entire Module imported
 
         TransferHttpModule, // Our Http TransferData method
+        Ng2TableModule,
 
         // i18n support
         TranslateModule.forRoot({
@@ -121,7 +129,17 @@ export function createTranslateLoader(http: Http, baseHref) {
                     ]
                 }
             },
-
+            {
+              path: 'journal', component: JournalComponent,
+              data: {
+                title: 'Journal',
+                meta: [{ name: 'description', content: 'journal' }],
+                links: [
+                  { rel: 'canonical', href: 'http://blogs.example.com/bootstrap/something' },
+                  { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/bootstrap-demo' }
+                ]
+              }
+            },
             { path: 'lazy', loadChildren: './containers/lazy/lazy.module#LazyModule'},
 
             {
@@ -134,7 +152,10 @@ export function createTranslateLoader(http: Http, baseHref) {
                         { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/bootstrap-demo' }
                     ]
                 }
-            }
+            },
+          { path: 'lazy', loadChildren: './containers/lazy/lazy.module#LazyModule' }
+
+          
         ], {
           // Router options
           useHash: false,
@@ -146,7 +167,9 @@ export function createTranslateLoader(http: Http, baseHref) {
         LinkService,
         UserService,
         // ConnectionResolver,
-        TranslateModule
+        TranslateModule,
+        LabBlockService,
+        JournalService
     ]
 })
 export class AppModuleShared {
