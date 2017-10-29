@@ -2,7 +2,7 @@ import { NgModule, Inject } from '@angular/core';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { CommonModule, APP_BASE_HREF } from '@angular/common';
 import { HttpModule, Http } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgModel } from '@angular/forms';
 
 import { Ng2BootstrapModule } from 'ngx-bootstrap';
 
@@ -15,7 +15,7 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './containers/home/home.component';
 import { UsersComponent } from './containers/users/users.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
-import { CounterComponent } from './containers/counter/counter.component';
+import { AdminComponent } from './containers/admin/admin.component';
 // import { ChatComponent } from './containers/chat/chat.component';
 import { NotFoundComponent } from './containers/not-found/not-found.component';
 import { NgxBootstrapComponent } from './containers/ngx-bootstrap-demo/ngx-bootstrap.component';
@@ -46,7 +46,7 @@ export function createTranslateLoader(http: Http, baseHref) {
     declarations: [
         AppComponent,
         NavMenuComponent,
-        CounterComponent,
+        AdminComponent,
         UsersComponent,
         UserDetailComponent,
         HomeComponent,
@@ -99,10 +99,10 @@ export function createTranslateLoader(http: Http, baseHref) {
                 }
             },
             {
-                path: 'counter', component: CounterComponent,
+                path: 'admin', component: AdminComponent,
                 data: {
-                    title: 'Counter',
-                    meta: [{ name: 'description', content: 'This is an Counter page Description!' }],
+                    title: 'Admin',
+                    meta: [{ name: 'description', content: 'This is an Admin page Description!' }],
                     links: [
                         { rel: 'canonical', href: 'http://blogs.example.com/counter/something' },
                         { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/counter' }

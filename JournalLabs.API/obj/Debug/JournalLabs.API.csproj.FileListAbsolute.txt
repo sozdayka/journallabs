@@ -205,3 +205,6 @@ C:\Users\Anuitex-15\Source\Repos\journallabs\JournalLabs.API\bin\EntityFramework
 C:\Users\Anuitex-15\Source\Repos\journallabs\JournalLabs.API\bin\Dapper.xml
 C:\Users\Anuitex-15\Source\Repos\journallabs\JournalLabs.API\bin\EntityFramework.xml
 C:\Users\Anuitex-15\Source\Repos\journallabs\JournalLabs.API\bin\EntityFramework.SqlServer.xml
+C:\Users\Anuitex-15\source\repos\JournalLabs\JournalLabs.API\bin\System.Web.Cors.dll
+C:\Users\Anuitex-15\source\repos\JournalLabs\JournalLabs.API\bin\System.Web.Http.Cors.dll
+C:\Users\Anuitex-15\source\repos\JournalLabs\JournalLabs.API\bin\System.Web.Http.Cors.xml

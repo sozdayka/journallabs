@@ -1,10 +1,11 @@
 import { Injectable, Inject } from '@angular/core';
-import { Http, URLSearchParams } from '@angular/http';
+import { Http, URLSearchParams, Headers, RequestOptions } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { ORIGIN_URL } from './constants/baseurl.constants';
 import { IUser } from '../models/User';
 import { TransferHttp } from '../../modules/transfer-http/transfer-http';
 import { Observable } from 'rxjs/Observable';
+import { REQUEST } from './constants/request';
 
 @Injectable()
 export class UserService {
@@ -12,7 +13,7 @@ export class UserService {
     private transferHttp:
     TransferHttp, // Use only for GETS that you want re-used between Server render -> Client render
     private http: Http, // Use for everything else
-    @Inject(ORIGIN_URL) private baseUrl: string) {
+    @Inject(REQUEST) private baseUrl: string) {
 
   }
 
@@ -38,6 +39,11 @@ export class UserService {
   }
 
   addUser(user: IUser): Observable<any> {
-    return this.http.post(`${this.baseUrl}/api/User/CreateUser`, user);
+    //let headers = new Headers();
+    //headers.append('Content-Type', 'application/json');
+    //headers.append('Accept', 'application/json');
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(`${this.baseUrl}/api/User/CreateUser`, user, options);
   }
 }

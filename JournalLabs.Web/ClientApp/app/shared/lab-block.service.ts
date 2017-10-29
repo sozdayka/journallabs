@@ -5,13 +5,14 @@ import { ORIGIN_URL } from './constants/baseurl.constants';
 import { ILabBlock } from '../models/LabBlock';
 import { TransferHttp } from '../../modules/transfer-http/transfer-http';
 import { Observable } from 'rxjs/Observable';
+import { REQUEST } from './constants/request';
 
 @Injectable()
 export class LabBlockService {
   constructor(
     private transferHttp: TransferHttp, // Use only for GETS that you want re-used between Server render -> Client render
     private http: Http, // Use for everything else
-    @Inject(ORIGIN_URL) private baseUrl: string) {
+    @Inject(REQUEST) private baseUrl: string) {
 
   }
 

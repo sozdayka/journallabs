@@ -7,7 +7,7 @@ namespace JournalLabs.API.Models
 {
     public class LabBlock
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public DateTime FirstDate { get; set; }
         public int FirstMark { get; set; }
         public DateTime SecondDate { get; set; }
