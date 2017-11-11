@@ -9,6 +9,11 @@ import { RowContentComponent } from './row-content.component';
 })
 export class TeacherJournalsComponent implements OnInit {
   public rows: Array<any> = [];
+  public isNewJournal: boolean = false;
+  public lessonName: string = "";
+  public studentsCount: number = 0;
+  public labBlocksCount: number = 0;
+
   public columns: Array<any> = [
     { title: 'Name', name: 'name', filtering: { filterString: '', placeholder: 'Filter by name' } },
     { title: 'Office', name: 'office', editable: true, options: ["France", "Venezuela", "Macao"] },

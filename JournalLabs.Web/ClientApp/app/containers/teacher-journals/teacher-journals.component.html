@@ -1,4 +1,20 @@
-<div class="row">
+<a *ngIf="!isNewJournal" (click)="isNewJournal=true">Create new journal</a>
+<br>
+<div *ngIf="isNewJournal">
+  <h1>New journal</h1>
+  <br />
+  <p>Lesson Name:</p>
+  <input type="text" [(ngModel)]="lessonName" name="LessonName" />
+  <br />
+  <p>Input count students:</p>
+  <input type="text" [(ngModel)]="studentsCount" name="StudentsCount"/>
+  <br />
+  <p>Input count lab blocks:</p>
+  <input type="text" [(ngModel)]="labBlocksCount" name="LabBlocksCount"/>
+  <br />
+  <button (click)="isNewJournal=!isNewJournal">Create journal</button><!--(click)="SignIn()"-->
+</div>
+<div *ngIf="!isNewJournal" class="row">
   <div class="col-md-4">
     <input *ngIf="config.filtering" placeholder="Filter all columns"
            [ngTableFiltering]="config.filtering"
@@ -7,7 +23,7 @@
   </div>
 </div>
 <br>
-<ng-table [config]="config"
+<ng-table *ngIf="!isNewJournal" [config]="config"
           (tableChanged)="onChangeTable(config)"
           (cellClicked)="onCellClick($event)"
           (scrolledDown)="onScrollDown()"
