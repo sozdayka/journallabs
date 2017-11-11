@@ -1,4 +1,4 @@
-﻿import { Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IUser } from '../../models/User';
 import { UserService } from '../../shared/user.service';
 
@@ -13,10 +13,10 @@ export class UserDetailComponent {
 
 
     updateUser(user) {
-        this.userService.updateUser(user).subscribe(result => {
-            console.log('Put user result: ', result);
-        }, error => {
-            console.log(`There was an issue. ${error._body}.`);
-        });
+        //this.userService.updateUser(user).subscribe(result => {
+        //    console.log('Put user result: ', result);
+        //}, error => {
+        //    console.log(`There was an issue. ${error._body}.`);
+        //});
     }
 }

@@ -32,12 +32,16 @@ namespace JournalLabs.API.Controllers
             _userService.CreateUser(user);
             return Ok("Good");
         }
-        [Route("UpdateUser")]
+        [Route("SignInUser")]
         [HttpPost]
-        public IHttpActionResult UpdateUser(User user)
+        public IHttpActionResult SignInUser(User user)
         {
-            _userService.UpdateUser(user);
-            return Ok("Good");
+            var resultUser =_userService.SignInUser(user);
+            if (resultUser==null)
+            {
+                return Ok();
+            }
+            return Ok(resultUser);
         }
         [Route("GetUserById")]
         [HttpGet]

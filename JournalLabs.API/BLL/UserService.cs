@@ -22,9 +22,9 @@ namespace JournalLabs.API.BLL
             _userRepository.CreateUser(userModel);
         }
 
-        public void UpdateUser(User userModel)
+        public User SignInUser(User userModel)
         {
-            _userRepository.UpdateUser(userModel);
+            return _userRepository.SignInUser(userModel);
         }
 
         public User GetUserById(string userId)

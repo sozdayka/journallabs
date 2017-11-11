@@ -1,5 +1,5 @@
 import { NgModule, Inject } from '@angular/core';
-import { RouterModule, PreloadAllModules } from '@angular/router';
+import { Router, RouterModule, PreloadAllModules } from '@angular/router';
 import { CommonModule, APP_BASE_HREF } from '@angular/common';
 import { HttpModule, Http } from '@angular/http';
 import { FormsModule, NgModel } from '@angular/forms';
@@ -12,8 +12,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
-import { HomeComponent } from './containers/home/home.component';
-import { UsersComponent } from './containers/users/users.component';
+import { StudentJournalsComponent } from './containers/student-journals/student-journals.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import { AdminComponent } from './containers/admin/admin.component';
 // import { ChatComponent } from './containers/chat/chat.component';
@@ -26,8 +25,9 @@ import { UserService } from './shared/user.service';
 // import { ConnectionResolver } from './shared/route.resolver';
 import { ORIGIN_URL } from './shared/constants/baseurl.constants';
 import { TransferHttpModule } from '../modules/transfer-http/transfer-http.module';
-import { JournalComponent } from './containers/journal/journal.component';
-import { RowContentComponent } from './containers/journal/row-content.component';
+import { TeacherJournalsComponent } from './containers/teacher-journals/teacher-journals.component';
+import { SignInComponent } from './containers/sign-in/sign-in.component';
+import { RowContentComponent } from './containers/teacher-journals/row-content.component';
 import { LabBlockService } from './shared/lab-block.service';
 import { JournalService } from './shared/journal.service';
 import { KindOfWorkService } from './shared/kind-of-work.service';
@@ -47,13 +47,13 @@ export function createTranslateLoader(http: Http, baseHref) {
         AppComponent,
         NavMenuComponent,
         AdminComponent,
-        UsersComponent,
+      StudentJournalsComponent,
         UserDetailComponent,
-        HomeComponent,
         // ChatComponent,
         NotFoundComponent,
       NgxBootstrapComponent,
-      JournalComponent,
+      TeacherJournalsComponent,
+      SignInComponent,
       RowContentComponent
     ],
     imports: [
@@ -78,26 +78,9 @@ export function createTranslateLoader(http: Http, baseHref) {
         RouterModule.forRoot([
             {
                 path: '',
-                redirectTo: 'home',
+                redirectTo: 'student-journals',
                 pathMatch: 'full'
-            },
-            {
-                path: 'home', component: HomeComponent,
-
-                // *** SEO Magic ***
-                // We're using "data" in our Routes to pass in our <title> <meta> <link> tag information
-                // Note: This is only happening for ROOT level Routes, you'd have to add some additional logic if you wanted this for Child level routing
-                // When you change Routes it will automatically append these to your document for you on the Server-side
-                //  - check out app.component.ts to see how it's doing this
-                data: {
-                    title: 'Homepage',
-                    meta: [{ name: 'description', content: 'This is an example Description Meta tag!' }],
-                    links: [
-                        { rel: 'canonical', href: 'http://blogs.example.com/blah/nice' },
-                        { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/' }
-                    ]
-                }
-            },
+            },           
             {
                 path: 'admin', component: AdminComponent,
                 data: {
@@ -110,10 +93,10 @@ export function createTranslateLoader(http: Http, baseHref) {
                 }
             },
             {
-                path: 'users', component: UsersComponent,
+              path: 'student-journals', component: StudentJournalsComponent,
                 data: {
-                    title: 'Users REST example',
-                    meta: [{ name: 'description', content: 'This is User REST API example page Description!' }],
+                  title: 'Student Journals',
+                  meta: [{ name: 'description', content: 'Student Journals' }],
                     links: [
                         { rel: 'canonical', href: 'http://blogs.example.com/chat/something' },
                         { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/users' }
@@ -132,17 +115,26 @@ export function createTranslateLoader(http: Http, baseHref) {
                 }
             },
             {
-              path: 'journal', component: JournalComponent,
+              path: 'teacher-journals', component: TeacherJournalsComponent,
               data: {
-                title: 'Journal',
-                meta: [{ name: 'description', content: 'journal' }],
+                title: 'Teacher journals',
+                meta: [{ name: 'description', content: 'Teacher journals' }],
                 links: [
                   { rel: 'canonical', href: 'http://blogs.example.com/bootstrap/something' },
                   { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/bootstrap-demo' }
                 ]
               }
             },
-            { path: 'lazy', loadChildren: './containers/lazy/lazy.module#LazyModule'},
+            {
+              path: 'sign-in', component: SignInComponent,
+              data: {
+                title: 'Sign In',
+                meta: [{ name: 'description', content: 'sign-in' }],
+                links: [
+                  { rel: 'canonical', href: 'http://blogs.example.com/bootstrap/something' },
+                  { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/bootstrap-demo' }
+                ]
+              }},
 
             {
                 path: '**', component: NotFoundComponent,
@@ -154,9 +146,7 @@ export function createTranslateLoader(http: Http, baseHref) {
                         { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/bootstrap-demo' }
                     ]
                 }
-            },
-          { path: 'lazy', loadChildren: './containers/lazy/lazy.module#LazyModule' }
-
+            }
           
         ], {
           // Router options

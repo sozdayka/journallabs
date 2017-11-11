@@ -34,8 +34,10 @@ export class UserService {
     return this.http.delete(`${this.baseUrl}/api/User/DeleteUserById` + id);
   }
 
-  updateUser(user: IUser): Observable<any> {
-    return this.http.post(`${this.baseUrl}/api/User/UpdateUser`, user);
+  signInUser(user: IUser): Observable<any> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(`${this.baseUrl}/api/User/SignInUser`, user, options);
   }
 
   addUser(user: IUser): Observable<any> {

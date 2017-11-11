@@ -8,7 +8,7 @@ import { NgModel } from '@angular/forms';
     templateUrl: './admin.component.html'
 })
 export class AdminComponent {
-  public teacherModel: IUser = {Id:"", Login: "", Password:"", Role:"Teacher"};
+  public teacherModel: IUser = {Id:"", Login: "", Password:"", Role:"Admin"};
 
     constructor(private userService: UserService) { }
 

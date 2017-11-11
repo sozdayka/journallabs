@@ -36,18 +36,19 @@ namespace JournalLabs.API.DAL.Repositories
             }
         }
 
-        public void UpdateUser(User userModel)
+        public User SignInUser(User userModel)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
+                string insertQuery = @"SELECT * From Users Where Login = @Login AND Password=@Password";
                 try
                 {
-                    string insertQuery = @"UPDATE Users Set Login = @Login, Password = @Password, Role = @Role Where Id = @Id";
-                    var result = db.Execute(insertQuery, userModel);
+                    var result = db.Query<User>(insertQuery, userModel);
+                    return result.FirstOrDefault();
                 }
                 catch (Exception ex)
                 {
-
+                    return null;
                 }
             }
         }
