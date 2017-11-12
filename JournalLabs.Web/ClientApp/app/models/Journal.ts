@@ -1,7 +1,7 @@
-import { ILabBlock } from "./LabBlock"
+import { LabBlock } from "./LabBlock"
 
-export interface IJournal {
-   Id:string;
-   TeacherId: string;
-   LabBlocks: ILabBlock[];
+export class Journal {
+   Id:string="";
+   TeacherId: string="";
+   LabBlocks: LabBlock[]=[];
 }

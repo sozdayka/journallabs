@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Http, URLSearchParams, Headers, RequestOptions } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { ORIGIN_URL } from './constants/baseurl.constants';
-import { IUser } from '../models/User';
+import { User } from '../models/User';
 import { TransferHttp } from '../../modules/transfer-http/transfer-http';
 import { Observable } from 'rxjs/Observable';
 import { REQUEST } from './constants/request';
@@ -17,7 +17,7 @@ export class UserService {
 
   }
 
-  getUsers(): Observable<IUser[]> {
+  getUsers(): Observable<User[]> {
     // ** TransferHttp example / concept **
     //    - Here we make an Http call on the server, save the result on the window object and pass it down with the SSR,
     //      The Client then re-uses this Http result instead of hitting the server again!
@@ -26,7 +26,7 @@ export class UserService {
     return this.transferHttp.get(`${this.baseUrl}/api/User/GetUsers`);
   }
 
-  getUser(id: string): Observable<IUser> {
+  getUser(id: string): Observable<User> {
     return this.transferHttp.get(`${this.baseUrl}/api/User/GetUserById` + id);
   }
 
@@ -34,13 +34,13 @@ export class UserService {
     return this.http.delete(`${this.baseUrl}/api/User/DeleteUserById` + id);
   }
 
-  signInUser(user: IUser): Observable<any> {
+  signInUser(user: User): Observable<any> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http.post(`${this.baseUrl}/api/User/SignInUser`, user, options);
   }
 
-  addUser(user: IUser): Observable<any> {
+  addUser(user: User): Observable<any> {
     //let headers = new Headers();
     //headers.append('Content-Type', 'application/json');
     //headers.append('Accept', 'application/json');

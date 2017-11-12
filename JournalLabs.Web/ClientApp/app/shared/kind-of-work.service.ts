@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { ORIGIN_URL } from './constants/baseurl.constants';
-import { IKindOfWork } from '../models/kind-of-work';
+import { KindOfWork } from '../models/kind-of-work';
 import { TransferHttp } from '../../modules/transfer-http/transfer-http';
 import { Observable } from 'rxjs/Observable';
 import { REQUEST } from './constants/request';
@@ -33,11 +33,11 @@ export class KindOfWorkService {
     return this.http.delete(`${this.baseUrl}/api/KindOfWork/DeleteKindOfWorkById` + id);
   }
 
-  updateKindOfWork(kindOfWork: IKindOfWork): Observable<any> {
+  updateKindOfWork(kindOfWork: KindOfWork): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/KindOfWork/UpdateKindOfWork`, kindOfWork);
   }
 
-  addKindOfWork(kindOfWork: IKindOfWork): Observable<any> {
+  addKindOfWork(kindOfWork: KindOfWork): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/KindOfWork/CreateKindOfWork`, kindOfWork)
   }
 }

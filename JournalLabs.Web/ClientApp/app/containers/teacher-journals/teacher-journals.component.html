@@ -7,23 +7,59 @@
   <input type="text" [(ngModel)]="lessonName" name="LessonName" />
   <br />
   <p>Input count students:</p>
-  <input type="text" [(ngModel)]="studentsCount" name="StudentsCount"/>
+  <input type="text" [(ngModel)]="studentsCount" name="StudentsCount" />
   <br />
   <p>Input count lab blocks:</p>
-  <input type="text" [(ngModel)]="labBlocksCount" name="LabBlocksCount"/>
+  <input type="text" [(ngModel)]="labBlocksCount" name="LabBlocksCount" />
   <br />
   <button (click)="createJournal()">Create journal</button>
 </div>
 <div *ngIf="!isNewJournal" class="row">
-  <div class="col-md-4">
+  <!--<div class="col-md-4">
     <input *ngIf="config.filtering" placeholder="Filter all columns"
            [ngTableFiltering]="config.filtering"
            class="form-control"
            (tableChanged)="onChangeTable(config)" />
+  </div>-->
+  <div *ngIf="!isNewJournal && journalViewModel.length!=0">
+    <table>
+      <thead>
+        <tr>
+          <td></td>
+          <td style="text-align:center; vertical-align:middle;" colspan="4" *ngFor=" let key of journalViewModel.KindsOfWorkForJournal">
+            {{key.NameKindOfWork}}
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td></td>
+        <ng-container *ngFor=" let key1 of countBlocks">
+          <td>FirstDate</td>
+          <td>FirstMark</td>
+          <td>SecondDate</td>
+          <td>SecondMark</td>
+        </ng-container>
+      </tr>
+      <ng-container *ngFor=" let key2 of journalViewModel.StudentResultForJournal;let i = index">
+        <tr>
+            <td><input value="{{journalViewModel.StudentResultForJournal[i].StudentInfo.StudentName}}" /></td>
+            <ng-container *ngFor=" let key of journalViewModel.StudentResultForJournal[i].StudentLabBlocks">
+              <td><input value="{{key?.FirstDate}}" /></td>
+              <td><input value="{{key?.FirstMark}}" /></td>
+              <td><input value="{{key?.SecondDate}}" /></td>
+              <td><input value="{{key?.SecondMark}}" /></td>
+            </ng-container>          
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
   </div>
 </div>
-<br>
-<ng-table *ngIf="!isNewJournal" [config]="config"
+<br />
+<button (click)="getJournal()">Get journal</button>
+<!--<br>-->
+<!--<ng-table *ngIf="!isNewJournal" [config]="config"
           (tableChanged)="onChangeTable(config)"
           (cellClicked)="onCellClick($event)"
           (scrolledDown)="onScrollDown()"
@@ -33,4 +69,4 @@
           [expandable]="true"
           [expandedComponent]="rowComponent"
           [rowInputs]="rowInputs">
-</ng-table>
+</ng-table>-->

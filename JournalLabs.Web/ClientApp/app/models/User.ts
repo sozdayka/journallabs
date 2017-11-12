@@ -1,6 +1,6 @@
-export interface IUser {
-   Id: string;
-   Login: string;
-   Password: string;
-   Role: string;
+export class User {
+   Id: string ="";
+   Login: string = "";
+   Password: string = "";
+   Role: string = "";
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using Dapper;
 using JournalLabs.API.Models;
+using JournalLabs.API.ViewModels;
 
 namespace JournalLabs.API.DAL.Repositories
 {
@@ -52,14 +53,14 @@ namespace JournalLabs.API.DAL.Repositories
             }
         }
 
-        public Journal GetJournalById(string journalId)
+        public JournalViewModel GetJournalById(string journalId)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 string insertQuery = @"SELECT * From Journals Where Id = @journalId";
                 try
                 {
-                    var result = db.Query<Journal>(insertQuery, new { journalId = journalId });
+                    var result = db.Query<JournalViewModel>(insertQuery, new { journalId = journalId });
                     return result.FirstOrDefault();
                 }
                 catch (Exception ex)

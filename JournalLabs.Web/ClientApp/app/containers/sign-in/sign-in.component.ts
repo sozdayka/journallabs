@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IUser } from '../../models/User';
+import { User } from '../../models/User';
 import { UserService } from '../../shared/user.service';
 import { Router, CanActivate, NavigationEnd } from '@angular/router';
 @Component({
@@ -17,7 +17,7 @@ import { Router, CanActivate, NavigationEnd } from '@angular/router';
   `
 })
 export class SignInComponent {
-  public teacherModel: IUser = { Id: "", Login: "", Password: "", Role: "" };
+  public teacherModel: User = { Id: "", Login: "", Password: "", Role: "" };
 
   constructor(public router: Router,
     private userService: UserService) { }
@@ -25,7 +25,7 @@ export class SignInComponent {
   public SignIn() {
     //this.teacherModel.Role = "Teacher";
     this.userService.signInUser(this.teacherModel).subscribe(response => {
-      var result:IUser = JSON.parse(response._body);
+      var result:User = JSON.parse(response._body);
       if (result.Role == "Teacher") {
         localStorage.setItem('Role', result.Role);
         localStorage.setItem('TeacherId', result.Id);

@@ -7,6 +7,7 @@ using System.Web;
 using Dapper;
 using JournalLabs.API.DAL.Repositories;
 using JournalLabs.API.Models;
+using JournalLabs.API.ViewModels;
 
 namespace JournalLabs.API.BLL
 {
@@ -73,9 +74,24 @@ namespace JournalLabs.API.BLL
             _journalRepository.UpdateJournal(journalModel);
         }
 
-        public Journal GetJournalById(string journalId)
+        public JournalGridViewModel GetJournalById(string journalId)
         {
-            return _journalRepository.GetJournalById(journalId);
+            var journal = new JournalGridViewModel();
+            journal.JournalModel = _journalRepository.GetJournalById(journalId);
+            journal.KindsOfWorkForJournal = _kindOfWorkRepository.GetKindsOfWorkByJournalId(journalId);
+            var students = _labBlockRepository.GetStudentsByJournalId(journalId);
+            journal.StudentResultForJournal = new List<StudentJournalViewModel>();
+            foreach (var student in students)
+            {
+                string studentId = student.Id.ToString();
+                journal.StudentResultForJournal.Add(new StudentJournalViewModel()
+                {
+                    StudentInfo = student,
+                    StudentLabBlocks = _labBlockRepository.GetLabBlockByStudentAndJournalId(studentId, journalId)
+                });
+            }
+            //journal.StudentResultForJournal = _labBlockRepository.GetStudentJournalViewModels(journalId);
+            return journal;
         }
         public bool DeleteJournalById(string id)
         {

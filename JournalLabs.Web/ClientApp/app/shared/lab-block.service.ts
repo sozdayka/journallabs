@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { ORIGIN_URL } from './constants/baseurl.constants';
-import { ILabBlock } from '../models/LabBlock';
+import { LabBlock } from '../models/LabBlock';
 import { TransferHttp } from '../../modules/transfer-http/transfer-http';
 import { Observable } from 'rxjs/Observable';
 import { REQUEST } from './constants/request';
@@ -33,11 +33,11 @@ export class LabBlockService {
     return this.http.delete(`${this.baseUrl}/api/LabBlock/DeleteLabBlockById` + id);
   }
 
-  updateLabBlock(labBlock: ILabBlock): Observable<any> {
+  updateLabBlock(labBlock: LabBlock): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/LabBlock/UpdateLabBlock`, labBlock);
   }
 
-  addLabBlock(labBlock: ILabBlock): Observable<any> {
+  addLabBlock(labBlock: LabBlock): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/LabBlock/CreateLabBlock`, labBlock)
   }
 }

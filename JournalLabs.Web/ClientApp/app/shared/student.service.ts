@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { ORIGIN_URL } from './constants/baseurl.constants';
-import { IStudent } from '../models/Student';
+import { Student } from '../models/Student';
 import { TransferHttp } from '../../modules/transfer-http/transfer-http';
 import { Observable } from 'rxjs/Observable';
 import { REQUEST } from './constants/request';
@@ -33,11 +33,11 @@ export class StudentService {
     return this.http.delete(`${this.baseUrl}/api/Student/DeleteStudentById` + id);
   }
 
-  updateStudent(student: IStudent): Observable<any> {
+  updateStudent(student: Student): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/Student/UpdateStudent`, student);
   }
 
-  addStudent(student: IStudent): Observable<any> {
+  addStudent(student: Student): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/Student/CreateStudent`, student)
   }
 }

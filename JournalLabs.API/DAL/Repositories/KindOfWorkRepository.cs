@@ -68,6 +68,25 @@ namespace JournalLabs.API.DAL.Repositories
                 }
             }
         }
+        public List<KindOfWork> GetKindsOfWorkByJournalId(string journalId)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string insertQuery = @"	select distinct kw.Id,kw.NameKindOfWork from Journals j 
+	                                    left join LabBlocks lb on j.Id=lb.JournalId
+	                                    left join KindOfWorks kw on lb.KindOfWorkId=kw.Id 
+                                        where j.Id=@journalId";
+                try
+                {
+                    var result = db.Query<KindOfWork>(insertQuery, new { journalId = journalId });
+                    return result.ToList();
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
         public bool DeleteKindOfWorkById(string id)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))

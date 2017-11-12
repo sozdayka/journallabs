@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IUser } from '../../models/User';
+import {User } from '../../models/User';
 import { UserService } from '../../shared/user.service';
 import { NgModel } from '@angular/forms';
 
@@ -8,7 +8,7 @@ import { NgModel } from '@angular/forms';
     templateUrl: './admin.component.html'
 })
 export class AdminComponent {
-  public teacherModel: IUser = {Id:"", Login: "", Password:"", Role:"Admin"};
+  public teacherModel: User = {Id:"", Login: "", Password:"", Role:"Admin"};
 
     constructor(private userService: UserService) { }
 

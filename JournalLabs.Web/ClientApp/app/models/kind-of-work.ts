@@ -1,5 +1,5 @@
-export interface IKindOfWork {
-   Id:string;
-   NameKindOfWork:string;
+export class KindOfWork {
+   Id:string = "";
+   NameKindOfWork:string = "";
 
 }

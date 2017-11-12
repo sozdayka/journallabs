@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using Dapper;
 using JournalLabs.API.Models;
+using JournalLabs.API.ViewModels;
 
 namespace JournalLabs.API.DAL.Repositories
 {
@@ -61,6 +62,63 @@ namespace JournalLabs.API.DAL.Repositories
                 {
                     var result = db.Query<LabBlock>(insertQuery, new { labBlockId = labBlockId });
                     return result.FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+        public List<Student> GetStudentsByJournalId(string journalId)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string insertQuery = @"SELECT distinct s.* From LabBlocks lb
+	                                    left join Students s on s.Id=lb.StudentId
+                                            where lb.JournalId=@journalId";
+                try
+                {
+                    var result = db.Query<Student>(insertQuery, new { journalId = journalId });
+                    return result.ToList();
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+        public List<LabBlockViewModel> GetLabBlockByStudentAndJournalId(string studentId,string journalId)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string insertQuery = @"	SELECT * From LabBlocks Where StudentId = @studentId And JournalId=@journalId";
+                try
+                {
+                    var result = db.Query<LabBlockViewModel>(insertQuery, new { studentId = studentId, journalId= journalId });
+                    return result.ToList();
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+        public List<StudentJournalViewModel> GetStudentJournalViewModels( string journalId)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string insertQuery = @"select st.*,lb.* from (SELECT distinct s.* From LabBlocks lb
+	                                    left join Students s on s.Id=lb.StudentId
+                                            where lb.JournalId=@journalId) as st
+	                                    right join LabBlocks lb on st.Id=lb.StudentId";
+                try
+                {
+                    var result = db.Query<StudentJournalViewModel, Student, List<LabBlockViewModel>, StudentJournalViewModel>(insertQuery, (sv, st, lb) =>
+                    new StudentJournalViewModel(){
+                        StudentInfo = st,
+                        StudentLabBlocks = lb
+                    }, new { journalId = journalId }, splitOn: "StudentId,JournalId,Id,journalId");
+                    return result.ToList();
                 }
                 catch (Exception ex)
                 {
