@@ -72,10 +72,11 @@ namespace JournalLabs.API.DAL.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string insertQuery = @"	select distinct kw.Id,kw.NameKindOfWork from Journals j 
+                string insertQuery = @"	select  kw.* from (select distinct kw.* from Journals j 
 	                                    left join LabBlocks lb on j.Id=lb.JournalId
 	                                    left join KindOfWorks kw on lb.KindOfWorkId=kw.Id 
-                                        where j.Id=@journalId";
+                                        where j.Id='42570A60-834E-44D1-AC0F-87BB12B07B65')as kw order by 
+											len(kw.NameKindOfWork), kw.NameKindOfWork";
                 try
                 {
                     var result = db.Query<KindOfWork>(insertQuery, new { journalId = journalId });

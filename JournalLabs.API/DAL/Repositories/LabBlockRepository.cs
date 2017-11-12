@@ -73,9 +73,9 @@ namespace JournalLabs.API.DAL.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string insertQuery = @"SELECT distinct s.* From LabBlocks lb
-	                                    left join Students s on s.Id=lb.StudentId
-                                            where lb.JournalId=@journalId";
+                string insertQuery = @" select  s.* from (SELECT distinct s.* From LabBlocks lb left join Students s on s.Id=lb.StudentId
+                                            where lb.JournalId=@journalId)as s order by 
+											len(s.StudentName), s.StudentName";
                 try
                 {
                     var result = db.Query<Student>(insertQuery, new { journalId = journalId });

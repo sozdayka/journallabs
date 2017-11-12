@@ -44,7 +44,7 @@ namespace JournalLabs.API.BLL
                     new Student()
                     {
                         Id = studentId,
-                        StudentName = $"UserName {i}"
+                        StudentName = $"UserName {i+1}"
                     });               
                 
                 for (int j = 0; j < labBlocksCount; j++)
@@ -53,7 +53,7 @@ namespace JournalLabs.API.BLL
                     {
                         var kindOfWork = Guid.NewGuid();
                         kindOfWorkGuidList.Add(kindOfWork);
-                        _kindOfWorkRepository.CreateKindOfWork(new KindOfWork(){Id = kindOfWork,NameKindOfWork = $"Lab block{j}"});
+                        _kindOfWorkRepository.CreateKindOfWork(new KindOfWork(){Id = kindOfWork,NameKindOfWork = $"Lab block{j+1}"});
                     }
                     _labBlockRepository.CreateLabBlock(
                         new LabBlock()
