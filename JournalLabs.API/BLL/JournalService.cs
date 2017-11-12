@@ -25,13 +25,16 @@ namespace JournalLabs.API.BLL
         }
         public void CreateJournal(string lessonName, int studentsCount, int labBlocksCount,Guid teacherId)
         {
+            var kindOfWorkGuidList = new List<Guid>();
             var journalId = Guid.NewGuid();
+
             Journal journal = new Journal();
             journal.Id = journalId;
             journal.TeacherId = teacherId;
             journal.LessonName = lessonName;
+
             _journalRepository.CreateJournal(journal);
-            var kindOfWorkGuidList = new List<Guid>();
+            
 
             for (int i = 0; i < studentsCount; i++)
             {
