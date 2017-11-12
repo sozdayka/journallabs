@@ -23,7 +23,7 @@ namespace JournalLabs.API.DAL.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string insertQuery = @"INSERT INTO [dbo].[Students]([Id],[FirstDate],[FirstMark],[SecondDate],[SecondMark],[UserFIO],[LessonName],[JournalId]) VALUES (@Id,@FirstDate,@FirstMark,@SecondDate,@SecondMark,@UserFIO,@LessonName,@JournalId)";
+                string insertQuery = @"INSERT INTO [dbo].[Students]([Id],[StudentName]) VALUES (@Id,@StudentName)";
                 try
                 {
                     var result = db.Execute(insertQuery, studentModel);
@@ -42,7 +42,7 @@ namespace JournalLabs.API.DAL.Repositories
             {
                 try
                 {
-                    string insertQuery = @"UPDATE Students Set FirstDate = @FirstDate,FirstMark = @FirstMark,SecondDate = @SecondDate,SecondMark = @SecondMark,UserFIO = @UserFIO,LessonName=@LessonName,JournalId = @JournalId Where Id = @Id";
+                    string insertQuery = @"UPDATE Students Set StudentName = @StudentName Where Id = @Id";
                     var result = db.Execute(insertQuery, studentModel);
                 }
                 catch (Exception ex)

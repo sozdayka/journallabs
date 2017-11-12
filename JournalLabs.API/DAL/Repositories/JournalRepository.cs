@@ -23,7 +23,7 @@ namespace JournalLabs.API.DAL.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string insertQuery = @"INSERT INTO [dbo].[Journals]([Id],[TeacherId]) VALUES (@Id,@TeacherId)";
+                string insertQuery = @"INSERT INTO [dbo].[Journals]([Id],[TeacherId],[LessonName]) VALUES (@Id,@TeacherId,@LessonName)";
                 try
                 {
                     var result = db.Execute(insertQuery, journalModel);

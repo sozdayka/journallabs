@@ -23,7 +23,7 @@ namespace JournalLabs.API.DAL.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string insertQuery = @"INSERT INTO [dbo].[LabBlocks]([Id],[FirstDate],[FirstMark],[SecondDate],[SecondMark],[UserFIO],[LessonName],[JournalId]) VALUES (@Id,@FirstDate,@FirstMark,@SecondDate,@SecondMark,@UserFIO,@LessonName,@JournalId)";
+                string insertQuery = @"INSERT INTO [dbo].[LabBlocks]([Id],[FirstDate],[FirstMark],[SecondDate],[SecondMark],[StudentId],[KindOfWorkId],[JournalId]) VALUES (@Id,@FirstDate,@FirstMark,@SecondDate,@SecondMark,@StudentId,@KindOfWorkId,@JournalId)";
                 try
                 {
                     var result = db.Execute(insertQuery, labBlockModel);
@@ -42,7 +42,7 @@ namespace JournalLabs.API.DAL.Repositories
             {
                 try
                 {
-                    string insertQuery = @"UPDATE LabBlocks Set FirstDate = @FirstDate,FirstMark = @FirstMark,SecondDate = @SecondDate,SecondMark = @SecondMark,UserFIO = @UserFIO,LessonName=@LessonName,JournalId = @JournalId Where Id = @Id";
+                    string insertQuery = @"UPDATE LabBlocks Set FirstDate = @FirstDate,FirstMark = @FirstMark,SecondDate = @SecondDate,SecondMark = @SecondMark,StudentId = @StudentId,KindOfWorkId=@KindOfWorkId,JournalId = @JournalId Where Id = @Id";
                     var result = db.Execute(insertQuery, labBlockModel);
                 }
                 catch (Exception ex)

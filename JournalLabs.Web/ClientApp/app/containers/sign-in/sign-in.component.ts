@@ -28,8 +28,9 @@ export class SignInComponent {
       var result:IUser = JSON.parse(response._body);
       if (result.Role == "Teacher") {
         localStorage.setItem('Role', result.Role);
+        localStorage.setItem('TeacherId', result.Id);
         location.reload();
-        this.router.navigate(['journal']);
+        this.router.navigate(['teacher-journals']);
         return;
       }
       if (result.Role == "Admin") {

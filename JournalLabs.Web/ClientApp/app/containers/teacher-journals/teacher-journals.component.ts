@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TableData } from './table-data';
 import { RowContentComponent } from './row-content.component';
-
+import { JournalService } from '../../shared/journal.service';
 
 @Component({
   selector: 'teacher-journals',
@@ -50,7 +50,7 @@ export class TeacherJournalsComponent implements OnInit {
 
   private data: Array<any> = TableData;
 
-  public constructor() {
+  public constructor(public journalService:JournalService) {
     this.length = this.data.length;
   }
 
@@ -173,5 +173,11 @@ export class TeacherJournalsComponent implements OnInit {
 
   public onCellClick(data: any): any {
     console.log(data);
+  }
+
+  public createJournal() {
+    this.journalService.addJournal(this.lessonName, this.studentsCount, this.labBlocksCount, localStorage.getItem('TeacherId')).subscribe(response => {
+      this.isNewJournal = !this.isNewJournal
+    });
   }
 }

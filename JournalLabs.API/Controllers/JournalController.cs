@@ -26,10 +26,10 @@ namespace JournalLabs.API.Controllers
             return Ok("Good");
         }
         [Route("CreateJournal")]
-        [HttpPost]
-        public IHttpActionResult CreateJournal(Journal journal)
+        [HttpGet]
+        public IHttpActionResult CreateJournal(string lessonName ,int studentsCount,int labBlocksCount, Guid teacherId)
         {
-             _journalService.CreateJournal(journal);
+             _journalService.CreateJournal(lessonName, studentsCount, labBlocksCount,teacherId);
             return Ok("Good");
         }
         [Route("UpdateJournal")]

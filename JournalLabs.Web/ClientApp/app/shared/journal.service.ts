@@ -37,7 +37,7 @@ export class JournalService {
     return this.http.post(`${this.baseUrl}/api/Journal/UpdateJournal`, journal);
   }
 
-  addJournal(journal: IJournal): Observable<any> {
-    return this.http.post(`${this.baseUrl}/api/Journal/CreateJournal`, journal)
+  addJournal(lessonName: string, studentsCount: number, labBlocksCount: number, teacherId:string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/api/Journal/CreateJournal?lessonName=${lessonName}&studentsCount=${studentsCount}&labBlocksCount=${labBlocksCount}&teacherId=${teacherId}`);
   }
 }
