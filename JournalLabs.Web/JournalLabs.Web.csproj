@@ -18,7 +18,7 @@
   <ItemGroup>
     <!-- Files not to show in IDE -->
     <None Remove="ClientApp\app\models\journalViewModel.ts" />
-    <None Remove="ClientApp\app\models\studentJournalViewModel.ts" />
+    <None Remove="ClientApp\app\models\studentJournal.ts" />
     <None Remove="yarn.lock" />
     <Content Remove="wwwroot\dist\**" />
     <None Remove="ClientApp\dist\**" />
@@ -29,7 +29,8 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\models\journalViewModel.ts" />
-    <TypeScriptCompile Include="ClientApp\app\models\studentJournalViewModel.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\studentJournal.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\studentLabBlocksViewModel.ts" />
   </ItemGroup>
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
     <!-- Ensure Node.js is installed -->

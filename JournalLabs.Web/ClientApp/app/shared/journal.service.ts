@@ -46,4 +46,7 @@ export class JournalService {
   getJournalByIdAndStudentId(journalId: string, studentId:string): Observable<any> {
     return this.http.get(`${this.baseUrl}/api/Journal/GetJournalByIdAndStudentId?journalId=${journalId}&studentId=${studentId}`);
   }
+  getAllStudentJournalsByStudentName(studentName: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/api/Journal/GetAllStudentJournalsByStudentName?studentName=${studentName}`);
+  }
 }

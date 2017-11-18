@@ -14,7 +14,7 @@ export class NavMenuComponent implements OnInit {
     currentRole: string = "";
     public teacherJournals: Journal[] = [];
     public studentJournals: Journal[] = [];
-    public studentId:string="";
+    public studentName:string="";
     constructor(public router: Router,
       private journalService: JournalService) {
       
@@ -28,9 +28,7 @@ export class NavMenuComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      if (localStorage.getItem('StudentId') == null) {
-        localStorage.setItem('StudentId', '3B5659A4-8BAE-47D9-BD09-66CB529316A4');
-      }
+
       if (localStorage.getItem('Role') != null) {
         this.currentRole = localStorage.getItem('Role');
       }
@@ -39,9 +37,11 @@ export class NavMenuComponent implements OnInit {
           this.teacherJournals = JSON.parse(response._body);
         });
       }
-      if (localStorage.getItem('StudentId') != null) {
-        this.studentId = localStorage.getItem('StudentId');
-        this.studentJournals = [{ Id: '42570A60-834E-44D1-AC0F-87BB12B07B65', LessonName: 'IPZ', TeacherId:'10A20B0B-46F2-4A39-AF21-77B5B9D22E95'}]
+      if (this.studentName != "") {
+        this.journalService.getAllStudentJournalsByStudentName(this.studentName).subscribe(response => {
+          this.studentJournals = JSON.parse(response._body);
+        });
+        //this.studentJournals = [{ Id: '42570A60-834E-44D1-AC0F-87BB12B07B65', LessonName: 'IPZ', TeacherId:'10A20B0B-46F2-4A39-AF21-77B5B9D22E95'}]
         //this.journalService.getAllJournalsByTeacherId(localStorage.getItem('StudentId')).subscribe(response => {
         //  this.teacherJournals = JSON.parse(response._body);
         //});
@@ -57,5 +57,12 @@ export class NavMenuComponent implements OnInit {
 
     collapseMenu() {
           this.collapse = "collapse"
-      }
+    }
+
+    public StudentSearch() {
+      this.journalService.getAllStudentJournalsByStudentName(this.studentName).subscribe(response => {
+        this.studentJournals = JSON.parse(response._body);
+      });
+    console.log(this.studentName);
+  }
 }

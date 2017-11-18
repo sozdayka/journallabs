@@ -101,6 +101,25 @@ namespace JournalLabs.API.DAL.Repositories
                 }
             }
         }
-        
+        public List<StudentJournal> GetAllStudentJournalsByStudentName(string studentName)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string selectQuery = @"  select distinct lb.JournalId, s.StudentId, j.LessonName  from 
+                                        (SELECT Id as StudentId From Students Where StudentName = @studentName) s
+                                         left join LabBlocks lb on lb.StudentId = s.StudentId
+                                         inner join Journals j on j.Id= lb.JournalId";
+                try
+                {
+                    var result = db.Query<StudentJournal>(selectQuery, new { studentName = studentName });
+                    return result.ToList();
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+
     }
 }

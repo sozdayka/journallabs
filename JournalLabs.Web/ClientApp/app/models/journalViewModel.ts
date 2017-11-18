@@ -1,9 +1,9 @@
 import { Journal } from "./Journal"
 import { KindOfWork } from "./kind-of-work"
-import { StudentJournalViewModel } from "./studentJournalViewModel"
+import { StudentLabBlocksViewModel } from "./studentLabBlocksViewModel"
 
 export class JournalViewModel {
   JournalModel: Journal = new Journal();
   KindsOfWorkForJournal: KindOfWork[] = [];
-  StudentResultForJournal: StudentJournalViewModel[] = [];
+  StudentResultForJournal: StudentLabBlocksViewModel[] = [];
 }

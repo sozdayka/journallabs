@@ -89,11 +89,11 @@ namespace JournalLabs.API.BLL
                 var student =_studentRepository.GetStudentById(student_Id);
                 students.Add(student); 
             }
-            journal.StudentResultForJournal = new List<StudentJournalViewModel>();
+            journal.StudentResultForJournal = new List<StudentLabBlocksViewModel>();
             foreach (var student in students)
             {
                 string studentId = student.Id.ToString();
-                journal.StudentResultForJournal.Add(new StudentJournalViewModel()
+                journal.StudentResultForJournal.Add(new StudentLabBlocksViewModel()
                 {
                     StudentInfo = student,
                     StudentLabBlocks = _labBlockRepository.GetLabBlockByStudentAndJournalId(studentId, journalId)
@@ -106,7 +106,10 @@ namespace JournalLabs.API.BLL
         {
             return _journalRepository.GetAllJournalsByTeacherId(teacherId);
         }
-
+        public List<StudentJournal> GetAllStudentJournalsByStudentName(string studentName)
+        {
+            return _journalRepository.GetAllStudentJournalsByStudentName(studentName);
+        }
         public bool DeleteJournalById(string id)
         {
             return _journalRepository.DeleteJournalById(id);

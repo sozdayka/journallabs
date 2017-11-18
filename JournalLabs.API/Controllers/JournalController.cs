@@ -67,5 +67,12 @@ namespace JournalLabs.API.Controllers
             var result =_journalService.GetAllJournalsByTeacherId(teacherId);
             return Ok(result);
         }
+        [Route("GetAllStudentJournalsByStudentName")]
+        [HttpGet]
+        public IHttpActionResult GetAllStudentJournalsByStudentName(string studentName)
+        {
+            var result = _journalService.GetAllStudentJournalsByStudentName(studentName);
+            return Ok(result);
+        }
     }
 }

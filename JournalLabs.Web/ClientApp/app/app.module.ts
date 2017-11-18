@@ -78,7 +78,7 @@ export function createTranslateLoader(http: Http, baseHref) {
         RouterModule.forRoot([
             {
                 path: '',
-                redirectTo: 'student-journals',
+                redirectTo: 'sign-in',
                 pathMatch: 'full'
             },           
             {
@@ -92,17 +92,17 @@ export function createTranslateLoader(http: Http, baseHref) {
                     ]
                 }
             },
-            {
-              path: 'student-journals', component: StudentJournalsComponent,
-                data: {
-                  title: 'Student Journals',
-                  meta: [{ name: 'description', content: 'Student Journals' }],
-                    links: [
-                        { rel: 'canonical', href: 'http://blogs.example.com/chat/something' },
-                        { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/users' }
-                    ]
-                }
-            },
+            //{
+            //  path: 'student-journals', component: StudentJournalsComponent,
+            //    data: {
+            //      title: 'Student Journals',
+            //      meta: [{ name: 'description', content: 'Student Journals' }],
+            //        links: [
+            //            { rel: 'canonical', href: 'http://blogs.example.com/chat/something' },
+            //            { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/users' }
+            //        ]
+            //    }
+            //},
             {
                 path: 'ngx-bootstrap', component: NgxBootstrapComponent,
                 data: {

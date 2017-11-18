@@ -130,7 +130,8 @@
     <Compile Include="ViewModels\JournalGridViewModel.cs" />
     <Compile Include="ViewModels\JournalViewModel.cs" />
     <Compile Include="ViewModels\LabBlockViewModel.cs" />
-    <Compile Include="ViewModels\StudentJournalViewModel.cs" />
+    <Compile Include="ViewModels\StudentJournal.cs" />
+    <Compile Include="ViewModels\StudentLabBlocksViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

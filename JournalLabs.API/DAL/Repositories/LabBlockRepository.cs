@@ -103,7 +103,7 @@ namespace JournalLabs.API.DAL.Repositories
                 }
             }
         }
-        public List<StudentJournalViewModel> GetStudentJournalViewModels( string journalId)
+        public List<StudentLabBlocksViewModel> GetStudentJournalViewModels( string journalId)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
@@ -113,8 +113,8 @@ namespace JournalLabs.API.DAL.Repositories
 	                                    right join LabBlocks lb on st.Id=lb.StudentId";
                 try
                 {
-                    var result = db.Query<StudentJournalViewModel, Student, List<LabBlockViewModel>, StudentJournalViewModel>(insertQuery, (sv, st, lb) =>
-                    new StudentJournalViewModel(){
+                    var result = db.Query<StudentLabBlocksViewModel, Student, List<LabBlockViewModel>, StudentLabBlocksViewModel>(insertQuery, (sv, st, lb) =>
+                    new StudentLabBlocksViewModel(){
                         StudentInfo = st,
                         StudentLabBlocks = lb
                     }, new { journalId = journalId }, splitOn: "StudentId,JournalId,Id,journalId");

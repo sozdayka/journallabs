@@ -10,6 +10,6 @@ namespace JournalLabs.API.ViewModels
     {
         public JournalViewModel JournalModel { get; set; }
         public List<KindOfWork> KindsOfWorkForJournal { get; set; }
-        public List<StudentJournalViewModel> StudentResultForJournal { get; set; }
+        public List<StudentLabBlocksViewModel> StudentResultForJournal { get; set; }
     }
 }
