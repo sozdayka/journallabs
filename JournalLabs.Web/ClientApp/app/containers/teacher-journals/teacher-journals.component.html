@@ -21,7 +21,7 @@
            class="form-control"
            (tableChanged)="onChangeTable(config)" />
   </div>-->
-  <div *ngIf="!isNewJournal && journalViewModel.length!=0">
+  <div *ngIf="!isNewJournal && journalViewModel!=null">
     <table>
       <thead>
         <tr>

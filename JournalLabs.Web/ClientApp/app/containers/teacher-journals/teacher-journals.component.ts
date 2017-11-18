@@ -3,6 +3,7 @@ import { TableData } from './table-data';
 import { RowContentComponent } from './row-content.component';
 import { JournalService } from '../../shared/journal.service';
 import { JournalViewModel } from '../../models/journalViewModel';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'teacher-journals',
@@ -10,7 +11,7 @@ import { JournalViewModel } from '../../models/journalViewModel';
 })
 export class TeacherJournalsComponent implements OnInit {
   name: string;
-  public journalViewModel: JournalViewModel = new JournalViewModel();
+  public journalViewModel: JournalViewModel = null;
   public pasrseArray:any=[];
   countBlocks: number[] = []; 
   public rows: Array<any> = [];
@@ -20,11 +21,19 @@ export class TeacherJournalsComponent implements OnInit {
   public labBlocksCount: number = 0;
 
 
-  public constructor(public journalService:JournalService) {
+  public constructor(public journalService: JournalService, private activatedRoute: ActivatedRoute) {
   }
 
   public ngOnInit(): void {
-    this.getJournal();
+    this.activatedRoute.params.subscribe(params => {
+      let teacherId = params["journalId"];
+      this.getJournal(teacherId);
+    });
+    //this.activatedRoute.queryParams.subscribe((params: Params) => {
+    //  let teacherId = params['journalId'];
+      
+    //});
+    
   }
 
   public createJournal() {
@@ -33,8 +42,8 @@ export class TeacherJournalsComponent implements OnInit {
     });
   }
 
-  public getJournal() {
-    this.journalService.getJournal('42570A60-834E-44D1-AC0F-87BB12B07B65').subscribe(response => {
+  public getJournal(teacherId:string) {
+    this.journalService.getJournal(teacherId).subscribe(response => {
       var resp = JSON.stringify(response);
       this.journalViewModel = JSON.parse(resp);
       for (var i = 0; i < this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.length; i++) {

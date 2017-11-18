@@ -34,11 +34,13 @@
             <span class='glyphicon glyphicon-star-empty'></span> Sign In
           </a>
         </li>
-         <li *ngIf="currentRole=='Teacher'" [routerLinkActive]="['link-active']" (click)="collapseMenu()">
-          <a [routerLink]="['/teacher-journals']">
-            <span class='glyphicon glyphicon-comment'></span> Teacher journals
-          </a>
-        </li> 
+        <ng-container *ngIf="teacherJournals.length!=0 && currentRole=='Teacher'" >
+          <li *ngFor=" let journal of teacherJournals" [routerLinkActive]="['link-active']" (click)="collapseMenu()">
+            <a [routerLink]="['/teacher-journals', journal.Id ]">
+              <span class='glyphicon glyphicon-comment'></span> {{journal.LessonName}}
+            </a>
+          </li>
+        </ng-container>
       </ul>
     </div>
   </div>

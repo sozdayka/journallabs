@@ -93,6 +93,12 @@ namespace JournalLabs.API.BLL
             //journal.StudentResultForJournal = _labBlockRepository.GetStudentJournalViewModels(journalId);
             return journal;
         }
+
+        public List<JournalViewModel> GetAllJournalsByTeacherId(string teacherId)
+        {
+            return _journalRepository.GetAllJournalsByTeacherId(teacherId);
+        }
+
         public bool DeleteJournalById(string id)
         {
             return _journalRepository.DeleteJournalById(id);

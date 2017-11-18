@@ -30,7 +30,7 @@ export class SignInComponent {
         localStorage.setItem('Role', result.Role);
         localStorage.setItem('TeacherId', result.Id);
         location.reload();
-        this.router.navigate(['teacher-journals']);
+        //this.router.navigate(['teacher-journals']);
         return;
       }
       if (result.Role == "Admin") {

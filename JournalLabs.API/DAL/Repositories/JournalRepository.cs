@@ -85,5 +85,22 @@ namespace JournalLabs.API.DAL.Repositories
                 }
             }
         }
+        public List<JournalViewModel> GetAllJournalsByTeacherId(string teacherId)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string selectQuery = @"SELECT * From Journals Where TeacherId = @teacherId";
+                try
+                {
+                    var result = db.Query<JournalViewModel>(selectQuery, new { teacherId = teacherId });
+                    return result.ToList();
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+        
     }
 }
