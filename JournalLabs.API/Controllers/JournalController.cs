@@ -46,6 +46,13 @@ namespace JournalLabs.API.Controllers
             var result = _journalService.GetJournalById(Id);
             return Ok(result);
         }
+        [Route("GetJournalByIdAndStudentId")]
+        [HttpGet]
+        public IHttpActionResult GetJournalByIdAndStudentId(string journalId, string studentId)
+        {
+            var result = _journalService.GetJournalById(journalId, studentId);
+            return Ok(result);
+        }
         [Route("DeleteJournalById")]
         [HttpGet]
         public IHttpActionResult DeleteJournalById(string Id)

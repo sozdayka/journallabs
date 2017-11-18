@@ -25,33 +25,45 @@ export class TeacherJournalsComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-      let teacherId = params["journalId"];
-      this.getJournal(teacherId);
-    });
-    //this.activatedRoute.queryParams.subscribe((params: Params) => {
-    //  let teacherId = params['journalId'];
-      
+    //this.activatedRoute.params.subscribe(params => {
+    //  let teacherId = params["journalId"];
+    //  this.getJournal(teacherId);
     //});
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+      let journalId = params['journalId'];
+      let studentId = params['studentId'];
+      if (typeof (studentId)=='undefined') {
+        this.getJournal(journalId);
+      }
+      if (typeof (studentId) != 'undefined') {
+        this.getStudentJournal(journalId, studentId);
+      }
+
+    });
     
   }
 
   public createJournal() {
     this.journalService.addJournal(this.lessonName, this.studentsCount, this.labBlocksCount, localStorage.getItem('TeacherId')).subscribe(response => {
-      this.isNewJournal = !this.isNewJournal
+      this.isNewJournal = !this.isNewJournal;
     });
   }
 
-  public getJournal(teacherId:string) {
-    this.journalService.getJournal(teacherId).subscribe(response => {
+  public getJournal(journalId:string) {
+    this.journalService.getJournal(journalId).subscribe(response => {
       var resp = JSON.stringify(response);
       this.journalViewModel = JSON.parse(resp);
       for (var i = 0; i < this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.length; i++) {
         this.countBlocks.push(i);
+      }          
+    });
+  }
+  public getStudentJournal(journalId: string,studentId:string) {
+    this.journalService.getJournalByIdAndStudentId(journalId, studentId).subscribe(response => {
+        this.journalViewModel = JSON.parse(response._body);
+      for (var i = 0; i < this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.length; i++) {
+        this.countBlocks.push(i);
       }
-      
-      
-      //this.isNewJournal = !this.isNewJournal
     });
   }
 }

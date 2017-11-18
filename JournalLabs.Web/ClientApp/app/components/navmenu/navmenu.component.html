@@ -36,8 +36,15 @@
         </li>
         <ng-container *ngIf="teacherJournals.length!=0 && currentRole=='Teacher'" >
           <li *ngFor=" let journal of teacherJournals" [routerLinkActive]="['link-active']" (click)="collapseMenu()">
-            <a [routerLink]="['/teacher-journals', journal.Id ]">
-              <span class='glyphicon glyphicon-comment'></span> {{journal.LessonName}}
+            <a [routerLink]="['/teacher-journals']" [queryParams]="{ journalId: journal.Id }">
+              <span class='glyphicon glyphicon-comment'></span> Teacher - {{journal.LessonName}}
+            </a>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="studentJournals.length!=0">
+          <li *ngFor=" let journal of studentJournals" [routerLinkActive]="['link-active']" (click)="collapseMenu()">
+            <a [routerLink]="['/teacher-journals']" [queryParams]="{ journalId: journal.Id,studentId:studentId }">
+              <span class='glyphicon glyphicon-comment'></span> Student - {{journal.LessonName}}
             </a>
           </li>
         </ng-container>

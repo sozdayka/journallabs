@@ -74,12 +74,21 @@ namespace JournalLabs.API.BLL
             _journalRepository.UpdateJournal(journalModel);
         }
 
-        public JournalGridViewModel GetJournalById(string journalId)
+        public JournalGridViewModel GetJournalById(string journalId,string student_Id="")
         {
+            List<Student> students = new List<Student>();
             var journal = new JournalGridViewModel();
             journal.JournalModel = _journalRepository.GetJournalById(journalId);
             journal.KindsOfWorkForJournal = _kindOfWorkRepository.GetKindsOfWorkByJournalId(journalId);
-            var students = _labBlockRepository.GetStudentsByJournalId(journalId);
+            if (student_Id == "")
+            {
+                students = _labBlockRepository.GetStudentsByJournalId(journalId);
+            }
+            if (student_Id!="")
+            {
+                var student =_studentRepository.GetStudentById(student_Id);
+                students.Add(student); 
+            }
             journal.StudentResultForJournal = new List<StudentJournalViewModel>();
             foreach (var student in students)
             {
@@ -90,7 +99,6 @@ namespace JournalLabs.API.BLL
                     StudentLabBlocks = _labBlockRepository.GetLabBlockByStudentAndJournalId(studentId, journalId)
                 });
             }
-            //journal.StudentResultForJournal = _labBlockRepository.GetStudentJournalViewModels(journalId);
             return journal;
         }
 

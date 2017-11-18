@@ -115,7 +115,7 @@ export function createTranslateLoader(http: Http, baseHref) {
                 }
             },
             {
-              path: 'teacher-journals/:journalId', component: TeacherJournalsComponent,
+              path: 'teacher-journals', component: TeacherJournalsComponent,
               data: {
                 title: 'Teacher journals',
                 meta: [{ name: 'description', content: 'Teacher journals' }],

@@ -192,7 +192,6 @@ ClientBin/
 *.jfm
 *.pfx
 *.publishsettings
-*.txt
 node_modules/
 orleans.codegen.cs
 
@@ -260,3 +259,4 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/Sustainabilist.Test
