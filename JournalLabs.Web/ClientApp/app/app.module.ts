@@ -159,7 +159,7 @@ export function createTranslateLoader(http: Http, baseHref) {
         LabBlockService,
         JournalService,
         StudentService,
-        LabBlockService
+        KindOfWorkService
     ]
 })
 export class AppModuleShared {

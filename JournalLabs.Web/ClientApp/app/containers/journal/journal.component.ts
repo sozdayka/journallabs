@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { JournalService } from '../../shared/journal.service';
+import { StudentService } from '../../shared/student.service';
+import { LabBlockService } from '../../shared/lab-block.service';
+import { KindOfWorkService } from '../../shared/kind-of-work.service';
 import { JournalViewModel } from '../../models/journalViewModel';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-
+import { Student } from "../../models/Student"
+import { KindOfWork } from "../../models/kind-of-work"
+import { LabBlock } from "../../models/LabBlock"
 @Component({
   selector: 'journal',
   templateUrl:'journal.component.html'
@@ -18,8 +23,13 @@ export class JournalComponent implements OnInit {
   public studentsCount: number = 0;
   public labBlocksCount: number = 0;
 
-
-  public constructor(public journalService: JournalService, private activatedRoute: ActivatedRoute) {
+  
+  public constructor(public journalService: JournalService,
+    public studentService: StudentService,
+    public labBlockService: LabBlockService,
+    public kindOfWorkService: KindOfWorkService,
+    private activatedRoute: ActivatedRoute
+  ) {
   }
 
   public ngOnInit(): void {
@@ -63,5 +73,18 @@ export class JournalComponent implements OnInit {
         this.countBlocks.push(i);
       }
     });
+  }
+
+  public changeUserName(student: Student) {
+    this.studentService.updateStudent(student).subscribe(
+      result => {
+        console.log("success update user name");
+      });
+  }
+  public changeKindOfWorkName(kindOfWork: KindOfWork) {
+    this.kindOfWorkService.updateKindOfWork(kindOfWork).subscribe(
+      result => {
+        console.log("success update kindOfWork name");
+      });
   }
 }
