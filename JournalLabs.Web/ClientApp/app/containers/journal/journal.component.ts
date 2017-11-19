@@ -37,7 +37,9 @@ export class JournalComponent implements OnInit {
     //  let teacherId = params["journalId"];
     //  this.getJournal(teacherId);
     //});
+    
     this.activatedRoute.queryParams.subscribe((params: Params) => {
+      this.countBlocks = [];
       let journalId = params['journalId'];
       let studentId = params['studentId'];
       if (typeof (studentId)=='undefined') {
