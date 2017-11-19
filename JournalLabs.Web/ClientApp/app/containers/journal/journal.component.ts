@@ -87,4 +87,10 @@ export class JournalComponent implements OnInit {
         console.log("success update kindOfWork name");
       });
   }
+  public changeLabBlock(labBlock: LabBlock) {
+    this.labBlockService.updateLabBlock(labBlock).subscribe(
+      result => {
+        console.log("success update labBlock");
+      });
+  }
 }

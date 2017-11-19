@@ -45,10 +45,10 @@
         <tr>
             <td><input (keyup.enter)="changeUserName(journalViewModel.StudentResultForJournal[i].StudentInfo)" [(ngModel)]="journalViewModel.StudentResultForJournal[i].StudentInfo.StudentName" /></td>
             <ng-container *ngFor=" let key of journalViewModel.StudentResultForJournal[i].StudentLabBlocks">
-              <td><input [(ngModel)]="key.FirstDate" /></td>
-              <td><input [(ngModel)]="key.FirstMark" /></td>
-              <td><input [(ngModel)]="key.SecondDate" /></td>
-              <td><input [(ngModel)]="key.SecondMark" /></td>
+              <td><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.FirstDate" /></td>
+              <td><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.FirstMark" /></td>
+              <td><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.SecondDate" /></td>
+              <td><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.SecondMark" /></td>
             </ng-container>          
         </tr>
       </ng-container>
