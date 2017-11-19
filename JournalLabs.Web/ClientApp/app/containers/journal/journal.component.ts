@@ -17,7 +17,7 @@ export class JournalComponent implements OnInit {
   public journalViewModel: JournalViewModel = null;
   public pasrseArray:any=[];
   countBlocks: number[] = []; 
-
+  public studentId = "";
   
   public constructor(public journalService: JournalService,
     public studentService: StudentService,
@@ -36,12 +36,12 @@ export class JournalComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.countBlocks = [];
       let journalId = params['journalId'];
-      let studentId = params['studentId'];
-      if (typeof (studentId)=='undefined') {
+      this.studentId = params['studentId'];
+      if (typeof (this.studentId)=='undefined') {
         this.getJournal(journalId);
       }
-      if (typeof (studentId) != 'undefined') {
-        this.getStudentJournal(journalId, studentId);
+      if (typeof (this.studentId) != 'undefined') {
+        this.getStudentJournal(journalId, this.studentId);
       }
 
     });
