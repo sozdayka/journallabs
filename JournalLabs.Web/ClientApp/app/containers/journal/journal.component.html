@@ -27,7 +27,7 @@
         <tr>
           <td></td>
           <td style="text-align:center; vertical-align:middle;" colspan="4" *ngFor=" let key of journalViewModel.KindsOfWorkForJournal">
-            {{key.NameKindOfWork}}
+            <input [(ngModel)]="key.NameKindOfWork" />
           </td>
         </tr>
       </thead>
@@ -43,12 +43,12 @@
       </tr>
       <ng-container *ngFor=" let key2 of journalViewModel.StudentResultForJournal;let i = index">
         <tr>
-            <td><input value="{{journalViewModel.StudentResultForJournal[i].StudentInfo.StudentName}}" /></td>
+            <td><input [(ngModel)]="journalViewModel.StudentResultForJournal[i].StudentInfo.StudentName" /></td>
             <ng-container *ngFor=" let key of journalViewModel.StudentResultForJournal[i].StudentLabBlocks">
-              <td><input value="{{key?.FirstDate}}" /></td>
-              <td><input value="{{key?.FirstMark}}" /></td>
-              <td><input value="{{key?.SecondDate}}" /></td>
-              <td><input value="{{key?.SecondMark}}" /></td>
+              <td><input [(ngModel)]="key.FirstDate" /></td>
+              <td><input [(ngModel)]="key.FirstMark" /></td>
+              <td><input [(ngModel)]="key.SecondDate" /></td>
+              <td><input [(ngModel)]="key.SecondMark" /></td>
             </ng-container>          
         </tr>
       </ng-container>
@@ -56,8 +56,6 @@
     </table>
   </div>
 </div>
-<br />
-<button (click)="getJournal()">Get journal</button>
 <!--<br>-->
 <!--<ng-table *ngIf="!isNewJournal" [config]="config"
           (tableChanged)="onChangeTable(config)"

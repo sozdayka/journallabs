@@ -12,7 +12,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
-import { StudentJournalsComponent } from './containers/student-journals/student-journals.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import { AdminComponent } from './containers/admin/admin.component';
 // import { ChatComponent } from './containers/chat/chat.component';
@@ -25,9 +24,8 @@ import { UserService } from './shared/user.service';
 // import { ConnectionResolver } from './shared/route.resolver';
 import { ORIGIN_URL } from './shared/constants/baseurl.constants';
 import { TransferHttpModule } from '../modules/transfer-http/transfer-http.module';
-import { TeacherJournalsComponent } from './containers/teacher-journals/teacher-journals.component';
+import { JournalComponent } from './containers/journal/journal.component';
 import { SignInComponent } from './containers/sign-in/sign-in.component';
-import { RowContentComponent } from './containers/teacher-journals/row-content.component';
 import { LabBlockService } from './shared/lab-block.service';
 import { JournalService } from './shared/journal.service';
 import { KindOfWorkService } from './shared/kind-of-work.service';
@@ -47,14 +45,12 @@ export function createTranslateLoader(http: Http, baseHref) {
         AppComponent,
         NavMenuComponent,
         AdminComponent,
-      StudentJournalsComponent,
         UserDetailComponent,
         // ChatComponent,
         NotFoundComponent,
       NgxBootstrapComponent,
-      TeacherJournalsComponent,
+      JournalComponent,
       SignInComponent,
-      RowContentComponent
     ],
     imports: [
         CommonModule,
@@ -115,10 +111,10 @@ export function createTranslateLoader(http: Http, baseHref) {
                 }
             },
             {
-              path: 'teacher-journals', component: TeacherJournalsComponent,
+              path: 'journal', component: JournalComponent,
               data: {
-                title: 'Teacher journals',
-                meta: [{ name: 'description', content: 'Teacher journals' }],
+                title: 'Journal',
+                meta: [{ name: 'description', content: 'Journal' }],
                 links: [
                   { rel: 'canonical', href: 'http://blogs.example.com/bootstrap/something' },
                   { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/bootstrap-demo' }

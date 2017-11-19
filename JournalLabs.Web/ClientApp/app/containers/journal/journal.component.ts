@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { TableData } from './table-data';
-import { RowContentComponent } from './row-content.component';
 import { JournalService } from '../../shared/journal.service';
 import { JournalViewModel } from '../../models/journalViewModel';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
-  selector: 'teacher-journals',
-  templateUrl:'teacher-journals.component.html'
+  selector: 'journal',
+  templateUrl:'journal.component.html'
 })
-export class TeacherJournalsComponent implements OnInit {
+export class JournalComponent implements OnInit {
   name: string;
   public journalViewModel: JournalViewModel = null;
   public pasrseArray:any=[];
