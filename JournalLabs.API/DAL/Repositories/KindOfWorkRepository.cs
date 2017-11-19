@@ -76,7 +76,7 @@ namespace JournalLabs.API.DAL.Repositories
 	                                    left join LabBlocks lb on j.Id=lb.JournalId
 	                                    left join KindOfWorks kw on lb.KindOfWorkId=kw.Id 
                                         where j.Id=@journalId)as kw order by 
-											len(kw.NameKindOfWork), kw.NameKindOfWork";
+									    kw.NameKindOfWork"; //len(kw.NameKindOfWork),
                 try
                 {
                     var result = db.Query<KindOfWork>(insertQuery, new { journalId = journalId });
