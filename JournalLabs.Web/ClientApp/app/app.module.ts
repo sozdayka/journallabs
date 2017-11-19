@@ -16,7 +16,7 @@ import { UserDetailComponent } from './components/user-detail/user-detail.compon
 import { AdminComponent } from './containers/admin/admin.component';
 // import { ChatComponent } from './containers/chat/chat.component';
 import { NotFoundComponent } from './containers/not-found/not-found.component';
-import { NgxBootstrapComponent } from './containers/ngx-bootstrap-demo/ngx-bootstrap.component';
+import { CreateJournalComponent } from './containers/create-journal/create-journal.component';
 import { Ng2TableModule } from 'ng2-expanding-table/components/ng-table-module';
 
 import { LinkService } from './shared/link.service';
@@ -48,7 +48,7 @@ export function createTranslateLoader(http: Http, baseHref) {
         UserDetailComponent,
         // ChatComponent,
         NotFoundComponent,
-      NgxBootstrapComponent,
+      CreateJournalComponent,
       JournalComponent,
       SignInComponent,
     ],
@@ -81,7 +81,7 @@ export function createTranslateLoader(http: Http, baseHref) {
                 path: 'admin', component: AdminComponent,
                 data: {
                     title: 'Admin',
-                    meta: [{ name: 'description', content: 'This is an Admin page Description!' }],
+                    meta: [{ name: 'description', content: 'Admin' }],
                     links: [
                         { rel: 'canonical', href: 'http://blogs.example.com/counter/something' },
                         { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/counter' }
@@ -100,10 +100,10 @@ export function createTranslateLoader(http: Http, baseHref) {
             //    }
             //},
             {
-                path: 'ngx-bootstrap', component: NgxBootstrapComponent,
+              path: 'create-journal', component: CreateJournalComponent,
                 data: {
-                    title: 'Ngx-bootstrap demo!!',
-                    meta: [{ name: 'description', content: 'This is an Demo Bootstrap page Description!' }],
+                    title: 'Create journal',
+                    meta: [{ name: 'description', content: 'Create journal' }],
                     links: [
                         { rel: 'canonical', href: 'http://blogs.example.com/bootstrap/something' },
                         { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/bootstrap-demo' }

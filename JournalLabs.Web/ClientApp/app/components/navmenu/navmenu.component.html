@@ -25,11 +25,11 @@
             <span class='glyphicon glyphicon-education'></span> {{ 'Admin' | translate }}
           </a>
         </li>
-        <!--<li [routerLinkActive]="['link-active']" (click)="collapseMenu()">
-          <a [routerLink]="['/student-journals']">
-            <span class='glyphicon glyphicon-user'></span> Student journals
+        <li *ngIf="currentRole=='Teacher'" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="collapseMenu()">
+          <a [routerLink]="['/create-journal']">
+            <span class='glyphicon glyphicon-user'></span> Создать журнал <!--Student journals-->
           </a>
-        </li>-->
+        </li>
         <li *ngIf="currentRole!=''" [routerLinkActive]="['link-active']" (click)="signOut()">
           <a>
             <span class='glyphicon glyphicon-th-large'></span> Выйти с аккаунта <!--Sign Out-->

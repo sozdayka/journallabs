@@ -1,27 +1,7 @@
-<a *ngIf="!isNewJournal" (click)="isNewJournal=true">Создать новый журнал (+)</a><!--Create new journal-->
-<br>
-<div *ngIf="isNewJournal">
-  <h1>Новый журнал:</h1><!--New journal-->
-  <br />
-  <p>Название предмета:</p><!--Lesson Name:-->
-  <input type="text" [(ngModel)]="lessonName" name="LessonName" />
-  <br />
-  <p>Введите количество студентов:</p><!--Input count students:-->
-  <input type="text" [(ngModel)]="studentsCount" name="StudentsCount" />
-  <br />
-  <p>Введите количество видов работ:</p><!--Input count lab blocks:-->
-  <input type="text" [(ngModel)]="labBlocksCount" name="LabBlocksCount" />
-  <br />
-  <button (click)="createJournal()">Создать журнал</button><!--Create journal-->
-</div>
-<div *ngIf="!isNewJournal" class="row">
-  <!--<div class="col-md-4">
-    <input *ngIf="config.filtering" placeholder="Filter all columns"
-           [ngTableFiltering]="config.filtering"
-           class="form-control"
-           (tableChanged)="onChangeTable(config)" />
-  </div>-->
-  <div *ngIf="!isNewJournal && journalViewModel!=null">
+<!--<a *ngIf="!isNewJournal" (click)="isNewJournal=true">Создать новый журнал (+)</a>--><!--Create new journal-->
+
+<div class="row">
+  <div *ngIf="journalViewModel!=null">
     <table>
       <thead>
         <tr>
@@ -56,15 +36,3 @@
     </table>
   </div>
 </div>
-<!--<br>-->
-<!--<ng-table *ngIf="!isNewJournal" [config]="config"
-          (tableChanged)="onChangeTable(config)"
-          (cellClicked)="onCellClick($event)"
-          (scrolledDown)="onScrollDown()"
-          (expanderClicked)="expanderClicked($event)"
-          (valueEdit)="editRow($event)"
-          [rows]="rows" [columns]="columns"
-          [expandable]="true"
-          [expandedComponent]="rowComponent"
-          [rowInputs]="rowInputs">
-</ng-table>-->

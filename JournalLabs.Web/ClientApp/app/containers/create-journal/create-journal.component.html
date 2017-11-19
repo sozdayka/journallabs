@@ -1,0 +1,13 @@
+<br>
+  <h1>Новый журнал:</h1><!--New journal-->
+  <br />
+  <p>Название предмета:</p><!--Lesson Name:-->
+  <input type="text" [(ngModel)]="lessonName" name="LessonName" />
+  <br />
+  <p>Введите количество студентов:</p><!--Input count students:-->
+  <input type="text" [(ngModel)]="studentsCount" name="StudentsCount" />
+  <br />
+  <p>Введите количество видов работ:</p><!--Input count lab blocks:-->
+  <input type="text" [(ngModel)]="labBlocksCount" name="LabBlocksCount" />
+  <br />
+  <button (click)="createJournal()">Создать журнал</button><!--Create journal-->

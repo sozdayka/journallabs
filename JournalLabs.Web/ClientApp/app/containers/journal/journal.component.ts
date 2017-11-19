@@ -17,11 +17,6 @@ export class JournalComponent implements OnInit {
   public journalViewModel: JournalViewModel = null;
   public pasrseArray:any=[];
   countBlocks: number[] = []; 
-  public rows: Array<any> = [];
-  public isNewJournal: boolean = false;
-  public lessonName: string = "";
-  public studentsCount: number = 0;
-  public labBlocksCount: number = 0;
 
   
   public constructor(public journalService: JournalService,
@@ -51,12 +46,6 @@ export class JournalComponent implements OnInit {
 
     });
     
-  }
-
-  public createJournal() {
-    this.journalService.addJournal(this.lessonName, this.studentsCount, this.labBlocksCount, localStorage.getItem('TeacherId')).subscribe(response => {
-      this.isNewJournal = !this.isNewJournal;
-    });
   }
 
   public getJournal(journalId:string) {
