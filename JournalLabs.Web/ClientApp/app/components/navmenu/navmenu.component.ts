@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { Router, CanActivate, NavigationEnd } from '@angular/router';
 import { JournalService } from "../../shared/journal.service";
 import { Journal } from '../../models/Journal';
+import { StudentJournal } from '../../models/studentJournal';
 
 @Component({
     selector: 'nav-menu',
@@ -13,7 +14,7 @@ export class NavMenuComponent implements OnInit {
     collapse: string = "collapse";
     currentRole: string = "";
     public teacherJournals: Journal[] = [];
-    public studentJournals: Journal[] = [];
+    public studentJournals: StudentJournal[] = [];
     public studentName:string="";
     constructor(public router: Router,
       private journalService: JournalService) {
@@ -35,22 +36,21 @@ export class NavMenuComponent implements OnInit {
       if (localStorage.getItem('TeacherId')!=null) {
         this.journalService.getAllJournalsByTeacherId(localStorage.getItem('TeacherId')).subscribe(response => {
           this.teacherJournals = JSON.parse(response._body);
+          this.router.navigate(['journal'], { queryParams: { journalId: this.teacherJournals[0].Id } });
         });
       }
       if (this.studentName != "") {
         this.journalService.getAllStudentJournalsByStudentName(this.studentName).subscribe(response => {
           this.studentJournals = JSON.parse(response._body);
+          this.router.navigate(['journal'], { queryParams: { journalId: this.studentJournals[0].JournalId, studentId: this.studentJournals[0].StudentId } });
         });
-        //this.studentJournals = [{ Id: '42570A60-834E-44D1-AC0F-87BB12B07B65', LessonName: 'IPZ', TeacherId:'10A20B0B-46F2-4A39-AF21-77B5B9D22E95'}]
-        //this.journalService.getAllJournalsByTeacherId(localStorage.getItem('StudentId')).subscribe(response => {
-        //  this.teacherJournals = JSON.parse(response._body);
-        //});
       }
-      
+      this.router.navigate(['sign-in']);
     }
 
     signOut() {
       localStorage.removeItem('Role');
+      localStorage.removeItem('TeacherId');
       location.reload();
       this.router.navigate(['sign-in']);
     }
@@ -62,6 +62,7 @@ export class NavMenuComponent implements OnInit {
     public StudentSearch() {
       this.journalService.getAllStudentJournalsByStudentName(this.studentName).subscribe(response => {
         this.studentJournals = JSON.parse(response._body);
+        this.router.navigate(['journal'], { queryParams: { journalId: this.studentJournals[0].JournalId, studentId: this.studentJournals[0].StudentId } });
       });
     console.log(this.studentName);
   }
