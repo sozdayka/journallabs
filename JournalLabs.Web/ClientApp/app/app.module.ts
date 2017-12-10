@@ -30,6 +30,7 @@ import { LabBlockService } from './shared/lab-block.service';
 import { JournalService } from './shared/journal.service';
 import { KindOfWorkService } from './shared/kind-of-work.service';
 import { StudentService } from './shared/student.service';
+import { RemarkService } from './shared/remark.service';
 
 export function createTranslateLoader(http: Http, baseHref) {
     // Temporary Azure hack
@@ -159,7 +160,8 @@ export function createTranslateLoader(http: Http, baseHref) {
         LabBlockService,
         JournalService,
         StudentService,
-        KindOfWorkService
+        KindOfWorkService,
+        RemarkService
     ]
 })
 export class AppModuleShared {

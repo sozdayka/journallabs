@@ -17,12 +17,14 @@ namespace JournalLabs.API.BLL
         private LabBlockRepository _labBlockRepository;
         private StudentRepository _studentRepository;
         private KindOfWorkRepository _kindOfWorkRepository;
+        private RemarkRepository _remarkRepository;
         public JournalService()
         {
             _journalRepository = new JournalRepository();
             _labBlockRepository=new LabBlockRepository();
             _studentRepository = new StudentRepository();
             _kindOfWorkRepository = new KindOfWorkRepository();
+            _remarkRepository = new RemarkRepository();
         }
         public void CreateJournal(string lessonName, int studentsCount, int labBlocksCount,Guid teacherId)
         {
@@ -64,6 +66,7 @@ namespace JournalLabs.API.BLL
                             KindOfWorkId = kindOfWorkGuidList[j]
                         });
                 }
+                _remarkRepository.CreateRemark(new Remark() { JournalId = journalId, StudentId = studentId, RemarkText = "" });
             }
             
             
@@ -96,7 +99,9 @@ namespace JournalLabs.API.BLL
                 journal.StudentResultForJournal.Add(new StudentLabBlocksViewModel()
                 {
                     StudentInfo = student,
-                    StudentLabBlocks = _labBlockRepository.GetLabBlockByStudentAndJournalId(studentId, journalId)
+                    StudentLabBlocks = _labBlockRepository.GetLabBlockByStudentAndJournalId(studentId, journalId),
+                    Remark = 
+                    _remarkRepository.GetRemarkTextByJournalIdAndStudentId(journalId, studentId)
                 });
             }
             return journal;

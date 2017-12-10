@@ -10,5 +10,6 @@ namespace JournalLabs.API.ViewModels
     {
         public Student StudentInfo { get; set; }
         public List<LabBlockViewModel> StudentLabBlocks { get; set; }
+        public Remark Remark { get; set; }
     }
 }

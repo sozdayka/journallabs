@@ -3,11 +3,13 @@ import { JournalService } from '../../shared/journal.service';
 import { StudentService } from '../../shared/student.service';
 import { LabBlockService } from '../../shared/lab-block.service';
 import { KindOfWorkService } from '../../shared/kind-of-work.service';
+import { RemarkService } from '../../shared/remark.service';
 import { JournalViewModel } from '../../models/journalViewModel';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Student } from "../../models/Student"
 import { KindOfWork } from "../../models/kind-of-work"
 import { LabBlock } from "../../models/LabBlock"
+import { Remark } from "../../models/Remark"
 @Component({
   selector: 'journal',
   templateUrl:'journal.component.html'
@@ -23,6 +25,7 @@ export class JournalComponent implements OnInit {
     public studentService: StudentService,
     public labBlockService: LabBlockService,
     public kindOfWorkService: KindOfWorkService,
+    public remarkService: RemarkService,
     private activatedRoute: ActivatedRoute
   ) {
   }
@@ -77,6 +80,20 @@ export class JournalComponent implements OnInit {
       result => {
         console.log("success update kindOfWork name");
       });
+  }
+  public changeRemark(remark: Remark) {
+    this.remarkService.updateRemark(remark).subscribe(
+      result => {
+        console.log("success update remark");
+      });
+  }
+  public totalMark(labBlocks: LabBlock[]):number
+  {
+    let sum:number = 0;
+    for (let labBlock of labBlocks) {
+      sum += labBlock.FirstMark > labBlock.SecondMark ? labBlock.FirstMark : labBlock.SecondMark;
+    }
+    return sum;
   }
   public changeLabBlock(labBlock: LabBlock) {
     this.labBlockService.updateLabBlock(labBlock).subscribe(

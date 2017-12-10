@@ -20,16 +20,21 @@
           <td>Дата пересдачи</td><!--SecondDate-->
           <td>Оценка при пересдаче</td><!--SecondMark-->
         </ng-container>
+        <td>Итоговая оценка</td>
+        <td>Описание</td>
       </tr>
       <ng-container *ngFor=" let key2 of journalViewModel.StudentResultForJournal;let i = index">
         <tr>
-            <td><input (keyup.enter)="changeUserName(journalViewModel.StudentResultForJournal[i].StudentInfo)" [(ngModel)]="journalViewModel.StudentResultForJournal[i].StudentInfo.StudentName" [readonly]="studentId"/></td>
-            <ng-container *ngFor=" let key of journalViewModel.StudentResultForJournal[i].StudentLabBlocks">
+            <td><input (keyup.enter)="changeUserName(key2.StudentInfo)" [(ngModel)]="key2.StudentInfo.StudentName" [readonly]="studentId"/></td>
+            <ng-container *ngFor=" let key of key2.StudentLabBlocks">
               <td><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.FirstDate"  [readonly]="studentId"/></td>
               <td><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.FirstMark" [readonly]="studentId"/></td>
               <td><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.SecondDate" [readonly]="studentId"/></td>
               <td><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.SecondMark" [readonly]="studentId"/></td>
-            </ng-container>          
+            </ng-container>
+          <td><input value="{{totalMark(key2.StudentLabBlocks)}}" [readonly]="studentId" /></td>
+          <td *ngIf="key2.Remark!=null"><input (keyup.enter)="changeRemark(key2.Remark)" [(ngModel)]="key2.Remark.RemarkText" [readonly]="studentId"/></td>
+          <td *ngIf="key2.Remark==null"><input value="" [readonly]="studentId" /></td>
         </tr>
       </ng-container>
       </tbody>
