@@ -10,6 +10,7 @@ import { Student } from "../../models/Student"
 import { KindOfWork } from "../../models/kind-of-work"
 import { LabBlock } from "../../models/LabBlock"
 import { Remark } from "../../models/Remark"
+import { KindOfMark } from '../../models/enums/KindOfMark';
 @Component({
   selector: 'journal',
   templateUrl:'journal.component.html'
@@ -20,7 +21,7 @@ export class JournalComponent implements OnInit {
   public pasrseArray:any=[];
   countBlocks: number[] = []; 
   public studentId = "";
-  
+  public kindOfMark= KindOfMark ;
   public constructor(public journalService: JournalService,
     public studentService: StudentService,
     public labBlockService: LabBlockService,

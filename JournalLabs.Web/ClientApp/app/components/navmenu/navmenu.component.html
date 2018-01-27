@@ -25,7 +25,7 @@
             <span class='glyphicon glyphicon-education'></span> {{ 'Admin' | translate }}
           </a>
         </li>
-        <li *ngIf="currentRole=='Teacher' || currentRole=='Assistant'" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="collapseMenu()">
+        <li *ngIf="currentRole=='Teacher'" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="collapseMenu()">
           <a [routerLink]="['/create-journal']">
             <span class='glyphicon glyphicon-user'></span> Создать журнал <!--Student journals-->
           </a>

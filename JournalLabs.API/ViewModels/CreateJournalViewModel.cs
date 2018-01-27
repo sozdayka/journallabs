@@ -10,7 +10,7 @@ namespace JournalLabs.API.ViewModels
     {
         public string LessonName { get; set; }
         public int StudentsCount { get; set; }
-        public List<LabBlock> LabBlocksSettings { get; set; }
+        public List<LabBlockViewModel> LabBlocksSettings { get; set; }
         public List<Guid> TeacherIds { get; set; }
     }
 }

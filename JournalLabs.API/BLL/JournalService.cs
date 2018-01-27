@@ -7,6 +7,7 @@ using System.Web;
 using Dapper;
 using JournalLabs.API.DAL.Repositories;
 using JournalLabs.API.Models;
+using JournalLabs.API.Models.Enums;
 using JournalLabs.API.ViewModels;
 
 namespace JournalLabs.API.BLL
@@ -66,12 +67,26 @@ namespace JournalLabs.API.BLL
                         kindOfWorkGuidList.Add(kindOfWork);
                         _kindOfWorkRepository.CreateKindOfWork(new KindOfWork(){Id = kindOfWork,NameKindOfWork = $"Вид работы {j+1}"});
                     }
-                    labBlock.Id = Guid.NewGuid();
-                    labBlock.JournalId = journalId;
-                    labBlock.StudentId = studentId;
-                    labBlock.KindOfWorkId = kindOfWorkGuidList.LastOrDefault();
+                    var createLabBlock = new LabBlock();
+                    createLabBlock.IsBoolField = labBlock.IsBoolField;
+                    createLabBlock.IsCalculateMark = labBlock.IsCalculateMark;
+                    createLabBlock.IsKindOfWorkVisible = labBlock.IsKindOfWorkVisible;
+                    createLabBlock.IsVisibleToStudent = labBlock.IsVisibleToStudent;
+                    createLabBlock.KindOfMark = KindOfMark.FirstMark;
+                    createLabBlock.Id = Guid.NewGuid();
+                    createLabBlock.JournalId = journalId;
+                    createLabBlock.StudentId = studentId;
+                    createLabBlock.KindOfWorkId = kindOfWorkGuidList.LastOrDefault();
 
-                    _labBlockRepository.CreateLabBlock(labBlock);
+                    _labBlockRepository.CreateLabBlock(createLabBlock);
+
+                    if (labBlock.IsSecondBlock)
+                    {
+                        createLabBlock.KindOfMark = KindOfMark.SecondMark;
+                        createLabBlock.Id = Guid.NewGuid();
+
+                        _labBlockRepository.CreateLabBlock(createLabBlock);
+                    }
                     j++;
                 }
                 _remarkRepository.CreateRemark(new Remark() { JournalId = journalId, StudentId = studentId, RemarkText = "" });
