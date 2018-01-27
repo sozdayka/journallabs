@@ -10,7 +10,7 @@ using JournalLabs.API.Models;
 
 namespace JournalLabs.API.Controllers
 {
-    [EnableCors(origins: "http://localhost:54500", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:62106", headers: "*", methods: "*")]
     [RoutePrefix("api/LabBlock")]
     public class LabBlockController : ApiController
     {

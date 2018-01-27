@@ -1,9 +1,15 @@
 <h1>Зарегистрировать нового преподователя:</h1><!--Sign Up Teacher-->
 <br />
 <p>Введите логин:</p><!--Input Email:-->
-<input type="text" [(ngModel)]="teacherModel.Login" name="Login"/>
+<input type="text" [(ngModel)]="teacherModel.Login" name="Login" />
 <br />
 <p>Введите пароль:</p><!--Input password:-->
-<input type="text" [(ngModel)]="teacherModel.Password" name="Password"/>
+<input type="text" [(ngModel)]="teacherModel.Password" name="Password" />
+<br />
+<p>Выберите роль:</p><!--Input password:-->
+<select [(ngModel)]="teacherModel.Role">
+  <option value="Teacher">Teacher</option>
+  <option value="Assistant">Assistant</option>
+</select>
 <br />
 <button (click)="SignUp()">Зарегистрироваться</button><!--Sign up-->

@@ -15,7 +15,7 @@ export class AdminComponent {
     public SignUp() {      
       //this.teacherModel.Role = "Teacher";
       this.userService.addUser(this.teacherModel).subscribe(response => {
-        alert("Преподователь успешно добавлен");
+        alert("Преподаватель успешно добавлен");
         location.reload();
       });
     }

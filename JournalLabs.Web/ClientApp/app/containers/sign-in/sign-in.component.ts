@@ -5,7 +5,7 @@ import { Router, CanActivate, NavigationEnd } from '@angular/router';
 @Component({
   selector: 'sign-in',
   template: `
-      <h1>Войти как преподователь:</h1>
+      <h1>Войти как преподаватель:</h1>
       <br />
       <p>Введите логин</p>
       <input type="text" [(ngModel)]="teacherModel.Login" name="Login"/>
