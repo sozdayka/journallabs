@@ -56,24 +56,23 @@ namespace JournalLabs.API.BLL
                     {
                         Id = studentId,
                         StudentName = $"Студент {i+1}"
-                    });               
-                
-                for (int j = 0; j < createJournalViewModel.LabBlocksCount; j++)
+                    });
+                var j = 0;
+                foreach (var labBlock in createJournalViewModel.LabBlocksSettings)
                 {
-                    if (kindOfWorkGuidList.Count != createJournalViewModel.LabBlocksCount)
+                    if (kindOfWorkGuidList.Count != createJournalViewModel.LabBlocksSettings.Count)
                     {
                         var kindOfWork = Guid.NewGuid();
                         kindOfWorkGuidList.Add(kindOfWork);
                         _kindOfWorkRepository.CreateKindOfWork(new KindOfWork(){Id = kindOfWork,NameKindOfWork = $"Вид работы {j+1}"});
                     }
-                    _labBlockRepository.CreateLabBlock(
-                        new LabBlock()
-                        {
-                            Id = Guid.NewGuid(),
-                            JournalId = journalId,
-                            StudentId = studentId,
-                            KindOfWorkId = kindOfWorkGuidList[j]
-                        });
+                    labBlock.Id = Guid.NewGuid();
+                    labBlock.JournalId = journalId;
+                    labBlock.StudentId = studentId;
+                    labBlock.KindOfWorkId = kindOfWorkGuidList.LastOrDefault();
+
+                    _labBlockRepository.CreateLabBlock(labBlock);
+                    j++;
                 }
                 _remarkRepository.CreateRemark(new Remark() { JournalId = journalId, StudentId = studentId, RemarkText = "" });
             }

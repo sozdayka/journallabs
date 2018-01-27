@@ -91,7 +91,7 @@ export class JournalComponent implements OnInit {
   {
     let sum:number = 0;
     for (let labBlock of labBlocks) {
-      sum += labBlock.FirstMark > labBlock.SecondMark ? labBlock.FirstMark : labBlock.SecondMark;
+      sum += labBlock.Mark;// > labBlock.SecondMark ? labBlock.FirstMark : labBlock.SecondMark;
     }
     return sum;
   }

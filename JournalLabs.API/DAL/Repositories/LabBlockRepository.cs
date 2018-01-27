@@ -44,7 +44,7 @@ namespace JournalLabs.API.DAL.Repositories
             {
                 try
                 {
-                    string insertQuery = @"UPDATE LabBlocks Set FirstDate = @FirstDate,FirstMark = @FirstMark,SecondDate = @SecondDate,SecondMark = @SecondMark,StudentId = @StudentId,KindOfWorkId=@KindOfWorkId,JournalId = @JournalId Where Id = @Id";
+                    string insertQuery = @"UPDATE LabBlocks Set Date = @Date,Mark = @Mark,MarkTeacherId = @MarkTeacherId,KindOfMark = @KindOfMark,IsKindOfWorkVisible = @IsKindOfWorkVisible,IsCalculateMark=@IsCalculateMark,IsVisibleToStudent = @IsVisibleToStudent,IsBoolField = @IsBoolField,StudentId = @StudentId,KindOfWorkId=@KindOfWorkId,JournalId = @JournalId Where Id = @Id";
                     var result = db.Execute(insertQuery, labBlockModel);
                 }
                 catch (Exception ex)

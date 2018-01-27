@@ -8,10 +8,29 @@
 <input type="text" [(ngModel)]="createJournalViewModel.StudentsCount" name="StudentsCount" />
 <br />
 <p>Введите количество видов работ:</p><!--Input count lab blocks:-->
-<input type="text" [(ngModel)]="createJournalViewModel.LabBlocksCount" name="LabBlocksCount" />
+<input type="text" [(ngModel)]="labBlockCount" (keyup)="fillLabBlockSettingsArray()" name="LabBlocksCount" />
+<br />
+<table *ngIf="createJournalViewModel.LabBlocksSettings.length!=0">
+  <tr>
+    <td>Название вида работы</td><!--FirstDate-->
+    <td style="padding-left: 20px;">Отображать ли данный вид работы</td><!--FirstMark-->
+    <td style="padding-left: 20px;">Учитывать эту оценку для итоговой оценки</td><!--SecondDate-->
+    <td style="padding-left: 20px;">Отображать ли данный вид работы для студента</td><!--SecondMark-->
+    <td style="padding-left: 20px;">Булевое ли это поле</td>
+  </tr>
+  <ng-container *ngFor=" let key of createJournalViewModel.LabBlocksSettings; let i = index">
+    <tr>
+      <td><span>Вид работы - {{i}}</span></td>
+      <td style="text-align: center;"><input type="checkbox" [(ngModel)]="key.IsKindOfWorkVisible"></td>
+      <td style="text-align: center;"><input type="checkbox" [(ngModel)]="key.IsCalculateMark"></td>
+      <td style="text-align: center;"><input type="checkbox" [(ngModel)]="key.IsVisibleToStudent"></td>
+      <td style="text-align: center;"><input type="checkbox" [(ngModel)]="key.IsBoolField"></td>
+    </tr>
+  </ng-container>
+</table>
 <br />
 <p>Выберите ассистентов которые будут иметь доступ к журналу:</p><!--Input count lab blocks:-->
 <ul style="width: 300px; height: 200px; overflow: auto">
   <li *ngFor=" let assistant of assistantList"><input type="checkbox" (click)="addAssistant($event,assistant.Id)"> {{assistant.Login}}</li>
 </ul>
-  <button (click)="createJournal()">Создать журнал</button><!--Create journal-->
+<button (click)="createJournal()">Создать журнал</button><!--Create journal-->
