@@ -29,7 +29,10 @@ export class UserService {
   getUser(id: string): Observable<User> {
     return this.transferHttp.get(`${this.baseUrl}/api/User/GetUserById` + id);
   }
-
+  getAllAssistants(): Observable<User[]> {
+    return this.transferHttp.get(`${this.baseUrl}/api/User/GetAllAssistants`);
+  }
+  
   deleteUser(id: string): Observable<any> {
     return this.http.delete(`${this.baseUrl}/api/User/DeleteUserById` + id);
   }

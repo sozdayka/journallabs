@@ -30,7 +30,7 @@ export class SignInComponent {
     //this.teacherModel.Role = "Teacher";
     this.userService.signInUser(this.teacherModel).subscribe(response => {
       var result:User = JSON.parse(response._body);
-      if (result.Role == "Teacher") {
+      if (result.Role == "Teacher" || result.Role == "Assistant") {
         localStorage.setItem('Role', result.Role);
         localStorage.setItem('TeacherId', result.Id);
         location.reload();

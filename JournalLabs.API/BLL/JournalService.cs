@@ -18,6 +18,7 @@ namespace JournalLabs.API.BLL
         private StudentRepository _studentRepository;
         private KindOfWorkRepository _kindOfWorkRepository;
         private RemarkRepository _remarkRepository;
+        private TeacherJournalRepository _teacherJournalRepository;
         public JournalService()
         {
             _journalRepository = new JournalRepository();
@@ -25,21 +26,29 @@ namespace JournalLabs.API.BLL
             _studentRepository = new StudentRepository();
             _kindOfWorkRepository = new KindOfWorkRepository();
             _remarkRepository = new RemarkRepository();
+            _teacherJournalRepository = new TeacherJournalRepository();
         }
-        public void CreateJournal(string lessonName, int studentsCount, int labBlocksCount,Guid teacherId)
+        public void CreateJournal(CreateJournalViewModel createJournalViewModel)
         {
             var kindOfWorkGuidList = new List<Guid>();
             var journalId = Guid.NewGuid();
 
             Journal journal = new Journal();
             journal.Id = journalId;
-            journal.TeacherId = teacherId;
-            journal.LessonName = lessonName;
+            journal.LessonName = createJournalViewModel.LessonName;
 
             _journalRepository.CreateJournal(journal);
-            
 
-            for (int i = 0; i < studentsCount; i++)
+            for (int i = 0; i < createJournalViewModel.TeacherIds.Count; i++)
+            {
+                _teacherJournalRepository.CreateTeacherJournal(new TeacherJournal {
+                    Id =Guid.NewGuid(),
+                    JournalId = journalId,
+                    TeacherId = createJournalViewModel.TeacherIds[i]
+                });
+            }
+
+            for (int i = 0; i < createJournalViewModel.StudentsCount; i++)
             {
                 var studentId = Guid.NewGuid();
                 _studentRepository.CreateStudent(
@@ -49,9 +58,9 @@ namespace JournalLabs.API.BLL
                         StudentName = $"Студент {i+1}"
                     });               
                 
-                for (int j = 0; j < labBlocksCount; j++)
+                for (int j = 0; j < createJournalViewModel.LabBlocksCount; j++)
                 {
-                    if (kindOfWorkGuidList.Count != labBlocksCount)
+                    if (kindOfWorkGuidList.Count != createJournalViewModel.LabBlocksCount)
                     {
                         var kindOfWork = Guid.NewGuid();
                         kindOfWorkGuidList.Add(kindOfWork);

@@ -1,19 +1,30 @@
 import { Component } from '@angular/core';
 import { JournalService } from '../../shared/journal.service';
-
+import { UserService } from '../../shared/user.service';
+import { CreateJournalViewModel } from "../../models/createJournalViewModel"
+import { User } from '../../models/User';
 @Component({
     selector: 'create-journal',
     templateUrl: './create-journal.component.html'
 })
 export class CreateJournalComponent {
-  public lessonName: string = "";
-  public studentsCount: number = 0;
-  public labBlocksCount: number = 0;
-
-  public constructor(public journalService: JournalService) {
+  public assistantList: User[] = [];
+  public createJournalViewModel: CreateJournalViewModel = new CreateJournalViewModel();
+  public constructor(public journalService: JournalService,public userService:UserService) {
+    var assistants = this.userService.getAllAssistants().subscribe(response => {
+      this.assistantList = response;
+    });
+  }
+  public addAssistant(event: any, id: string) {
+    if (event.target.checked) {
+      this.createJournalViewModel.TeacherIds.push(id);
+      return;
+    }
+    this.createJournalViewModel.TeacherIds = this.createJournalViewModel.TeacherIds.filter(obj => obj !== id);
   }
   public createJournal() {
-    this.journalService.addJournal(this.lessonName, this.studentsCount, this.labBlocksCount, localStorage.getItem('TeacherId')).subscribe(response => {
+    this.createJournalViewModel.TeacherIds.push(localStorage.getItem('TeacherId'));
+    this.journalService.addJournal(this.createJournalViewModel).subscribe(response => {
       alert("Журнал успешно добавлен");
       location.reload();
     });

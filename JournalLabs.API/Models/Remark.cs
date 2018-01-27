@@ -8,6 +8,7 @@ namespace JournalLabs.API.Models
     public class Remark
     {
         public Guid? Id { get; set; }
+        public bool IsStudentVisible { get; set; }
         public string RemarkText { get; set; }
         public Guid StudentId { get; set; }
         public Guid JournalId { get; set; }

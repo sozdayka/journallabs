@@ -1,4 +1,4 @@
-﻿$navbar-default-bg: #312312;
+$navbar-default-bg: #312312;
 $light-orange: #ff8c00;
 $navbar-default-color: $light-orange;
 
@@ -61,3 +61,8 @@ ul li { padding: 5px 0; }
 
 blockquote { margin: 25px 10px; padding: 10px 35px 10px 10px; border-left: 10px #158a15 solid; background: #edffed; }
 blockquote a, blockquote a:hover { color: #068006; }
+
+select {
+  height: 24px;
+  width: 174px;
+}

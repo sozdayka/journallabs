@@ -25,7 +25,7 @@
             <span class='glyphicon glyphicon-education'></span> {{ 'Admin' | translate }}
           </a>
         </li>
-        <li *ngIf="currentRole=='Teacher'" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="collapseMenu()">
+        <li *ngIf="currentRole=='Teacher' || currentRole=='Assistant'" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="collapseMenu()">
           <a [routerLink]="['/create-journal']">
             <span class='glyphicon glyphicon-user'></span> Создать журнал <!--Student journals-->
           </a>
@@ -40,7 +40,7 @@
             <span class='glyphicon glyphicon-star-empty'></span> Войти в аккаунт<!--Sign In-->
           </a>
         </li>
-        <ng-container *ngIf="teacherJournals.length!=0 && currentRole=='Teacher'" >
+        <ng-container *ngIf="teacherJournals.length!=0 && (currentRole=='Teacher'||currentRole=='Assistant')" >
           <li *ngFor=" let journal of teacherJournals;let i=index" id="teacher{{i}}" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="collapseMenu()">
             <a [routerLink]="['/journal']" [queryParams]="{ journalId: journal.Id }">
               <span class='glyphicon glyphicon-comment'></span> Преподаватель - {{journal.LessonName}}<!--Teacher-->

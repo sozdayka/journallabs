@@ -57,5 +57,12 @@ namespace JournalLabs.API.Controllers
             _userService.DeleteUserById(Id);
             return Ok("Good");
         }
+        [Route("GetAllAssistants")]
+        [HttpGet]
+        public IHttpActionResult GetAllAssistants()
+        {
+            var result = _userService.GetAllAssistants();
+            return Ok(result);
+        }
     }
 }

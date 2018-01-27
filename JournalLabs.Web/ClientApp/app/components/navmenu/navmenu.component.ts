@@ -35,8 +35,10 @@ export class NavMenuComponent implements OnInit {
       }
       if (localStorage.getItem('TeacherId')!=null) {
         this.journalService.getAllJournalsByTeacherId(localStorage.getItem('TeacherId')).subscribe(response => {
-          this.teacherJournals = JSON.parse(response._body);
-          this.router.navigate(['journal'], { queryParams: { journalId: this.teacherJournals[0].Id } });
+          if (response._body!="null") {
+            this.teacherJournals = JSON.parse(response._body);
+            this.router.navigate(['journal'], { queryParams: { journalId: this.teacherJournals[0].Id } });
+          }       
         });
       }
       if (this.studentName != "") {

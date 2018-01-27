@@ -24,7 +24,8 @@ namespace JournalLabs.API.DAL.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string insertQuery = @"INSERT INTO [dbo].[LabBlocks]([Id],[FirstDate],[FirstMark],[SecondDate],[SecondMark],[StudentId],[KindOfWorkId],[JournalId]) VALUES (@Id,@FirstDate,@FirstMark,@SecondDate,@SecondMark,@StudentId,@KindOfWorkId,@JournalId)";
+                string insertQuery = @"INSERT INTO [dbo].[LabBlocks]([Id],[Date],[Mark],[MarkTeacherId],[KindOfMark],[IsKindOfWorkVisible],[IsCalculateMark],[IsVisibleToStudent],[IsBoolField],[StudentId],[KindOfWorkId],[JournalId])
+                                                             VALUES (@Id,@Date,@Mark,@MarkTeacherId,@KindOfMark,@IsKindOfWorkVisible,@IsCalculateMark,@IsVisibleToStudent,@IsBoolField,@StudentId,@KindOfWorkId,@JournalId)";
                 try
                 {
                     var result = db.Execute(insertQuery, labBlockModel);

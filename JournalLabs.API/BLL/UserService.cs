@@ -35,5 +35,9 @@ namespace JournalLabs.API.BLL
         {
             return _userRepository.DeleteUserById(id);
         }
+        public List<User> GetAllAssistants()
+        {
+            return _userRepository.GetAllAssistants();
+        }
     }
 }

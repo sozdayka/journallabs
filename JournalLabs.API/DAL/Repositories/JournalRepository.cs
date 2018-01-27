@@ -24,7 +24,7 @@ namespace JournalLabs.API.DAL.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string insertQuery = @"INSERT INTO [dbo].[Journals]([Id],[TeacherId],[LessonName]) VALUES (@Id,@TeacherId,@LessonName)";
+                string insertQuery = @"INSERT INTO [dbo].[Journals]([Id],[LessonName]) VALUES (@Id,@LessonName)";
                 try
                 {
                     var result = db.Execute(insertQuery, journalModel);
@@ -89,7 +89,8 @@ namespace JournalLabs.API.DAL.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string selectQuery = @"SELECT * From Journals Where TeacherId = @teacherId";
+                string selectQuery = @"Select tj.TeacherId,lb.Id,lb.LessonName From (SELECT * From TeacherJournals Where TeacherId = @teacherId) as tj
+                                        inner join Journals lb on lb.Id = tj.JournalId";
                 try
                 {
                     var result = db.Query<JournalViewModel>(selectQuery, new { teacherId = teacherId });

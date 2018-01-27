@@ -17,6 +17,7 @@
   </ItemGroup>
   <ItemGroup>
     <!-- Files not to show in IDE -->
+    <None Remove="ClientApp\app\models\createJournalViewModel.ts" />
     <None Remove="ClientApp\app\models\journalViewModel.ts" />
     <None Remove="ClientApp\app\models\Remark.ts" />
     <None Remove="ClientApp\app\models\studentJournal.ts" />
@@ -29,6 +30,7 @@
     <Content Remove="ClientApp\**" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\models\createJournalViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\journalViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\Remark.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\studentJournal.ts" />
