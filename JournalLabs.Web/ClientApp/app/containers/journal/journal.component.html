@@ -12,19 +12,18 @@
         </tr>
       </thead>
       <tbody>
-      
-      <ng-container *ngFor=" let key2 of journalViewModel.StudentResultForJournal;let i = index">
         <tr>
           <td></td>
-          <ng-container *ngFor=" let key of key2.StudentLabBlocks">
-            <td *ngIf="key.KindOfMark == kindOfMark.FirstMark">Дата сдачи</td><!--FirstDate-->
-            <td *ngIf="key.KindOfMark == kindOfMark.FirstMark">Оценка при первой сдаче</td><!--FirstMark-->
-            <td *ngIf="key.KindOfMark == kindOfMark.SecondMark">Дата пересдачи</td><!--SecondDate-->
-            <td *ngIf="key.KindOfMark == kindOfMark.SecondMark">Оценка при пересдаче</td><!--SecondMark-->
+          <ng-container *ngFor=" let key of headerKindOfWork">
+            <td *ngIf="key == kindOfMark.FirstMark">Дата сдачи</td><!--FirstDate-->
+            <td *ngIf="key == kindOfMark.FirstMark">Оценка при первой сдаче</td><!--FirstMark-->
+            <td *ngIf="key == kindOfMark.SecondMark">Дата пересдачи</td><!--SecondDate-->
+            <td *ngIf="key == kindOfMark.SecondMark">Оценка при пересдаче</td><!--SecondMark-->
           </ng-container>
           <td>Итоговая оценка</td>
           <td>Описание</td>
         </tr>
+      <ng-container *ngFor=" let key2 of journalViewModel.StudentResultForJournal;let i = index">       
         <tr>
             <td><input (keyup.enter)="changeUserName(key2.StudentInfo)" [(ngModel)]="key2.StudentInfo.StudentName" [readonly]="studentId"/></td>
             <ng-container *ngFor=" let key of key2.StudentLabBlocks">

@@ -18,8 +18,8 @@ import { KindOfMark } from '../../models/enums/KindOfMark';
 export class JournalComponent implements OnInit {
   name: string;
   public journalViewModel: JournalViewModel = null;
-  public pasrseArray:any=[];
-  countBlocks: number[] = []; 
+  public pasrseArray: any = [];
+  public headerKindOfWork: KindOfMark[] = []; 
   public studentId = "";
   public kindOfMark= KindOfMark ;
   public constructor(public journalService: JournalService,
@@ -38,7 +38,7 @@ export class JournalComponent implements OnInit {
     //});
     
     this.activatedRoute.queryParams.subscribe((params: Params) => {
-      this.countBlocks = [];
+      this.headerKindOfWork = [];
       let journalId = params['journalId'];
       this.studentId = params['studentId'];
       if (typeof (this.studentId)=='undefined') {
@@ -57,7 +57,7 @@ export class JournalComponent implements OnInit {
       var resp = JSON.stringify(response);
       this.journalViewModel = JSON.parse(resp);
       for (var i = 0; i < this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.length; i++) {
-        this.countBlocks.push(i);
+        this.headerKindOfWork.push(this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark);
       }          
     });
   }
@@ -65,7 +65,7 @@ export class JournalComponent implements OnInit {
     this.journalService.getJournalByIdAndStudentId(journalId, studentId).subscribe(response => {
         this.journalViewModel = JSON.parse(response._body);
       for (var i = 0; i < this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.length; i++) {
-        this.countBlocks.push(i);
+        this.headerKindOfWork.push(this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark);
       }
     });
   }

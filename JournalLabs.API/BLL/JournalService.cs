@@ -76,7 +76,7 @@ namespace JournalLabs.API.BLL
                     createLabBlock.Id = Guid.NewGuid();
                     createLabBlock.JournalId = journalId;
                     createLabBlock.StudentId = studentId;
-                    createLabBlock.KindOfWorkId = kindOfWorkGuidList.LastOrDefault();
+                    createLabBlock.KindOfWorkId = kindOfWorkGuidList[j];
 
                     _labBlockRepository.CreateLabBlock(createLabBlock);
 
@@ -119,10 +119,21 @@ namespace JournalLabs.API.BLL
             foreach (var student in students)
             {
                 string studentId = student.Id.ToString();
+                var labBlocks = _labBlockRepository.GetLabBlockByStudentAndJournalId(studentId, journalId);
+                for (int i = 0; i < labBlocks.Count; i++)
+                {
+                    if (i+1< labBlocks.Count&&labBlocks[i].KindOfWorkId== labBlocks[i+1].KindOfWorkId &&
+                        labBlocks[i].KindOfMark == KindOfMark.SecondMark&& labBlocks[i + 1].KindOfMark== KindOfMark.FirstMark)
+                    {
+                        var temp = labBlocks[i];
+                        labBlocks[i] = labBlocks[i+1];
+                        labBlocks[i + 1] = temp;
+                    }
+                }
                 journal.StudentResultForJournal.Add(new StudentLabBlocksViewModel()
                 {
                     StudentInfo = student,
-                    StudentLabBlocks = _labBlockRepository.GetLabBlockByStudentAndJournalId(studentId, journalId),
+                    StudentLabBlocks = labBlocks,
                     Remark = 
                     _remarkRepository.GetRemarkTextByJournalIdAndStudentId(journalId, studentId)
                 });
