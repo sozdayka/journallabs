@@ -63,6 +63,6 @@ namespace JournalLabs.API.Controllers
         {
             var result = _userService.GetAllAssistants();
             return Ok(result);
-        }
+        }        
     }
 }

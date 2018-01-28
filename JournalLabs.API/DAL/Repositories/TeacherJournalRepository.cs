@@ -19,7 +19,7 @@ namespace JournalLabs.API.DAL.Repositories
             _connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         }
 
-        public void CreateTeacherJournal(TeacherJournal teacherJournalModel)
+        public void AddTeacherToJournal(TeacherJournal teacherJournalModel)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
@@ -68,7 +68,7 @@ namespace JournalLabs.API.DAL.Repositories
                 }
             }
         }
-        public bool DeleteTeacherJournalById(string id)
+        public bool DeleteTeacherFromJournal(string id)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
@@ -84,14 +84,14 @@ namespace JournalLabs.API.DAL.Repositories
                 }
             }
         }
-        public List<TeacherJournal> GetAllTeacherJournalsByTeacherId(string teacherId)
+        public List<TeacherJournal> GetAllTeacherJournalsByJournalId(string journalId)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string selectQuery = @"SELECT * From TeacherJournals Where TeacherId = @teacherId";
+                string selectQuery = @"SELECT * From TeacherJournals Where JournalId = @journalId";
                 try
                 {
-                    var result = db.Query<TeacherJournal>(selectQuery, new { teacherId = teacherId });
+                    var result = db.Query<TeacherJournal>(selectQuery, new { journalId = journalId });
                     return result.ToList();
                 }
                 catch (Exception ex)

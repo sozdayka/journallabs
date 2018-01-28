@@ -20,6 +20,7 @@ namespace JournalLabs.API.BLL
         private KindOfWorkRepository _kindOfWorkRepository;
         private RemarkRepository _remarkRepository;
         private TeacherJournalRepository _teacherJournalRepository;
+        private UserRepository _userRepository;
         public JournalService()
         {
             _journalRepository = new JournalRepository();
@@ -28,6 +29,7 @@ namespace JournalLabs.API.BLL
             _kindOfWorkRepository = new KindOfWorkRepository();
             _remarkRepository = new RemarkRepository();
             _teacherJournalRepository = new TeacherJournalRepository();
+            _userRepository = new UserRepository();
         }
         public void CreateJournal(CreateJournalViewModel createJournalViewModel)
         {
@@ -42,7 +44,7 @@ namespace JournalLabs.API.BLL
 
             for (int i = 0; i < createJournalViewModel.TeacherIds.Count; i++)
             {
-                _teacherJournalRepository.CreateTeacherJournal(new TeacherJournal {
+                _teacherJournalRepository.AddTeacherToJournal(new TeacherJournal {
                     Id =Guid.NewGuid(),
                     JournalId = journalId,
                     TeacherId = createJournalViewModel.TeacherIds[i]
@@ -129,6 +131,10 @@ namespace JournalLabs.API.BLL
                         labBlocks[i] = labBlocks[i+1];
                         labBlocks[i + 1] = temp;
                     }
+                    if (labBlocks[i].MarkTeacherId!=null)
+                    {
+                        labBlocks[i].MarkTeacherName = _userRepository.GetUserById(labBlocks[i].MarkTeacherId.ToString()).Login;
+                    }                   
                 }
                 journal.StudentResultForJournal.Add(new StudentLabBlocksViewModel()
                 {

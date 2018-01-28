@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using JournalLabs.API.DAL.Repositories;
 using JournalLabs.API.Models;
+using JournalLabs.API.ViewModels;
 
 namespace JournalLabs.API.BLL
 {
@@ -38,6 +39,6 @@ namespace JournalLabs.API.BLL
         public List<User> GetAllAssistants()
         {
             return _userRepository.GetAllAssistants();
-        }
+        }        
     }
 }

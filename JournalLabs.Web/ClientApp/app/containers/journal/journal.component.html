@@ -7,7 +7,7 @@
         <tr>
           <td></td>
           <td style="text-align:center; vertical-align:middle;" colspan="2" *ngFor=" let key of journalViewModel.KindsOfWorkForJournal">
-            <input (keyup.enter)="changeKindOfWorkName(key)" [(ngModel)]="key.NameKindOfWork" [readonly]="studentId"/>
+            <input (keyup.enter)="changeKindOfWorkName(key)" [(ngModel)]="key.NameKindOfWork" [readonly]="studentId" />
           </td>
         </tr>
       </thead>
@@ -17,27 +17,38 @@
           <ng-container *ngFor=" let key of headerKindOfWork">
             <td *ngIf="key == kindOfMark.FirstMark">Дата сдачи</td><!--FirstDate-->
             <td *ngIf="key == kindOfMark.FirstMark">Оценка при первой сдаче</td><!--FirstMark-->
+            <td *ngIf="key == kindOfMark.FirstMark">ФИО преподаватеяя</td><!--FirstMark-->
             <td *ngIf="key == kindOfMark.SecondMark">Дата пересдачи</td><!--SecondDate-->
             <td *ngIf="key == kindOfMark.SecondMark">Оценка при пересдаче</td><!--SecondMark-->
+            <td *ngIf="key == kindOfMark.SecondMark">ФИО преподаватеяя</td><!--FirstMark-->
           </ng-container>
           <td>Итоговая оценка</td>
           <td>Описание</td>
         </tr>
-      <ng-container *ngFor=" let key2 of journalViewModel.StudentResultForJournal;let i = index">       
-        <tr>
-            <td><input (keyup.enter)="changeUserName(key2.StudentInfo)" [(ngModel)]="key2.StudentInfo.StudentName" [readonly]="studentId"/></td>
+        <ng-container *ngFor=" let key2 of journalViewModel.StudentResultForJournal;let i = index">
+          <tr>
+            <td><input (keyup.enter)="changeUserName(key2.StudentInfo)" [(ngModel)]="key2.StudentInfo.StudentName" [readonly]="studentId" /></td>
             <ng-container *ngFor=" let key of key2.StudentLabBlocks">
-              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.Date"  [readonly]="studentId"/></td>
-              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.Mark" [readonly]="studentId"/></td>
-              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark"><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.Date" [readonly]="studentId"/></td>
-              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark"><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.Mark" [readonly]="studentId"/></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.Date" [readonly]="studentId" /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.Mark" [readonly]="studentId" /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"><input [(ngModel)]="key.MarkTeacherName" readonly /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark"><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.Date" [readonly]="studentId" /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark"><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.Mark" [readonly]="studentId" /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark"><input [(ngModel)]="key.MarkTeacherName" readonly /></td>
             </ng-container>
-          <td><input value="{{totalMark(key2.StudentLabBlocks)}}" [readonly]="studentId" /></td>
-          <td *ngIf="key2.Remark!=null"><input (keyup.enter)="changeRemark(key2.Remark)" [(ngModel)]="key2.Remark.RemarkText" [readonly]="studentId"/></td>
-          <td *ngIf="key2.Remark==null"><input value="" [readonly]="studentId" /></td>
-        </tr>
-      </ng-container>
+            <td><input value="{{totalMark(key2.StudentLabBlocks)}}" [readonly]="studentId" /></td>
+            <td *ngIf="key2.Remark!=null"><input (keyup.enter)="changeRemark(key2.Remark)" [(ngModel)]="key2.Remark.RemarkText" [readonly]="studentId" /></td>
+            <td *ngIf="key2.Remark==null"><input value="" [readonly]="studentId" /></td>
+          </tr>
+        </ng-container>
       </tbody>
     </table>
+    <br/>
+    <div *ngIf="currentRole=='Teacher'">
+      <p>Aссистенты которые имеют доступ к журналу:</p><!--Input count lab blocks:-->
+      <ul style="width: 300px; height: 200px; overflow: auto">
+        <li *ngFor=" let assistant of assistantList"><input type="checkbox" (click)="changeAssistant($event,assistant)" [checked]="assistant.IsAllowAccess"> {{assistant.Name}}</li>
+      </ul>
+    </div>
   </div>
 </div>

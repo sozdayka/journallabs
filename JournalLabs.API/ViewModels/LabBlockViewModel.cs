@@ -1,4 +1,5 @@
-﻿using JournalLabs.API.Models.Enums;
+﻿using JournalLabs.API.Models;
+using JournalLabs.API.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,5 +22,6 @@ namespace JournalLabs.API.ViewModels
         public bool IsVisibleToStudent { get; set; }
         public bool IsBoolField { get; set; }
         public bool IsSecondBlock { get; set; }
+        public string MarkTeacherName { get; set; }
     }
 }

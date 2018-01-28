@@ -6,6 +6,7 @@ import { User } from '../models/User';
 import { TransferHttp } from '../../modules/transfer-http/transfer-http';
 import { Observable } from 'rxjs/Observable';
 import { REQUEST } from './constants/request';
+import { AssistantsJournalViewModel } from '../models/assistantsJournalViewModel';
 
 @Injectable()
 export class UserService {
@@ -51,4 +52,5 @@ export class UserService {
     let options = new RequestOptions({ headers: headers });
     return this.http.post(`${this.baseUrl}/api/User/CreateUser`, user, options);
   }
+
 }

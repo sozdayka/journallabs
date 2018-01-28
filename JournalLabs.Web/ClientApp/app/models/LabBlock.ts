@@ -13,4 +13,5 @@ export class LabBlock {
    IsVisibleToStudent: boolean = false;
    IsBoolField: boolean = false;
    IsSecondBlock: boolean = false;
+   MarkTeacherName: string = "";
 }
