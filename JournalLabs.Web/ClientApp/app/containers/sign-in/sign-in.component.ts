@@ -33,6 +33,7 @@ export class SignInComponent {
       if (result.Role == "Teacher" || result.Role == "Assistant") {
         localStorage.setItem('Role', result.Role);
         localStorage.setItem('TeacherId', result.Id);
+        localStorage.setItem('TeacherName', result.Login);
         location.reload();
         //this.router.navigate(['teacher-journals']);
         return;

@@ -30,6 +30,7 @@ export class JournalComponent implements OnInit {
   public assistantList: AssistantsJournalViewModel[] = [];
   public journalId: string = "";
   public currentRole: string = "";
+  public currentTeacherId: string = "";
   public constructor(public journalService: JournalService,
     public studentService: StudentService,
     public labBlockService: LabBlockService,
@@ -47,6 +48,7 @@ export class JournalComponent implements OnInit {
     //  this.getJournal(teacherId);
     //});
     this.currentRole = localStorage.getItem('Role');
+    this.currentTeacherId = localStorage.getItem('TeacherId');
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.headerKindOfWork = [];
       this.journalId = params['journalId'];
@@ -130,6 +132,8 @@ export class JournalComponent implements OnInit {
     return sum;
   }
   public changeLabBlock(labBlock: LabBlock) {
+    labBlock.MarkTeacherId = this.currentTeacherId;
+    labBlock.MarkTeacherName = localStorage.getItem('TeacherName');
     this.labBlockService.updateLabBlock(labBlock).subscribe(
       result => {
         console.log("success update labBlock");
