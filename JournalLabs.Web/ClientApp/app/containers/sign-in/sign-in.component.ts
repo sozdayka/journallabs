@@ -11,7 +11,7 @@ import { Router, CanActivate, NavigationEnd } from '@angular/router';
       <input type="text" [(ngModel)]="teacherModel.Login" name="Login"/>
       <br />
       <p>Введите пароль:</p>
-      <input type="text" [(ngModel)]="teacherModel.Password" name="Password"/>
+      <input type="password" [(ngModel)]="teacherModel.Password" name="Password"/>
       <br />
       <button (click)="SignIn()">Войти</button>
   `
@@ -21,7 +21,7 @@ export class SignInComponent {
   /*Input your Email and password to sign in into site*/
   /*Input password:*/
   /*Sign in*/
-  public teacherModel: User = { Id: "", Login: "", Password: "", Role: "" };
+  public teacherModel: User = { Id: "", Login: "", Password: "111111", Role: "" };
 
   constructor(public router: Router,
     private userService: UserService) { }
