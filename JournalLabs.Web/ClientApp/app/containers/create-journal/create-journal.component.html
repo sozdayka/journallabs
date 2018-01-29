@@ -5,10 +5,10 @@
 <input type="text" [(ngModel)]="createJournalViewModel.LessonName" name="LessonName" />
 <br />
 <p>Введите количество студентов:</p><!--Input count students:-->
-<input type="text" [(ngModel)]="createJournalViewModel.StudentsCount" name="StudentsCount" />
+<input type="number" [(ngModel)]="createJournalViewModel.StudentsCount" name="StudentsCount" />
 <br />
 <p>Введите количество видов работ:</p><!--Input count lab blocks:-->
-<input type="text" [(ngModel)]="labBlockCount" (keyup)="fillLabBlockSettingsArray()" name="LabBlocksCount" />
+<input type="number" [(ngModel)]="labBlockCount" (keyup)="fillLabBlockSettingsArray()" name="LabBlocksCount" />
 <br />
 <table *ngIf="createJournalViewModel.LabBlocksSettings.length!=0">
   <tr>

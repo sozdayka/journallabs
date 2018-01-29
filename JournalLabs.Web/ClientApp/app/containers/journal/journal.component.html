@@ -30,10 +30,10 @@
             <td><input (keyup.enter)="changeUserName(key2.StudentInfo)" [(ngModel)]="key2.StudentInfo.StudentName" [readonly]="studentId" /></td>
             <ng-container *ngFor=" let key of key2.StudentLabBlocks">
               <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.Date" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" /></td>
-              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.Mark" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"><input type="number" step="0.1" (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.Mark" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" /></td>
               <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"><input [(ngModel)]="key.MarkTeacherName" readonly /></td>
               <td *ngIf="key.KindOfMark == kindOfMark.SecondMark"><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.Date" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" /></td>
-              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark"><input (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.Mark" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark"><input type="number" step="0.1" (keyup.enter)="changeLabBlock(key)" [(ngModel)]="key.Mark" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" /></td>
               <td *ngIf="key.KindOfMark == kindOfMark.SecondMark"><input [(ngModel)]="key.MarkTeacherName" readonly /></td>
             </ng-container>
             <td><input value="{{totalMark(key2.StudentLabBlocks)}}" [readonly]="studentId" /></td>
