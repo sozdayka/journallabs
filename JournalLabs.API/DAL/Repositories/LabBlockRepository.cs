@@ -24,8 +24,8 @@ namespace JournalLabs.API.DAL.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string insertQuery = @"INSERT INTO [dbo].[LabBlocks]([Id],[Date],[Mark],[MarkTeacherId],[KindOfMark],[IsKindOfWorkVisible],[IsCalculateMark],[IsVisibleToStudent],[IsBoolField],[StudentId],[KindOfWorkId],[JournalId])
-                                                             VALUES (@Id,@Date,@Mark,@MarkTeacherId,@KindOfMark,@IsKindOfWorkVisible,@IsCalculateMark,@IsVisibleToStudent,@IsBoolField,@StudentId,@KindOfWorkId,@JournalId)";
+                string insertQuery = @"INSERT INTO [dbo].[LabBlocks]([Id],[Date],[Mark],[MarkTeacherId],[KindOfMark],[IsKindOfWorkVisible],[IsCalculateMark],[IsVisibleToStudent],[IsBoolField],[StudentId],[KindOfWorkId],[JournalId],[Color])
+                                                             VALUES (@Id,@Date,@Mark,@MarkTeacherId,@KindOfMark,@IsKindOfWorkVisible,@IsCalculateMark,@IsVisibleToStudent,@IsBoolField,@StudentId,@KindOfWorkId,@JournalId,@Color)";
                 try
                 {
                     var result = db.Execute(insertQuery, labBlockModel);
@@ -44,7 +44,7 @@ namespace JournalLabs.API.DAL.Repositories
             {
                 try
                 {
-                    string insertQuery = @"UPDATE LabBlocks Set Date = @Date,Mark = @Mark,MarkTeacherId = @MarkTeacherId,KindOfMark = @KindOfMark,IsKindOfWorkVisible = @IsKindOfWorkVisible,IsCalculateMark=@IsCalculateMark,IsVisibleToStudent = @IsVisibleToStudent,IsBoolField = @IsBoolField,StudentId = @StudentId,KindOfWorkId=@KindOfWorkId,JournalId = @JournalId Where Id = @Id";
+                    string insertQuery = @"UPDATE LabBlocks Set Date = @Date,Mark = @Mark,MarkTeacherId = @MarkTeacherId,KindOfMark = @KindOfMark,IsKindOfWorkVisible = @IsKindOfWorkVisible,IsCalculateMark=@IsCalculateMark,IsVisibleToStudent = @IsVisibleToStudent,IsBoolField = @IsBoolField,StudentId = @StudentId,KindOfWorkId=@KindOfWorkId,JournalId = @JournalId,Color=@Color Where Id = @Id";
                     var result = db.Execute(insertQuery, labBlockModel);
                 }
                 catch (Exception ex)

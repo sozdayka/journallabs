@@ -14,4 +14,6 @@ export class LabBlock {
    IsBoolField: boolean = false;
    IsSecondBlock: boolean = false;
    MarkTeacherName: string = "";
+   Color: string = "";
+   oldMark: number = 0;
 }

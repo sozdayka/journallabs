@@ -23,6 +23,7 @@ import { TeacherJournal } from '../../models/teacherJournal';
 export class JournalComponent implements OnInit {
   name: string;
   public journalViewModel: JournalViewModel = null;
+  public oldJournalViewModel: JournalViewModel = null;
   public pasrseArray: any = [];
   public headerKindOfWork: KindOfMark[] = [];
   public studentId = "";
@@ -89,6 +90,11 @@ export class JournalComponent implements OnInit {
     this.journalService.getJournal(journalId).subscribe(response => {
       var resp = JSON.stringify(response);
       this.journalViewModel = JSON.parse(resp);
+
+      for (let studentResultForJournal of this.journalViewModel.StudentResultForJournal)
+        for (let studentLabBlock of studentResultForJournal.StudentLabBlocks)
+          studentLabBlock.oldMark = studentLabBlock.Mark;
+
       for (var i = 0; i < this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.length; i++) {
         this.headerKindOfWork.push(this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark);
       }
@@ -97,6 +103,11 @@ export class JournalComponent implements OnInit {
   public getStudentJournal(journalId: string, studentId: string) {
     this.journalService.getJournalByIdAndStudentId(journalId, studentId).subscribe(response => {
       this.journalViewModel = JSON.parse(response._body);
+
+      //for (let studentResultForJournal of this.journalViewModel.StudentResultForJournal)
+      //  for (let studentLabBlock of studentResultForJournal.StudentLabBlocks)
+      //    studentLabBlock.oldMark = studentLabBlock.Mark;
+
       for (var i = 0; i < this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.length; i++) {
         this.headerKindOfWork.push(this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark);
       }
@@ -132,11 +143,23 @@ export class JournalComponent implements OnInit {
     return sum;
   }
   public changeLabBlock(labBlock: LabBlock) {
+    if (labBlock.Date != null && labBlock.Mark!=0) {    
     labBlock.MarkTeacherId = this.currentTeacherId;
     labBlock.MarkTeacherName = localStorage.getItem('TeacherName');
+
+    if (labBlock.oldMark != labBlock.Mark && labBlock.oldMark!=0) {
+      if (labBlock.oldMark > labBlock.Mark) {
+        labBlock.Color = "red";        
+      }
+      if (labBlock.oldMark < labBlock.Mark) {
+        labBlock.Color = "green";
+      }     
+    }
+    labBlock.oldMark = labBlock.Mark;
     this.labBlockService.updateLabBlock(labBlock).subscribe(
       result => {
         console.log("success update labBlock");
       });
+    }
   }
 }

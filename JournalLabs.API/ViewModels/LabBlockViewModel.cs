@@ -23,5 +23,6 @@ namespace JournalLabs.API.ViewModels
         public bool IsBoolField { get; set; }
         public bool IsSecondBlock { get; set; }
         public string MarkTeacherName { get; set; }
+        public string Color { get; set; }
     }
 }

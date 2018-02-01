@@ -20,6 +20,7 @@ namespace JournalLabs.API.Models
         public bool IsCalculateMark { get; set; }
         public bool IsVisibleToStudent { get; set; }
         public bool IsBoolField { get; set; }
+        public string Color { get; set; }
         public virtual User MarkTeacher { get; set; }
         public virtual Journal Journal { get; set; }
         public virtual Student Student { get; set; }

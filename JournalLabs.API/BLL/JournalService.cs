@@ -74,6 +74,7 @@ namespace JournalLabs.API.BLL
                     createLabBlock.IsCalculateMark = labBlock.IsCalculateMark;
                     createLabBlock.IsKindOfWorkVisible = labBlock.IsKindOfWorkVisible;
                     createLabBlock.IsVisibleToStudent = labBlock.IsVisibleToStudent;
+                    createLabBlock.Color = "";
                     createLabBlock.KindOfMark = KindOfMark.FirstMark;
                     createLabBlock.Id = Guid.NewGuid();
                     createLabBlock.JournalId = journalId;
