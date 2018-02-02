@@ -92,7 +92,7 @@ namespace JournalLabs.API.BLL
                     }
                     j++;
                 }
-                _remarkRepository.CreateRemark(new Remark() { JournalId = journalId, StudentId = studentId, RemarkText = "" });
+                _remarkRepository.CreateRemark(new Remark() { JournalId = journalId, StudentId = studentId, RemarkText = "",IsHideStudent=false });
             }
             
             

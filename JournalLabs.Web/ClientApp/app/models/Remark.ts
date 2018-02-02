@@ -3,4 +3,5 @@ export class Remark {
   RemarkText: string = "";
   StudentId: string = "";
   JournalId: string = "";
+  IsHideStudent: boolean = false;
 }

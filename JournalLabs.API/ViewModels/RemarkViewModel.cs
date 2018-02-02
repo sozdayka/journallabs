@@ -9,6 +9,7 @@ namespace JournalLabs.API.ViewModels
     {
         public Guid? Id { get; set; }
         public string RemarkText { get; set; }
+        public bool IsHideStudent { get; set; }
         public Guid StudentId { get; set; }
         public Guid JournalId { get; set; }
     }

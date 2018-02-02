@@ -14,6 +14,7 @@
       <tbody>
         <tr>
           <td></td>
+          <td></td>
           <ng-container *ngFor=" let key of headerKindOfWork">
             <td *ngIf="key == kindOfMark.FirstMark">Дата сдачи</td><!--FirstDate-->
             <td *ngIf="key == kindOfMark.FirstMark">Оценка при первой сдаче</td><!--FirstMark-->
@@ -27,14 +28,15 @@
         </tr>
         <ng-container *ngFor=" let key2 of journalViewModel.StudentResultForJournal;let i = index">
           <tr>
+            <td style="padding-right: 10px;"><input type="checkbox" [(ngModel)]="key2.Remark.IsHideStudent" /></td>
             <td><input (keyup.enter)="changeUserName(key2.StudentInfo)" [(ngModel)]="key2.StudentInfo.StudentName" [readonly]="studentId" /></td>
             <ng-container *ngFor=" let key of key2.StudentLabBlocks">
-              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"><input (blur)="changeLabBlock(key)" (click)="key.Date=currentDate" [(ngModel)]="key.Date" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" /></td>
-              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"><input type="number" [ngStyle]="{'background-color': key.Color != '' && !studentId ? key.Color : 'white'}" step="0.1" (click)="key.Date=currentDate" (blur)="changeLabBlock(key)" [(ngModel)]="key.Mark" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" /></td>
-              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"><input [(ngModel)]="key.MarkTeacherName" readonly /></td>
-              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark"><input (blur)="changeLabBlock(key)" [(ngModel)]="key.Date" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" /></td>
-              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark"><input type="number" [ngStyle]="{'background-color': key.Color != '' && !studentId ? key.Color : 'white'}" (click)="key.Date=currentDate" step="0.1" (blur)="changeLabBlock(key)" [(ngModel)]="key.Mark" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" /></td>
-              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark"><input [(ngModel)]="key.MarkTeacherName" (click)="key.Date=currentDate" readonly /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"> <input [(ngModel)]="key.Date" (click)="key.Date=currentDate" (blur)="changeLabBlock(key)" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"> <input [(ngModel)]="key.Mark" (click)="key.Date=currentDate" (blur)="changeLabBlock(key)" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" type="number" [ngStyle]="{'background-color': key.Color != '' && !studentId ? key.Color : 'white'}" step="0.1" /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"> <input [(ngModel)]="key.MarkTeacherName" readonly /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark"><input [(ngModel)]="key.Date" (click)="key.Date=currentDate" (blur)="changeLabBlock(key)" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark"><input [(ngModel)]="key.Mark" (click)="key.Date=currentDate" (blur)="changeLabBlock(key)" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" type="number" [ngStyle]="{'background-color': key.Color != '' && !studentId ? key.Color : 'white'}" step="0.1" /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark"><input [(ngModel)]="key.MarkTeacherName" readonly /></td>
             </ng-container>
             <td><input value="{{totalMark(key2.StudentLabBlocks)}}" [readonly]="studentId" /></td>
             <td *ngIf="key2.Remark!=null"><input (keyup.enter)="changeRemark(key2.Remark)" [(ngModel)]="key2.Remark.RemarkText" [readonly]="studentId" /></td>
