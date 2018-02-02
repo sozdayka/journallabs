@@ -32,6 +32,7 @@ export class JournalComponent implements OnInit {
   public journalId: string = "";
   public currentRole: string = "";
   public currentTeacherId: string = "";
+  public currentDate: string = "";
   public constructor(public journalService: JournalService,
     public studentService: StudentService,
     public labBlockService: LabBlockService,
@@ -48,6 +49,20 @@ export class JournalComponent implements OnInit {
     //  let teacherId = params["journalId"];
     //  this.getJournal(teacherId);
     //});
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    var date = "";
+    var month = "";
+    if (dd < 10) {
+      date = '0' + dd;
+    }
+    if (mm < 10) {
+      month = '0' + mm;
+    }
+    this.currentDate = date + '.' + month + '.' + yyyy;
     this.currentRole = localStorage.getItem('Role');
     this.currentTeacherId = localStorage.getItem('TeacherId');
     this.activatedRoute.queryParams.subscribe((params: Params) => {
