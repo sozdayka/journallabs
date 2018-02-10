@@ -5,13 +5,13 @@ import { Router, CanActivate, NavigationEnd } from '@angular/router';
 @Component({
   selector: 'sign-in',
   template: `
-      <h1>Войти как преподователь:</h1>
+      <h1>Войти как преподаватель:</h1>
       <br />
       <p>Введите логин</p>
       <input type="text" [(ngModel)]="teacherModel.Login" name="Login"/>
       <br />
       <p>Введите пароль:</p>
-      <input type="text" [(ngModel)]="teacherModel.Password" name="Password"/>
+      <input type="password" [(ngModel)]="teacherModel.Password" name="Password"/>
       <br />
       <button (click)="SignIn()">Войти</button>
   `
@@ -21,7 +21,7 @@ export class SignInComponent {
   /*Input your Email and password to sign in into site*/
   /*Input password:*/
   /*Sign in*/
-  public teacherModel: User = { Id: "", Login: "", Password: "", Role: "" };
+  public teacherModel: User = { Id: "", Login: "", Password: "111111", Role: "" };
 
   constructor(public router: Router,
     private userService: UserService) { }
@@ -30,9 +30,10 @@ export class SignInComponent {
     //this.teacherModel.Role = "Teacher";
     this.userService.signInUser(this.teacherModel).subscribe(response => {
       var result:User = JSON.parse(response._body);
-      if (result.Role == "Teacher") {
+      if (result.Role == "Teacher" || result.Role == "Assistant") {
         localStorage.setItem('Role', result.Role);
         localStorage.setItem('TeacherId', result.Id);
+        localStorage.setItem('TeacherName', result.Login);
         location.reload();
         //this.router.navigate(['teacher-journals']);
         return;

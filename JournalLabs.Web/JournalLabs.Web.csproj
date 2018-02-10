@@ -17,9 +17,14 @@
   </ItemGroup>
   <ItemGroup>
     <!-- Files not to show in IDE -->
+    <None Remove="ClientApp\app\models\assistantsJournalViewModel.ts" />
+    <None Remove="ClientApp\app\models\createJournalViewModel.ts" />
+    <None Remove="ClientApp\app\models\enums\KindOfMark.ts" />
     <None Remove="ClientApp\app\models\journalViewModel.ts" />
     <None Remove="ClientApp\app\models\Remark.ts" />
     <None Remove="ClientApp\app\models\studentJournal.ts" />
+    <None Remove="ClientApp\app\models\teacherJournal.ts" />
+    <None Remove="ClientApp\app\shared\teacher-journal.ts" />
     <None Remove="yarn.lock" />
     <Content Remove="wwwroot\dist\**" />
     <None Remove="ClientApp\dist\**" />
@@ -29,11 +34,16 @@
     <Content Remove="ClientApp\**" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\models\assistantsJournalViewModel.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\createJournalViewModel.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\enums\KindOfMark.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\journalViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\Remark.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\studentJournal.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\studentLabBlocksViewModel.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\teacherJournal.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\remark.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\teacher-journal.ts" />
   </ItemGroup>
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
     <!-- Ensure Node.js is installed -->

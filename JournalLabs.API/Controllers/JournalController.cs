@@ -7,10 +7,11 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using JournalLabs.API.BLL;
 using JournalLabs.API.Models;
+using JournalLabs.API.ViewModels;
 
 namespace JournalLabs.API.Controllers
 {
-    [EnableCors(origins: "http://localhost:54500", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:62106", headers: "*", methods: "*")]
     [RoutePrefix("api/Journal")]
     public class JournalController : ApiController
     {
@@ -26,10 +27,10 @@ namespace JournalLabs.API.Controllers
             return Ok("Good");
         }
         [Route("CreateJournal")]
-        [HttpGet]
-        public IHttpActionResult CreateJournal(string lessonName ,int studentsCount,int labBlocksCount, Guid teacherId)
+        [HttpPost]
+        public IHttpActionResult CreateJournal(CreateJournalViewModel createJournalViewModel)
         {
-             _journalService.CreateJournal(lessonName, studentsCount, labBlocksCount,teacherId);
+             _journalService.CreateJournal(createJournalViewModel);
             return Ok("Good");
         }
         [Route("UpdateJournal")]

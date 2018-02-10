@@ -8,14 +8,14 @@ import { NgModel } from '@angular/forms';
     templateUrl: './admin.component.html'
 })
 export class AdminComponent {
-  public teacherModel: User = {Id:"", Login: "", Password:"", Role:"Teacher"};
+  public teacherModel: User = {Id:"", Login: "", Password:"111111", Role:"Teacher"};
 
     constructor(private userService: UserService) { }
 
     public SignUp() {      
       //this.teacherModel.Role = "Teacher";
       this.userService.addUser(this.teacherModel).subscribe(response => {
-        alert("Преподователь успешно добавлен");
+        alert("Преподаватель успешно добавлен");
         location.reload();
       });
     }

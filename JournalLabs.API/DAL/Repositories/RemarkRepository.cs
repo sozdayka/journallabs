@@ -24,7 +24,7 @@ namespace JournalLabs.API.DAL.Repositories
             remarkModel.Id = Guid.NewGuid();
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string insertQuery = @"INSERT INTO [dbo].[Remarks]([Id],[RemarkText],[StudentId],[JournalId]) VALUES (@Id,@RemarkText,@StudentId, @JournalId)";
+                string insertQuery = @"INSERT INTO [dbo].[Remarks]([Id],[RemarkText],[StudentId],[JournalId],[IsHideStudent]) VALUES (@Id,@RemarkText,@StudentId, @JournalId, @IsHideStudent)";
                 try
                 {
                     var result = db.Execute(insertQuery, remarkModel);
@@ -61,7 +61,7 @@ namespace JournalLabs.API.DAL.Repositories
             {
                 try
                 {
-                    string insertQuery = @"UPDATE Remarks Set JournalId = @JournalId,StudentId=@StudentId,RemarkText=@RemarkText Where Id = @Id";
+                    string insertQuery = @"UPDATE Remarks Set JournalId = @JournalId,StudentId=@StudentId,RemarkText=@RemarkText,IsHideStudent=@IsHideStudent Where Id = @Id";
                     var result = db.Execute(insertQuery, remark);
                 }
                 catch (Exception ex)

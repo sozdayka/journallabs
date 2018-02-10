@@ -10,7 +10,7 @@ using JournalLabs.API.Models;
 
 namespace JournalLabs.API.Controllers
 {
-    [EnableCors(origins: "http://localhost:54500", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:62106", headers: "*", methods: "*")]
     [RoutePrefix("api/User")]
     public class UserController : ApiController
     {
@@ -57,5 +57,12 @@ namespace JournalLabs.API.Controllers
             _userService.DeleteUserById(Id);
             return Ok("Good");
         }
+        [Route("GetAllAssistants")]
+        [HttpGet]
+        public IHttpActionResult GetAllAssistants()
+        {
+            var result = _userService.GetAllAssistants();
+            return Ok(result);
+        }        
     }
 }

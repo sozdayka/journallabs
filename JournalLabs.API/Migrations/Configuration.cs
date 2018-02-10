@@ -15,6 +15,7 @@ namespace JournalLabs.API.Migrations
 
         protected override void Seed(JournalLabs.API.DAL.ApplicationContext context)
         {
+            context.Users.AddOrUpdate(x => x.Id, new Models.User { Id = Guid.NewGuid(), Login = "admin", Password = "111111", Role = "Admin" });
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

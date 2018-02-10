@@ -85,6 +85,22 @@ namespace JournalLabs.API.DAL.Repositories
                 }
             }
         }
+        public List<User> GetAllAssistants()
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string insertQuery = @"SELECT * From Users Where Role = 'Assistant'";
+                try
+                {
+                    var result = db.Query<User>(insertQuery);
+                    return result.ToList();
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
 
     }
 }

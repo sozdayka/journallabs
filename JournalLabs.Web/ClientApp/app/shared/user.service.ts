@@ -6,6 +6,7 @@ import { User } from '../models/User';
 import { TransferHttp } from '../../modules/transfer-http/transfer-http';
 import { Observable } from 'rxjs/Observable';
 import { REQUEST } from './constants/request';
+import { AssistantsJournalViewModel } from '../models/assistantsJournalViewModel';
 
 @Injectable()
 export class UserService {
@@ -29,7 +30,10 @@ export class UserService {
   getUser(id: string): Observable<User> {
     return this.transferHttp.get(`${this.baseUrl}/api/User/GetUserById` + id);
   }
-
+  getAllAssistants(): Observable<User[]> {
+    return this.transferHttp.get(`${this.baseUrl}/api/User/GetAllAssistants`);
+  }
+  
   deleteUser(id: string): Observable<any> {
     return this.http.delete(`${this.baseUrl}/api/User/DeleteUserById` + id);
   }
@@ -48,4 +52,5 @@ export class UserService {
     let options = new RequestOptions({ headers: headers });
     return this.http.post(`${this.baseUrl}/api/User/CreateUser`, user, options);
   }
+
 }

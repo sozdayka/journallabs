@@ -19,6 +19,7 @@ namespace JournalLabs.API.DAL
         public DbSet<KindOfWork> KindOfWorks { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Remark> Remarks { get; set; }
+        public DbSet<TeacherJournal> TeacherJournals { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
         }
