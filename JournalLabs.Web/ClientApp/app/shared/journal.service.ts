@@ -27,7 +27,8 @@ export class JournalService {
   }
 
   getJournal(id: string): Observable<any> {
-    return this.transferHttp.get(`${this.baseUrl}/api/Journal/GetJournalById?Id=` + id);
+    var isTeacher = localStorage.getItem('Role') == 'Teacher';
+    return this.transferHttp.get(`${this.baseUrl}/api/Journal/GetJournalById?Id=${id}&isTeacher=${isTeacher}`);
   }
 
   deleteJournal(id: string): Observable<any> {
@@ -44,8 +45,9 @@ export class JournalService {
   getAllJournalsByTeacherId(teacherId: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/api/Journal/GetAllJournalsByTeacherId?teacherId=` + teacherId);
   }
-  getJournalByIdAndStudentId(journalId: string, studentId:string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/api/Journal/GetJournalByIdAndStudentId?journalId=${journalId}&studentId=${studentId}`);
+  getJournalByIdAndStudentId(journalId: string, studentId: string): Observable<any> {
+    var isTeacher = localStorage.getItem('Role') == 'Teacher';
+    return this.http.get(`${this.baseUrl}/api/Journal/GetJournalByIdAndStudentId?journalId=${journalId}&studentId=${studentId}&isTeacher=${isTeacher}`);
   }
   getAllStudentJournalsByStudentName(studentName: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/api/Journal/GetAllStudentJournalsByStudentName?studentName=${studentName}`);

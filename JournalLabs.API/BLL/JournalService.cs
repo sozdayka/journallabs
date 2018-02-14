@@ -103,7 +103,7 @@ namespace JournalLabs.API.BLL
             _journalRepository.UpdateJournal(journalModel);
         }
 
-        public JournalGridViewModel GetJournalById(string journalId,string student_Id="")
+        public JournalGridViewModel GetJournalById(string journalId, bool isTeacher,string student_Id="")
         {
             List<Student> students = new List<Student>();
             var journal = new JournalGridViewModel();
@@ -122,6 +122,11 @@ namespace JournalLabs.API.BLL
             foreach (var student in students)
             {
                 string studentId = student.Id.ToString();
+                var remark = _remarkRepository.GetRemarkTextByJournalIdAndStudentId(journalId, studentId);
+                if (remark.IsHideStudent==true && isTeacher==false)
+                {
+                    continue;
+                }
                 var labBlocks = _labBlockRepository.GetLabBlockByStudentAndJournalId(studentId, journalId);
                 for (int i = 0; i < labBlocks.Count; i++)
                 {
@@ -137,17 +142,21 @@ namespace JournalLabs.API.BLL
                         labBlocks[i].MarkTeacherName = _userRepository.GetUserById(labBlocks[i].MarkTeacherId.ToString()).Login;
                     }                   
                 }
+                
+
                 journal.StudentResultForJournal.Add(new StudentLabBlocksViewModel()
                 {
                     StudentInfo = student,
                     StudentLabBlocks = labBlocks,
-                    Remark = 
-                    _remarkRepository.GetRemarkTextByJournalIdAndStudentId(journalId, studentId)
+                    Remark = remark
                 });
             }
             return journal;
         }
-
+        public bool RemoveStudentFromJournal(string id)
+        {
+            return _journalRepository.DeleteJournalById(id);
+        }
         public List<JournalViewModel> GetAllJournalsByTeacherId(string teacherId)
         {
             return _journalRepository.GetAllJournalsByTeacherId(teacherId);
