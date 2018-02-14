@@ -7,7 +7,7 @@ namespace JournalLabs.API.Models
 {
     public class KindOfWork
     {
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
         public string NameKindOfWork { get; set; }
     }
 }

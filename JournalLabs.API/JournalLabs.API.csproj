@@ -136,6 +136,7 @@
     <Compile Include="Models\TeacherJournal.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AddStudentViewModel.cs" />
     <Compile Include="ViewModels\AssistantsJournalViewModel.cs" />
     <Compile Include="ViewModels\CreateJournalViewModel.cs" />
     <Compile Include="ViewModels\JournalGridViewModel.cs" />

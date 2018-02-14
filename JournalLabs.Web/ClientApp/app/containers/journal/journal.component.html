@@ -47,7 +47,9 @@
         </ng-container>
       </tbody>
     </table>
-    <br/>
+    <br />
+    <input type="button" (click)="addStudentToJournal()" value="Добавить студента" />
+    <br />
     <div *ngIf="currentRole=='Teacher'">
       <p>Aссистенты которые имеют доступ к журналу:</p><!--Input count lab blocks:-->
       <ul style="width: 300px; height: 200px; overflow: auto">

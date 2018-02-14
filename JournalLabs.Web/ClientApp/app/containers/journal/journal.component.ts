@@ -54,8 +54,8 @@ export class JournalComponent implements OnInit {
     var mm = today.getMonth() + 1; //January is 0!
     var yyyy = today.getFullYear();
 
-    var date = "";
-    var month = "";
+    var date = dd.toString();
+    var month = mm.toString();
     if (dd < 10) {
       date = '0' + dd;
     }
@@ -180,8 +180,14 @@ export class JournalComponent implements OnInit {
     }
   }
   public removeStudent(id: string) {
-    debugger;
     this.studentService.deleteStudent(id).subscribe(
+      result => {
+        console.log("success remove student");
+        location.reload();
+      });
+  }
+  public addStudentToJournal() {
+    this.journalService.addStudentToJournal(this.journalId).subscribe(
       result => {
         console.log("success remove student");
         location.reload();

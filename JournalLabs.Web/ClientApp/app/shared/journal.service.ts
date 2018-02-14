@@ -52,4 +52,7 @@ export class JournalService {
   getAllStudentJournalsByStudentName(studentName: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/api/Journal/GetAllStudentJournalsByStudentName?studentName=${studentName}`);
   }
+  addStudentToJournal(journalId: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/api/Journal/AddStudentToJournal?journalId=${journalId}`);
+  }
 }

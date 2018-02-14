@@ -120,7 +120,6 @@ namespace JournalLabs.API.DAL.Repositories
                     return null;
                 }
             }
-        }
-
+        }              
     }
 }
