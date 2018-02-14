@@ -30,7 +30,7 @@
         <ng-container *ngFor=" let key2 of journalViewModel.StudentResultForJournal;let i = index">
           <tr>
             <td *ngIf="currentRole=='Teacher'" style="padding-right: 10px;"><input type="checkbox" [(ngModel)]="key2.Remark.IsHideStudent" (ngModelChange)="changeRemark(key2.Remark)" /></td>
-            <td *ngIf="currentRole=='Teacher'" style="padding-right: 10px;"><input type="button" (click)="removeStudent(studentId)" value="удалить" /></td>
+            <td *ngIf="currentRole=='Teacher'" style="padding-right: 10px;"><input type="button" (click)="removeStudent(key2.StudentLabBlocks[0].StudentId)" value="удалить" /></td>
             <td><input [(ngModel)]="key2.StudentInfo.StudentName" (blur)="changeUserName(key2.StudentInfo)" [readonly]="studentId" /></td>
             <ng-container *ngFor=" let key of key2.StudentLabBlocks">
               <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"> <input [(ngModel)]="key.Date" (click)="key.Date=currentDate" (blur)="changeLabBlock(key)" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" /></td>

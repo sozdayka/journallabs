@@ -46,11 +46,11 @@ namespace JournalLabs.API.Controllers
             var result = _labBlockService.GetLabBlockById(Id);
             return Ok(result);
         }
-        [Route("DeleteLabBlockById")]
+        [Route("DeleteLabBlockByStudentId")]
         [HttpGet]
-        public IHttpActionResult DeleteLabBlockById(string Id)
+        public IHttpActionResult DeleteLabBlockByStudentId(string studentId)
         {
-            _labBlockService.DeleteLabBlockById(Id);
+            _labBlockService.DeleteLabBlockByStudentId(studentId);
             return Ok("Good");
         }
     }

@@ -17,9 +17,11 @@ namespace StudentLabs.API.Controllers
     public class StudentController : ApiController
     {
         public StudentService _studentService;
+        public LabBlockService _labBlockService;
         public StudentController()
         {
             _studentService = new StudentService();
+            _labBlockService = new LabBlockService();
         }
         [Route("GetStudents")]
         [HttpGet]
@@ -53,6 +55,7 @@ namespace StudentLabs.API.Controllers
         public IHttpActionResult DeleteStudentById(string Id)
         {
             _studentService.DeleteStudentById(Id);
+            _labBlockService.DeleteLabBlockByStudentId(Id);
             return Ok("Good");
         }
     }

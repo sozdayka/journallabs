@@ -180,9 +180,11 @@ export class JournalComponent implements OnInit {
     }
   }
   public removeStudent(id: string) {
+    debugger;
     this.studentService.deleteStudent(id).subscribe(
       result => {
         console.log("success remove student");
+        location.reload();
       });
   }
 }

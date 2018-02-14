@@ -31,9 +31,9 @@ namespace JournalLabs.API.BLL
         {
             return _labBlockRepository.GetLabBlockById(labBlockId);
         }
-        public bool DeleteLabBlockById(string id)
+        public bool DeleteLabBlockByStudentId(string studentId)
         {
-            return _labBlockRepository.DeleteLabBlockById(id);
+            return _labBlockRepository.DeleteLabBlockByStudentId(studentId);
         }
     }
 }

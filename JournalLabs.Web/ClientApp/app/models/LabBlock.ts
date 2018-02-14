@@ -8,6 +8,7 @@ export class LabBlock {
    UserFIO:string = "";
    LessonName:string = "";
    JournalId: string = "";
+   StudentId: string = "";
    IsKindOfWorkVisible: boolean = false;
    IsCalculateMark: boolean = false;
    IsVisibleToStudent: boolean = false;
