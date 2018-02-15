@@ -11,6 +11,7 @@ using JournalLabs.API.Models;
 namespace JournalLabs.API.Controllers
 {
     [EnableCors(origins: "http://localhost:62106", headers: "*", methods: "*")]
+    //[EnableCors(origins: "http://localhost:54500", headers: "*", methods: "*")]
     [RoutePrefix("api/User")]
     public class UserController : ApiController
     {
