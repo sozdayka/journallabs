@@ -42,16 +42,16 @@ namespace JournalLabs.API.Controllers
         }
         [Route("GetJournalById")]
         [HttpGet]
-        public IHttpActionResult GetJournalById(string Id)
+        public IHttpActionResult GetJournalById(string Id,bool isTeacher)
         {
-            var result = _journalService.GetJournalById(Id);
+            var result = _journalService.GetJournalById(Id,isTeacher);
             return Ok(result);
         }
         [Route("GetJournalByIdAndStudentId")]
         [HttpGet]
-        public IHttpActionResult GetJournalByIdAndStudentId(string journalId, string studentId)
+        public IHttpActionResult GetJournalByIdAndStudentId(string journalId, string studentId, bool isTeacher)
         {
-            var result = _journalService.GetJournalById(journalId, studentId);
+            var result = _journalService.GetJournalById(journalId, isTeacher, studentId);
             return Ok(result);
         }
         [Route("DeleteJournalById")]
@@ -75,5 +75,13 @@ namespace JournalLabs.API.Controllers
             var result = _journalService.GetAllStudentJournalsByStudentName(studentName);
             return Ok(result);
         }
+        [Route("AddStudentToJournal")]
+        [HttpGet]
+        public IHttpActionResult AddStudentToJournal(string journalId)
+        {
+            _journalService.AddStudentToJournal(journalId);
+            return Ok("Good");
+        }
+        
     }
 }

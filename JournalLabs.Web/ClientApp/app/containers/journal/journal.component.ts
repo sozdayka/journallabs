@@ -54,8 +54,8 @@ export class JournalComponent implements OnInit {
     var mm = today.getMonth() + 1; //January is 0!
     var yyyy = today.getFullYear();
 
-    var date = "";
-    var month = "";
+    var date = dd.toString();
+    var month = mm.toString();
     if (dd < 10) {
       date = '0' + dd;
     }
@@ -81,6 +81,7 @@ export class JournalComponent implements OnInit {
     });
 
   }
+
   public changeAssistant(event: any, assistant: AssistantsJournalViewModel) {
     if (event.target.checked) {
       var teacherJournal: TeacherJournal = new TeacherJournal();
@@ -101,6 +102,7 @@ export class JournalComponent implements OnInit {
         console.log("success remove assistant");
       });
   }
+
   public getJournal(journalId: string) {
     this.journalService.getJournal(journalId).subscribe(response => {
       var resp = JSON.stringify(response);
@@ -176,5 +178,19 @@ export class JournalComponent implements OnInit {
         console.log("success update labBlock");
       });
     }
+  }
+  public removeStudent(id: string) {
+    this.studentService.deleteStudent(id).subscribe(
+      result => {
+        console.log("success remove student");
+        location.reload();
+      });
+  }
+  public addStudentToJournal() {
+    this.journalService.addStudentToJournal(this.journalId).subscribe(
+      result => {
+        console.log("success remove student");
+        location.reload();
+      });
   }
 }

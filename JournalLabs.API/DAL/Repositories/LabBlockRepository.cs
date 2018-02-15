@@ -132,14 +132,14 @@ namespace JournalLabs.API.DAL.Repositories
                 }
             }
         }
-        public bool DeleteLabBlockById(string id)
+        public bool DeleteLabBlockByStudentId(string studentId)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 try
                 {
-                    string insertQuery = @"Delete FROM LabBlocks Where Id = @Id";
-                    var res = db.Execute(insertQuery, new { Id = id });
+                    string insertQuery = @"Delete FROM LabBlocks Where StudentId = @StudentId";
+                    var res = db.Execute(insertQuery, new { StudentId = studentId });
                     return res > 0;
                 }
                 catch (Exception ex)

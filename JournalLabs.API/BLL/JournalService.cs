@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using Dapper;
 using JournalLabs.API.DAL.Repositories;
@@ -53,57 +54,60 @@ namespace JournalLabs.API.BLL
 
             for (int i = 0; i < createJournalViewModel.StudentsCount; i++)
             {
-                var studentId = Guid.NewGuid();
-                _studentRepository.CreateStudent(
-                    new Student()
-                    {
-                        Id = studentId,
-                        StudentName = $"Студент {i+1}"
-                    });
-                var j = 0;
-                foreach (var labBlock in createJournalViewModel.LabBlocksSettings)
-                {
-                    if (kindOfWorkGuidList.Count != createJournalViewModel.LabBlocksSettings.Count)
-                    {
-                        var kindOfWork = Guid.NewGuid();
-                        kindOfWorkGuidList.Add(kindOfWork);
-                        _kindOfWorkRepository.CreateKindOfWork(new KindOfWork(){Id = kindOfWork,NameKindOfWork = $"Вид работы {j+1}"});
-                    }
-                    var createLabBlock = new LabBlock();
-                    createLabBlock.IsBoolField = labBlock.IsBoolField;
-                    createLabBlock.IsCalculateMark = labBlock.IsCalculateMark;
-                    createLabBlock.IsKindOfWorkVisible = labBlock.IsKindOfWorkVisible;
-                    createLabBlock.IsVisibleToStudent = labBlock.IsVisibleToStudent;
-                    createLabBlock.Color = "";
-                    createLabBlock.KindOfMark = KindOfMark.FirstMark;
-                    createLabBlock.Id = Guid.NewGuid();
-                    createLabBlock.JournalId = journalId;
-                    createLabBlock.StudentId = studentId;
-                    createLabBlock.KindOfWorkId = kindOfWorkGuidList[j];
-
-                    _labBlockRepository.CreateLabBlock(createLabBlock);
-
-                    if (labBlock.IsSecondBlock)
-                    {
-                        createLabBlock.KindOfMark = KindOfMark.SecondMark;
-                        createLabBlock.Id = Guid.NewGuid();
-
-                        _labBlockRepository.CreateLabBlock(createLabBlock);
-                    }
-                    j++;
-                }
-                _remarkRepository.CreateRemark(new Remark() { JournalId = journalId, StudentId = studentId, RemarkText = "",IsHideStudent=false });
+                CreateStudentInJournal(journalId,$"Студент {i + 1}", kindOfWorkGuidList, createJournalViewModel.LabBlocksSettings);
             }
             
             
         }
+        public void CreateStudentInJournal(Guid journalId,string studentName, List<Guid> kindOfWorkGuidList, List<LabBlockViewModel> labBlocksSettings)
+        {
+            var studentId = Guid.NewGuid();
+            _studentRepository.CreateStudent(
+                new Student()
+                {
+                    Id = studentId,
+                    StudentName = studentName
+                });
+            var j = 0;
+            foreach (var labBlock in labBlocksSettings)
+            {
+                if (kindOfWorkGuidList.Count != labBlocksSettings.Count)
+                {
+                    var kindOfWork = Guid.NewGuid();
+                    kindOfWorkGuidList.Add(kindOfWork);
+                    _kindOfWorkRepository.CreateKindOfWork(new KindOfWork() { Id = kindOfWork, NameKindOfWork = $"Вид работы {j + 1}" });
+                }
+                var createLabBlock = new LabBlock();
+                createLabBlock.IsBoolField = labBlock.IsBoolField;
+                createLabBlock.IsCalculateMark = labBlock.IsCalculateMark;
+                createLabBlock.IsKindOfWorkVisible = labBlock.IsKindOfWorkVisible;
+                createLabBlock.IsVisibleToStudent = labBlock.IsVisibleToStudent;
+                createLabBlock.Color = "";
+                createLabBlock.KindOfMark = KindOfMark.FirstMark;
+                createLabBlock.Id = Guid.NewGuid();
+                createLabBlock.JournalId = journalId;
+                createLabBlock.StudentId = studentId;
+                createLabBlock.KindOfWorkId = kindOfWorkGuidList[j];
 
+                _labBlockRepository.CreateLabBlock(createLabBlock);
+
+                if (labBlock.IsSecondBlock)
+                {
+                    createLabBlock.KindOfMark = KindOfMark.SecondMark;
+                    createLabBlock.Id = Guid.NewGuid();
+
+                    _labBlockRepository.CreateLabBlock(createLabBlock);
+                }
+                j++;
+            }
+            _remarkRepository.CreateRemark(new Remark() { JournalId = journalId, StudentId = studentId, RemarkText = "", IsHideStudent = false });
+        }
         public void UpdateJournal(Journal journalModel)
         {
             _journalRepository.UpdateJournal(journalModel);
         }
 
-        public JournalGridViewModel GetJournalById(string journalId,string student_Id="")
+        public JournalGridViewModel GetJournalById(string journalId, bool isTeacher,string student_Id="")
         {
             List<Student> students = new List<Student>();
             var journal = new JournalGridViewModel();
@@ -122,6 +126,11 @@ namespace JournalLabs.API.BLL
             foreach (var student in students)
             {
                 string studentId = student.Id.ToString();
+                var remark = _remarkRepository.GetRemarkTextByJournalIdAndStudentId(journalId, studentId);
+                if (remark.IsHideStudent==true && isTeacher==false)
+                {
+                    continue;
+                }
                 var labBlocks = _labBlockRepository.GetLabBlockByStudentAndJournalId(studentId, journalId);
                 for (int i = 0; i < labBlocks.Count; i++)
                 {
@@ -137,17 +146,21 @@ namespace JournalLabs.API.BLL
                         labBlocks[i].MarkTeacherName = _userRepository.GetUserById(labBlocks[i].MarkTeacherId.ToString()).Login;
                     }                   
                 }
+                
+
                 journal.StudentResultForJournal.Add(new StudentLabBlocksViewModel()
                 {
                     StudentInfo = student,
                     StudentLabBlocks = labBlocks,
-                    Remark = 
-                    _remarkRepository.GetRemarkTextByJournalIdAndStudentId(journalId, studentId)
+                    Remark = remark
                 });
             }
             return journal;
         }
-
+        public bool RemoveStudentFromJournal(string id)
+        {
+            return _journalRepository.DeleteJournalById(id);
+        }
         public List<JournalViewModel> GetAllJournalsByTeacherId(string teacherId)
         {
             return _journalRepository.GetAllJournalsByTeacherId(teacherId);
@@ -159,6 +172,31 @@ namespace JournalLabs.API.BLL
         public bool DeleteJournalById(string id)
         {
             return _journalRepository.DeleteJournalById(id);
+        }
+        public void AddStudentToJournal(string journalId)
+        {
+            
+            var kindOfWorks = _kindOfWorkRepository.GetKindsOfWorkByJournalId(journalId).Select(x=>x.Id).ToList();
+            var lastStudent = _labBlockRepository.GetStudentsByJournalId(journalId).LastOrDefault();
+            var studentIndex = int.Parse(Regex.Match(lastStudent.StudentName, @"\d+").Value);
+            var studentName = $"Студент {studentIndex+1}";
+            var labBlocksSettings = _labBlockRepository.GetLabBlockByStudentAndJournalId(lastStudent.Id.ToString(), journalId);
+            var labBlocksSettingsResult = new List<LabBlockViewModel>();
+            for (int i = 0; i < labBlocksSettings.Count; i++)
+            {                
+                if (i+1== labBlocksSettings.Count||labBlocksSettings[i].KindOfWorkId != labBlocksSettings[i + 1].KindOfWorkId)
+                {
+                    labBlocksSettingsResult.Add(labBlocksSettings[i]);
+                    continue;
+                }
+                if (i + 1 != labBlocksSettings.Count && labBlocksSettings[i].KindOfWorkId == labBlocksSettings[i + 1].KindOfWorkId)
+                {
+                    labBlocksSettings[i].IsSecondBlock = true;
+                    labBlocksSettingsResult.Add(labBlocksSettings[i]);
+                    i++;
+                }
+            }
+            CreateStudentInJournal(Guid.Parse(journalId), studentName, kindOfWorks, labBlocksSettingsResult);
         }
     }
 }

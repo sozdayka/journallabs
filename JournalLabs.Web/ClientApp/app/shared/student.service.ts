@@ -30,7 +30,7 @@ export class StudentService {
   }
 
   deleteStudent(id: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/api/Student/DeleteStudentById` + id);
+    return this.http.get(`${this.baseUrl}/api/Student/DeleteStudentById?Id=${id}`);
   }
 
   updateStudent(student: Student): Observable<any> {
