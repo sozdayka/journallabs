@@ -6,9 +6,12 @@
       <thead>
         <tr>
           <td></td>
-          <td style="text-align:center; vertical-align:middle;" colspan="2" *ngFor=" let key of journalViewModel.KindsOfWorkForJournal">
-            <input (keyup.enter)="changeKindOfWorkName(key)" [(ngModel)]="key.NameKindOfWork" [readonly]="studentId" />
-          </td>
+          <ng-container *ngFor=" let key of journalViewModel.KindsOfWorkForJournal">
+            <td style="text-align:center; vertical-align:middle;" colspan="2" >
+              <input [(ngModel)]="key.NameKindOfWork" (blur)="changeKindOfWorkName(key)" [readonly]="studentId" />              
+            </td>
+            <td><input type="checkbox" (ngModelChange)="changeVisibleKindOfWork(key.Id)" /></td>
+          </ng-container>
         </tr>
       </thead>
       <tbody>

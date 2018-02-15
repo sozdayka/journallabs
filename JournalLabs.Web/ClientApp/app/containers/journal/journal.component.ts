@@ -193,4 +193,11 @@ export class JournalComponent implements OnInit {
         location.reload();
       });
   }
+  public changeVisibleKindOfWork(idKindOfWork:string) {
+    //this.labBlockService.updateLabBlock(labBlock).subscribe(
+    //  result => {
+    //    console.log("success update labBlock");
+    //  });
+  }
+  
 }
