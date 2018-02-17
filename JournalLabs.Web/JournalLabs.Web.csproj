@@ -20,6 +20,7 @@
     <None Remove="ClientApp\app\models\assistantsJournalViewModel.ts" />
     <None Remove="ClientApp\app\models\createJournalViewModel.ts" />
     <None Remove="ClientApp\app\models\enums\KindOfMark.ts" />
+    <None Remove="ClientApp\app\models\headerKindOfWorkBlock.ts" />
     <None Remove="ClientApp\app\models\journalViewModel.ts" />
     <None Remove="ClientApp\app\models\Remark.ts" />
     <None Remove="ClientApp\app\models\studentJournal.ts" />
@@ -37,6 +38,7 @@
     <TypeScriptCompile Include="ClientApp\app\models\assistantsJournalViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\createJournalViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\enums\KindOfMark.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\headerKindOfWorkBlock.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\journalViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\Remark.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\studentJournal.ts" />

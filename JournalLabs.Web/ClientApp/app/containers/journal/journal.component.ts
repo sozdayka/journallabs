@@ -10,12 +10,13 @@ import { Student } from "../../models/Student"
 import { KindOfWork } from "../../models/kind-of-work"
 import { LabBlock } from "../../models/LabBlock"
 import { Remark } from "../../models/Remark"
-import { KindOfMark } from '../../models/enums/KindOfMark';
+import { HeaderKindOfWorkBlock } from '../../models/headerKindOfWorkBlock';
 import { User } from '../../models/User';
 import { UserService } from '../../shared/user.service';
 import { AssistantsJournalViewModel } from '../../models/assistantsJournalViewModel';
 import { TeacherJournalService } from '../../shared/teacher-journal';
 import { TeacherJournal } from '../../models/teacherJournal';
+import { KindOfMark } from "../../models/enums/KindOfMark"
 @Component({
   selector: 'journal',
   templateUrl: 'journal.component.html'
@@ -23,11 +24,10 @@ import { TeacherJournal } from '../../models/teacherJournal';
 export class JournalComponent implements OnInit {
   name: string;
   public journalViewModel: JournalViewModel = null;
-  public oldJournalViewModel: JournalViewModel = null;
-  public pasrseArray: any = [];
   public headerKindOfWork: KindOfMark[] = [];
-  public studentId = "";
+  public headerKindOfWorkBlock: HeaderKindOfWorkBlock[] = [];
   public kindOfMark = KindOfMark;
+  public studentId = "";
   public assistantList: AssistantsJournalViewModel[] = [];
   public journalId: string = "";
   public currentRole: string = "";
@@ -113,6 +113,13 @@ export class JournalComponent implements OnInit {
           studentLabBlock.oldMark = studentLabBlock.Mark;
 
       for (var i = 0; i < this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.length; i++) {
+        if (this.journalViewModel.KindsOfWorkForJournal.length>i) {
+          this.headerKindOfWorkBlock.push({
+            isVisible: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.filter(obj => obj.KindOfWorkId == this.journalViewModel.KindsOfWorkForJournal[i].Id)[0].IsKindOfWorkVisible,
+            kindOfWork: this.journalViewModel.KindsOfWorkForJournal[i]
+          });
+        }
+        
         this.headerKindOfWork.push(this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark);
       }
     });
@@ -193,11 +200,12 @@ export class JournalComponent implements OnInit {
         location.reload();
       });
   }
-  public changeVisibleKindOfWork(idKindOfWork:string) {
-    //this.labBlockService.updateLabBlock(labBlock).subscribe(
-    //  result => {
-    //    console.log("success update labBlock");
-    //  });
+  public changeVisibleKindOfWork(idKindOfWork: string,isChecked:any) {
+    this.labBlockService.updateVisibleLabBlock(idKindOfWork, isChecked).subscribe(
+      result => {
+        console.log("success update labBlock");
+        location.reload();
+      });
   }
   
 }

@@ -148,5 +148,22 @@ namespace JournalLabs.API.DAL.Repositories
                 }
             }
         }
+        public bool UpdateVisibleLabBlock(string idKindOfWork, bool isKindOfWorkVisible)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                try
+                {
+                    string insertQuery = @"UPDATE LabBlocks Set IsKindOfWorkVisible = @isKindOfWorkVisible Where KindOfWorkId = @idKindOfWork";
+                    var res = db.Execute(insertQuery, new { idKindOfWork = idKindOfWork, isKindOfWorkVisible = isKindOfWorkVisible });
+                    return res > 0;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
+        
     }
 }

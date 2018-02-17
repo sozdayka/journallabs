@@ -53,5 +53,13 @@ namespace JournalLabs.API.Controllers
             _labBlockService.DeleteLabBlockByStudentId(studentId);
             return Ok("Good");
         }
+        [Route("UpdateVisibleLabBlock")]
+        [HttpGet]
+        public IHttpActionResult UpdateVisibleLabBlock(string idKindOfWork,bool isKindOfWorkVisible)
+        {
+            _labBlockService.UpdateVisibleLabBlock(idKindOfWork, isKindOfWorkVisible);
+            return Ok("Good");
+        }
+        
     }
 }
