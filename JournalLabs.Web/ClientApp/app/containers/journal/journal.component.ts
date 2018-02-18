@@ -24,8 +24,8 @@ import { KindOfMark } from "../../models/enums/KindOfMark"
 export class JournalComponent implements OnInit {
   name: string;
   public journalViewModel: JournalViewModel = null;
-  public headerKindOfWork: KindOfMark[] = [];
-  public headerKindOfWorkBlock: HeaderKindOfWorkBlock[] = [];
+  //public headerKindOfWork: KindOfMark[] = [];
+  public headerKindOfWork: HeaderKindOfWorkBlock[] = [];
   public kindOfMark = KindOfMark;
   public studentId = "";
   public assistantList: AssistantsJournalViewModel[] = [];
@@ -113,7 +113,11 @@ export class JournalComponent implements OnInit {
           studentLabBlock.oldMark = studentLabBlock.Mark;
 
       for (var i = 0; i < this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.length; i++) {       
-        this.headerKindOfWork.push(this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark);
+        this.headerKindOfWork.push({
+          KindOfMark: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark,
+          isVisible: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark == KindOfMark.FirstMark ? true : false,
+          kindOfWorkId: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfWorkId
+        });
       }
     });
   }
@@ -121,7 +125,11 @@ export class JournalComponent implements OnInit {
     this.journalService.getJournalByIdAndStudentId(journalId, studentId).subscribe(response => {
       this.journalViewModel = JSON.parse(response._body);
       for (var i = 0; i < this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.length; i++) {
-        this.headerKindOfWork.push(this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark);
+        this.headerKindOfWork.push({
+          KindOfMark: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark,
+          isVisible: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark == KindOfMark.FirstMark ? true : false,
+          kindOfWorkId: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfWorkId
+        });
       }
     });
   }
@@ -208,5 +216,24 @@ export class JournalComponent implements OnInit {
         console.log("success remove student");
         location.reload();
       });
+  }
+  public changeVisibleSecondBlock(key: KindOfWork, isChecked: any) {
+    key.isSecondBlockVisible = isChecked;
+    var kindOfWork = this.headerKindOfWork.filter(x => x.KindOfMark == KindOfMark.SecondMark && x.kindOfWorkId == key.Id)[0];
+    if (kindOfWork) {
+      kindOfWork.isVisible = isChecked;
+    }
+
+    for (var i = 0; i < this.journalViewModel.StudentResultForJournal.length; i++) {
+      var labBlock = this.journalViewModel.StudentResultForJournal[i].StudentLabBlocks.filter(x => x.KindOfMark == KindOfMark.SecondMark && x.KindOfWorkId == key.Id)[0];
+      if (labBlock) {
+        labBlock.IsSecondBlock = isChecked;
+      }
+    }
+    //for (var i = 0; i < this.headerKindOfWork.length; i++) {
+    //  if (this.headerKindOfWork[i].KindOfMark == KindOfMark.SecondMark && this.headerKindOfWork[i].kindOfWorkId == key.Id) {
+    //    this.headerKindOfWork[i].isVisible = !this.headerKindOfWork[i].isVisible;
+    //  }
+    //}
   }
 }

@@ -1,5 +1,6 @@
-import { KindOfWork } from "./kind-of-work"
+import { KindOfMark } from "./enums/KindOfMark"
 export class HeaderKindOfWorkBlock {
-  kindOfWork: KindOfWork;
+  KindOfMark: KindOfMark;
   isVisible: boolean = false;
+  kindOfWorkId: string = "";
 }
