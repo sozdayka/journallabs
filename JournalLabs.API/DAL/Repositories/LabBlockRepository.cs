@@ -24,8 +24,8 @@ namespace JournalLabs.API.DAL.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string insertQuery = @"INSERT INTO [dbo].[LabBlocks]([Id],[Date],[Mark],[MarkTeacherId],[KindOfMark],[IsKindOfWorkVisible],[IsCalculateMark],[IsVisibleToStudent],[IsBoolField],[StudentId],[KindOfWorkId],[JournalId],[Color])
-                                                             VALUES (@Id,@Date,@Mark,@MarkTeacherId,@KindOfMark,@IsKindOfWorkVisible,@IsCalculateMark,@IsVisibleToStudent,@IsBoolField,@StudentId,@KindOfWorkId,@JournalId,@Color)";
+                string insertQuery = @"INSERT INTO [dbo].[LabBlocks]([Id],[Date],[Mark],[MarkTeacherId],[KindOfMark],[IsCalculateMark],[IsVisibleToStudent],[IsBoolField],[StudentId],[KindOfWorkId],[JournalId],[Color])
+                                                             VALUES (@Id,@Date,@Mark,@MarkTeacherId,@KindOfMark,@IsCalculateMark,@IsVisibleToStudent,@IsBoolField,@StudentId,@KindOfWorkId,@JournalId,@Color)";
                 try
                 {
                     var result = db.Execute(insertQuery, labBlockModel);
@@ -44,7 +44,7 @@ namespace JournalLabs.API.DAL.Repositories
             {
                 try
                 {
-                    string insertQuery = @"UPDATE LabBlocks Set Date = @Date,Mark = @Mark,MarkTeacherId = @MarkTeacherId,KindOfMark = @KindOfMark,IsKindOfWorkVisible = @IsKindOfWorkVisible,IsCalculateMark=@IsCalculateMark,IsVisibleToStudent = @IsVisibleToStudent,IsBoolField = @IsBoolField,StudentId = @StudentId,KindOfWorkId=@KindOfWorkId,JournalId = @JournalId,Color=@Color Where Id = @Id";
+                    string insertQuery = @"UPDATE LabBlocks Set Date = @Date,Mark = @Mark,MarkTeacherId = @MarkTeacherId,KindOfMark = @KindOfMark,IsCalculateMark=@IsCalculateMark,IsVisibleToStudent = @IsVisibleToStudent,IsBoolField = @IsBoolField,StudentId = @StudentId,KindOfWorkId=@KindOfWorkId,JournalId = @JournalId,Color=@Color Where Id = @Id";
                     var result = db.Execute(insertQuery, labBlockModel);
                 }
                 catch (Exception ex)
@@ -88,15 +88,15 @@ namespace JournalLabs.API.DAL.Repositories
                 }
             }
         }
-        public List<LabBlockViewModel> GetLabBlockByStudentAndJournalId(string studentId,string journalId)
+        public List<LabBlockViewModel> GetLabBlockByStudentAndJournalId(string studentId,string journalId,string kindOfWorkVisibleQueryString)
         {
             ///------------review order by
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string insertQuery = @"select  lb.* from (
+                string insertQuery = $@"select  lb.* from (
                                             SELECT lb.*,kw.NameKindOfWork From LabBlocks lb 
                                             left join KindOfWorks kw on lb.KindOfWorkId=kw.Id 
-                                            Where StudentId = @studentId And JournalId=@journalId)as lb order by 
+                                            Where StudentId = @studentId And JournalId=@journalId AND KindOfWorkId IN ({kindOfWorkVisibleQueryString}))as lb order by 
 										    lb.NameKindOfWork"; //len(lb.NameKindOfWork),
                 try
                 {
@@ -148,7 +148,8 @@ namespace JournalLabs.API.DAL.Repositories
                 }
             }
         }
-        public bool UpdateVisibleLabBlock(string idKindOfWork, bool isKindOfWorkVisible)
+
+        public bool GetVisibleLabBlocks(string idKindOfWork, bool isKindOfWorkVisible)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
@@ -164,6 +165,6 @@ namespace JournalLabs.API.DAL.Repositories
                 }
             }
         }
-        
+
     }
 }

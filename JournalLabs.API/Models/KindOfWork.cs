@@ -9,5 +9,6 @@ namespace JournalLabs.API.Models
     {
         public Guid Id { get; set; }
         public string NameKindOfWork { get; set; }
+        public bool IsKindOfWorkVisible { get; set; }
     }
 }

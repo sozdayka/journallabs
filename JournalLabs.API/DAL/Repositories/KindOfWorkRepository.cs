@@ -23,7 +23,7 @@ namespace JournalLabs.API.DAL.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string insertQuery = @"INSERT INTO [dbo].[KindOfWorks]([Id],[NameKindOfWork]) VALUES (@Id,@NameKindOfWork)";
+                string insertQuery = @"INSERT INTO [dbo].[KindOfWorks]([Id],[IsKindOfWorkVisible],[NameKindOfWork]) VALUES (@Id,@IsKindOfWorkVisible,@NameKindOfWork)";
                 try
                 {
                     var result = db.Execute(insertQuery, kindOfWorkModel);
@@ -42,7 +42,7 @@ namespace JournalLabs.API.DAL.Repositories
             {
                 try
                 {
-                    string insertQuery = @"UPDATE KindOfWorks Set NameKindOfWork = @NameKindOfWork Where Id = @Id";
+                    string insertQuery = @"UPDATE KindOfWorks Set NameKindOfWork = @NameKindOfWork,IsKindOfWorkVisible=@IsKindOfWorkVisible Where Id = @Id";
                     var result = db.Execute(insertQuery, kindOfWorkModel);
                 }
                 catch (Exception ex)
@@ -104,6 +104,21 @@ namespace JournalLabs.API.DAL.Repositories
                 }
             }
         }
-
+        public bool UpdateVisibleKindOfWork(string idKindOfWork, bool isKindOfWorkVisible)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                try
+                {
+                    string insertQuery = @"UPDATE KindOfWorks Set IsKindOfWorkVisible = @isKindOfWorkVisible Where Id = @idKindOfWork";
+                    var res = db.Execute(insertQuery, new { idKindOfWork = idKindOfWork, isKindOfWorkVisible = isKindOfWorkVisible });
+                    return res > 0;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
     }
 }

@@ -40,4 +40,8 @@ export class KindOfWorkService {
   addKindOfWork(kindOfWork: KindOfWork): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/KindOfWork/CreateKindOfWork`, kindOfWork)
   }
+
+  updateVisibleKindOfWork(idKindOfWork: string, isVisible: boolean): Observable<any> {
+    return this.transferHttp.get(`${this.baseUrl}/api/KindOfWork/UpdateVisibleKindOfWork?idKindOfWork=${idKindOfWork}&isKindOfWorkVisible=${isVisible}`);
+  }
 }

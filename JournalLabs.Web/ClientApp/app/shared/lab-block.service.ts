@@ -40,7 +40,4 @@ export class LabBlockService {
   addLabBlock(labBlock: LabBlock): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/LabBlock/CreateLabBlock`, labBlock)
   }
-  updateVisibleLabBlock(idKindOfWork:string,isVisible:boolean): Observable<any> {
-    return this.transferHttp.get(`${this.baseUrl}/api/LabBlock/UpdateVisibleLabBlock?idKindOfWork=${idKindOfWork}&isKindOfWorkVisible=${isVisible}`);
-  }
 }

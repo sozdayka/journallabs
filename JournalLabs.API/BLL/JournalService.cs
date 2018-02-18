@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using Dapper;
@@ -75,12 +76,11 @@ namespace JournalLabs.API.BLL
                 {
                     var kindOfWork = Guid.NewGuid();
                     kindOfWorkGuidList.Add(kindOfWork);
-                    _kindOfWorkRepository.CreateKindOfWork(new KindOfWork() { Id = kindOfWork, NameKindOfWork = $"Вид работы {j + 1}" });
+                    _kindOfWorkRepository.CreateKindOfWork(new KindOfWork() { Id = kindOfWork, NameKindOfWork = $"Вид работы {j + 1}",IsKindOfWorkVisible= labBlock.IsKindOfWorkVisible });
                 }
                 var createLabBlock = new LabBlock();
                 createLabBlock.IsBoolField = labBlock.IsBoolField;
                 createLabBlock.IsCalculateMark = labBlock.IsCalculateMark;
-                createLabBlock.IsKindOfWorkVisible = labBlock.IsKindOfWorkVisible;
                 createLabBlock.IsVisibleToStudent = labBlock.IsVisibleToStudent;
                 createLabBlock.Color = "";
                 createLabBlock.KindOfMark = KindOfMark.FirstMark;
@@ -112,7 +112,9 @@ namespace JournalLabs.API.BLL
             List<Student> students = new List<Student>();
             var journal = new JournalGridViewModel();
             journal.JournalModel = _journalRepository.GetJournalById(journalId);
-            journal.KindsOfWorkForJournal = _kindOfWorkRepository.GetKindsOfWorkByJournalId(journalId);
+            var kindOfWorks = _kindOfWorkRepository.GetKindsOfWorkByJournalId(journalId);
+            journal.KindsOfWorkForJournal = isTeacher? kindOfWorks: kindOfWorks.Where(x=>x.IsKindOfWorkVisible!=false).ToList();
+            var kindOfWorkVisibleQueryString = StringForKindOfWorkBulkQuery(journal.KindsOfWorkForJournal.Select(x=>x.Id).ToList());
             if (student_Id == "")
             {
                 students = _labBlockRepository.GetStudentsByJournalId(journalId);
@@ -131,7 +133,7 @@ namespace JournalLabs.API.BLL
                 {
                     continue;
                 }
-                var labBlocks = _labBlockRepository.GetLabBlockByStudentAndJournalId(studentId, journalId);
+                var labBlocks = _labBlockRepository.GetLabBlockByStudentAndJournalId(studentId, journalId, kindOfWorkVisibleQueryString);
                 for (int i = 0; i < labBlocks.Count; i++)
                 {
                     if (i+1< labBlocks.Count&&labBlocks[i].KindOfWorkId== labBlocks[i+1].KindOfWorkId &&
@@ -180,7 +182,8 @@ namespace JournalLabs.API.BLL
             var lastStudent = _labBlockRepository.GetStudentsByJournalId(journalId).LastOrDefault();
             var studentIndex = int.Parse(Regex.Match(lastStudent.StudentName, @"\d+").Value);
             var studentName = $"Студент {studentIndex+1}";
-            var labBlocksSettings = _labBlockRepository.GetLabBlockByStudentAndJournalId(lastStudent.Id.ToString(), journalId);
+            var kindOfWorkVisibleQueryString = StringForKindOfWorkBulkQuery(kindOfWorks);
+            var labBlocksSettings = _labBlockRepository.GetLabBlockByStudentAndJournalId(lastStudent.Id.ToString(), journalId, kindOfWorkVisibleQueryString);
             var labBlocksSettingsResult = new List<LabBlockViewModel>();
             for (int i = 0; i < labBlocksSettings.Count; i++)
             {                
@@ -197,6 +200,19 @@ namespace JournalLabs.API.BLL
                 }
             }
             CreateStudentInJournal(Guid.Parse(journalId), studentName, kindOfWorks, labBlocksSettingsResult);
+        }
+        public string StringForKindOfWorkBulkQuery(List<Guid> kindOfWorks)
+        {
+            StringBuilder queryString = new StringBuilder();
+            for (int i = 0; i < kindOfWorks.Count; i++)
+            {
+                queryString.Append($"'{kindOfWorks[i]}'");
+                if (i+1<kindOfWorks.Count)
+                {
+                    queryString.Append(",");
+                }
+            }
+            return queryString.ToString();
         }
     }
 }

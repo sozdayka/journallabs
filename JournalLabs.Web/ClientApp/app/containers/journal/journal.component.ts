@@ -114,10 +114,10 @@ export class JournalComponent implements OnInit {
 
       for (var i = 0; i < this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.length; i++) {
         if (this.journalViewModel.KindsOfWorkForJournal.length>i) {
-          this.headerKindOfWorkBlock.push({
-            isVisible: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.filter(obj => obj.KindOfWorkId == this.journalViewModel.KindsOfWorkForJournal[i].Id)[0].IsKindOfWorkVisible,
-            kindOfWork: this.journalViewModel.KindsOfWorkForJournal[i]
-          });
+          //this.headerKindOfWorkBlock.push({
+          //  isVisible: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.filter(obj => obj.KindOfWorkId == this.journalViewModel.KindsOfWorkForJournal[i].Id)[0].IsKindOfWorkVisible,
+          //  kindOfWork: this.journalViewModel.KindsOfWorkForJournal[i]
+          //});
         }
         
         this.headerKindOfWork.push(this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark);
@@ -200,10 +200,10 @@ export class JournalComponent implements OnInit {
         location.reload();
       });
   }
-  public changeVisibleKindOfWork(idKindOfWork: string,isChecked:any) {
-    this.labBlockService.updateVisibleLabBlock(idKindOfWork, isChecked).subscribe(
+  public changeVisibleKindOfWork(idKindOfWork: string, isChecked: any) {
+    this.kindOfWorkService.updateVisibleKindOfWork(idKindOfWork, isChecked).subscribe(
       result => {
-        console.log("success update labBlock");
+        console.log("success update kindOfWork");
         location.reload();
       });
   }
