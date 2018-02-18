@@ -76,12 +76,15 @@ namespace JournalLabs.API.BLL
                 {
                     var kindOfWork = Guid.NewGuid();
                     kindOfWorkGuidList.Add(kindOfWork);
-                    _kindOfWorkRepository.CreateKindOfWork(new KindOfWork() { Id = kindOfWork, NameKindOfWork = $"Вид работы {j + 1}",IsKindOfWorkVisible= labBlock.IsKindOfWorkVisible });
+                    _kindOfWorkRepository.CreateKindOfWork(new KindOfWork() {
+                        Id = kindOfWork, NameKindOfWork = $"Вид работы {j + 1}",
+                        IsKindOfWorkVisible = labBlock.IsKindOfWorkVisible,
+                    IsVisibleToStudent= labBlock.IsVisibleToStudent
+                    });
                 }
                 var createLabBlock = new LabBlock();
                 createLabBlock.IsBoolField = labBlock.IsBoolField;
                 createLabBlock.IsCalculateMark = labBlock.IsCalculateMark;
-                createLabBlock.IsVisibleToStudent = labBlock.IsVisibleToStudent;
                 createLabBlock.Color = "";
                 createLabBlock.KindOfMark = KindOfMark.FirstMark;
                 createLabBlock.Id = Guid.NewGuid();
@@ -113,12 +116,8 @@ namespace JournalLabs.API.BLL
             var journal = new JournalGridViewModel();
             journal.JournalModel = _journalRepository.GetJournalById(journalId);
             var kindOfWorks = _kindOfWorkRepository.GetKindsOfWorkByJournalId(journalId);
-            journal.KindsOfWorkForJournal = isTeacher? kindOfWorks: kindOfWorks.Where(x=>x.IsKindOfWorkVisible!=false).ToList();
-            if (journal.KindsOfWorkForJournal.Count==0)
-            {
-                return new JournalGridViewModel();
-            }
-            var kindOfWorkVisibleQueryString = StringForKindOfWorkBulkQuery(journal.KindsOfWorkForJournal.Select(x=>x.Id).ToList());
+            journal.KindsOfWorkForJournal = isTeacher? kindOfWorks: kindOfWorks.Where(x=>x.IsKindOfWorkVisible==true).ToList();
+                      
             if (student_Id == "")
             {
                 students = _labBlockRepository.GetStudentsByJournalId(journalId);
@@ -126,8 +125,14 @@ namespace JournalLabs.API.BLL
             if (student_Id!="")
             {
                 var student =_studentRepository.GetStudentById(student_Id);
-                students.Add(student); 
+                students.Add(student);
+                journal.KindsOfWorkForJournal = journal.KindsOfWorkForJournal.Where(x => x.IsVisibleToStudent == true).ToList();
             }
+            if (journal.KindsOfWorkForJournal.Count == 0)
+            {
+                return new JournalGridViewModel();
+            }
+            var kindOfWorkVisibleQueryString = StringForKindOfWorkBulkQuery(journal.KindsOfWorkForJournal.Select(x => x.Id).ToList());
             journal.StudentResultForJournal = new List<StudentLabBlocksViewModel>();
             foreach (var student in students)
             {
@@ -213,13 +218,15 @@ namespace JournalLabs.API.BLL
             var kindOfWorkIndex = int.Parse(Regex.Match(lastKindOfWork.NameKindOfWork, @"\d+").Value);
             var kindOfWorkName = $"Вид работы {kindOfWorkIndex + 1}";
             var kindOfWorkId = Guid.NewGuid();
-                _kindOfWorkRepository.CreateKindOfWork(new KindOfWork() { Id = kindOfWorkId, NameKindOfWork = kindOfWorkName, IsKindOfWorkVisible = true });
+                _kindOfWorkRepository.CreateKindOfWork(new KindOfWork() { Id = kindOfWorkId,
+                    NameKindOfWork = kindOfWorkName,
+                    IsKindOfWorkVisible = true,
+                    IsVisibleToStudent=true});
             for (int i = 0; i < students.Count; i++)
             {
                 var createLabBlock = new LabBlock();
                 createLabBlock.IsBoolField = false;
                 createLabBlock.IsCalculateMark = true;
-                createLabBlock.IsVisibleToStudent = true;
                 createLabBlock.Color = "";
                 createLabBlock.KindOfMark = KindOfMark.FirstMark;
                 createLabBlock.Id = Guid.NewGuid();

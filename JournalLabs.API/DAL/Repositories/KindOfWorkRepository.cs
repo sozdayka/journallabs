@@ -23,7 +23,7 @@ namespace JournalLabs.API.DAL.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string insertQuery = @"INSERT INTO [dbo].[KindOfWorks]([Id],[IsKindOfWorkVisible],[NameKindOfWork]) VALUES (@Id,@IsKindOfWorkVisible,@NameKindOfWork)";
+                string insertQuery = @"INSERT INTO [dbo].[KindOfWorks]([Id],[IsKindOfWorkVisible],[IsVisibleToStudent],[NameKindOfWork]) VALUES (@Id,@IsKindOfWorkVisible,@IsVisibleToStudent,@NameKindOfWork)";
                 try
                 {
                     var result = db.Execute(insertQuery, kindOfWorkModel);
@@ -42,7 +42,7 @@ namespace JournalLabs.API.DAL.Repositories
             {
                 try
                 {
-                    string insertQuery = @"UPDATE KindOfWorks Set NameKindOfWork = @NameKindOfWork,IsKindOfWorkVisible=@IsKindOfWorkVisible Where Id = @Id";
+                    string insertQuery = @"UPDATE KindOfWorks Set NameKindOfWork = @NameKindOfWork,IsVisibleToStudent=@IsVisibleToStudent,IsKindOfWorkVisible=@IsKindOfWorkVisible Where Id = @Id";
                     var result = db.Execute(insertQuery, kindOfWorkModel);
                 }
                 catch (Exception ex)
@@ -112,6 +112,22 @@ namespace JournalLabs.API.DAL.Repositories
                 {
                     string insertQuery = @"UPDATE KindOfWorks Set IsKindOfWorkVisible = @isKindOfWorkVisible Where Id = @idKindOfWork";
                     var res = db.Execute(insertQuery, new { idKindOfWork = idKindOfWork, isKindOfWorkVisible = isKindOfWorkVisible });
+                    return res > 0;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
+        public bool UpdateVisibleKindOfWorkForStudent(string idKindOfWork, bool isKindOfWorkVisibleForStudent)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                try
+                {
+                    string insertQuery = @"UPDATE KindOfWorks Set IsVisibleToStudent = @isKindOfWorkVisibleForStudent Where Id = @idKindOfWork";
+                    var res = db.Execute(insertQuery, new { idKindOfWork = idKindOfWork, isKindOfWorkVisibleForStudent = isKindOfWorkVisibleForStudent });
                     return res > 0;
                 }
                 catch (Exception ex)

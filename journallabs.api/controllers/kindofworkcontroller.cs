@@ -61,5 +61,13 @@ namespace JournalLabs.API.Controllers
             _kindOfWorkService.UpdateVisibleKindOfWork(idKindOfWork, isKindOfWorkVisible);
             return Ok("Good");
         }
+        [Route("UpdateVisibleKindOfWorkForStudent")]
+        [HttpGet]
+        public IHttpActionResult UpdateVisibleKindOfWorkForStudent(string idKindOfWork, bool isKindOfWorkVisibleForStudent)
+        {
+            _kindOfWorkService.UpdateVisibleKindOfWorkForStudent(idKindOfWork, isKindOfWorkVisibleForStudent);
+            return Ok("Good");
+        }
+        
     }
 }

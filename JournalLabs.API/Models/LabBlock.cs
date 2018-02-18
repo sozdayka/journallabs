@@ -17,7 +17,6 @@ namespace JournalLabs.API.Models
         public Guid KindOfWorkId { get; set; }
         public Guid JournalId { get; set; }
         public bool IsCalculateMark { get; set; }
-        public bool IsVisibleToStudent { get; set; }
         public bool IsBoolField { get; set; }
         public string Color { get; set; }
         public virtual User MarkTeacher { get; set; }

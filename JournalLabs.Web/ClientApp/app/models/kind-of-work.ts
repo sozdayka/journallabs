@@ -3,4 +3,5 @@ export class KindOfWork {
    NameKindOfWork:string = "";
    IsKindOfWorkVisible: boolean = false;
    isSecondBlockVisible: boolean = false;
+   IsVisibleToStudent: boolean = false;
 }

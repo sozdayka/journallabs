@@ -39,5 +39,10 @@ namespace JournalLabs.API.BLL
         {
             return _kindOfWorkRepository.UpdateVisibleKindOfWork(idKindOfWork, isKindOfWorkVisible);
         }
+        public bool UpdateVisibleKindOfWorkForStudent(string idKindOfWork, bool isKindOfWorkVisibleForStudent)
+        {
+            return _kindOfWorkRepository.UpdateVisibleKindOfWorkForStudent(idKindOfWork, isKindOfWorkVisibleForStudent);
+        }
+        
     }
 }

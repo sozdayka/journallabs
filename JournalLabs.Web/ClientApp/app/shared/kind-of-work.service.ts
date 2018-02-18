@@ -44,4 +44,7 @@ export class KindOfWorkService {
   updateVisibleKindOfWork(idKindOfWork: string, isVisible: boolean): Observable<any> {
     return this.transferHttp.get(`${this.baseUrl}/api/KindOfWork/UpdateVisibleKindOfWork?idKindOfWork=${idKindOfWork}&isKindOfWorkVisible=${isVisible}`);
   }
+  updateVisibleKindOfWorkForStudent(idKindOfWork: string, isVisible: boolean): Observable<any> {
+    return this.transferHttp.get(`${this.baseUrl}/api/KindOfWork/UpdateVisibleKindOfWorkForStudent?idKindOfWork=${idKindOfWork}&isKindOfWorkVisibleForStudent=${isVisible}`);
+  }
 }

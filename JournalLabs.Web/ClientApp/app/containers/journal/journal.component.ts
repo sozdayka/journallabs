@@ -236,4 +236,12 @@ export class JournalComponent implements OnInit {
       }
     }
   }
+  public changeVisibleKindOfWorkForStudent(idKindOfWork: string, isChecked: any) {
+    this.kindOfWorkService.updateVisibleKindOfWorkForStudent(idKindOfWork, isChecked).subscribe(
+      result => {
+        console.log("success update kindOfWork");
+        location.reload();
+      });
+  }
+  
 }
