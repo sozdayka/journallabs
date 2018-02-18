@@ -7,10 +7,11 @@
         <tr>
           <td></td>
           <ng-container *ngFor=" let key of journalViewModel.KindsOfWorkForJournal">
-            <td style="text-align:center; vertical-align:middle;" colspan="2" >
-              <input [(ngModel)]="key.NameKindOfWork" (blur)="changeKindOfWorkName(key)" [readonly]="studentId" />              
+            <td style="text-align:center; vertical-align:middle;" colspan="2">
+              <input [(ngModel)]="key.NameKindOfWork" (blur)="changeKindOfWorkName(key)" [readonly]="studentId" />
             </td>
-            <td><input type="checkbox" [(ngModel)]="key.IsKindOfWorkVisible" (ngModelChange)="changeVisibleKindOfWork(key.Id,$event)" /></td>
+            <td *ngIf="currentRole=='Teacher'"><input type="button" (click)="removeKindOfWork(key.Id)" value="удалить" /></td>
+            <td *ngIf="currentRole=='Teacher'"><input type="checkbox" [(ngModel)]="key.IsKindOfWorkVisible" (ngModelChange)="changeVisibleKindOfWork(key.Id,$event)" /></td>
           </ng-container>
         </tr>
       </thead>

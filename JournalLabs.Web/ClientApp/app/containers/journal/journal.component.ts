@@ -207,5 +207,12 @@ export class JournalComponent implements OnInit {
         location.reload();
       });
   }
+  public removeKindOfWork(idKindOfWork: string) {
+    this.kindOfWorkService.deleteKindOfWork(idKindOfWork).subscribe(
+      result => {
+        console.log("success update kindOfWork");
+        location.reload();
+      });
+  }
   
 }

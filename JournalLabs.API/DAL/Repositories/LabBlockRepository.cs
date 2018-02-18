@@ -148,15 +148,14 @@ namespace JournalLabs.API.DAL.Repositories
                 }
             }
         }
-
-        public bool GetVisibleLabBlocks(string idKindOfWork, bool isKindOfWorkVisible)
+        public bool DeleteLabBlockByKindOfWorkId(string kindOfWorkId)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 try
                 {
-                    string insertQuery = @"UPDATE LabBlocks Set IsKindOfWorkVisible = @isKindOfWorkVisible Where KindOfWorkId = @idKindOfWork";
-                    var res = db.Execute(insertQuery, new { idKindOfWork = idKindOfWork, isKindOfWorkVisible = isKindOfWorkVisible });
+                    string insertQuery = @"Delete FROM LabBlocks Where KindOfWorkId = @KindOfWorkId";
+                    var res = db.Execute(insertQuery, new { KindOfWorkId = kindOfWorkId });
                     return res > 0;
                 }
                 catch (Exception ex)
@@ -165,6 +164,6 @@ namespace JournalLabs.API.DAL.Repositories
                 }
             }
         }
-
+        
     }
 }

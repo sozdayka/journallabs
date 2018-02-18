@@ -30,7 +30,7 @@ export class LabBlockService {
   }
 
   deleteLabBlock(id: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/api/LabBlock/DeleteLabBlockById` + id);
+    return this.transferHttp.get(`${this.baseUrl}/api/LabBlock/DeleteLabBlockById?Id=` + id);
   }
 
   updateLabBlock(labBlock: LabBlock): Observable<any> {

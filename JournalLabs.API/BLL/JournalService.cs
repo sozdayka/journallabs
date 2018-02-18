@@ -114,6 +114,10 @@ namespace JournalLabs.API.BLL
             journal.JournalModel = _journalRepository.GetJournalById(journalId);
             var kindOfWorks = _kindOfWorkRepository.GetKindsOfWorkByJournalId(journalId);
             journal.KindsOfWorkForJournal = isTeacher? kindOfWorks: kindOfWorks.Where(x=>x.IsKindOfWorkVisible!=false).ToList();
+            if (journal.KindsOfWorkForJournal.Count==0)
+            {
+                return new JournalGridViewModel();
+            }
             var kindOfWorkVisibleQueryString = StringForKindOfWorkBulkQuery(journal.KindsOfWorkForJournal.Select(x=>x.Id).ToList());
             if (student_Id == "")
             {

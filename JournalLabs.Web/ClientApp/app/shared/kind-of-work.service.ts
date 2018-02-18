@@ -30,7 +30,7 @@ export class KindOfWorkService {
   }
 
   deleteKindOfWork(id: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/api/KindOfWork/DeleteKindOfWorkById` + id);
+    return this.transferHttp.get(`${this.baseUrl}/api/KindOfWork/DeleteKindOfWorkById?Id=` + id);
   }
 
   updateKindOfWork(kindOfWork: KindOfWork): Observable<any> {
