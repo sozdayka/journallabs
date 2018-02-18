@@ -152,6 +152,7 @@ export class JournalComponent implements OnInit {
         console.log("success update remark");
       });
   }
+
   public totalMark(labBlocks: LabBlock[]): number {
     let sum: number = 0;
     for (let labBlock of labBlocks) {
@@ -162,6 +163,7 @@ export class JournalComponent implements OnInit {
     }
     return sum;
   }
+
   public changeLabBlock(labBlock: LabBlock) {
     if (labBlock.Date != null && labBlock.Mark!=0) {    
     labBlock.MarkTeacherId = this.currentTeacherId;
@@ -182,6 +184,7 @@ export class JournalComponent implements OnInit {
       });
     }
   }
+
   public removeStudent(id: string) {
     this.studentService.deleteStudent(id).subscribe(
       result => {
@@ -218,7 +221,9 @@ export class JournalComponent implements OnInit {
       });
   }
   public changeVisibleSecondBlock(key: KindOfWork, isChecked: any) {
+
     key.isSecondBlockVisible = isChecked;
+
     var kindOfWork = this.headerKindOfWork.filter(x => x.KindOfMark == KindOfMark.SecondMark && x.kindOfWorkId == key.Id)[0];
     if (kindOfWork) {
       kindOfWork.isVisible = isChecked;
@@ -230,10 +235,5 @@ export class JournalComponent implements OnInit {
         labBlock.IsSecondBlock = isChecked;
       }
     }
-    //for (var i = 0; i < this.headerKindOfWork.length; i++) {
-    //  if (this.headerKindOfWork[i].KindOfMark == KindOfMark.SecondMark && this.headerKindOfWork[i].kindOfWorkId == key.Id) {
-    //    this.headerKindOfWork[i].isVisible = !this.headerKindOfWork[i].isVisible;
-    //  }
-    //}
   }
 }

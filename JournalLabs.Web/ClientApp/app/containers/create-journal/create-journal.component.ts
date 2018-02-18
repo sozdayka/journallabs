@@ -37,4 +37,11 @@ export class CreateJournalComponent {
       this.createJournalViewModel.LabBlocksSettings.push(new LabBlock());
     }
   }
+  public selectBooleanTypeField(key: LabBlock, isChecked: any) {
+    key.IsBoolField = isChecked;
+    if (isChecked) {
+      key.IsCalculateMark = false;
+    }
+    
+  }
 }

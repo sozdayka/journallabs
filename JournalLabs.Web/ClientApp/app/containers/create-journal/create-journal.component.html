@@ -24,9 +24,9 @@
       <td><span>Вид работы - {{i}}</span></td>
       <td style="text-align: center;"><input type="checkbox" [(ngModel)]="key.IsSecondBlock"></td>
       <td style="text-align: center;"><input type="checkbox" [(ngModel)]="key.IsKindOfWorkVisible"></td>
-      <td style="text-align: center;"><input type="checkbox" [(ngModel)]="key.IsCalculateMark"></td>
+      <td style="text-align: center;"><input type="checkbox" [(ngModel)]="key.IsCalculateMark" [disabled]="key.IsBoolField"></td>
       <td style="text-align: center;"><input type="checkbox" [(ngModel)]="key.IsVisibleToStudent"></td>
-      <td style="text-align: center;"><input type="checkbox" [(ngModel)]="key.IsBoolField"></td>
+      <td style="text-align: center;"><input type="checkbox" [ngModel]="key.IsBoolField" (ngModelChange)="selectBooleanTypeField(key,$event)"></td>
     </tr>
   </ng-container>
 </table>
