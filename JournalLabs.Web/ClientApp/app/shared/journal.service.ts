@@ -55,4 +55,7 @@ export class JournalService {
   addStudentToJournal(journalId: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/api/Journal/AddStudentToJournal?journalId=${journalId}`);
   }
+  addKindOfWorkToJournal(journalId: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/api/Journal/AddKindOfWorkToJournal?journalId=${journalId}`);
+  }
 }

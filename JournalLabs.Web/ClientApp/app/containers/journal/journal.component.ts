@@ -112,14 +112,7 @@ export class JournalComponent implements OnInit {
         for (let studentLabBlock of studentResultForJournal.StudentLabBlocks)
           studentLabBlock.oldMark = studentLabBlock.Mark;
 
-      for (var i = 0; i < this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.length; i++) {
-        if (this.journalViewModel.KindsOfWorkForJournal.length>i) {
-          //this.headerKindOfWorkBlock.push({
-          //  isVisible: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.filter(obj => obj.KindOfWorkId == this.journalViewModel.KindsOfWorkForJournal[i].Id)[0].IsKindOfWorkVisible,
-          //  kindOfWork: this.journalViewModel.KindsOfWorkForJournal[i]
-          //});
-        }
-        
+      for (var i = 0; i < this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.length; i++) {       
         this.headerKindOfWork.push(this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark);
       }
     });
@@ -127,11 +120,6 @@ export class JournalComponent implements OnInit {
   public getStudentJournal(journalId: string, studentId: string) {
     this.journalService.getJournalByIdAndStudentId(journalId, studentId).subscribe(response => {
       this.journalViewModel = JSON.parse(response._body);
-
-      //for (let studentResultForJournal of this.journalViewModel.StudentResultForJournal)
-      //  for (let studentLabBlock of studentResultForJournal.StudentLabBlocks)
-      //    studentLabBlock.oldMark = studentLabBlock.Mark;
-
       for (var i = 0; i < this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.length; i++) {
         this.headerKindOfWork.push(this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark);
       }
@@ -214,5 +202,11 @@ export class JournalComponent implements OnInit {
         location.reload();
       });
   }
-  
+  public addKindOfWorkToJournal() {
+    this.journalService.addKindOfWorkToJournal(this.journalId).subscribe(
+      result => {
+        console.log("success remove student");
+        location.reload();
+      });
+  }
 }

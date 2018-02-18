@@ -83,6 +83,12 @@ namespace JournalLabs.API.Controllers
             _journalService.AddStudentToJournal(journalId);
             return Ok("Good");
         }
-        
+        [Route("AddKindOfWorkToJournal")]
+        [HttpGet]
+        public IHttpActionResult AddKindOfWorkToJournal(string journalId)
+        {
+            _journalService.AddKindOfWorkToJournal(journalId);
+            return Ok("Good");
+        }
     }
 }

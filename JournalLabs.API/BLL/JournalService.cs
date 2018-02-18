@@ -205,7 +205,34 @@ namespace JournalLabs.API.BLL
             }
             CreateStudentInJournal(Guid.Parse(journalId), studentName, kindOfWorks, labBlocksSettingsResult);
         }
-        public string StringForKindOfWorkBulkQuery(List<Guid> kindOfWorks)
+
+        public void AddKindOfWorkToJournal(string journalId)
+        {
+            var students = _labBlockRepository.GetStudentsByJournalId(journalId);
+            var lastKindOfWork = _kindOfWorkRepository.GetKindsOfWorkByJournalId(journalId).LastOrDefault();
+            var kindOfWorkIndex = int.Parse(Regex.Match(lastKindOfWork.NameKindOfWork, @"\d+").Value);
+            var kindOfWorkName = $"Вид работы {kindOfWorkIndex + 1}";
+            var kindOfWorkId = Guid.NewGuid();
+                _kindOfWorkRepository.CreateKindOfWork(new KindOfWork() { Id = kindOfWorkId, NameKindOfWork = kindOfWorkName, IsKindOfWorkVisible = true });
+            for (int i = 0; i < students.Count; i++)
+            {
+                var createLabBlock = new LabBlock();
+                createLabBlock.IsBoolField = false;
+                createLabBlock.IsCalculateMark = true;
+                createLabBlock.IsVisibleToStudent = true;
+                createLabBlock.Color = "";
+                createLabBlock.KindOfMark = KindOfMark.FirstMark;
+                createLabBlock.Id = Guid.NewGuid();
+                createLabBlock.JournalId = new Guid(journalId);
+                createLabBlock.StudentId = students[i].Id;
+                createLabBlock.KindOfWorkId = kindOfWorkId;
+
+                _labBlockRepository.CreateLabBlock(createLabBlock);
+            }
+            
+        }
+
+            public string StringForKindOfWorkBulkQuery(List<Guid> kindOfWorks)
         {
             StringBuilder queryString = new StringBuilder();
             for (int i = 0; i < kindOfWorks.Count; i++)

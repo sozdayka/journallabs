@@ -6,6 +6,18 @@
       <thead>
         <tr>
           <td></td>
+          <td></td>
+          <ng-container *ngFor=" let key of journalViewModel.KindsOfWorkForJournal">
+            <td style="text-align:center; vertical-align:middle;" colspan="2">
+              Название
+            </td>
+            <td *ngIf="currentRole=='Teacher'">Удалить</td>
+            <td *ngIf="currentRole=='Teacher'">Скрыть</td>
+          </ng-container>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
           <ng-container *ngFor=" let key of journalViewModel.KindsOfWorkForJournal">
             <td style="text-align:center; vertical-align:middle;" colspan="2">
               <input [(ngModel)]="key.NameKindOfWork" (blur)="changeKindOfWorkName(key)" [readonly]="studentId" />
@@ -52,7 +64,8 @@
       </tbody>
     </table>
     <br />
-    <input type="button" (click)="addStudentToJournal()" value="Добавить студента" />
+    <input *ngIf="currentRole=='Teacher'" type="button" (click)="addStudentToJournal()" value="Добавить студента" />
+    <input *ngIf="currentRole=='Teacher'" type="button" (click)="addKindOfWorkToJournal()" value="Добавить вид работы" />
     <br />
     <div *ngIf="currentRole=='Teacher'">
       <p>Aссистенты которые имеют доступ к журналу:</p><!--Input count lab blocks:-->
