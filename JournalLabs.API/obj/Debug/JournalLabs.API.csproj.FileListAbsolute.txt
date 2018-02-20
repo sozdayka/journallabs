@@ -278,7 +278,6 @@ C:\Users\Anuitex-15\source\repos\journallabs\JournalLabs.API\bin\Newtonsoft.Json
 C:\Users\Anuitex-15\source\repos\journallabs\JournalLabs.API\bin\System.Net.Http.Formatting.xml
 C:\Users\Anuitex-15\source\repos\journallabs\JournalLabs.API\bin\System.Web.Http.xml
 C:\Users\Anuitex-15\source\repos\journallabs\JournalLabs.API\bin\System.Web.Http.WebHost.xml
-C:\Users\Anuitex-15\source\repos\journallabs\JournalLabs.API\obj\Debug\JournalLabs.API.csprojResolveAssemblyReference.cache
 C:\Users\Anuitex-15\source\repos\journallabs\JournalLabs.API\obj\Debug\JournalLabs.API.csproj.CoreCompileInputs.cache
 C:\Users\Anuitex-15\source\repos\journallabs\JournalLabs.API\obj\Debug\JournalLabs.API.dll
 C:\Users\Anuitex-15\source\repos\journallabs\JournalLabs.API\obj\Debug\JournalLabs.API.pdb

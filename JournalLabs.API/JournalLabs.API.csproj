@@ -102,6 +102,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BLL\JournalService.cs" />
+    <Compile Include="BLL\Provider\FileProvider.cs" />
     <Compile Include="BLL\RemarkService.cs" />
     <Compile Include="BLL\StudentService.cs" />
     <Compile Include="BLL\LabBlockService.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Controllers\SudentController.cs" />
     <Compile Include="Controllers\TeacherJournalController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
     <Compile Include="DAL\ApplicationContext.cs" />
     <Compile Include="DAL\Repositories\JournalRepository.cs" />
     <Compile Include="DAL\Repositories\RemarkRepository.cs" />
