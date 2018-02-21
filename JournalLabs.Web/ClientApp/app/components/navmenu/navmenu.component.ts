@@ -3,6 +3,7 @@ import { Router, CanActivate, NavigationEnd } from '@angular/router';
 import { JournalService } from "../../shared/journal.service";
 import { Journal } from '../../models/Journal';
 import { StudentJournal } from '../../models/studentJournal';
+import { LogService } from '../../shared/log.service';
 
 @Component({
     selector: 'nav-menu',
@@ -17,7 +18,8 @@ export class NavMenuComponent implements OnInit {
     public studentJournals: StudentJournal[] = [];
     public studentName:string="";
     constructor(public router: Router,
-      private journalService: JournalService) {
+      private journalService: JournalService,
+      private logService: LogService) {
       
     }
     collapseNavbar(): void {
@@ -67,5 +69,10 @@ export class NavMenuComponent implements OnInit {
         this.router.navigate(['journal'], { queryParams: { journalId: this.studentJournals[0].JournalId, studentId: this.studentJournals[0].StudentId } });
       });
     console.log(this.studentName);
-  }
+    }
+    public addDevelopmentRemak(event: any) {
+      this.logService.writeDevelopmentLog(`${new Date().toLocaleString()} -- ${event.target.value}`).subscribe(resp => {
+        console.log("Лог успешно записан");
+      }); 
+    }
 }
