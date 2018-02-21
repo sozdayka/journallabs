@@ -28,8 +28,9 @@ export class CreateJournalComponent {
   public createJournal() {
     var teacherName = localStorage.getItem('TeacherName');
     this.createJournalViewModel.TeacherIds.push(localStorage.getItem('TeacherId'));
-    this.journalService.addJournal(this.createJournalViewModel).subscribe(response => {
-      this.logService.writeTeacherLog(`Преподаватель ${teacherName} создал журнал под названием ${this.createJournalViewModel.LessonName} , с количеством студентов ${this.createJournalViewModel.StudentsCount}, и количеством видов работ ${this.createJournalViewModel.LabBlocksSettings.length}`).subscribe(response => {
+    this.journalService.addJournal(this.createJournalViewModel).subscribe(resp => {
+      var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} создал журнал под названием ${this.createJournalViewModel.LessonName}, с количеством студентов ${this.createJournalViewModel.StudentsCount}, и количеством видов работ ${this.createJournalViewModel.LabBlocksSettings.length}`;
+      this.logService.writeTeacherLog(logText).subscribe(response => {
         alert("Журнал успешно добавлен");
         location.reload();
       });

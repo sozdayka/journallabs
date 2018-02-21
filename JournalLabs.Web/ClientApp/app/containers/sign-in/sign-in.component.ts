@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { User } from '../../models/User';
 import { UserService } from '../../shared/user.service';
 import { Router, CanActivate, NavigationEnd } from '@angular/router';
+import { LogService } from '../../shared/log.service';
 @Component({
   selector: 'sign-in',
   template: `
@@ -24,26 +25,29 @@ export class SignInComponent {
   public teacherModel: User = { Id: "", Login: "", Password: "111111", Role: "" };
 
   constructor(public router: Router,
-    private userService: UserService) { }
+    private userService: UserService, private logService: LogService) { }
 
   public SignIn() {
     //this.teacherModel.Role = "Teacher";
     this.userService.signInUser(this.teacherModel).subscribe(response => {
-      var result:User = JSON.parse(response._body);
-      if (result.Role == "Teacher" || result.Role == "Assistant") {
-        localStorage.setItem('Role', result.Role);
-        localStorage.setItem('TeacherId', result.Id);
-        localStorage.setItem('TeacherName', result.Login);
-        location.reload();
-        //this.router.navigate(['teacher-journals']);
-        return;
-      }
-      if (result.Role == "Admin") {
-        localStorage.setItem('Role', result.Role);
-        location.reload();
-        this.router.navigate(['admin']);
-        return;
-      }
+      var logText = `${new Date().toLocaleString()} Пользователь ${this.teacherModel.Login} успешно авторизирован`;
+      this.logService.writeTeacherLog(logText).subscribe(resp => {
+        var result: User = JSON.parse(response._body);
+        if (result.Role == "Teacher" || result.Role == "Assistant") {
+          localStorage.setItem('Role', result.Role);
+          localStorage.setItem('TeacherId', result.Id);
+          localStorage.setItem('TeacherName', result.Login);
+          location.reload();
+          //this.router.navigate(['teacher-journals']);
+          return;
+        }
+        if (result.Role == "Admin") {
+          localStorage.setItem('Role', result.Role);
+          location.reload();
+          this.router.navigate(['admin']);
+          return;
+        }
+      });
     });
   }
 }
