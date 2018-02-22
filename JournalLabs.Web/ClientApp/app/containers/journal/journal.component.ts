@@ -17,6 +17,7 @@ import { AssistantsJournalViewModel } from '../../models/assistantsJournalViewMo
 import { TeacherJournalService } from '../../shared/teacher-journal';
 import { TeacherJournal } from '../../models/teacherJournal';
 import { KindOfMark } from "../../models/enums/KindOfMark"
+import { LogService } from '../../shared/log.service';
 @Component({
   selector: 'journal',
   templateUrl: 'journal.component.html'
@@ -40,7 +41,8 @@ export class JournalComponent implements OnInit {
     public remarkService: RemarkService,
     private activatedRoute: ActivatedRoute,
     public userService: UserService,
-    public teacherJournalService: TeacherJournalService
+    public teacherJournalService: TeacherJournalService,
+    public logService: LogService
   ) {
   }
 
@@ -89,17 +91,25 @@ export class JournalComponent implements OnInit {
       teacherJournal.TeacherId = assistant.Id
       this.teacherJournalService.addTeacherToJournal(teacherJournal).subscribe(
         result => {
-          console.log("success add assistant");
-          this.assistantList = [];
-          this.teacherJournalService.getAllJournalAssistants(this.journalId).subscribe(response => {
-            this.assistantList = response;
-          });
+          var teacherName = localStorage.getItem('TeacherName');
+          var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} предоставил доступ к журналу ${this.journalViewModel.JournalModel.LessonName} ассистенту ${assistant.Name}`;
+          this.logService.writeTeacherLog(logText).subscribe(resp => {
+            console.log("success add assistant");
+            this.assistantList = [];
+            this.teacherJournalService.getAllJournalAssistants(this.journalId).subscribe(response => {
+              this.assistantList = response;
+            });
+          });          
         });     
       return;
     }
     this.teacherJournalService.deleteTeacherFromJournal(assistant.TeacherJournalId).subscribe(
       result => {
-        console.log("success remove assistant");
+        var teacherName = localStorage.getItem('TeacherName');
+        var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} предоставил заблокировал доступ к журналу ${this.journalViewModel.JournalModel.LessonName} ассистенту ${assistant.Name}`;
+        this.logService.writeTeacherLog(logText).subscribe(resp => {
+          console.log("success remove assistant");
+        });
       });
   }
 
@@ -111,45 +121,66 @@ export class JournalComponent implements OnInit {
       for (let studentResultForJournal of this.journalViewModel.StudentResultForJournal)
         for (let studentLabBlock of studentResultForJournal.StudentLabBlocks)
           studentLabBlock.oldMark = studentLabBlock.Mark;
+      //--------review
+      var labBlocksForOneStudent = this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks;
 
-      for (var i = 0; i < this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.length; i++) {       
+      for (var i = 0; i < labBlocksForOneStudent.length; i++) {       
         this.headerKindOfWork.push({
-          KindOfMark: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark,
-          isVisible: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark == KindOfMark.FirstMark ? true : false,
-          kindOfWorkId: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfWorkId
+          KindOfMark: labBlocksForOneStudent[i].KindOfMark,
+          isVisible: labBlocksForOneStudent[i].KindOfMark == KindOfMark.FirstMark ? true : false,
+          kindOfWorkId: labBlocksForOneStudent[i].KindOfWorkId
         });
       }
+      //---------------
     });
   }
   public getStudentJournal(journalId: string, studentId: string) {
     this.journalService.getJournalByIdAndStudentId(journalId, studentId).subscribe(response => {
       this.journalViewModel = JSON.parse(response._body);
-      for (var i = 0; i < this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.length; i++) {
+      //--------review
+      var labBlocksForOneStudent = this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks;
+
+      for (var i = 0; i < labBlocksForOneStudent.length; i++) {
         this.headerKindOfWork.push({
-          KindOfMark: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark,
-          isVisible: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark == KindOfMark.FirstMark ? true : false,
-          kindOfWorkId: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfWorkId
+          KindOfMark: labBlocksForOneStudent[i].KindOfMark,
+          isVisible: labBlocksForOneStudent[i].KindOfMark == KindOfMark.FirstMark ? true : false,
+          kindOfWorkId: labBlocksForOneStudent[i].KindOfWorkId
         });
       }
+      //----------- 
     });
   }
 
   public changeUserName(student: Student) {
     this.studentService.updateStudent(student).subscribe(
       result => {
-        console.log("success update user name");
+        var teacherName = localStorage.getItem('TeacherName');
+        var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил имя студента под Id ${student.Id} на ${student.StudentName}`;
+        this.logService.writeTeacherLog(logText).subscribe(resp => {
+          console.log("success update user name");
+        });
+
       });
   }
   public changeKindOfWorkName(kindOfWork: KindOfWork) {
     this.kindOfWorkService.updateKindOfWork(kindOfWork).subscribe(
       result => {
-        console.log("success update kindOfWork name");
+        var teacherName = localStorage.getItem('TeacherName');
+        var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил настройки Вида работы под Id ${kindOfWork.Id} на
+                      название ${kindOfWork.NameKindOfWork}, видимость для ассистента ${kindOfWork.IsKindOfWorkVisible}, видимость для студента ${kindOfWork.IsVisibleToStudent}`;
+        this.logService.writeTeacherLog(logText).subscribe(resp => {
+          console.log("success update kindOfWork name");
+        });
       });
   }
   public changeRemark(remark: Remark) {
     this.remarkService.updateRemark(remark).subscribe(
       result => {
-        console.log("success update remark");
+        var teacherName = localStorage.getItem('TeacherName');
+        var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил блок заметок под Id ${remark.Id} на текст заметки ${remark.RemarkText}, видимость студента  ${remark.IsHideStudent}`;
+        this.logService.writeTeacherLog(logText).subscribe(resp => {
+          console.log("success update remark");
+        });       
       });
   }
 
@@ -164,8 +195,8 @@ export class JournalComponent implements OnInit {
     return sum;
   }
 
-  public changeLabBlock(labBlock: LabBlock) {
-    if (labBlock.Date != null && labBlock.Mark!=0) {    
+  public changeLabBlock(labBlock: LabBlock, event: any) {
+    if (labBlock.Date != null) {    
     labBlock.MarkTeacherId = this.currentTeacherId;
     labBlock.MarkTeacherName = localStorage.getItem('TeacherName');
 
@@ -180,7 +211,11 @@ export class JournalComponent implements OnInit {
     labBlock.oldMark = labBlock.Mark;
     this.labBlockService.updateLabBlock(labBlock).subscribe(
       result => {
-        console.log("success update labBlock");
+        var teacherName = localStorage.getItem('TeacherName');
+        var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил блок лабораторной работы под Id ${labBlock.Id} на дату ${labBlock.Date}, оценку ${labBlock.Mark}`;
+        this.logService.writeTeacherLog(logText).subscribe(resp => {
+          console.log("success update labBlock");
+        });        
       });
     }
   }
@@ -188,36 +223,56 @@ export class JournalComponent implements OnInit {
   public removeStudent(id: string) {
     this.studentService.deleteStudent(id).subscribe(
       result => {
-        console.log("success remove student");
-        location.reload();
+        var teacherName = localStorage.getItem('TeacherName');
+        var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} удалил студента под Id ${id}`;
+        this.logService.writeTeacherLog(logText).subscribe(resp => {
+          console.log("success remove student");
+          location.reload();
+        }); 
       });
   }
   public addStudentToJournal() {
     this.journalService.addStudentToJournal(this.journalId).subscribe(
       result => {
-        console.log("success remove student");
-        location.reload();
+        var teacherName = localStorage.getItem('TeacherName');
+        var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} добавил нового студента`;
+        this.logService.writeTeacherLog(logText).subscribe(resp => {
+          console.log("success add student");
+          location.reload();
+        }); 
       });
   }
   public changeVisibleKindOfWork(idKindOfWork: string, isChecked: any) {
     this.kindOfWorkService.updateVisibleKindOfWork(idKindOfWork, isChecked).subscribe(
       result => {
-        console.log("success update kindOfWork");
-        location.reload();
+        var teacherName = localStorage.getItem('TeacherName');
+        var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил видимость вида работы под Id ${idKindOfWork} на ${isChecked}`;
+        this.logService.writeTeacherLog(logText).subscribe(resp => {
+          console.log("success update visible kindOfWork");
+          location.reload();
+        });
       });
   }
   public removeKindOfWork(idKindOfWork: string) {
     this.kindOfWorkService.deleteKindOfWork(idKindOfWork).subscribe(
       result => {
-        console.log("success update kindOfWork");
-        location.reload();
+        var teacherName = localStorage.getItem('TeacherName');
+        var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} удалил вид работы под Id ${idKindOfWork}`;
+        this.logService.writeTeacherLog(logText).subscribe(resp => {
+          console.log("success remove kindOfWork");
+          location.reload();
+        }); 
       });
   }
   public addKindOfWorkToJournal() {
     this.journalService.addKindOfWorkToJournal(this.journalId).subscribe(
       result => {
-        console.log("success remove student");
-        location.reload();
+        var teacherName = localStorage.getItem('TeacherName');
+        var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} добавил новый вид работы в журнале под ID ${this.journalId}`;
+        this.logService.writeTeacherLog(logText).subscribe(resp => {
+          console.log("success add kindOfWork");
+          location.reload();
+        }); 
       });
   }
   public changeVisibleSecondBlock(key: KindOfWork, isChecked: any) {
@@ -239,8 +294,12 @@ export class JournalComponent implements OnInit {
   public changeVisibleKindOfWorkForStudent(idKindOfWork: string, isChecked: any) {
     this.kindOfWorkService.updateVisibleKindOfWorkForStudent(idKindOfWork, isChecked).subscribe(
       result => {
-        console.log("success update kindOfWork");
-        location.reload();
+        var teacherName = localStorage.getItem('TeacherName');
+        var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил видимость вида работы для студента под Id ${idKindOfWork} на ${isChecked}`;
+        this.logService.writeTeacherLog(logText).subscribe(resp => {
+          console.log("success update visible kindOfWork for student");
+          location.reload();
+        });
       });
   }
   

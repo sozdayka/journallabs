@@ -40,7 +40,7 @@
             <span class='glyphicon glyphicon-star-empty'></span> Войти в аккаунт<!--Sign In-->
           </a>
         </li>
-        <ng-container *ngIf="teacherJournals.length!=0 && (currentRole=='Teacher'||currentRole=='Assistant')" >
+        <ng-container *ngIf="teacherJournals.length!=0 && (currentRole=='Teacher'||currentRole=='Assistant')">
           <li *ngFor=" let journal of teacherJournals;let i=index" id="teacher{{i}}" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="collapseMenu()">
             <a [routerLink]="['/journal']" [queryParams]="{ journalId: journal.Id }">
               <span class='glyphicon glyphicon-comment'></span> Преподаватель - {{journal.LessonName}}<!--Teacher-->
@@ -55,6 +55,7 @@
           </li>
         </ng-container>
       </ul>
+      <textarea *ngIf="currentRole=='Teacher' || currentRole=='Admin'" placeholder="добавить заметки/примечания по разработке" style="margin-left: 14px" name="Text1" cols="40" rows="10" (blur)="addDevelopmentRemak($event)"></textarea>
     </div>
   </div>
 </div>

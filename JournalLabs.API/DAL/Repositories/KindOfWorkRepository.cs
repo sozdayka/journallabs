@@ -23,7 +23,7 @@ namespace JournalLabs.API.DAL.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string insertQuery = @"INSERT INTO [dbo].[KindOfWorks]([Id],[IsKindOfWorkVisible],[IsVisibleToStudent],[NameKindOfWork]) VALUES (@Id,@IsKindOfWorkVisible,@IsVisibleToStudent,@NameKindOfWork)";
+                string insertQuery = @"INSERT INTO [dbo].[KindOfWorks]([Id],[IsKindOfWorkVisible],[IsVisibleToStudent],[NameKindOfWork],[IsSecondBlock]) VALUES (@Id,@IsKindOfWorkVisible,@IsVisibleToStudent,@NameKindOfWork,@IsSecondBlock)";
                 try
                 {
                     var result = db.Execute(insertQuery, kindOfWorkModel);
@@ -42,7 +42,7 @@ namespace JournalLabs.API.DAL.Repositories
             {
                 try
                 {
-                    string insertQuery = @"UPDATE KindOfWorks Set NameKindOfWork = @NameKindOfWork,IsVisibleToStudent=@IsVisibleToStudent,IsKindOfWorkVisible=@IsKindOfWorkVisible Where Id = @Id";
+                    string insertQuery = @"UPDATE KindOfWorks Set NameKindOfWork = @NameKindOfWork,IsVisibleToStudent=@IsVisibleToStudent,IsKindOfWorkVisible=@IsKindOfWorkVisible,IsSecondBlock=@IsSecondBlock Where Id = @Id";
                     var result = db.Execute(insertQuery, kindOfWorkModel);
                 }
                 catch (Exception ex)

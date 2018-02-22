@@ -11,5 +11,6 @@ namespace JournalLabs.API.Models
         public string NameKindOfWork { get; set; }
         public bool IsKindOfWorkVisible { get; set; }
         public bool IsVisibleToStudent { get; set; }
+        public bool IsSecondBlock { get; set; }
     }
 }

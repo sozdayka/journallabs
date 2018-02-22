@@ -25,6 +25,7 @@
     <None Remove="ClientApp\app\models\Remark.ts" />
     <None Remove="ClientApp\app\models\studentJournal.ts" />
     <None Remove="ClientApp\app\models\teacherJournal.ts" />
+    <None Remove="ClientApp\app\shared\log.service.ts" />
     <None Remove="ClientApp\app\shared\teacher-journal.ts" />
     <None Remove="yarn.lock" />
     <Content Remove="wwwroot\dist\**" />
@@ -44,6 +45,7 @@
     <TypeScriptCompile Include="ClientApp\app\models\studentJournal.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\studentLabBlocksViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\teacherJournal.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\log.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\remark.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\teacher-journal.ts" />
   </ItemGroup>
