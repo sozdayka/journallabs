@@ -188,8 +188,8 @@ export class JournalComponent implements OnInit {
     return sum;
   }
 
-  public changeLabBlock(labBlock: LabBlock) {
-    if (labBlock.Date != null && labBlock.Mark!=0) {    
+  public changeLabBlock(labBlock: LabBlock, event: any) {
+    if (labBlock.Date != null) {    
     labBlock.MarkTeacherId = this.currentTeacherId;
     labBlock.MarkTeacherName = localStorage.getItem('TeacherName');
 

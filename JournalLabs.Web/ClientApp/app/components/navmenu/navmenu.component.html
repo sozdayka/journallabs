@@ -55,7 +55,7 @@
           </li>
         </ng-container>
       </ul>
-      <textarea placeholder="добавить заметки/примечания по разработке" style="margin-left: 14px" name="Text1" cols="40" rows="10" (blur)="addDevelopmentRemak($event)"></textarea>
+      <textarea *ngIf="currentRole=='Teacher' || currentRole=='Admin'" placeholder="добавить заметки/примечания по разработке" style="margin-left: 14px" name="Text1" cols="40" rows="10" (blur)="addDevelopmentRemak($event)"></textarea>
     </div>
   </div>
 </div>

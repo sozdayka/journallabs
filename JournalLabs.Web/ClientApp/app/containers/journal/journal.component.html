@@ -11,7 +11,7 @@
             </td>
             <td *ngIf="currentRole=='Teacher'">Удалить</td>
             <td *ngIf="currentRole=='Teacher'">Скрыть</td>
-            <td *ngIf="currentTeacherId!=''">Для Студента</td>
+            <td *ngIf="currentRole=='Teacher'">Для Студента</td>
             <td>Пересдача</td>
           </ng-container>
         </tr>
@@ -24,7 +24,7 @@
             </td>
             <td *ngIf="currentRole=='Teacher'"><input type="button" (click)="removeKindOfWork(key.Id)" value="удалить" /></td>
             <td *ngIf="currentRole=='Teacher'"><input type="checkbox" [(ngModel)]="key.IsKindOfWorkVisible" (ngModelChange)="changeVisibleKindOfWork(key.Id,$event)" /></td>
-            <td *ngIf="currentTeacherId!=''"><input type="checkbox" [(ngModel)]="key.IsVisibleToStudent" (ngModelChange)="changeVisibleKindOfWorkForStudent(key.Id,$event)" /></td>
+            <td *ngIf="currentRole=='Teacher'"><input type="checkbox" [(ngModel)]="key.IsVisibleToStudent" (ngModelChange)="changeVisibleKindOfWorkForStudent(key.Id,$event)" /></td>
             <td><input type="checkbox" [(ngModel)]="key.isSecondBlockVisible" (ngModelChange)="changeVisibleSecondBlock(key,$event)" /></td>
           </ng-container>
         </tr>
@@ -49,20 +49,20 @@
           <tr>
             <td *ngIf="currentRole=='Teacher'" style="padding-right: 10px;"><input type="checkbox" [(ngModel)]="key2.Remark.IsHideStudent" (ngModelChange)="changeRemark(key2.Remark)" /></td>
             <td *ngIf="currentRole=='Teacher'" style="padding-right: 10px;"><input type="button" (click)="removeStudent(key2.StudentLabBlocks[0].StudentId)" value="удалить" /></td>
-            <td><input [(ngModel)]="key2.StudentInfo.StudentName" (blur)="changeUserName(key2.StudentInfo)" [readonly]="studentId" /></td>
+            <td><input [(ngModel)]="key2.StudentInfo.StudentName" (blur)="changeUserName(key2.StudentInfo)" [disabled]="studentId" /></td>
             <ng-container *ngFor=" let key of key2.StudentLabBlocks">
-              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"> <input [(ngModel)]="key.Date" (click)="key.Date=currentDate" (blur)="changeLabBlock(key)" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" /></td>
-              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark && key.IsBoolField==false"><input [(ngModel)]="key.Mark" (click)="key.Date=currentDate" (blur)="changeLabBlock(key)" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" type="number" [ngStyle]="{'background-color': key.Color != '' && !studentId ? key.Color : 'white'}" step="0.1" /></td>
-              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark && key.IsBoolField==true"><input [(ngModel)]="key.Mark" (click)="key.Date=currentDate" (ngModelChange)="changeLabBlock(key)" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" type="checkbox" /></td>
-              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"> <input [(ngModel)]="key.MarkTeacherName" readonly /></td>
-              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark && key.IsSecondBlock"><input [(ngModel)]="key.Date" (click)="key.Date=currentDate" (blur)="changeLabBlock(key)" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" /></td>
-              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark && key.IsSecondBlock && key.IsBoolField==false"><input [(ngModel)]="key.Mark" (click)="key.Date=currentDate" (blur)="changeLabBlock(key)" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" type="number" [ngStyle]="{'background-color': key.Color != '' && !studentId ? key.Color : 'white'}" step="0.1" /></td>
-              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark && key.IsSecondBlock && key.IsBoolField==true"><input [(ngModel)]="key.Mark" (click)="key.Date=currentDate" (ngModelChange)="changeLabBlock(key)" [readonly]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" type="checkbox" /></td>
-              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark && key.IsSecondBlock"><input [(ngModel)]="key.MarkTeacherName" readonly /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"> <input [(ngModel)]="key.Date" (click)="key.Date=currentDate" (blur)="changeLabBlock(key)" [disabled]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark && key.IsBoolField==false"><input [(ngModel)]="key.Mark" (ngModelChange)="key.Date=currentDate" (blur)="changeLabBlock(key)" [disabled]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" type="number" [ngStyle]="{'background-color': key.Color != '' && !studentId ? key.Color : 'white'}" step="0.1" /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark && key.IsBoolField==true"><input [(ngModel)]="key.Mark" (ngModelChange)="key.Date=currentDate;changeLabBlock(key,$event)" [disabled]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" type="checkbox" /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.FirstMark"> <input [(ngModel)]="key.MarkTeacherName" disabled /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark && key.IsSecondBlock"><input [(ngModel)]="key.Date" (click)="key.Date=currentDate" (blur)="changeLabBlock(key)" [disabled]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark && key.IsSecondBlock && key.IsBoolField==false"><input [(ngModel)]="key.Mark" (ngModelChange)="key.Date=currentDate" (blur)="changeLabBlock(key)" [disabled]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" type="number" [ngStyle]="{'background-color': key.Color != '' && !studentId ? key.Color : 'white'}" step="0.1" /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark && key.IsSecondBlock && key.IsBoolField==true"><input [(ngModel)]="key.Mark" (ngModelChange)="key.Date=currentDate;changeLabBlock(key,$event)" [disabled]="key.MarkTeacherName!=null && (studentId || key.MarkTeacherId != currentTeacherId && currentRole!='Teacher')" type="checkbox" /></td>
+              <td *ngIf="key.KindOfMark == kindOfMark.SecondMark && key.IsSecondBlock"><input [(ngModel)]="key.MarkTeacherName" disabled /></td>
             </ng-container>
-            <td><input value="{{totalMark(key2.StudentLabBlocks)}}" [readonly]="studentId" /></td>
-            <td *ngIf="key2.Remark!=null"><input [(ngModel)]="key2.Remark.RemarkText" (blur)="changeRemark(key2.Remark)" [readonly]="studentId" /></td>
-            <td *ngIf="key2.Remark==null"><input value="" [readonly]="studentId" /></td>
+            <td><input value="{{totalMark(key2.StudentLabBlocks)}}" [disabled]="studentId" /></td>
+            <td *ngIf="key2.Remark!=null"><input [(ngModel)]="key2.Remark.RemarkText" (blur)="changeRemark(key2.Remark)" [disabled]="studentId" /></td>
+            <td *ngIf="key2.Remark==null"><input value="" [disabled]="studentId" /></td>
           </tr>
         </ng-container>
       </tbody>
