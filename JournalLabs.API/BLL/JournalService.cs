@@ -79,7 +79,8 @@ namespace JournalLabs.API.BLL
                     _kindOfWorkRepository.CreateKindOfWork(new KindOfWork() {
                         Id = kindOfWork, NameKindOfWork = $"Вид работы {j + 1}",
                         IsKindOfWorkVisible = labBlock.IsKindOfWorkVisible,
-                    IsVisibleToStudent= labBlock.IsVisibleToStudent
+                        IsVisibleToStudent= labBlock.IsVisibleToStudent,
+                        IsSecondBlock = labBlock.IsSecondBlock
                     });
                 }
                 var createLabBlock = new LabBlock();

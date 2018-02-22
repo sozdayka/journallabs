@@ -121,26 +121,33 @@ export class JournalComponent implements OnInit {
       for (let studentResultForJournal of this.journalViewModel.StudentResultForJournal)
         for (let studentLabBlock of studentResultForJournal.StudentLabBlocks)
           studentLabBlock.oldMark = studentLabBlock.Mark;
+      //--------review
+      var labBlocksForOneStudent = this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks;
 
-      for (var i = 0; i < this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.length; i++) {       
+      for (var i = 0; i < labBlocksForOneStudent.length; i++) {       
         this.headerKindOfWork.push({
-          KindOfMark: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark,
-          isVisible: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark == KindOfMark.FirstMark ? true : false,
-          kindOfWorkId: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfWorkId
+          KindOfMark: labBlocksForOneStudent[i].KindOfMark,
+          isVisible: labBlocksForOneStudent[i].KindOfMark == KindOfMark.FirstMark ? true : false,
+          kindOfWorkId: labBlocksForOneStudent[i].KindOfWorkId
         });
       }
+      //---------------
     });
   }
   public getStudentJournal(journalId: string, studentId: string) {
     this.journalService.getJournalByIdAndStudentId(journalId, studentId).subscribe(response => {
       this.journalViewModel = JSON.parse(response._body);
-      for (var i = 0; i < this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks.length; i++) {
+      //--------review
+      var labBlocksForOneStudent = this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks;
+
+      for (var i = 0; i < labBlocksForOneStudent.length; i++) {
         this.headerKindOfWork.push({
-          KindOfMark: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark,
-          isVisible: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfMark == KindOfMark.FirstMark ? true : false,
-          kindOfWorkId: this.journalViewModel.StudentResultForJournal[0].StudentLabBlocks[i].KindOfWorkId
+          KindOfMark: labBlocksForOneStudent[i].KindOfMark,
+          isVisible: labBlocksForOneStudent[i].KindOfMark == KindOfMark.FirstMark ? true : false,
+          kindOfWorkId: labBlocksForOneStudent[i].KindOfWorkId
         });
       }
+      //----------- 
     });
   }
 

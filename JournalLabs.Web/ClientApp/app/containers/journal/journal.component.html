@@ -12,7 +12,7 @@
             <td *ngIf="currentRole=='Teacher'">Удалить</td>
             <td *ngIf="currentRole=='Teacher'">Скрыть</td>
             <td *ngIf="currentRole=='Teacher'">Для Студента</td>
-            <td>Пересдача</td>
+            <td *ngIf="key.IsSecondBlock == true">Пересдача</td>
           </ng-container>
         </tr>
         <tr>
@@ -25,7 +25,7 @@
             <td *ngIf="currentRole=='Teacher'"><input type="button" (click)="removeKindOfWork(key.Id)" value="удалить" /></td>
             <td *ngIf="currentRole=='Teacher'"><input type="checkbox" [(ngModel)]="key.IsKindOfWorkVisible" (ngModelChange)="changeVisibleKindOfWork(key.Id,$event)" /></td>
             <td *ngIf="currentRole=='Teacher'"><input type="checkbox" [(ngModel)]="key.IsVisibleToStudent" (ngModelChange)="changeVisibleKindOfWorkForStudent(key.Id,$event)" /></td>
-            <td><input type="checkbox" [(ngModel)]="key.isSecondBlockVisible" (ngModelChange)="changeVisibleSecondBlock(key,$event)" /></td>
+            <td *ngIf="key.IsSecondBlock == true"><input type="checkbox" [(ngModel)]="key.isSecondBlockVisible" (ngModelChange)="changeVisibleSecondBlock(key,$event)" /></td>
           </ng-container>
         </tr>
       </thead>

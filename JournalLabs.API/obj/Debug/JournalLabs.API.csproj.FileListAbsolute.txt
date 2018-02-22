@@ -281,3 +281,4 @@ C:\Users\Anuitex-15\source\repos\journallabs\JournalLabs.API\bin\System.Web.Http
 C:\Users\Anuitex-15\source\repos\journallabs\JournalLabs.API\obj\Debug\JournalLabs.API.csproj.CoreCompileInputs.cache
 C:\Users\Anuitex-15\source\repos\journallabs\JournalLabs.API\obj\Debug\JournalLabs.API.dll
 C:\Users\Anuitex-15\source\repos\journallabs\JournalLabs.API\obj\Debug\JournalLabs.API.pdb
+C:\Users\Anuitex-15\source\repos\JournalLabs\JournalLabs.API\obj\Debug\JournalLabs.API.csprojResolveAssemblyReference.cache
