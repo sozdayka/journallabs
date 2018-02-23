@@ -13,8 +13,8 @@ namespace JournalLabs.API
             // Web API configuration and services
 
             // Web API routes
-            //var cors = new EnableCorsAttribute("http://localhost:54466", "*", "*");
-            config.EnableCors();
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
