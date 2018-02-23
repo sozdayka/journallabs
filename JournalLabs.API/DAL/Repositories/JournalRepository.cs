@@ -109,7 +109,8 @@ namespace JournalLabs.API.DAL.Repositories
                 string selectQuery = @"  select distinct lb.JournalId, s.StudentId, j.LessonName  from 
                                         (SELECT Id as StudentId From Students Where StudentName = @studentName) s
                                          left join LabBlocks lb on lb.StudentId = s.StudentId
-                                         inner join Journals j on j.Id= lb.JournalId";
+                                         inner join Journals j on j.Id= lb.JournalId
+                                         inner join Remarks r on r.StudentId=s.StudentId and r.IsHideStudent=0";
                 try
                 {
                     var result = db.Query<StudentJournal>(selectQuery, new { studentName = studentName });
