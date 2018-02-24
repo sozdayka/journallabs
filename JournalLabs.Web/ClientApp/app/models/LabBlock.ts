@@ -10,11 +10,11 @@ export class LabBlock {
    JournalId: string = "";
    StudentId: string = ""; 
    KindOfWorkId: string = "";
-   IsKindOfWorkVisible: boolean = false;
-   IsCalculateMark: boolean = false;
-   IsVisibleToStudent: boolean = false;
+   IsKindOfWorkVisible: boolean = true;
+   IsCalculateMark: boolean = true;
+   IsVisibleToStudent: boolean = true;
    IsBoolField: boolean = false;
-   IsSecondBlock: boolean = false;
+   IsSecondBlock: boolean = true;
    MarkTeacherName: string = "";
    Color: string = "";
    oldMark: number = 0;
