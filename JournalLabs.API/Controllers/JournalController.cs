@@ -62,10 +62,16 @@ namespace JournalLabs.API.Controllers
         }
         [Route("GetAllJournalsByTeacherId")]
         [HttpGet]
-        public IHttpActionResult GetAllJournalsByTeacherId(string teacherId)
+        public IHttpActionResult GetAllJournalsByTeacherId(string teacherId,string role)
         {
-            var result =_journalService.GetAllJournalsByTeacherId(teacherId);
-            return Ok(result);
+            if (role=="Teacher")
+            {
+                var teacherJournals = _journalService.GetAllJournalsByTeacherId(teacherId);
+                return Ok(teacherJournals);
+            }
+            
+            var assistantJournals = _journalService.GetAllJournalsByAssistantId(teacherId);
+            return Ok(assistantJournals);
         }
         [Route("GetAllStudentJournalsByStudentName")]
         [HttpGet]
