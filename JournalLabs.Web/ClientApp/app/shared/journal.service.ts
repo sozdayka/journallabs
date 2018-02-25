@@ -42,8 +42,8 @@ export class JournalService {
   addJournal(createJournalViewModel: CreateJournalViewModel): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/Journal/CreateJournal`, createJournalViewModel);
   }
-  getAllJournalsByTeacherId(teacherId: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/api/Journal/GetAllJournalsByTeacherId?teacherId=` + teacherId);
+  getAllJournalsByTeacherId(teacherId: string, role:string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/api/Journal/GetAllJournalsByTeacherId?teacherId=${teacherId}&role=${role}`);
   }
   getJournalByIdAndStudentId(journalId: string, studentId: string): Observable<any> {
     var isTeacher = localStorage.getItem('Role') == 'Teacher';

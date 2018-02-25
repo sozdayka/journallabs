@@ -127,7 +127,7 @@ namespace JournalLabs.API.BLL
             {
                 var student =_studentRepository.GetStudentById(student_Id);
                 students.Add(student);
-                journal.KindsOfWorkForJournal = journal.KindsOfWorkForJournal.Where(x => x.IsVisibleToStudent == true).ToList();
+                journal.KindsOfWorkForJournal = kindOfWorks.Where(x => x.IsVisibleToStudent == true).ToList();
             }
             if (journal.KindsOfWorkForJournal.Count == 0)
             {
@@ -176,6 +176,10 @@ namespace JournalLabs.API.BLL
         public List<JournalViewModel> GetAllJournalsByTeacherId(string teacherId)
         {
             return _journalRepository.GetAllJournalsByTeacherId(teacherId);
+        }
+        public List<JournalViewModel> GetAllJournalsByAssistantId(string teacherId)
+        {
+            return _journalRepository.GetAllJournalsByAssistantId(teacherId);
         }
         public List<StudentJournal> GetAllStudentJournalsByStudentName(string studentName)
         {

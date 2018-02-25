@@ -102,6 +102,25 @@ namespace JournalLabs.API.DAL.Repositories
                 }
             }
         }
+        public List<JournalViewModel> GetAllJournalsByAssistantId(string teacherId)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string selectQuery = @"Select distinct tj.TeacherId,j.Id,j.LessonName From (SELECT * From TeacherJournals Where TeacherId = @teacherId) as tj
+                                        inner join Journals j on j.Id = tj.JournalId
+                                        inner join LabBlocks lb on lb.JournalId = j.Id
+                                        inner join KindOfWorks kw on lb.KindOfWorkId = kw.Id and kw.IsKindOfWorkVisible=1";
+                try
+                {
+                    var result = db.Query<JournalViewModel>(selectQuery, new { teacherId = teacherId });
+                    return result.ToList();
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
         public List<StudentJournal> GetAllStudentJournalsByStudentName(string studentName)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
@@ -109,6 +128,7 @@ namespace JournalLabs.API.DAL.Repositories
                 string selectQuery = @"  select distinct lb.JournalId, s.StudentId, j.LessonName  from 
                                         (SELECT Id as StudentId From Students Where StudentName = @studentName) s
                                          left join LabBlocks lb on lb.StudentId = s.StudentId
+                                         inner join KindOfWorks kw on lb.KindOfWorkId = kw.Id and kw.IsVisibleToStudent=1
                                          inner join Journals j on j.Id= lb.JournalId
                                          inner join Remarks r on r.StudentId=s.StudentId and r.IsHideStudent=0";
                 try

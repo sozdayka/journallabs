@@ -35,12 +35,25 @@ export class NavMenuComponent implements OnInit {
       if (localStorage.getItem('Role') != null) {
         this.currentRole = localStorage.getItem('Role');
       }
+      if (this.currentRole != null && this.currentRole=="Admin") {
+        this.router.navigate(['admin']);
+        return;
+      }
       if (localStorage.getItem('TeacherId')!=null) {
-        this.journalService.getAllJournalsByTeacherId(localStorage.getItem('TeacherId')).subscribe(response => {
-          if (response._body!="null") {
+        this.journalService.getAllJournalsByTeacherId(localStorage.getItem('TeacherId'), this.currentRole).subscribe(response => {
+          if (response._body!="[]") {
             this.teacherJournals = JSON.parse(response._body);
             this.router.navigate(['journal'], { queryParams: { journalId: this.teacherJournals[0].Id } });
-          }       
+            return;
+          }
+          if (response._body == "[]" && this.currentRole == "Teacher") {
+            this.router.navigate(['create-journal']);
+            return;
+          }
+          if (response._body == "[]" && this.currentRole != "Teacher") {
+            this.router.navigate(['**']);
+            return;
+          }
         });
       }
       if (this.studentName != "") {
@@ -49,7 +62,7 @@ export class NavMenuComponent implements OnInit {
           this.router.navigate(['journal'], { queryParams: { journalId: this.studentJournals[0].JournalId, studentId: this.studentJournals[0].StudentId } });
         });
       }
-      this.router.navigate(['sign-in']);
+      //this.router.navigate(['sign-in']);
     }
 
     signOut() {
