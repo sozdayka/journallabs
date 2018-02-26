@@ -26,6 +26,11 @@
           </a>
         </li>
         <li *ngIf="currentRole=='Teacher'" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="collapseMenu()">
+          <a [routerLink]="['/pulpits']">
+            <span class='glyphicon glyphicon-user'></span> Создать дисциплину <!--Student journals-->
+          </a>
+        </li>
+        <li *ngIf="currentRole=='Teacher'" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="collapseMenu()">
           <a [routerLink]="['/create-journal']">
             <span class='glyphicon glyphicon-user'></span> Создать журнал <!--Student journals-->
           </a>
@@ -72,10 +77,25 @@
     <div class="list-group" *ngIf="menulist">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-              <a id="menu-close" (click)="toggleMenu()" href="#" class="btn btn-default btn-lg btn-block toggle">Скрыть фильтр <i class="glyphicon glyphicon-remove"></i></a>
+              <a id="menu-close" (click)="toggleMenu()"  class="btn btn-default btn-lg btn-block toggle">Скрыть фильтр <i class="glyphicon glyphicon-remove"></i></a>
               <br><br>
               <fieldset>
                   <legend>Фильтр по дисциплинам</legend>
+                  <input type="checkbox" [routerLink]="['/filter']" [queryParams]="{ predmet: 123456 }" id="predet0"/><label for="predet0"> ВМ </label> <br />
+                  <input type="checkbox" name="animal" value="Dog" id="predet1"/><label for="predet1"> Ипз </label> <br />
+                  <input type="checkbox" name="animal" value="Bird" id="predet2"/><label for="predet2"> Итех </label> <br />
+                  <input type="checkbox" [routerLink]="['/filter']" [queryParams]="{ predmet: 123456 }" id="predet0"/><label for="predet0"> ВМ </label> <br />
+                  <input type="checkbox" name="animal" value="Dog" id="predet1"/><label for="predet1"> Ипз </label> <br />
+                  <input type="checkbox" name="animal" value="Bird" id="predet2"/><label for="predet2"> Итех </label> <br />
+                  <input type="checkbox" [routerLink]="['/filter']" [queryParams]="{ predmet: 123456 }" id="predet0"/><label for="predet0"> ВМ </label> <br />
+                  <input type="checkbox" name="animal" value="Dog" id="predet1"/><label for="predet1"> Ипз </label> <br />
+                  <input type="checkbox" name="animal" value="Bird" id="predet2"/><label for="predet2"> Итех </label> <br />
+                  <input type="checkbox" [routerLink]="['/filter']" [queryParams]="{ predmet: 123456 }" id="predet0"/><label for="predet0"> ВМ </label> <br />
+                  <input type="checkbox" name="animal" value="Dog" id="predet1"/><label for="predet1"> Ипз </label> <br />
+                  <input type="checkbox" name="animal" value="Bird" id="predet2"/><label for="predet2"> Итех </label> <br />
+                  <input type="checkbox" [routerLink]="['/filter']" [queryParams]="{ predmet: 123456 }" id="predet0"/><label for="predet0"> ВМ </label> <br />
+                  <input type="checkbox" name="animal" value="Dog" id="predet1"/><label for="predet1"> Ипз </label> <br />
+                  <input type="checkbox" name="animal" value="Bird" id="predet2"/><label for="predet2"> Итех </label> <br />
                   <input type="checkbox" [routerLink]="['/filter']" [queryParams]="{ predmet: 123456 }" id="predet0"/><label for="predet0"> ВМ </label> <br />
                   <input type="checkbox" name="animal" value="Dog" id="predet1"/><label for="predet1"> Ипз </label> <br />
                   <input type="checkbox" name="animal" value="Bird" id="predet2"/><label for="predet2"> Итех </label> <br />

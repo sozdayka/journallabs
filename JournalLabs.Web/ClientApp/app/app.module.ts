@@ -34,6 +34,8 @@ import { RemarkService } from './shared/remark.service';
 import { TeacherJournalService } from './shared/teacher-journal';
 import { LogService } from './shared/log.service';
 
+import { PulpitsComponent } from './containers/pulpits/pulpits.component';
+
 export function createTranslateLoader(http: Http, baseHref) {
     // Temporary Azure hack
     if (baseHref === null && typeof window !== 'undefined') {
@@ -54,6 +56,8 @@ export function createTranslateLoader(http: Http, baseHref) {
       CreateJournalComponent,
       JournalComponent,
       SignInComponent,
+      
+      PulpitsComponent,
     ],
     imports: [
         CommonModule,
@@ -134,6 +138,18 @@ export function createTranslateLoader(http: Http, baseHref) {
                   { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/bootstrap-demo' }
                 ]
               }},
+
+              {
+                path: 'pulpits', component: PulpitsComponent,
+                  data: {
+                      title: 'Pulpits list',
+                      meta: [{ name: 'description', content: 'Pulpits list' }],
+                      links: [
+                          { rel: 'canonical', href: 'http://blogs.example.com/bootstrap/something' },
+                          { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/bootstrap-demo' }
+                      ]
+                  }
+              },
 
             {
                 path: '**', component: NotFoundComponent,

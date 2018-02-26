@@ -1,0 +1,44 @@
+<div class="row">
+<br>
+<br>
+
+
+  <div class="form-inline">
+    <div class="form-group">
+      <label for="exampleInputName2">Name</label>
+      <input type="text" class="form-control" [(ngModel)]="pulpitShortName">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail2">Email</label>
+      <input type="text" class="form-control" [(ngModel)]="pulpitFullName">
+    </div>
+    <button type="submit" class="btn btn-default" (click)="addPulPit()" >Добавить дисциплину</button>
+  </div>
+<br>
+<br>
+  <div> <!--*ngIf="pulpitsViewModel!=null">-->
+    <table class="table"> 
+      <caption>Список дисциплин</caption> 
+      <thead> 
+        <tr> 
+          <th>#</th> 
+          <th>Название</th> 
+          <th>Короткое название</th> 
+          <th></th> 
+        </tr> 
+      </thead> 
+      <tbody>
+        <ng-container *ngFor=" let key of pulpitArr;let i=index"> 
+          <tr> 
+            <th scope="row">{{i}}</th> 
+            <td><input [(ngModel)]="key.fName" (blur)="changePulPitFullName(key)"  /></td> 
+            <td><input [(ngModel)]="key.sName" (blur)="changePulPitShortName(key)"  /></td> 
+            <td ><input type="button" (click)="removePulPit(key)" value="удалить" /></td>
+          </tr>
+        </ng-container>
+
+      </tbody> 
+    </table>
+ 
+  </div>
+</div>
