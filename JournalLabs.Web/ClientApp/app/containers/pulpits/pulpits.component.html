@@ -33,7 +33,7 @@
             <th scope="row">{{i}}</th> 
             <td><input [(ngModel)]="key.fName" (blur)="changePulPitFullName(key)"  /></td> 
             <td><input [(ngModel)]="key.sName" (blur)="changePulPitShortName(key)"  /></td> 
-            <td ><input type="button" (click)="removePulPit(key)" value="удалить" /></td>
+            <td ><input type="button" (click)="removePulPit(i)" value="удалить" /></td>
           </tr>
         </ng-container>
 

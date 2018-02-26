@@ -56,9 +56,10 @@ export class PulpitsComponent implements OnInit {
     console.log("Change pulput ShortName: "+pulpitArr.sName);
   }
   public removePulPit(pulpitDelete){
+    //this.pulpitArr.splice(pulpitDelete.sName, 1);
+    console.log("Delete pulput ShortName: "+this.pulpitArr[pulpitDelete].sName);
     this.pulpitArr.splice(pulpitDelete, 1);
-
-    console.log("Delete pulput ShortName: "+pulpitDelete.sName);
+    
   }
 /*
   public changeKindOfWorkName(kindOfWork: KindOfWork) {
