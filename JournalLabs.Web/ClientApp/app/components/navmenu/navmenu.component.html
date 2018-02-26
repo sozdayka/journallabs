@@ -41,9 +41,15 @@
           </a>
         </li>
         <ng-container *ngIf="teacherJournals.length!=0 && (currentRole=='Teacher'||currentRole=='Assistant')">
+          <li><div class="mini-submenu" *ngIf="!menulist" (click)="toggleMenu()">
+              Фильтр по журналам
+          </div></li>
+        </ng-container>
+        <ng-container *ngIf="teacherJournals.length!=0 && (currentRole=='Teacher'||currentRole=='Assistant')">
           <li *ngFor=" let journal of teacherJournals;let i=index" id="teacher{{i}}" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="collapseMenu()">
             <a [routerLink]="['/journal']" [queryParams]="{ journalId: journal.Id }">
               <span class='glyphicon glyphicon-comment'></span> Преподаватель - {{journal.LessonName}}<!--Teacher-->
+              
             </a>
           </li>
         </ng-container>
@@ -59,3 +65,40 @@
     </div>
   </div>
 </div>
+<!-- filter sidebar -->
+<ng-container *ngIf="teacherJournals.length!=0 && (currentRole=='Teacher'||currentRole=='Assistant')">
+<div class="sidebar">
+
+    <div class="list-group" *ngIf="menulist">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+              <a id="menu-close" (click)="toggleMenu()" href="#" class="btn btn-default btn-lg btn-block toggle">Скрыть фильтр <i class="glyphicon glyphicon-remove"></i></a>
+              <br><br>
+              <fieldset>
+                  <legend>Фильтр по дисциплинам</legend>
+                  <input type="checkbox" [routerLink]="['/filter']" [queryParams]="{ predmet: 123456 }" id="predet0"/><label for="predet0"> ВМ </label> <br />
+                  <input type="checkbox" name="animal" value="Dog" id="predet1"/><label for="predet1"> Ипз </label> <br />
+                  <input type="checkbox" name="animal" value="Bird" id="predet2"/><label for="predet2"> Итех </label> <br />
+                  
+              </fieldset>
+
+                
+                <h4>
+                  <small><b>Фильтр по группам</b></small>
+                </h4>
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active"><input type="checkbox" [routerLink]="['/filter']" [queryParams]="{ group: 123456 }" id="group0" checked/><label for="group0"> Kіу 15-6 </label> <br />
+                      </li>
+                    <li><a href="#"><input type="checkbox" name="animal" value="Dog" id="group1"/><label for="group1"> ПІ 13-2 </label> <br />
+                     </a></li>
+                    <li><a href="#"> <input type="checkbox" name="animal" value="Bird" id="group2"/><label for="group2"> Ки 14-2 </label> <br />
+                    </a></li>
+                </ul>
+            </ul>
+          </div>
+          
+        
+      
+    </div>
+  </div>
+</ng-container>

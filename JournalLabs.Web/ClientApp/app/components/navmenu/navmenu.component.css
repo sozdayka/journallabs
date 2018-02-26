@@ -1,4 +1,71 @@
-﻿li .glyphicon {
+﻿.mini-submenu{
+    /*display:none;  */
+    background-color: rgba(0, 0, 0, 0);  
+    border: 1px solid rgba(0, 0, 0, 0.9);
+    border-radius: 4px;
+    padding: 9px;  
+    /*position: relative;*/
+    /* width: 32px; */
+    text-align: center;
+  
+  }
+  
+  .mini-submenu:hover{
+    cursor: pointer;
+  }
+  
+  
+  #slide-submenu{
+    background: rgba(0, 0, 0, 0.45);
+    display: inline-block;
+    padding: 0 8px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  #sidebar-wrapper {
+box-shadow: 6px 0px 16px #0000006e;
+box-shadow: 6px 0px 16px #0000006e;
+left: 0;
+width: 300px;
+background: rgb(251, 251, 251);
+position: fixed;
+height: 100%;
+overflow-y: auto;
+z-index: 1000;
+transition: all 0.5s ease-in 0s;
+-webkit-transition: all 0.5s ease-in 0s;
+-moz-transition: all 0.5s ease-in 0s;
+-ms-transition: all 0.5s ease-in 0s;
+-o-transition: all 0.5s ease-in 0s;
+  }
+  #sidebar-wrapper {
+    left: 318px;
+    top: 0;
+    transition: all 0.5s ease-out 0s;
+    -webkit-transition: all 0.5s ease-out 0s;
+    -moz-transition: all 0.5s ease-out 0s;
+    -ms-transition: all 0.5s ease-out 0s;
+    -o-transition: all 0.5s ease-out 0s;
+  }
+
+  #sidebar-wrapper .sidebar-nav {
+    padding: 12px 0 12px 12px;
+  }
+  #sidebar-wrapper .sidebar-nav h4{
+      display: block;
+  }
+
+
+
+
+
+
+
+
+
+
+
+li .glyphicon {
     margin-right: 10px;
 }
 
