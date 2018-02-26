@@ -18,7 +18,8 @@ export function getOriginUrl() {
 export function getRequest() {
   // the Request object only lives on the server
   //return { cookie: document.cookie };
-  return "http://localhost:54466";
+  //return "http://localhost:54466";
+  return "http://journallabs.pp.ua";
 }
 
 @NgModule({
