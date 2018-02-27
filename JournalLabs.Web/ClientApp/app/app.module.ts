@@ -36,6 +36,7 @@ import { LogService } from './shared/log.service';
 
 import { PulpitsComponent } from './containers/pulpits/pulpits.component';
 import { GroupsComponent } from './containers/groups/groups.component';
+import { GroupComponent } from './containers/group/group.component';
 
 export function createTranslateLoader(http: Http, baseHref) {
     // Temporary Azure hack
@@ -60,6 +61,7 @@ export function createTranslateLoader(http: Http, baseHref) {
       
       PulpitsComponent,
       GroupsComponent,
+      GroupComponent,
       
     ],
     imports: [
@@ -155,6 +157,17 @@ export function createTranslateLoader(http: Http, baseHref) {
               },
               {
                 path: 'groups', component: GroupsComponent,
+                  data: {
+                      title: 'Groups list',
+                      meta: [{ name: 'description', content: 'Groups list' }],
+                      links: [
+                          { rel: 'canonical', href: 'http://blogs.example.com/bootstrap/something' },
+                          { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/bootstrap-demo' }
+                      ]
+                  }
+              },
+              {
+                path: 'group', component: GroupComponent,
                   data: {
                       title: 'Groups list',
                       meta: [{ name: 'description', content: 'Groups list' }],

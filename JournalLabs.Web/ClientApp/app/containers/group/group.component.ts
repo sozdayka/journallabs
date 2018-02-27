@@ -1,62 +1,76 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
 import { LogService } from '../../shared/log.service';
 @Component({
-  selector: 'groups',
-  templateUrl: 'groups.component.html'
+  selector: 'group',
+  templateUrl: 'group.component.html'
 })
-export class GroupsComponent implements OnInit {
-  Name: string;
+export class GroupComponent implements OnInit {
+ 
+
+  Id: number;
+  GroupName: string;
+  StudentCount: number;
+
+  groupId = 0;
+  StudentName = '';
   
-
-  groupName = '';
-  groupStudentCount = 0;
-
-
-  public groupsArr: [{gName: string}] = [{
-    gName: 'Kiu 15-6'
+ 
+  public stugentArr: [{sName: string}] = [{
+    sName: 'Igor Rosliakov'
   }, {
-    gName: 'PI 14-3'
+    sName: 'Vlad Sas'
   }, {
-    gName: 'APK 13-6'
-    
+    sName: 'Artem Swenton'
+  }, {
+    sName: 'Taras Ziza'
   }];
 
 
 
   public constructor(
+    private route: ActivatedRoute,
 
     public logService: LogService
   ) {
   }
 
   public ngOnInit(): void {
+    this.route.queryParams.subscribe((params: Params) => {
+      //sss
+      this.Id = params['groupid'];
+      alert(this.Id);    
+    });
+  
     
 
 
   }
 
- 
-  public addGroup():void{
 
-      this.groupsArr.push({
-        gName: this.groupName,
-        
+  public addStudent():void{
+
+      this.stugentArr.push({
+        sName: this.StudentName,
+       
       });
-      this.groupName = '';
-     /* this.groupStudentCount = 0;*/
+      this.StudentName = '';
+     
 
   }
-  public changeGroupName(groupsArr){
-    console.log("Change group Name: "+groupsArr.gName);
+  public changeGroupName(){
+
+    console.log("Change group Name: "+ this.GroupName);
   }
-  public changeGroupStudentCount(groupsArr){
-    console.log("Change group Count: "+groupsArr.gName);
+  public changeGroupStudentCount(stugentArr){
+    console.log("Change group Count: "+stugentArr.sName);
   }
   public removeGroup(pulpitDelete){
     //this.pulpitArr.splice(pulpitDelete.sName, 1);
-    console.log("Delete group ShortName: "+this.groupsArr[pulpitDelete].gName);
-    this.groupsArr.splice(pulpitDelete, 1);
+    console.log("Delete from group, student Name: "+this.stugentArr[pulpitDelete].sName);
+    this.stugentArr.splice(pulpitDelete, 1);
     
   }
 /*

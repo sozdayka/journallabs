@@ -1,0 +1,52 @@
+<div class="row">
+<br>
+<br>
+
+<div class="form-inline">
+  <div class="form-group">
+    <label for="exampleInputName2">Название группы</label>
+    <input type="text" class="form-control" [(ngModel)]="groupName" (blur)="changeGrpupName()" >
+  </div>
+  
+  <br>
+  <br>
+</div>
+  
+  <div class="form-inline">
+    <div class="form-group">
+      <label for="exampleInputName2">Фио студента который добавится</label>
+      <input type="text" class="form-control" [(ngModel)]="StudentName">
+    </div>
+    
+    <button type="submit" class="btn btn-default" (click)="addStudent()" >Добавить студента</button>
+  </div>
+<br>
+<br>
+  <div> <!--*ngIf="pulpitsViewModel!=null">-->
+    <table class="table"> 
+      <caption>Список студентов</caption> 
+      <thead> 
+        <tr> 
+          <th>#</th> 
+          <th>Фио студента</th> 
+         
+          <th></th> 
+          <th></th> 
+        </tr> 
+      </thead> 
+      <tbody>
+        <ng-container *ngFor=" let key of stugentArr;let i=index"> 
+          <tr> 
+            <th scope="row">{{i}}</th> 
+            <td><input [(ngModel)]="key.sName" (blur)="changeGroupName(key)"  /></td> 
+
+            
+            <td ><input type="button" (click)="removeGroup(i)" value="удалить" /></td>
+          </tr>
+        </ng-container>
+
+      </tbody> 
+    </table>
+ 
+  </div>
+</div>
