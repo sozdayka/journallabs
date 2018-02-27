@@ -12,6 +12,7 @@ import { LogService } from '../../shared/log.service';
 })
 
 export class NavMenuComponent implements OnInit {
+    menulist: boolean = false;
     collapse: string = "collapse";
     currentRole: string = "";
     public teacherJournals: Journal[] = [];
@@ -87,5 +88,10 @@ export class NavMenuComponent implements OnInit {
       this.logService.writeDevelopmentLog(`${new Date().toLocaleString()} -- ${event.target.value}`).subscribe(resp => {
         console.log("Лог успешно записан");
       }); 
+    }
+    
+    toggleMenu(): void { 
+        this.menulist = !this.menulist;
+        //alert(this.menulist);
     }
 }

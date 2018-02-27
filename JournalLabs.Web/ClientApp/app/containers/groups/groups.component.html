@@ -1,0 +1,48 @@
+<div class="row">
+<br>
+<br>
+
+
+  <div class="form-inline">
+    <div class="form-group">
+      <label for="exampleInputName2">Название группы</label>
+      <input type="text" class="form-control" [(ngModel)]="groupName">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail2">Количестов студентов</label>
+      <input type="number" step="1" min="0" class="form-control" [(ngModel)]="groupStudentCount">
+    </div>
+    <button type="submit" class="btn btn-default" (click)="addGroup()" >Добавить группу</button>
+  </div>
+<br>
+<br>
+  <div> <!--*ngIf="pulpitsViewModel!=null">-->
+    <table class="table"> 
+      <caption>Список групп</caption> 
+      <thead> 
+        <tr> 
+          <th>#</th> 
+          <th>Название</th> 
+          <th>Короткое название</th> 
+          <th></th> 
+          <th></th> 
+        </tr> 
+      </thead> 
+      <tbody>
+        <ng-container *ngFor=" let key of groupsArr;let i=index"> 
+          <tr> 
+            <th scope="row">{{i}}</th> 
+            <td><input [(ngModel)]="key.gName" (blur)="changeGrpupName(key)"  /></td> 
+            <td><input [(ngModel)]="key.gStudentCount" (blur)="changeGroupStudentCount(key)"  /></td> 
+            <td >
+              <input type="button"  value="изменить" [routerLink]="['/group']" [queryParams]="{ groupid: 123 }"/>
+            </td>
+            <td ><input type="button" (click)="removeGroup(i)" value="удалить" /></td>
+          </tr>
+        </ng-container>
+
+      </tbody> 
+    </table>
+ 
+  </div>
+</div>
