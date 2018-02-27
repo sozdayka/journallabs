@@ -8,10 +8,7 @@
       <label for="exampleInputName2">Название группы</label>
       <input type="text" class="form-control" [(ngModel)]="groupName">
     </div>
-    <div class="form-group">
-      <label for="exampleInputEmail2">Количестов студентов</label>
-      <input type="number" step="1" min="0" class="form-control" [(ngModel)]="groupStudentCount">
-    </div>
+   
     <button type="submit" class="btn btn-default" (click)="addGroup()" >Добавить группу</button>
   </div>
 <br>
@@ -23,7 +20,7 @@
         <tr> 
           <th>#</th> 
           <th>Название</th> 
-          <th>Короткое название</th> 
+         
           <th></th> 
           <th></th> 
         </tr> 
@@ -32,10 +29,10 @@
         <ng-container *ngFor=" let key of groupsArr;let i=index"> 
           <tr> 
             <th scope="row">{{i}}</th> 
-            <td><input [(ngModel)]="key.gName" (blur)="changeGrpupName(key)"  /></td> 
-            <td><input [(ngModel)]="key.gStudentCount" (blur)="changeGroupStudentCount(key)"  /></td> 
+            <td><input [(ngModel)]="key.gName" (blur)="changeGroupName(key)"  /></td> 
+            
             <td >
-              <input type="button"  value="изменить" [routerLink]="['/group']" [queryParams]="{ groupid: 123 }"/>
+              <a [routerLink]="['/group']" [queryParams]="{ groupid: 123 }">изменить</a>
             </td>
             <td ><input type="button" (click)="removeGroup(i)" value="удалить" /></td>
           </tr>

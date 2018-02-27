@@ -7,21 +7,19 @@ import { LogService } from '../../shared/log.service';
 })
 export class GroupsComponent implements OnInit {
   Name: string;
-  StudentCount: number;
+  
 
   groupName = '';
   groupStudentCount = 0;
 
 
-  public groupsArr: [{gName: string, gStudentCount: number}] = [{
-    gName: 'Kiu 15-6',
-    gStudentCount: 20
+  public groupsArr: [{gName: string}] = [{
+    gName: 'Kiu 15-6'
   }, {
-    gName: 'PI 14-3',
-    gStudentCount: 10
+    gName: 'PI 14-3'
   }, {
-    gName: 'APK 13-6',
-    gStudentCount: 15
+    gName: 'APK 13-6'
+    
   }];
 
 
@@ -38,18 +36,18 @@ export class GroupsComponent implements OnInit {
 
   }
 
-
+ 
   public addGroup():void{
 
       this.groupsArr.push({
         gName: this.groupName,
-        gStudentCount: this.groupStudentCount
+        
       });
       this.groupName = '';
-      this.groupStudentCount = 0;
+     /* this.groupStudentCount = 0;*/
 
   }
-  public changeGrpupName(groupsArr){
+  public changeGroupName(groupsArr){
     console.log("Change group Name: "+groupsArr.gName);
   }
   public changeGroupStudentCount(groupsArr){
