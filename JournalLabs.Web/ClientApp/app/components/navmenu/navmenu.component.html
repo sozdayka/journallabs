@@ -27,7 +27,12 @@
         </li>
         <li *ngIf="currentRole=='Teacher'" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="collapseMenu()">
           <a [routerLink]="['/pulpits']">
-            <span class='glyphicon glyphicon-user'></span> Создать дисциплину <!--Student journals-->
+            <span class='glyphicon glyphicon-user'></span> Список дисциплин <!--List pulpits-->
+          </a>
+        </li>
+        <li *ngIf="currentRole=='Teacher'" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="collapseMenu()">
+          <a [routerLink]="['/groups']">
+            <span class='glyphicon glyphicon-user'></span> Список групп <!--List groups-->
           </a>
         </li>
         <li *ngIf="currentRole=='Teacher'" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="collapseMenu()">
