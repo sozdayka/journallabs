@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { LogService } from '../../shared/log.service';
+import { GroupService } from '../../shared/group.service';
+import { Group } from '../../models/Group';
 @Component({
   selector: 'groups',
   templateUrl: 'groups.component.html'
@@ -11,52 +13,57 @@ export class GroupsComponent implements OnInit {
 
   groupName = '';
   groupStudentCount = 0;
+  public newGroup: Group = new Group();
 
-
-  public groupsArr: [{gName: string}] = [{
-    gName: 'Kiu 15-6'
-  }, {
-    gName: 'PI 14-3'
-  }, {
-    gName: 'APK 13-6'
-    
-  }];
+  public groupsArray: Group[]= [];
 
 
 
   public constructor(
 
-    public logService: LogService
+    public logService: LogService,
+    public groupService: GroupService
   ) {
   }
 
   public ngOnInit(): void {
-    
-
-
+    this.loadGroups();
   }
-
- 
+  public loadGroups() {
+    this.groupService.getGroups().subscribe(data => {
+      this.groupsArray = [];
+      this.groupsArray = JSON.parse(data);
+      console.log("Groups loaded successfully");
+    });
+  }
   public addGroup():void{
 
-      this.groupsArr.push({
-        gName: this.groupName,
+      //this.groupsArr.push({
+      //  gName: this.groupName,
         
-      });
-      this.groupName = '';
+    //});
+    this.groupService.addGroup(this.newGroup).subscribe(responce => {
+      this.newGroup = new Group();
+      console.log("Group create successfully");
+      this.loadGroups();
+    })
+      //this.groupName = '';
      /* this.groupStudentCount = 0;*/
-
   }
+
   public changeGroupName(groupsArr){
     console.log("Change group Name: "+groupsArr.gName);
   }
   public changeGroupStudentCount(groupsArr){
     console.log("Change group Count: "+groupsArr.gName);
   }
-  public removeGroup(pulpitDelete){
+  public removeGroup(group:Group){
     //this.pulpitArr.splice(pulpitDelete.sName, 1);
-    console.log("Delete group ShortName: "+this.groupsArr[pulpitDelete].gName);
-    this.groupsArr.splice(pulpitDelete, 1);
+    this.groupService.deleteGroup(group.Id).subscribe(responce => {
+      console.log("Delete group : " + group.Name);
+      //this.groupsArr.splice(pulpitDelete, 1);
+    })
+    
     
   }
 /*

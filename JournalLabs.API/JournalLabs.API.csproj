@@ -135,7 +135,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Cathedra.cs" />
     <Compile Include="Models\Enums\KindOfMark.cs" />
+    <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Journal.cs" />
     <Compile Include="Models\KindOfWork.cs" />
     <Compile Include="Models\LabBlock.cs" />

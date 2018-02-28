@@ -6,7 +6,7 @@
   <div class="form-inline">
     <div class="form-group">
       <label for="exampleInputName2">Название группы</label>
-      <input type="text" class="form-control" [(ngModel)]="groupName">
+      <input type="text" class="form-control" [(ngModel)]="newGroup.Name">
     </div>
    
     <button type="submit" class="btn btn-default" (click)="addGroup()" >Добавить группу</button>
@@ -26,15 +26,15 @@
         </tr> 
       </thead> 
       <tbody>
-        <ng-container *ngFor=" let key of groupsArr;let i=index"> 
+        <ng-container *ngFor=" let key of groupsArray;let i=index"> 
           <tr> 
             <th scope="row">{{i}}</th> 
-            <td><input [(ngModel)]="key.gName" (blur)="changeGroupName(key)"  /></td> 
+            <td><span>{{key.Name}}</span></td> 
             
             <td >
-              <a [routerLink]="['/group']" [queryParams]="{ groupid: 123 }">изменить</a>
+              <a [routerLink]="['/group']" [queryParams]="{ groupid: key.Id }">изменить</a>
             </td>
-            <td ><input type="button" (click)="removeGroup(i)" value="удалить" /></td>
+            <td ><input type="button" (click)="removeGroup(key)" value="удалить" /></td>
           </tr>
         </ng-container>
 
