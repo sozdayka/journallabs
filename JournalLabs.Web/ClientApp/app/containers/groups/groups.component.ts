@@ -13,13 +13,12 @@ export class GroupsComponent implements OnInit {
   groupStudentCount = 0;
 
 
-  public groupsArr: [{gName: string}] = [{
+  public groupsArr: {gName: string} []= [{
     gName: 'Kiu 15-6'
   }, {
     gName: 'PI 14-3'
   }, {
     gName: 'APK 13-6'
-    
   }];
 
 
@@ -41,7 +40,7 @@ export class GroupsComponent implements OnInit {
 
       this.groupsArr.push({
         gName: this.groupName,
-        
+       // gId: 1213
       });
       this.groupName = '';
      /* this.groupStudentCount = 0;*/
