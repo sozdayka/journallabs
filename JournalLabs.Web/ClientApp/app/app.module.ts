@@ -38,6 +38,8 @@ import { ViewLogsComponent } from './containers/view-logs/view-logs.component';
 import { CathedrasComponent } from './containers/cathedras/cathedras.component';
 import { GroupsComponent } from './containers/groups/groups.component';
 import { GroupComponent } from './containers/group/group.component';
+import { GroupService } from './shared/group.service';
+import { CathedraService } from './shared/cathedra.service';
 
 export function createTranslateLoader(http: Http, baseHref) {
     // Temporary Azure hack
@@ -222,7 +224,9 @@ export function createTranslateLoader(http: Http, baseHref) {
         KindOfWorkService,
         RemarkService,
       TeacherJournalService,
-        LogService
+      LogService,
+      GroupService,
+      CathedraService
     ]
 })
 export class AppModuleShared {

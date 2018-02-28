@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { LogService } from '../../shared/log.service';
+
+import { GroupService } from '../../shared/group.service';
+
 @Component({
   selector: 'group',
   templateUrl: 'group.component.html'
@@ -34,7 +37,8 @@ public stugentArr: {sName: string} []= [{
   public constructor(
     private route: ActivatedRoute,
 
-    public logService: LogService
+    public logService: LogService,
+    public groupService: GroupService
   ) {
   }
 

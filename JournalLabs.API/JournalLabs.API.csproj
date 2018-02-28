@@ -101,6 +101,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BLL\CathedraService.cs" />
+    <Compile Include="BLL\GroupService.cs" />
     <Compile Include="BLL\JournalService.cs" />
     <Compile Include="BLL\Provider\FileProvider.cs" />
     <Compile Include="BLL\RemarkService.cs" />
@@ -109,6 +111,8 @@
     <Compile Include="BLL\KindOfWorkService.cs" />
     <Compile Include="BLL\TeacherJournalService.cs" />
     <Compile Include="BLL\UserService.cs" />
+    <Compile Include="Controllers\CathedraController.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\JournalController.cs" />
     <Compile Include="Controllers\KindOfWorkController.cs" />
     <Compile Include="Controllers\LabBlockController.cs" />
@@ -118,6 +122,8 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="DAL\ApplicationContext.cs" />
+    <Compile Include="DAL\Repositories\CathedraRepository.cs" />
+    <Compile Include="DAL\Repositories\GroupRepository.cs" />
     <Compile Include="DAL\Repositories\JournalRepository.cs" />
     <Compile Include="DAL\Repositories\RemarkRepository.cs" />
     <Compile Include="DAL\Repositories\StudentRepository.cs" />
@@ -129,7 +135,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Cathedra.cs" />
     <Compile Include="Models\Enums\KindOfMark.cs" />
+    <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Journal.cs" />
     <Compile Include="Models\KindOfWork.cs" />
     <Compile Include="Models\LabBlock.cs" />
