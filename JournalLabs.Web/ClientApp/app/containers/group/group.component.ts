@@ -27,8 +27,7 @@ export class GroupComponent implements OnInit {
   StudentName = '';
   
  
-//  public stugentArr: any = [{
-public stugentArr: {sName: string} []= [{
+  public stugentArr: [{sName: string}] = [{
     sName: 'Igor Rosliakov'
   }, {
     sName: 'Vlad Sas'
@@ -94,5 +93,17 @@ public stugentArr: {sName: string} []= [{
     this.stugentArr.splice(pulpitDelete, 1);
     
   }
-
+/*
+  public changeKindOfWorkName(kindOfWork: KindOfWork) {
+    this.kindOfWorkService.updateKindOfWork(kindOfWork).subscribe(
+      result => {
+        var teacherName = localStorage.getItem('TeacherName');
+        var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил настройки Вида работы под Id ${kindOfWork.Id} на
+                      название ${kindOfWork.NameKindOfWork}, видимость для ассистента ${kindOfWork.IsKindOfWorkVisible}, видимость для студента ${kindOfWork.IsVisibleToStudent}`;
+        this.logService.writeTeacherLog(logText).subscribe(resp => {
+          console.log("success update kindOfWork name");
+        });
+      });
+  }
+*/  
 }
