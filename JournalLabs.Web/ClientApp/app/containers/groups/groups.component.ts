@@ -32,7 +32,8 @@ export class GroupsComponent implements OnInit {
   public loadGroups() {
     this.groupService.getGroups().subscribe(data => {
       this.groupsArray = [];
-      this.groupsArray = JSON.parse(data);
+      var responseArray = JSON.stringify(data);
+      this.groupsArray = JSON.parse(responseArray);
       console.log("Groups loaded successfully");
     });
   }
