@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import { LogService } from '../../shared/log.service';
 @Component({
-  selector: 'pulpits',
-  templateUrl: 'pulpits.component.html'
+  selector: 'cathedras',
+  templateUrl: 'cathedras.component.html'
 })
-export class PulpitsComponent implements OnInit {
+export class CathedrasComponent implements OnInit {
   fullName: string;
   shortName: string;
 
@@ -13,7 +13,8 @@ export class PulpitsComponent implements OnInit {
   pulpitFullName = '';
 
 
-  public pulpitArr: [{fName: string, sName: string}] = [{
+//  public pulpitArr: any = [{
+    public pulpitArr: {fName:string, sName:string}[] = [{
     fName: 'ІТех',
     sName: 'INTERNET-технологіі'
   }, {
