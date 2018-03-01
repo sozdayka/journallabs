@@ -263,3 +263,5 @@ paket-files/
 __pycache__/
 *.pyc
 /Sustainabilist.Test
+/JournalLabs.API/Properties/PublishProfiles/CustomProfile.pubxml
+/JournalLabs.API/Properties/PublishProfiles/CustomProfile1.pubxml
