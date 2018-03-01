@@ -6,14 +6,20 @@ import { LogService } from '../../shared/log.service';
 
 import { GroupService } from '../../shared/group.service';
 
+import { StudentService } from '../../shared/student.service';
+
+import { Group } from '../../models/Group';
+
+import { Student } from '../../models/Student';
+
 @Component({
   selector: 'group',
   templateUrl: 'group.component.html'
 })
 export class GroupComponent implements OnInit {
  
-
-  Id: number;
+  groupInfo: Group = new Group();
+  student: Student = new Student();
   GroupName: string;
   StudentCount: number;
 
@@ -38,28 +44,40 @@ public stugentArr: {sName: string} []= [{
     private route: ActivatedRoute,
 
     public logService: LogService,
-    public groupService: GroupService
+    public groupService: GroupService,
+    public studentService: StudentService
   ) {
   }
 
   public ngOnInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
-      this.Id = params['groupid'];   
-    });
-  
-    
-
-
+      //sss
+      this.loadGroupInfo(params['groupid']);  
+    });    
   }
 
+  public loadGroupInfo(goripId: string) {
+    this.groupService.getGroup(goripId).subscribe(data => {
+      this.groupInfo = data;
+      console.log("Group loaded successfully");
+    });
+  }
 
-  public addStudent():void{
-
-      this.stugentArr.push({
-        sName: this.StudentName,
-       
+  public loadStudents() {
+    //this.groupService.getGroup(goripId).subscribe(data => {
+    //  this.groupInfo = data;
+    //  console.log("Group loaded successfully");
+    //});
+  }
+  public addStudent(): void{
+    this.studentService.addStudent(this.student).subscribe(
+      response => {
+        this.student = new Student();
+        console.log("Student create successfully");
       });
-      this.StudentName = '';
+      this.stugentArr.push({
+        sName: this.student.StudentName,       
+      });
      
 
   }

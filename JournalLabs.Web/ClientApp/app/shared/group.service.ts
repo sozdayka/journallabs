@@ -25,8 +25,8 @@ export class GroupService {
     return this.transferHttp.get(`${this.baseUrl}/api/Group/GetGroups`);
   }
 
-  getGroup(id: string): Observable<any> {
-    return this.transferHttp.get(`${this.baseUrl}/api/Group/GetGroupById` + id);
+  getGroup(id: string): Observable<Group> {
+    return this.transferHttp.get(`${this.baseUrl}/api/Group/GetGroupById?Id=${id}`);
   }
 
   deleteGroup(id: string): Observable<any> {
