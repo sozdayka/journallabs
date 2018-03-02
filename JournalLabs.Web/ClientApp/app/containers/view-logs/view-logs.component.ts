@@ -37,20 +37,10 @@ export class ViewLogsComponent implements OnInit {
 
   public filterChange(view){
     this.typeLogs = view; 
-console.log(this.typeLogs);
+
     this.viewLog = this.logsArr.filter(s => {
       return s.ltype==this.typeLogs;
     });
-
-
-    // this.selected_groups = this.groups.filter(s => {
-    //   this.studenFromGroup.forEach(eachObj => {
-    //     if(eachObj.id== s.id && s.selected==true) {
-    //       this.studList.push(eachObj);
-    //     }
-    //   });
-    //   return s.selected;
-    // });
   }
 
  

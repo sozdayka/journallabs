@@ -34,8 +34,7 @@ import { RemarkService } from './shared/remark.service';
 import { TeacherJournalService } from './shared/teacher-journal';
 import { LogService } from './shared/log.service';
 
-import { ViewLogsComponent } from './containers/view-logs/view-logs.component';
-import { CathedrasComponent } from './containers/cathedras/cathedras.component';
+import { PulpitsComponent } from './containers/pulpits/pulpits.component';
 import { GroupsComponent } from './containers/groups/groups.component';
 import { GroupComponent } from './containers/group/group.component';
 import { GroupService } from './shared/group.service';
@@ -62,8 +61,7 @@ export function createTranslateLoader(http: Http, baseHref) {
       JournalComponent,
       SignInComponent,
       
-      ViewLogsComponent,
-      CathedrasComponent,
+      PulpitsComponent,
       GroupsComponent,
       GroupComponent,
       
@@ -149,21 +147,10 @@ export function createTranslateLoader(http: Http, baseHref) {
               }},
 
               {
-                path: 'view-logs', component: ViewLogsComponent,
+                path: 'pulpits', component: PulpitsComponent,
                   data: {
-                      title: 'View Logs',
-                      meta: [{ name: 'description', content: 'View Logs' }],
-                      links: [
-                          { rel: 'canonical', href: 'http://blogs.example.com/bootstrap/something' },
-                          { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/bootstrap-demo' }
-                      ]
-                  }
-              },
-              {
-                path: 'cathedras', component: CathedrasComponent,
-                  data: {
-                      title: 'Cathedras list',
-                      meta: [{ name: 'description', content: 'Cathedras list' }],
+                      title: 'Pulpits list',
+                      meta: [{ name: 'description', content: 'Pulpits list' }],
                       links: [
                           { rel: 'canonical', href: 'http://blogs.example.com/bootstrap/something' },
                           { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/bootstrap-demo' }

@@ -1,13 +1,12 @@
 <br>
 <h1>Новый журнал:</h1><!--New journal-->
 <br />
-<p>Название дисцыплины:</p><!--Lesson Name:-->
+<p>Название предмета:</p><!--Lesson Name:-->
 <input type="text" [(ngModel)]="createJournalViewModel.LessonName" name="LessonName" />
 <br />
-
-<!-- <p>Введите количество студентов:</p>
+<p>Введите количество студентов:</p><!--Input count students:-->
 <input type="number" [(ngModel)]="createJournalViewModel.StudentsCount" name="StudentsCount" />
-<br /> -->
+<br />
 <p>Введите количество видов работ:</p><!--Input count lab blocks:-->
 <input type="number" [(ngModel)]="labBlockCount" (keyup)="fillLabBlockSettingsArray()" name="LabBlocksCount" />
 <br />
@@ -32,54 +31,8 @@
   </ng-container>
 </table>
 <br />
-
-<h4>Выберите тып предмета</h4>
-<input type="radio" name="typejournals" value="зачет" id="typj1"><label for="typj1">Зачет</label>
-<br>
-<input type="radio" name="typejournals" value="экзамен" id="typj2"><label for="typj2">Экзамен</label>
-<br />
 <p>Выберите ассистентов которые будут иметь доступ к журналу:</p><!--Input count lab blocks:-->
-<ul style="width: 300px; height: 100px; overflow: auto">
+<ul style="width: 300px; height: 200px; overflow: auto">
   <li *ngFor=" let assistant of assistantList"><input type="checkbox" (click)="addAssistant($event,assistant.Id)"> {{assistant.Login}}</li>
 </ul>
-
-<!-- Group List -->
-<h4>Выберите группу</h4>
-<ul>
-  <li *ngFor="let g of groups " > 
-    <input (change)="getSelected()" type="checkbox"
-             name="group"
-             value="{{g.id}}"
-             [(ngModel)]="g.selected"/> 
-    <span>{{g.name}}</span>
-  </li>
-</ul>
-<!-- Selected Group
-<div class="selected-games-wrap">
-  <div class="selected-game" *ngFor="let s of selected_games" >
-    <span>{{s.name}} <span class="delete-game" (click)="deleteGame(s.id)" title="Click to delete">X</span></span>
-  </div>
-</div>
--->
-<ng-container *ngIf="groupselecte==true">
-<h4>Выберите студентов</h4>
-<ul class="game-list">
-  <li *ngFor="let g of studList " class="game-item"> 
-      {{g.name}}
-    <ul>
-      <li *ngFor="let s of g.studenList ">
-       
-        <input (change)="getSelected()" type="checkbox"
-             name="student"
-             value="{{s.studentSelected}}"
-             [(ngModel)]="s.selected"/> 
-        <span class="game-text">{{s.studentName}}</span>
-       
-        </li>
-    </ul>
-  </li>
-</ul>
-</ng-container>
-
-
 <button (click)="createJournal()">Создать журнал</button><!--Create journal-->
