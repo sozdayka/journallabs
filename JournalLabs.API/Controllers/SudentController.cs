@@ -28,6 +28,13 @@ namespace StudentLabs.API.Controllers
         {
             return Ok("Good");
         }
+        [Route("GetStudentsByGroupId")]
+        [HttpGet]
+        public IHttpActionResult GetStudentsByGroupId(string groupId)
+        {
+            var result = _studentService.GetStudentsByGroupId(groupId);
+            return Ok(result);
+        }
         [Route("CreateStudent")]
         [HttpPost]
         public IHttpActionResult CreateStudent(Student student)

@@ -11,6 +11,8 @@ import { StudentService } from '../../shared/student.service';
 import { Group } from '../../models/Group';
 
 import { Student } from '../../models/Student';
+import { StudentGroupService } from '../../shared/student-group.service';
+import { AddStudentToGroup } from '../../models/addStudentToGroup';
 
 @Component({
   selector: 'group',
@@ -19,11 +21,12 @@ import { Student } from '../../models/Student';
 export class GroupComponent implements OnInit {
  
   groupInfo: Group = new Group();
-  student: Student = new Student();
+  student: AddStudentToGroup = new AddStudentToGroup();
+  groupStudents: Student[] = [];
   GroupName: string;
   StudentCount: number;
 
-  groupId = 0;
+  groupId:string = "";
   StudentName = '';
   
  
@@ -44,14 +47,17 @@ export class GroupComponent implements OnInit {
 
     public logService: LogService,
     public groupService: GroupService,
-    public studentService: StudentService
+    public studentService: StudentService,
+    public studentGroupService: StudentGroupService
   ) {
   }
 
   public ngOnInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
       //sss
-      this.loadGroupInfo(params['groupid']);  
+      this.groupId = params['groupid'];
+      this.loadGroupInfo(this.groupId);
+      this.loadStudents();
     });    
   }
 
@@ -63,20 +69,23 @@ export class GroupComponent implements OnInit {
   }
 
   public loadStudents() {
-    //this.groupService.getGroup(goripId).subscribe(data => {
-    //  this.groupInfo = data;
-    //  console.log("Group loaded successfully");
-    //});
+    this.studentService.getStudentsByGroupId(this.groupId).subscribe(data => {
+      this.groupStudents = data;
+      console.log("Group loaded successfully");
+    });
   }
   public addStudent(): void{
-    this.studentService.addStudent(this.student).subscribe(
+    this.student.GroupId = this.groupId;
+    this.studentGroupService.addStudentToGroup(this.student).subscribe(
       response => {
-        this.student = new Student();
+        this.groupStudents.push({
+          Id: JSON.parse(response._body),
+          StudentName:this.student.Student.StudentName
+        });
+        this.student.Student = new Student();
         console.log("Student create successfully");
       });
-      this.stugentArr.push({
-        sName: this.student.StudentName,       
-      });
+    
      
 
   }

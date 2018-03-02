@@ -39,6 +39,7 @@ import { GroupsComponent } from './containers/groups/groups.component';
 import { GroupComponent } from './containers/group/group.component';
 import { GroupService } from './shared/group.service';
 import { CathedraService } from './shared/cathedra.service';
+import { StudentGroupService } from './shared/student-group.service';
 
 export function createTranslateLoader(http: Http, baseHref) {
     // Temporary Azure hack
@@ -213,7 +214,8 @@ export function createTranslateLoader(http: Http, baseHref) {
       TeacherJournalService,
       LogService,
       GroupService,
-      CathedraService
+      CathedraService,
+      StudentGroupService
     ]
 })
 export class AppModuleShared {

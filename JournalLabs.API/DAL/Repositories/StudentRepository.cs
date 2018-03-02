@@ -84,5 +84,21 @@ namespace JournalLabs.API.DAL.Repositories
                 }
             }
         }
+        public List<Student> GetStudentsByGroupId(string groupId)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string insertQuery = @"SELECT * From Students Where Id IN (SELECT StudentId From StudentGroups where GroupId=@groupId)";
+                try
+                {
+                    var result = db.Query<Student>(insertQuery, new { groupId = groupId });
+                    return result.ToList();
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
     }
 }
