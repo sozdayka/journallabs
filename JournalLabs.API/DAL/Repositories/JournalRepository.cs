@@ -24,7 +24,7 @@ namespace JournalLabs.API.DAL.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string insertQuery = @"INSERT INTO [dbo].[Journals]([Id],[LessonName]) VALUES (@Id,@LessonName)";
+                string insertQuery = @"INSERT INTO [dbo].[Journals]([Id],[LessonName],[IsExam],[GroupName]) VALUES (@Id,@LessonName,@IsExam,@GroupName)";
                 try
                 {
                     var result = db.Execute(insertQuery, journalModel);
@@ -43,7 +43,7 @@ namespace JournalLabs.API.DAL.Repositories
             {
                 try
                 {
-                    string insertQuery = @"UPDATE Journals Set TeacherId = @TeacherId Where Id = @Id";
+                    string insertQuery = @"UPDATE Journals Set LessonName = @LessonName,IsExam=@IsExam,GroupName=@GroupName Where Id = @Id";
                     var result = db.Execute(insertQuery, journalModel);
                 }
                 catch (Exception ex)
@@ -89,7 +89,7 @@ namespace JournalLabs.API.DAL.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string selectQuery = @"Select tj.TeacherId,lb.Id,lb.LessonName From (SELECT * From TeacherJournals Where TeacherId = @teacherId) as tj
+                string selectQuery = @"Select tj.TeacherId,lb.Id,lb.LessonName,lb.IsExam,lb.GroupName From (SELECT * From TeacherJournals Where TeacherId = @teacherId) as tj
                                         inner join Journals lb on lb.Id = tj.JournalId";
                 try
                 {
@@ -106,7 +106,7 @@ namespace JournalLabs.API.DAL.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string selectQuery = @"Select distinct tj.TeacherId,j.Id,j.LessonName From (SELECT * From TeacherJournals Where TeacherId = @teacherId) as tj
+                string selectQuery = @"Select distinct tj.TeacherId,j.Id,j.LessonName,j.IsExam,j.GroupName From (SELECT * From TeacherJournals Where TeacherId = @teacherId) as tj
                                         inner join Journals j on j.Id = tj.JournalId
                                         inner join LabBlocks lb on lb.JournalId = j.Id
                                         inner join KindOfWorks kw on lb.KindOfWorkId = kw.Id and kw.IsKindOfWorkVisible=1";
@@ -125,7 +125,7 @@ namespace JournalLabs.API.DAL.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string selectQuery = @"  select distinct lb.JournalId, s.StudentId, j.LessonName  from 
+                string selectQuery = @"  select distinct lb.JournalId, s.StudentId, j.LessonName,j.IsExam,j.GroupName  from 
                                         (SELECT Id as StudentId From Students Where StudentName = @studentName) s
                                          left join LabBlocks lb on lb.StudentId = s.StudentId
                                          inner join KindOfWorks kw on lb.KindOfWorkId = kw.Id and kw.IsVisibleToStudent=1

@@ -6,14 +6,14 @@ import { User } from '../../models/User';
 import { LabBlock } from '../../models/LabBlock';
 import { LogService } from '../../shared/log.service';
 @Component({
-    selector: 'create-journal',
-    templateUrl: './create-journal.component.html'
+  selector: 'create-journal',
+  templateUrl: './create-journal.component.html'
 })
 export class CreateJournalComponent {
   public assistantList: User[] = [];
   public labBlockCount: number = 0;
   public createJournalViewModel: CreateJournalViewModel = new CreateJournalViewModel();
-  public constructor(public journalService: JournalService, public userService: UserService, public logService:LogService) {
+  public constructor(public journalService: JournalService, public userService: UserService, public logService: LogService) {
     var assistants = this.userService.getAllAssistants().subscribe(response => {
       this.assistantList = response;
     });
@@ -47,7 +47,7 @@ export class CreateJournalComponent {
     if (isChecked) {
       key.IsCalculateMark = false;
     }
-    
+
   }
 
 

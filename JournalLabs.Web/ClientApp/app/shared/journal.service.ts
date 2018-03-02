@@ -6,7 +6,8 @@ import { Journal } from '../models/Journal';
 import { TransferHttp } from '../../modules/transfer-http/transfer-http';
 import { Observable } from 'rxjs/Observable';
 import { REQUEST } from './constants/request';
-import { CreateJournalViewModel } from "../models/createJournalViewModel"
+import { CreateJournalViewModel } from "../models/createJournalViewModel";
+import { AddStudentToJournalViewModel } from "../models/addStudentToJournalViewModel";
 
 @Injectable()
 export class JournalService {
@@ -52,8 +53,8 @@ export class JournalService {
   getAllStudentJournalsByStudentName(studentName: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/api/Journal/GetAllStudentJournalsByStudentName?studentName=${studentName}`);
   }
-  addStudentToJournal(journalId: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/api/Journal/AddStudentToJournal?journalId=${journalId}`);
+  addStudentToJournal(addStudentToJournalViewModel: AddStudentToJournalViewModel): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/Journal/AddStudentToJournal`, addStudentToJournalViewModel);
   }
   addKindOfWorkToJournal(journalId: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/api/Journal/AddKindOfWorkToJournal?journalId=${journalId}`);

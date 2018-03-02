@@ -22,6 +22,7 @@ namespace JournalLabs.API.DAL
         public DbSet<TeacherJournal> TeacherJournals { get; set; }
         public DbSet<Cathedra> Cathedras { get; set; }
         public DbSet<Group> Groups { get; set; }
+        public DbSet<StudentGroup> StudentGroups { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
         }

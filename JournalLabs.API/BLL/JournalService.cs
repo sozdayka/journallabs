@@ -53,9 +53,9 @@ namespace JournalLabs.API.BLL
                 });
             }
 
-            for (int i = 0; i < createJournalViewModel.StudentsCount; i++)
+            foreach(Student student in createJournalViewModel.Students)
             {
-                CreateStudentInJournal(journalId,$"Студент {i + 1}", kindOfWorkGuidList, createJournalViewModel.LabBlocksSettings);
+                CreateStudentInJournal(journalId, student.StudentName, kindOfWorkGuidList, createJournalViewModel.LabBlocksSettings);
             }
             
             
@@ -189,31 +189,32 @@ namespace JournalLabs.API.BLL
         {
             return _journalRepository.DeleteJournalById(id);
         }
-        public void AddStudentToJournal(string journalId)
+        public void AddStudentToJournal(AddStudentToJournalViewModel studentToJournalModel)
         {
             
-            var kindOfWorks = _kindOfWorkRepository.GetKindsOfWorkByJournalId(journalId).Select(x=>x.Id).ToList();
-            var lastStudent = _labBlockRepository.GetStudentsByJournalId(journalId).LastOrDefault();
-            var studentIndex = int.Parse(Regex.Match(lastStudent.StudentName, @"\d+").Value);
-            var studentName = $"Студент {studentIndex+1}";
-            var kindOfWorkVisibleQueryString = StringForKindOfWorkBulkQuery(kindOfWorks);
-            var labBlocksSettings = _labBlockRepository.GetLabBlockByStudentAndJournalId(lastStudent.Id.ToString(), journalId, kindOfWorkVisibleQueryString);
-            var labBlocksSettingsResult = new List<LabBlockViewModel>();
-            for (int i = 0; i < labBlocksSettings.Count; i++)
-            {                
-                if (i+1== labBlocksSettings.Count||labBlocksSettings[i].KindOfWorkId != labBlocksSettings[i + 1].KindOfWorkId)
+            var kindOfWorks = _kindOfWorkRepository.GetKindsOfWorkByJournalId(studentToJournalModel.JournalId).Select(x=>x.Id).ToList();
+            foreach (Student student in studentToJournalModel.Students)
+            {
+                var kindOfWorkVisibleQueryString = StringForKindOfWorkBulkQuery(kindOfWorks);
+                var labBlocksSettings = _labBlockRepository.GetLabBlockByStudentAndJournalId(student.Id.ToString(), studentToJournalModel.JournalId, kindOfWorkVisibleQueryString);
+                var labBlocksSettingsResult = new List<LabBlockViewModel>();
+                for (int i = 0; i < labBlocksSettings.Count; i++)
                 {
-                    labBlocksSettingsResult.Add(labBlocksSettings[i]);
-                    continue;
+                    if (i + 1 == labBlocksSettings.Count || labBlocksSettings[i].KindOfWorkId != labBlocksSettings[i + 1].KindOfWorkId)
+                    {
+                        labBlocksSettingsResult.Add(labBlocksSettings[i]);
+                        continue;
+                    }
+                    if (i + 1 != labBlocksSettings.Count && labBlocksSettings[i].KindOfWorkId == labBlocksSettings[i + 1].KindOfWorkId)
+                    {
+                        labBlocksSettings[i].IsSecondBlock = true;
+                        labBlocksSettingsResult.Add(labBlocksSettings[i]);
+                        i++;
+                    }
                 }
-                if (i + 1 != labBlocksSettings.Count && labBlocksSettings[i].KindOfWorkId == labBlocksSettings[i + 1].KindOfWorkId)
-                {
-                    labBlocksSettings[i].IsSecondBlock = true;
-                    labBlocksSettingsResult.Add(labBlocksSettings[i]);
-                    i++;
-                }
+                CreateStudentInJournal(Guid.Parse(studentToJournalModel.JournalId), student.StudentName, kindOfWorks, labBlocksSettingsResult);
             }
-            CreateStudentInJournal(Guid.Parse(journalId), studentName, kindOfWorks, labBlocksSettingsResult);
+            
         }
 
         public void AddKindOfWorkToJournal(string journalId)

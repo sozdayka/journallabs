@@ -18,6 +18,7 @@ import { TeacherJournalService } from '../../shared/teacher-journal';
 import { TeacherJournal } from '../../models/teacherJournal';
 import { KindOfMark } from "../../models/enums/KindOfMark"
 import { LogService } from '../../shared/log.service';
+import { AddStudentToJournalViewModel } from "../../models/addStudentToJournalViewModel";
 @Component({
   selector: 'journal',
   templateUrl: 'journal.component.html'
@@ -34,6 +35,7 @@ export class JournalComponent implements OnInit {
   public currentRole: string = "";
   public currentTeacherId: string = "";
   public currentDate: string = "";
+  public addStudentToJournalViewModel: AddStudentToJournalViewModel = new AddStudentToJournalViewModel();
   public constructor(public journalService: JournalService,
     public studentService: StudentService,
     public labBlockService: LabBlockService,
@@ -69,6 +71,7 @@ export class JournalComponent implements OnInit {
     this.currentTeacherId = localStorage.getItem('TeacherId');
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.headerKindOfWork = [];
+      this.addStudentToJournalViewModel.JournalId = params['journalId'];
       this.journalId = params['journalId'];
       this.studentId = params['studentId'];
       if (typeof (this.studentId) == 'undefined') {
@@ -232,11 +235,12 @@ export class JournalComponent implements OnInit {
       });
   }
   public addStudentToJournal() {
-    this.journalService.addStudentToJournal(this.journalId).subscribe(
+    this.journalService.addStudentToJournal(this.addStudentToJournalViewModel).subscribe(
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} добавил нового студента`;
         this.logService.writeTeacherLog(logText).subscribe(resp => {
+          this.addStudentToJournalViewModel.Students = [];
           console.log("success add student");
           location.reload();
         }); 
