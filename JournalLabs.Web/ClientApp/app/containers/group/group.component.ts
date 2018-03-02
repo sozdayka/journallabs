@@ -89,18 +89,22 @@ export class GroupComponent implements OnInit {
      
 
   }
-  public changeGroupName(){
-
-    console.log("Change group Name: "+ this.GroupName);
+  public changeGroupName() {
+    this.groupService.updateGroup(this.groupInfo).subscribe(response => {
+      console.log("Change group Name: " + this.GroupName);
+    });
   }
-  public changeGroupStudentCount(stugentArr){
-    console.log("Change group Count: "+stugentArr.sName);
+  public changeStudentName(student: Student) {
+    this.studentService.updateStudent(student).subscribe(response => {
+      console.log("Change student Name: " + student.StudentName);
+    });
   }
-  public removeGroup(pulpitDelete){
+  public removeStudent(studentDelete: Student,index:number) {
     //this.pulpitArr.splice(pulpitDelete.sName, 1);
-    console.log("Delete from group, student Name: "+this.stugentArr[pulpitDelete].sName);
-    this.stugentArr.splice(pulpitDelete, 1);
-    
+    this.studentService.deleteStudent(studentDelete.Id).subscribe(response => {
+      console.log("Delete from group, student Name: " + this.groupStudents[index].StudentName);
+      this.groupStudents.splice(index, 1);
+    });
   }
 /*
   public changeKindOfWorkName(kindOfWork: KindOfWork) {
