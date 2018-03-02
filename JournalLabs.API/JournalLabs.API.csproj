@@ -106,6 +106,7 @@
     <Compile Include="BLL\JournalService.cs" />
     <Compile Include="BLL\Provider\FileProvider.cs" />
     <Compile Include="BLL\RemarkService.cs" />
+    <Compile Include="BLL\StudentGroupService.cs" />
     <Compile Include="BLL\StudentService.cs" />
     <Compile Include="BLL\LabBlockService.cs" />
     <Compile Include="BLL\KindOfWorkService.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="DAL\Repositories\GroupRepository.cs" />
     <Compile Include="DAL\Repositories\JournalRepository.cs" />
     <Compile Include="DAL\Repositories\RemarkRepository.cs" />
+    <Compile Include="DAL\Repositories\StudentGroupRepository.cs" />
     <Compile Include="DAL\Repositories\StudentRepository.cs" />
     <Compile Include="DAL\Repositories\LabBlockRepository.cs" />
     <Compile Include="DAL\Repositories\KindOfWorkRepository.cs" />
@@ -143,6 +145,7 @@
     <Compile Include="Models\LabBlock.cs" />
     <Compile Include="Models\Remark.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentGroup.cs" />
     <Compile Include="Models\TeacherJournal.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
