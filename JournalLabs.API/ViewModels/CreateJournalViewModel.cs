@@ -9,7 +9,9 @@ namespace JournalLabs.API.ViewModels
     public class CreateJournalViewModel
     {
         public string LessonName { get; set; }
-        public int StudentsCount { get; set; }
+        public bool IsExam { get; set; }
+        public string GroupName { get; set; }
+        public List<Student> Students { get; set; }
         public List<LabBlockViewModel> LabBlocksSettings { get; set; }
         public List<Guid> TeacherIds { get; set; }
     }

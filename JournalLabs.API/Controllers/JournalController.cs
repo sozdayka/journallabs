@@ -81,10 +81,10 @@ namespace JournalLabs.API.Controllers
             return Ok(result);
         }
         [Route("AddStudentToJournal")]
-        [HttpGet]
-        public IHttpActionResult AddStudentToJournal(string journalId)
+        [HttpPost]
+        public IHttpActionResult AddStudentToJournal(AddStudentToJournalViewModel studentToJournalModel)
         {
-            _journalService.AddStudentToJournal(journalId);
+            _journalService.AddStudentToJournal(studentToJournalModel);
             return Ok("Good");
         }
         [Route("AddKindOfWorkToJournal")]
