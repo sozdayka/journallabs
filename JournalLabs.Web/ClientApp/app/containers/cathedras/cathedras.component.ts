@@ -58,11 +58,11 @@ export class CathedrasComponent implements OnInit {
       //this.groupName = '';
     /* this.groupStudentCount = 0;*/
   }
-  public changeGroupName(groupsArr){
-    console.log("Change group Name: "+groupsArr.gName);
-  }
-  public changeGroupStudentCount(groupsArr){
-    console.log("Change group Count: "+groupsArr.gName);
+  public changeCathedraName(cathedra: Cathedra) {
+    this.cathedraService.updateCathedra(cathedra).subscribe(responce => {
+      console.log("Change cathedra Name: " + cathedra.FullName);
+    });
+    
   }
   public removeCathedra(cathedra:Cathedra,cathedraDelrow){
     this.cathedraService.deleteCathedra(cathedra.Id).subscribe(responce => {
