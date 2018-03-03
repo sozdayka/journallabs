@@ -1,10 +1,12 @@
-<p>Название предмета:</p><!--Lesson Name:-->
-<input type="text" [(ngModel)]=".LessonName" name="LessonName" />
-<br />
-<br />
-<p>Название группы:</p><!--Lesson Name:-->
-<input type="text" [(ngModel)]=".GroupName" name="GroupName" />
-<br />
+<div *ngIf="journalViewModel!=null">
+  <p>Название предмета:</p><!--Lesson Name:-->
+  <input [(ngModel)]="journalViewModel.JournalModel.LessonName" (blur)="changeJournalModel()" type="text" name="LessonName" /> <!---->
+  <br />
+  <br />
+  <p>Название группы:</p><!--Lesson Name:-->
+  <input [(ngModel)]="journalViewModel.JournalModel.GroupName" (blur)="changeJournalModel()" type="text" name="GroupName" /> <!---->
+  <br />
+</div>
 
 <div class="row">
   <div *ngIf="journalViewModel!=null">
