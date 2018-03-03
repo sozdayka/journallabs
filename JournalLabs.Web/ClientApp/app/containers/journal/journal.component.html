@@ -1,3 +1,11 @@
+<p>Название предмета:</p><!--Lesson Name:-->
+<input type="text" [(ngModel)]=".LessonName" name="LessonName" />
+<br />
+<br />
+<p>Название группы:</p><!--Lesson Name:-->
+<input type="text" [(ngModel)]=".GroupName" name="GroupName" />
+<br />
+
 <div class="row">
   <div *ngIf="journalViewModel!=null">
     <table>
@@ -73,7 +81,7 @@
     <br />
     <br />
 
-    
+
     <br />
     <br />
     <div *ngIf="currentRole=='Teacher'">
