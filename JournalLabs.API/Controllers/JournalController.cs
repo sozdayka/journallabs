@@ -62,7 +62,7 @@ namespace JournalLabs.API.Controllers
         }
         [Route("GetAllJournalsByTeacherId")]
         [HttpGet]
-        public IHttpActionResult GetAllJournalsByTeacherId(string teacherId,string role)
+        public IHttpActionResult GetAllJournalsByTeacherId(string teacherId,string role="Teacher")
         {
             if (role=="Teacher")
             {
@@ -93,6 +93,20 @@ namespace JournalLabs.API.Controllers
         {
             _journalService.AddKindOfWorkToJournal(journalId);
             return Ok("Good");
+        }
+        [Route("GetJournalGroupsByLessonNameAndTeacherId")]
+        [HttpGet]
+        public IHttpActionResult GetJournalGroupsByLessonNameAndTeacherId(string LessonName,string TeacherId)
+        {
+            var result = _journalService.GetJournalGroupsByLessonNameAndTeacherId(LessonName, TeacherId);
+            return Ok(result);
+        }
+        [Route("GetJournalsByLessonNameAndGroupNameForStudent")]
+        [HttpGet]
+        public IHttpActionResult GetJournalsByLessonNameAndGroupNameForStudent(string LessonName, string GroupName)
+        {
+            var result = _journalService.GetJournalsByLessonNameAndGroupNameForStudent(LessonName, GroupName);
+            return Ok(result);
         }
     }
 }

@@ -11,14 +11,10 @@
   <option value="Teacher">Teacher</option>
   <option value="Assistant">Assistant</option>
 </select>
-<select [(ngModel)]="teacherModel.CathedraId">
-  <option ></option>
-</select>
 <br />
 <p>Выберите кафедра:</p><!--Input password:-->
-<select>
-  <option value="Teacher">АПВТ</option>
-  <option value="Assistant">ЭВМ</option>
+<select [(ngModel)]="teacherModel.CathedraId">
+  <option *ngFor="let cathedra of cathedrasList" [ngValue]="cathedra.Id"> {{cathedra.ShortName}} </option>
 </select>
 <br />
 <br />

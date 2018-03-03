@@ -306,5 +306,14 @@ export class JournalComponent implements OnInit {
         });
       });
   }
-  
+  public changeJournalModel() {
+    this.journalService.updateJournal(this.journalViewModel.JournalModel).subscribe(
+      result => {
+        var teacherName = localStorage.getItem('TeacherName');
+        var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил поля в журнале ${this.journalViewModel.JournalModel.Id}`;
+        this.logService.writeTeacherLog(logText).subscribe(resp => {
+          console.log("success update journal");
+        });
+      });
+  }
 }

@@ -141,6 +141,39 @@ namespace JournalLabs.API.DAL.Repositories
                     return null;
                 }
             }
-        }              
+        }
+        public List<JournalViewModel> GetJournalGroupsByLessonNameAndTeacherId(string LessonName, string TeacherId)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string insertQuery = @"Select tj.TeacherId,lb.Id,lb.LessonName,lb.IsExam,lb.GroupName From (SELECT * From TeacherJournals Where TeacherId = @TeacherId) as tj
+                                        inner join Journals lb on lb.Id = tj.JournalId and LessonName = @LessonName";
+                try
+                {
+                    var result = db.Query<JournalViewModel>(insertQuery, new { LessonName = LessonName, TeacherId= new Guid(TeacherId) });
+                    return result.ToList();
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+        public Guid GetJournalIdByLessonNameAndGroupNameForStudent(string LessonName, string GroupName)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string insertQuery = @"Select Id From Journals where GroupName=@GroupName and LessonName = @LessonName";
+                try
+                {
+                    var result = db.Query<Guid>(insertQuery, new { LessonName = LessonName, GroupName = GroupName });
+                    return result.FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    return Guid.Empty;
+                }
+            }
+        }
     }
 }

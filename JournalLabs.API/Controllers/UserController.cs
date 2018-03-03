@@ -62,6 +62,13 @@ namespace JournalLabs.API.Controllers
         {
             var result = _userService.GetAllAssistants();
             return Ok(result);
-        }        
+        }
+        [Route("GetAllTeachers")]
+        [HttpGet]
+        public IHttpActionResult GetAllTeachers()
+        {
+            var result = _userService.GetAllTeachers();
+            return Ok(result);
+        }
     }
 }

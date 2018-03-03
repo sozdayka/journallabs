@@ -104,6 +104,7 @@
     <Compile Include="BLL\CathedraService.cs" />
     <Compile Include="BLL\GroupService.cs" />
     <Compile Include="BLL\JournalService.cs" />
+    <Compile Include="BLL\LogService.cs" />
     <Compile Include="BLL\Provider\FileProvider.cs" />
     <Compile Include="BLL\RemarkService.cs" />
     <Compile Include="BLL\StudentGroupService.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="DAL\Repositories\CathedraRepository.cs" />
     <Compile Include="DAL\Repositories\GroupRepository.cs" />
     <Compile Include="DAL\Repositories\JournalRepository.cs" />
+    <Compile Include="DAL\Repositories\LogRepository.cs" />
     <Compile Include="DAL\Repositories\RemarkRepository.cs" />
     <Compile Include="DAL\Repositories\StudentGroupRepository.cs" />
     <Compile Include="DAL\Repositories\StudentRepository.cs" />
@@ -144,6 +146,7 @@
     <Compile Include="Models\Journal.cs" />
     <Compile Include="Models\KindOfWork.cs" />
     <Compile Include="Models\LabBlock.cs" />
+    <Compile Include="Models\Log.cs" />
     <Compile Include="Models\Remark.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentGroup.cs" />
@@ -161,6 +164,7 @@
     <Compile Include="ViewModels\RemarkViewModel.cs" />
     <Compile Include="ViewModels\StudentJournal.cs" />
     <Compile Include="ViewModels\StudentLabBlocksViewModel.cs" />
+    <Compile Include="ViewModels\TeacherViewModelForExternalApi.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

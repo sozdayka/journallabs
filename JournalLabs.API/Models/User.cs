@@ -11,6 +11,6 @@ namespace JournalLabs.API.Models
         public string Login { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
-        public string CathedraId { get; set; }
+        public Guid CathedraId { get; set; }
     }
 }

@@ -6,11 +6,11 @@
   <div class="form-inline">
     <div class="form-group">
       <label for="exampleInputName2">Название</label>
-      <input type="text" class="form-control" [(ngModel)]="newCathedra.ShortName">
+      <input type="text" class="form-control" [(ngModel)]="newCathedra.FullName">
     </div>
     <div class="form-group">
       <label for="exampleInputEmail2">Короткое название</label>
-      <input type="text" class="form-control" [(ngModel)]="newCathedra.FullName">
+      <input type="text" class="form-control" [(ngModel)]="newCathedra.ShortName">
     </div>
 
     <button type="submit" class="btn btn-default" (click)="addCathedra()" >Добавить дисциплину</button>
