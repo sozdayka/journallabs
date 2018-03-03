@@ -4,6 +4,10 @@
 <p>Название предмета:</p><!--Lesson Name:-->
 <input type="text" [(ngModel)]="createJournalViewModel.LessonName" name="LessonName" />
 <br />
+<br />
+<p>Название группы:</p><!--Lesson Name:-->
+<input type="text" [(ngModel)]="createJournalViewModel.GroupName" name="GroupName" />
+<br />
 
 <p>Введите количество видов работ:</p><!--Input count lab blocks:-->
 <input type="number" [(ngModel)]="labBlockCount" (keyup)="fillLabBlockSettingsArray()" name="LabBlocksCount" />
@@ -11,6 +15,7 @@
 <table *ngIf="createJournalViewModel.LabBlocksSettings.length!=0">
   <tr>
     <td>Название вида работы</td><!--FirstDate-->
+    <td style="padding-left: 20px;">Дедлайн для сдачи</td><!--FirstMark-->
     <td style="padding-left: 20px;">Добавить блок переcдачи</td><!--FirstMark-->
     <td style="padding-left: 20px;">Отображать ли данный вид работы</td><!--FirstMark-->
     <td style="padding-left: 20px;">Учитывать эту оценку для итоговой оценки</td><!--SecondDate-->
@@ -20,7 +25,8 @@
   <ng-container *ngFor=" let key of createJournalViewModel.LabBlocksSettings; let i = index">
     <tr>
       <td><span>Вид работы - {{i}}</span></td>
-      <td style="text-align: center;"><input type="checkbox" [(ngModel)]="key.IsSecondBlock"></td>
+      <td style="text-align: center;"><input type="checkbox" [(ngModel)]="key.deadLine"></td>
+      <td style="text-align: center;"><input type="text" [(ngModel)]="key.IsSecondBlock"></td>
       <td style="text-align: center;"><input type="checkbox" [(ngModel)]="key.IsKindOfWorkVisible"></td>
       <td style="text-align: center;"><input type="checkbox" [(ngModel)]="key.IsCalculateMark" [disabled]="key.IsBoolField"></td>
       <td style="text-align: center;"><input type="checkbox" [(ngModel)]="key.IsVisibleToStudent"></td>
@@ -28,21 +34,13 @@
     </tr>
   </ng-container>
 </table>
-<br />
-<p>Выберите ассистентов которые будут иметь доступ к журналу:</p><!--Input count lab blocks:-->
-<ul style="width: 300px; height: 200px; overflow: auto">
-  <li *ngFor=" let assistant of assistantList"><input type="checkbox" (click)="addAssistant($event,assistant.Id)"> {{assistant.Login}}</li>
-</ul>
 
 <h4>Выберите тып предмета</h4>
 <input type="radio" name="typejournals" value="зачет" id="typj1"><label for="typj1">Зачет</label>
 <br>
 <input type="radio" name="typejournals" value="экзамен" id="typj2"><label for="typj2">Экзамен</label>
 <br />
-<p>Выберите ассистентов которые будут иметь доступ к журналу:</p><!--Input count lab blocks:-->
-<ul style="width: 300px; height: 100px; overflow: auto">
-  <li *ngFor=" let assistant of assistantList"><input type="checkbox" (click)="addAssistant($event,assistant.Id)"> {{assistant.Login}}</li>
-</ul>
+
 
 <!-- Group List -->
 <h4>Выберите группу</h4>
@@ -81,5 +79,11 @@
     </li>
   </ul>
 </ng-container>
+<br />
+<p>Выберите ассистентов которые будут иметь доступ к журналу:</p><!--Input count lab blocks:-->
+<ul style="width: 300px; height: 200px; overflow: auto">
+  <li *ngFor=" let assistant of assistantList"><input type="checkbox" (click)="addAssistant($event,assistant.Id)"> {{assistant.Login}}</li>
+</ul>
+
 
 <button (click)="createJournal()">Создать журнал</button><!--Create journal-->
