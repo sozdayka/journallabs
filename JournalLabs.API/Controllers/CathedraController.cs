@@ -17,36 +17,38 @@ namespace JournalLabs.API.Controllers
         {
             _cathedraService = new CathedraService();
         }
-        [Route("GetСathedras")]
+        [Route("GetCathedras")]
         [HttpGet]
-        public IHttpActionResult GetСathedras()
+        public IHttpActionResult GetCathedras()
         {
-            return Ok("Good");
+            var cathedras = _cathedraService.GetCathedras();
+            return Ok(cathedras);
         }
-        [Route("CreateСathedra")]
+        [Route("CreateCathedra")]
         [HttpPost]
-        public IHttpActionResult CreateСathedra(Cathedra cathedra)
+        public IHttpActionResult CreateCathedra(Cathedra cathedra)
         {
             _cathedraService.CreateCathedra(cathedra);
             return Ok("Good");
         }
-        [Route("UpdateСathedra")]
+        
+        [Route("UpdateCathedra")]
         [HttpPost]
-        public IHttpActionResult UpdateСathedra(Cathedra cathedra)
+        public IHttpActionResult UpdateCathedra(Cathedra cathedra)
         {
             _cathedraService.UpdateCathedra(cathedra);
             return Ok("Good");
         }
-        [Route("GetСathedraById")]
+        [Route("GetCathedraById")]
         [HttpGet]
         public IHttpActionResult GetСathedraById(string Id)
         {
             var result = _cathedraService.GetCathedraById(Id);
             return Ok(result);
         }
-        [Route("DeleteСathedraById")]
+        [Route("DeleteCathedraById")]
         [HttpGet]
-        public IHttpActionResult DeleteСathedraById(string Id)
+        public IHttpActionResult DeleteCathedraById(string Id)
         {
             _cathedraService.DeleteCathedraById(Id);
             return Ok("Good");

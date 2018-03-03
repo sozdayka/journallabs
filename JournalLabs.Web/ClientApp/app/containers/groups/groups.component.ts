@@ -58,11 +58,10 @@ export class GroupsComponent implements OnInit {
   public changeGroupStudentCount(groupsArr){
     console.log("Change group Count: "+groupsArr.gName);
   }
-  public removeGroup(group:Group){
-    //this.pulpitArr.splice(pulpitDelete.sName, 1);
+  public removeGroup(group:Group,groupDelrow){
     this.groupService.deleteGroup(group.Id).subscribe(responce => {
       console.log("Delete group : " + group.Name);
-      //this.groupsArr.splice(pulpitDelete, 1);
+      this.groupsArray.splice(groupDelrow, 1);
     })
     
     

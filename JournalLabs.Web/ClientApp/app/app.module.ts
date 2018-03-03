@@ -34,7 +34,7 @@ import { RemarkService } from './shared/remark.service';
 import { TeacherJournalService } from './shared/teacher-journal';
 import { LogService } from './shared/log.service';
 
-import { PulpitsComponent } from './containers/pulpits/pulpits.component';
+import { CathedrasComponent } from './containers/cathedras/cathedras.component';
 import { GroupsComponent } from './containers/groups/groups.component';
 import { GroupComponent } from './containers/group/group.component';
 import { GroupService } from './shared/group.service';
@@ -61,7 +61,7 @@ export function createTranslateLoader(http: Http, baseHref) {
       JournalComponent,
       SignInComponent,
       
-      PulpitsComponent,
+      CathedrasComponent,
       GroupsComponent,
       GroupComponent,
       
@@ -147,10 +147,10 @@ export function createTranslateLoader(http: Http, baseHref) {
               }},
 
               {
-                path: 'pulpits', component: PulpitsComponent,
+                path: 'cathedras', component: CathedrasComponent,
                   data: {
-                      title: 'Pulpits list',
-                      meta: [{ name: 'description', content: 'Pulpits list' }],
+                      title: 'Сathedras list',
+                      meta: [{ name: 'description', content: 'Сathedras list' }],
                       links: [
                           { rel: 'canonical', href: 'http://blogs.example.com/bootstrap/something' },
                           { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/bootstrap-demo' }

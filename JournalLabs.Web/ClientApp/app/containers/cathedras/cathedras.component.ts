@@ -1,20 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 import { LogService } from '../../shared/log.service';
+import { CathedraService } from '../../shared/cathedra.service';
+import { Cathedra } from '../../models/Cathedra';
 @Component({
   selector: 'cathedras',
   templateUrl: 'cathedras.component.html'
 })
 export class CathedrasComponent implements OnInit {
-  fullName: string;
-  shortName: string;
 
-  pulpitShortName = '';
-  pulpitFullName = '';
-
-
-//  public pulpitArr: any = [{
-    public pulpitArr: {fName:string, sName:string}[] = [{
+  public pulpitArr: {fName:string, sName:string}[] = [{
     fName: 'ІТех',
     sName: 'INTERNET-технологіі'
   }, {
@@ -25,54 +20,57 @@ export class CathedrasComponent implements OnInit {
     sName: 'ЗІКС'
   }];
 
+  //http://journallabs.pp.ua/api/Cathedra/GetCathedras
+  //http://journallabs.pp.ua/api/Cathedra/GetCathedras
 
+  public newCathedra: Cathedra = new Cathedra();
+  public cathedrasArray: Cathedra[]= [];
 
   public constructor(
 
-    public logService: LogService
+    public logService: LogService,
+    public cathedraService: CathedraService
   ) {
   }
 
   public ngOnInit(): void {
-    
+    this.loadCathedras();
+  }
+  public loadCathedras() {
+    this.cathedraService.getCathedras().subscribe(data => {
+      this.cathedrasArray = [];
+      var responseArray = JSON.stringify(data);
+      this.cathedrasArray = JSON.parse(responseArray);
+      console.log("Cathedrs loaded successfully");
+    });
+  }
+  public addCathedra():void{
+
+      //this.groupsArr.push({
+      //  gName: this.groupName,
+        
+    //});
+    this.cathedraService.addCathedra(this.newCathedra).subscribe(responce => {
+      this.newCathedra = new Cathedra();
+      console.log("Group create successfully");
+      this.loadCathedras();
+    })
+      //this.groupName = '';
+    /* this.groupStudentCount = 0;*/
+  }
+  public changeGroupName(groupsArr){
+    console.log("Change group Name: "+groupsArr.gName);
+  }
+  public changeGroupStudentCount(groupsArr){
+    console.log("Change group Count: "+groupsArr.gName);
+  }
+  public removeCathedra(cathedra:Cathedra,cathedraDelrow){
+    this.cathedraService.deleteCathedra(cathedra.Id).subscribe(responce => {
+      console.log("Delete cathedra : " + cathedra.ShortName);
+      this.cathedrasArray.splice(cathedraDelrow, 1);
+ 
+    })
 
 
   }
-
-
-  public addPulPit():void{
-
-      this.pulpitArr.push({
-        fName: this.pulpitShortName,
-        sName: this.pulpitFullName
-      });
-      this.pulpitShortName = '';
-      this.pulpitFullName = '';
-
-  }
-  public changePulPitFullName(pulpitArr){
-    console.log("Change pulput FullName: "+pulpitArr.fName);
-  }
-  public changePulPitShortName(pulpitArr){
-    console.log("Change pulput ShortName: "+pulpitArr.sName);
-  }
-  public removePulPit(pulpitDelete){
-    //this.pulpitArr.splice(pulpitDelete.sName, 1);
-    console.log("Delete pulput ShortName: "+this.pulpitArr[pulpitDelete].sName);
-    this.pulpitArr.splice(pulpitDelete, 1);
-    
-  }
-/*
-  public changeKindOfWorkName(kindOfWork: KindOfWork) {
-    this.kindOfWorkService.updateKindOfWork(kindOfWork).subscribe(
-      result => {
-        var teacherName = localStorage.getItem('TeacherName');
-        var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил настройки Вида работы под Id ${kindOfWork.Id} на
-                      название ${kindOfWork.NameKindOfWork}, видимость для ассистента ${kindOfWork.IsKindOfWorkVisible}, видимость для студента ${kindOfWork.IsVisibleToStudent}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
-          console.log("success update kindOfWork name");
-        });
-      });
-  }
-*/  
 }

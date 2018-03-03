@@ -19,6 +19,23 @@ namespace JournalLabs.API.DAL.Repositories
             _connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         }
 
+        public List<Cathedra> Cathedras()
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string insertQuery = @"SELECT * From Cathedras ";
+                try
+                {
+                    var result = db.Query<Cathedra>(insertQuery);
+                    return result.ToList();
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+
         public void CreateCathedra(Cathedra cathedraModel)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
