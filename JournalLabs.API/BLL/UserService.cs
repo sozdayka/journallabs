@@ -39,6 +39,10 @@ namespace JournalLabs.API.BLL
         public List<User> GetAllAssistants()
         {
             return _userRepository.GetAllAssistants();
-        }        
+        }
+        public List<TeacherViewModelForExternalApi> GetAllTeachers()
+        {
+            return _userRepository.GetAllTeachers();
+        }
     }
 }

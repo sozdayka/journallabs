@@ -258,5 +258,15 @@ namespace JournalLabs.API.BLL
             }
             return queryString.ToString();
         }
+        public List<JournalViewModel> GetJournalGroupsByLessonNameAndTeacherId(string LessonName, string TeacherId)
+        {
+            return _journalRepository.GetJournalGroupsByLessonNameAndTeacherId(LessonName, TeacherId);
+        }
+        public JournalGridViewModel GetJournalsByLessonNameAndGroupNameForStudent(string LessonName, string GroupName)
+        {
+            var journalId = _journalRepository.GetJournalIdByLessonNameAndGroupNameForStudent(LessonName, GroupName);
+            var relult = GetJournalById(journalId.ToString(),false);
+            return relult;
+        }
     }
 }
