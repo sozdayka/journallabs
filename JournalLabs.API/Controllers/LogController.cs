@@ -1,4 +1,6 @@
-﻿using JournalLabs.API.BLL.Provider;
+﻿using JournalLabs.API.BLL;
+using JournalLabs.API.BLL.Provider;
+using JournalLabs.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,23 +14,23 @@ namespace JournalLabs.API.Controllers
     [RoutePrefix("api/Log")]
     public class LogController : ApiController
     {
-        FileProvider fileFrovider;
+        public LogService _logService;
         public LogController()
         {
-            fileFrovider=new FileProvider();
+            _logService = new LogService();
         }
-        [Route("WriteTeacherLog")]
-        [HttpGet]
-        public IHttpActionResult WriteTeacherLog(string data)
+        [Route("CreateLog")]
+        [HttpPost]
+        public IHttpActionResult CreateLog(Log logModel)
         {
-            fileFrovider.Write("TeacherLog.txt", data);
+            _logService.CreateLog(logModel);
             return Ok("Good");
         }
-        [Route("WriteDevelopmentLog")]
+        [Route("GetLogsByType")]
         [HttpGet]
-        public IHttpActionResult WriteDevelopmentLog(string data)
+        public IHttpActionResult GetLogsByType(string type)
         {
-            fileFrovider.Write("DevelopmentLog.txt", data);
+            var result = _logService.GetLogsByType(type);
             return Ok("Good");
         }
     }
