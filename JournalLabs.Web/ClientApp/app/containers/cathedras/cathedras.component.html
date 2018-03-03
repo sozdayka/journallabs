@@ -32,8 +32,8 @@
         <ng-container *ngFor=" let key of cathedrasArray;let i=index"> 
           <tr> 
             <th scope="row">{{i}}</th> 
-            <td><input [(ngModel)]="key.ShortName" (blur)="changePulPitFullName(key)"  /></td> 
-            <td><input [(ngModel)]="key.FullName" (blur)="changePulPitShortName(key)"  /></td> 
+            <td><input [(ngModel)]="key.ShortName" (blur)="changeCathedraShortName(key)"  /></td> 
+            <td><input [(ngModel)]="key.FullName" (blur)="changeCathedraFullName(key)"  /></td> 
             <td ><input type="button" (click)="removeCathedra(key,i)" value="удалить" /></td>
           </tr>
         </ng-container>

@@ -46,23 +46,37 @@ export class CathedrasComponent implements OnInit {
   }
   public addCathedra():void{
 
-      //this.groupsArr.push({
-      //  gName: this.groupName,
-        
-    //});
     this.cathedraService.addCathedra(this.newCathedra).subscribe(responce => {
       this.newCathedra = new Cathedra();
-      console.log("Group create successfully");
+      console.log("Cathedra create successfully");
       this.loadCathedras();
     })
       //this.groupName = '';
     /* this.groupStudentCount = 0;*/
   }
-  public changeGroupName(groupsArr){
-    console.log("Change group Name: "+groupsArr.gName);
-  }
-  public changeGroupStudentCount(groupsArr){
-    console.log("Change group Count: "+groupsArr.gName);
+  public changeCathedraShortName(cathedra: Cathedra){
+    //console.log("Change group Name: "+groupsArr.gName);
+      this.cathedraService.updateCathedra(cathedra).subscribe(
+        result => {
+          console.log("Cathedra update successfully");
+        //   var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил имя студента под Id ${student.Id} на ${student.StudentName}`;
+        //   this.logService.writeTeacherLog(logText).subscribe(resp => {
+        //     console.log("success update user name");
+        //   });
+
+        });
+    }
+  
+  public changeCathedraFullName(cathedra: Cathedra){
+    this.cathedraService.updateCathedra(cathedra).subscribe(
+      result => {
+        console.log("Cathedra update successfully");
+      //   var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил имя студента под Id ${student.Id} на ${student.StudentName}`;
+      //   this.logService.writeTeacherLog(logText).subscribe(resp => {
+      //     console.log("success update user name");
+      //   });
+
+      });
   }
   public removeCathedra(cathedra:Cathedra,cathedraDelrow){
     this.cathedraService.deleteCathedra(cathedra.Id).subscribe(responce => {
