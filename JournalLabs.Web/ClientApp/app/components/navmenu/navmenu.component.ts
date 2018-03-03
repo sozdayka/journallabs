@@ -43,9 +43,9 @@ export class NavMenuComponent implements OnInit {
       if (localStorage.getItem('TeacherId')!=null) {
         this.journalService.getAllJournalsByTeacherId(localStorage.getItem('TeacherId'), this.currentRole).subscribe(response => {
           if (response._body!="[]") {
-console.log(response);
+//console.log(response);
             this.teacherJournals = JSON.parse(response._body);
-console.log(this.teacherJournals);
+//console.log(this.teacherJournals);
             this.router.navigate(['journal'], { queryParams: { journalId: this.teacherJournals[0].Id } });
             return;
           }
