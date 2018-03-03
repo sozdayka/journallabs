@@ -28,7 +28,10 @@ export class StudentService {
   getStudent(id: string): Observable<any> {
     return this.transferHttp.get(`${this.baseUrl}/api/Student/GetStudentById` + id);
   }
-
+  getStudentsByGroupId(groupId: string): Observable<Student[]> {
+    return this.transferHttp.get(`${this.baseUrl}/api/Student/GetStudentsByGroupId?groupId=${groupId}` );
+  }
+  
   deleteStudent(id: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/api/Student/DeleteStudentById?Id=${id}`);
   }

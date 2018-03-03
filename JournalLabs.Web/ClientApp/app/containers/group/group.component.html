@@ -5,7 +5,7 @@
 <div class="form-inline">
   <div class="form-group">
     <label for="exampleInputName2">Название группы</label>
-    <input type="text" class="form-control" [(ngModel)]="groupInfo.Name" (blur)="changeGrpupName()" >
+    <input type="text" class="form-control" [(ngModel)]="groupInfo.Name" (blur)="changeGroupName()" >
   </div>
   
   <br>
@@ -15,7 +15,7 @@
   <div class="form-inline">
     <div class="form-group">
       <label for="exampleInputName2">Фио студента который добавится</label>
-      <input type="text" class="form-control" [(ngModel)]="student.StudentName">
+      <input type="text" class="form-control" [(ngModel)]="student.Student.StudentName">
     </div>
     
     <button type="submit" class="btn btn-default" (click)="addStudent()" >Добавить студента</button>
@@ -35,13 +35,13 @@
         </tr> 
       </thead> 
       <tbody>
-        <ng-container *ngFor=" let key of stugentArr;let i=index"> 
+        <ng-container *ngFor=" let key of groupStudents;let i=index"> 
           <tr> 
             <th scope="row">{{i}}</th> 
-            <td><input [(ngModel)]="key.sName" (blur)="changeGroupName(key)"  /></td> 
+            <td><input [(ngModel)]="key.StudentName" (blur)="changeStudentName(key)"  /></td> 
 
             
-            <td ><input type="button" (click)="removeGroup(i)" value="удалить" /></td>
+            <td ><input type="button" (click)="removeStudent(key,i)" value="удалить" /></td>
           </tr>
         </ng-container>
 

@@ -35,5 +35,9 @@ namespace JournalLabs.API.BLL
         {
             return _studentRepository.DeleteStudentById(id);
         }
+        public List<Student> GetStudentsByGroupId(string groupId)
+        {
+            return _studentRepository.GetStudentsByGroupId(groupId);
+        }
     }
 }
