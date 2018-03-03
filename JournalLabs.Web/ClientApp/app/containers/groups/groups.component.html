@@ -34,7 +34,7 @@
             <td >
               <a [routerLink]="['/group']" [queryParams]="{ groupid: key.Id }">изменить</a>
             </td>
-            <td ><input type="button" (click)="removeGroup(key)" value="удалить" /></td>
+            <td ><input type="button" (click)="removeGroup(key,i)" value="удалить" /></td>
           </tr>
         </ng-container>
 

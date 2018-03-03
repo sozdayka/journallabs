@@ -15,6 +15,10 @@ namespace JournalLabs.API.BLL
         {
             _cathedraRepository = new CathedraRepository();
         }
+        public List<Cathedra> GetCathedras()
+        {
+            return _cathedraRepository.Cathedras();
+        }
 
         public void CreateCathedra(Cathedra cathedraModel)
         {
