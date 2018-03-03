@@ -19,6 +19,9 @@ import { TeacherJournal } from '../../models/teacherJournal';
 import { KindOfMark } from "../../models/enums/KindOfMark"
 import { LogService } from '../../shared/log.service';
 import { AddStudentToJournalViewModel } from "../../models/addStudentToJournalViewModel";
+import { GroupService } from '../../shared/group.service';
+import { Group } from '../../models/Group';
+import { SubgroupStudents } from '../../models/subgroupStudents';
 @Component({
   selector: 'journal',
   templateUrl: 'journal.component.html'
@@ -35,7 +38,12 @@ export class JournalComponent implements OnInit {
   public currentRole: string = "";
   public currentTeacherId: string = "";
   public currentDate: string = "";
+  public isAddSudent:boolean = false;
   public addStudentToJournalViewModel: AddStudentToJournalViewModel = new AddStudentToJournalViewModel();
+
+  public groupsArray: Group[] = [];
+  public isGroupSelected: boolean = false;
+  public subgroupStudents: SubgroupStudents[] = [];
   public constructor(public journalService: JournalService,
     public studentService: StudentService,
     public labBlockService: LabBlockService,
@@ -44,7 +52,8 @@ export class JournalComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public userService: UserService,
     public teacherJournalService: TeacherJournalService,
-    public logService: LogService
+    public logService: LogService,
+    public groupService: GroupService
   ) {
   }
 
@@ -53,6 +62,7 @@ export class JournalComponent implements OnInit {
     //  let teacherId = params["journalId"];
     //  this.getJournal(teacherId);
     //});
+    this.loadGroups();
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
@@ -224,7 +234,7 @@ export class JournalComponent implements OnInit {
   }
 
   public removeStudent(id: string) {
-    this.studentService.deleteStudent(id).subscribe(
+    this.labBlockService.deleteLabBlockByStudentId(id).subscribe(
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} удалил студента под Id ${id}`;
@@ -234,8 +244,37 @@ export class JournalComponent implements OnInit {
         }); 
       });
   }
+  public loadGroups() {
+    this.groupService.getGroups().subscribe(data => {
+      this.groupsArray = [];
+      var responseArray = JSON.stringify(data);
+      this.groupsArray = JSON.parse(responseArray);
+      console.log("Groups loaded successfully");
+    });
+  }
+  public getGroupStudents(group: Group, event: any,index:number) {
+    if (event.target.checked) {
+      this.studentService.getStudentsByGroupId(group.Id).subscribe(data => {
+        this.subgroupStudents.push({
+          groupName: group.Name,
+          students: data
+        });
+        console.log("Group loaded successfully");
+      });
+      return;
+    }
+    this.subgroupStudents.splice(index, 1);
+  }
+  public selectStudent(student: Student, event: any, index: number) {
+    if (event.target.checked) {
+      this.addStudentToJournalViewModel.Students.push(student);
+      return;
+    }
+    this.addStudentToJournalViewModel.Students.splice(index,1);
+  }
   public addStudentToJournal() {
-    this.journalService.addStudentToJournal(this.addStudentToJournalViewModel).subscribe(
+    if (this.isAddSudent) {
+      this.journalService.addStudentToJournal(this.addStudentToJournalViewModel).subscribe(
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} добавил нового студента`;
@@ -245,6 +284,9 @@ export class JournalComponent implements OnInit {
           location.reload();
         }); 
       });
+    }
+    this.isAddSudent = !this.isAddSudent;
+    
   }
   public changeVisibleKindOfWork(idKindOfWork: string, isChecked: any) {
     this.kindOfWorkService.updateVisibleKindOfWork(idKindOfWork, isChecked).subscribe(

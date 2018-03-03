@@ -193,10 +193,11 @@ namespace JournalLabs.API.BLL
         {
             
             var kindOfWorks = _kindOfWorkRepository.GetKindsOfWorkByJournalId(studentToJournalModel.JournalId).Select(x=>x.Id).ToList();
+            var journalStudents = _labBlockRepository.GetStudentsByJournalId(studentToJournalModel.JournalId);
+            var kindOfWorkVisibleQueryString = StringForKindOfWorkBulkQuery(kindOfWorks);
+            var labBlocksSettings = _labBlockRepository.GetLabBlockByStudentAndJournalId(journalStudents[0].Id.ToString(), studentToJournalModel.JournalId, kindOfWorkVisibleQueryString);
             foreach (Student student in studentToJournalModel.Students)
-            {
-                var kindOfWorkVisibleQueryString = StringForKindOfWorkBulkQuery(kindOfWorks);
-                var labBlocksSettings = _labBlockRepository.GetLabBlockByStudentAndJournalId(student.Id.ToString(), studentToJournalModel.JournalId, kindOfWorkVisibleQueryString);
+            {                
                 var labBlocksSettingsResult = new List<LabBlockViewModel>();
                 for (int i = 0; i < labBlocksSettings.Count; i++)
                 {

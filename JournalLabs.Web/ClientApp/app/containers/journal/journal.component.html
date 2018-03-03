@@ -78,11 +78,45 @@
       </tbody>
     </table>
     <br />
+    <br />
+    <br />
+    <div *ngIf="isAddSudent">
+      <!-- Group List -->
+      <h4>Выберите группу</h4>
+      <ul>
+        <li *ngFor="let key of groupsArray;let i=index">
+          <input (change)="getGroupStudents(key,$event,i)" type="checkbox" name="group" value="{{key.Id}}" />
+          <span>{{key.Name}}</span>
+        </li>
+      </ul>
+      <!-- Selected Group
+    <div class="selected-games-wrap">
+      <div class="selected-game" *ngFor="let s of selected_games" >
+        <span>{{s.name}} <span class="delete-game" (click)="deleteGame(s.id)" title="Click to delete">X</span></span>
+      </div>
+    </div>
+    -->
+      <ng-container *ngIf="subgroupStudents.length>0">
+        <h4>Выберите студентов</h4>
+        <ul class="game-list">
+          <li *ngFor="let subgroup of subgroupStudents;let i=index " class="game-item">
+            {{subgroup.groupName}}
+            <ul>
+              <li *ngFor="let student of subgroup.students ">
+
+                <input (change)="selectStudent(student,$event,i)" type="checkbox"
+                       name="student" />
+                <span class="game-text">{{student.StudentName}}</span>
+
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </ng-container>
+    </div>
     <input *ngIf="currentRole=='Teacher'" type="button" (click)="addStudentToJournal()" value="Добавить студента" />
     <input *ngIf="currentRole=='Teacher'" type="button" (click)="addKindOfWorkToJournal()" value="Добавить вид работы" />
     <br />
-    <br />
-
 
     <br />
     <br />

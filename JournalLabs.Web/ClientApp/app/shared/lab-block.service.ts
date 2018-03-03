@@ -40,4 +40,7 @@ export class LabBlockService {
   addLabBlock(labBlock: LabBlock): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/LabBlock/CreateLabBlock`, labBlock)
   }
+  deleteLabBlockByStudentId(studentId: string): Observable<any> {
+    return this.transferHttp.get(`${this.baseUrl}/api/LabBlock/DeleteLabBlockByStudentId?studentId=` + studentId);
+  }
 }

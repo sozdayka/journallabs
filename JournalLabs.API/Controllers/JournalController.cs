@@ -15,9 +15,11 @@ namespace JournalLabs.API.Controllers
     public class JournalController : ApiController
     {
         public JournalService _journalService;
+        public LabBlockService _labBlockService;
         public JournalController()
         {
             _journalService = new JournalService();
+            _labBlockService = new LabBlockService();
         }
         [Route("GetJournals")]
         [HttpGet]
@@ -85,6 +87,14 @@ namespace JournalLabs.API.Controllers
         public IHttpActionResult AddStudentToJournal(AddStudentToJournalViewModel studentToJournalModel)
         {
             _journalService.AddStudentToJournal(studentToJournalModel);
+            return Ok("Good");
+        }
+        [Route("DeleteStudentByIdFromJournal")]
+        [HttpGet]
+        public IHttpActionResult DeleteStudentByIdFromJournal(string studentId)
+        {
+            _labBlockService.DeleteLabBlockByStudentId(studentId);
+
             return Ok("Good");
         }
         [Route("AddKindOfWorkToJournal")]
