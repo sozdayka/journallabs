@@ -45,12 +45,12 @@
 <!-- Group List -->
 <h4>Выберите группу</h4>
 <ul>
-  <li *ngFor="let g of groups ">
-    <input (change)="getSelected()" type="checkbox"
+  <li *ngFor="let key of groupsArray ">
+    <input (change)="getSelected(key.Id)" type="checkbox"
            name="group"
-           value="{{g.id}}"
-           [(ngModel)]="g.selected" />
-    <span>{{g.name}}</span>
+           value="{{key.Id}}"
+           />
+    <span>{{key.Name}}</span>
   </li>
 </ul>
 <!-- Selected Group

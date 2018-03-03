@@ -5,19 +5,52 @@ import { CreateJournalViewModel } from "../../models/createJournalViewModel"
 import { User } from '../../models/User';
 import { LabBlock } from '../../models/LabBlock';
 import { LogService } from '../../shared/log.service';
+
+import { GroupService } from '../../shared/group.service';
+import { StudentGroupService } from '../../shared/student-group.service';
+import { Group } from '../../models/Group';
+
 @Component({
   selector: 'create-journal',
   templateUrl: './create-journal.component.html'
 })
 export class CreateJournalComponent {
+
+  //public groupsArray: {Group: { Id: string,Name: string }[],selected:boolean} []= [];
+  public groupsArray: Group []= [];
+  public groupsSelected: {Id:string,selected:boolean}[];
+
   public assistantList: User[] = [];
   public labBlockCount: number = 0;
   public createJournalViewModel: CreateJournalViewModel = new CreateJournalViewModel();
-  public constructor(public journalService: JournalService, public userService: UserService, public logService: LogService) {
+  public constructor(public journalService: JournalService, public userService: UserService, public logService: LogService, public groupService: GroupService,public studentService: StudentGroupService ) {
     var assistants = this.userService.getAllAssistants().subscribe(response => {
       this.assistantList = response;
     });
+    
+    
   }
+  public ngOnInit(): void {
+    this.loadGroups();
+  }
+
+  public loadGroups() {
+    this.groupService.getGroups().subscribe(data => {
+      this.groupsArray = [];
+      var responseArray = JSON.stringify(data);
+      this.groupsArray = JSON.parse(responseArray);
+   
+      // this.groupsArray.forEach(s => {
+      //     s.selected = false;
+      // });
+
+      console.log("Groups loaded successfully");
+    });
+
+
+
+  }
+
   public addAssistant(event: any, id: string) {
     if (event.target.checked) {
       this.createJournalViewModel.TeacherIds.push(id);
@@ -53,18 +86,40 @@ export class CreateJournalComponent {
 
 
   // igor add
-  public getSelected() {
+  public getSelected(id) {
     this.groupselecte = true;
 
-    this.studList = [];
-    this.selected_groups = this.groups.filter(s => {
-      this.studenFromGroup.forEach(eachObj => {
-        if (eachObj.id == s.id && s.selected == true) {
-          this.studList.push(eachObj);
-        }
-      });
-      return s.selected;
-    });
+    // this.studList = [];
+    // this.selected_groups = this.groups.filter(s => {
+    //   this.studenFromGroup.forEach(eachObj => {
+    //     if (eachObj.id == s.id && s.selected == true) {
+    //       this.studList.push(eachObj);
+    //     }
+    //   });
+    //   return s.selected;
+    // });
+
+    // this.studList = [];
+    // this.selected_groups = this.groupsArray.filter(s => {
+
+
+        this.studentService.getStudentGroup(id).subscribe(data => {
+          //this.groupsArray = [];
+          console.log(data);    
+          var responseArray = JSON.stringify(data);
+        // this.groupsArray = JSON.parse(responseArray);
+    console.log(responseArray);
+        // console.log("Groups loaded successfully");
+        });
+      
+    //   // this.studenFromGroup.forEach(eachObj => {
+    //   //   if (eachObj.id == s.Group.Id && s.selected == true) {
+    //   //     this.studList.push(eachObj);
+    //   //   }
+    //   // });
+    
+    //   return s.Id;
+    // });
 
   }
 
