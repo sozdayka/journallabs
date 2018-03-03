@@ -54,29 +54,11 @@ export class CathedrasComponent implements OnInit {
       //this.groupName = '';
     /* this.groupStudentCount = 0;*/
   }
-  public changeCathedraShortName(cathedra: Cathedra){
-    //console.log("Change group Name: "+groupsArr.gName);
-      this.cathedraService.updateCathedra(cathedra).subscribe(
-        result => {
-          console.log("Cathedra update successfully");
-        //   var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил имя студента под Id ${student.Id} на ${student.StudentName}`;
-        //   this.logService.writeTeacherLog(logText).subscribe(resp => {
-        //     console.log("success update user name");
-        //   });
-
-        });
-    }
-  
-  public changeCathedraFullName(cathedra: Cathedra){
-    this.cathedraService.updateCathedra(cathedra).subscribe(
-      result => {
-        console.log("Cathedra update successfully");
-      //   var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил имя студента под Id ${student.Id} на ${student.StudentName}`;
-      //   this.logService.writeTeacherLog(logText).subscribe(resp => {
-      //     console.log("success update user name");
-      //   });
-
-      });
+  public changeCathedraName(cathedra: Cathedra) {
+    this.cathedraService.updateCathedra(cathedra).subscribe(responce => {
+      console.log("Change cathedra Name: " + cathedra.FullName);
+    });
+    
   }
   public removeCathedra(cathedra:Cathedra,cathedraDelrow){
     this.cathedraService.deleteCathedra(cathedra.Id).subscribe(responce => {
