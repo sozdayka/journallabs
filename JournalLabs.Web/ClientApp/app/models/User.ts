@@ -3,4 +3,5 @@ export class User {
    Login: string = "";
    Password: string = "";
    Role: string = "";
+   CathedraId: string = "";
 }

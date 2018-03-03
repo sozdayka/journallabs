@@ -9,7 +9,7 @@ import { LogService } from '../../shared/log.service';
     templateUrl: './admin.component.html'
 })
 export class AdminComponent {
-  public teacherModel: User = {Id:"", Login: "", Password:"111111", Role:"Teacher"};
+  public teacherModel: User = { Id: "", Login: "", Password: "111111", Role: "Teacher", CathedraId:"" };
 
   constructor(private userService: UserService, private logService: LogService) { }
 
