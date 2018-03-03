@@ -22,7 +22,7 @@ export class SignInComponent {
   /*Input your Email and password to sign in into site*/
   /*Input password:*/
   /*Sign in*/
-  public teacherModel: User = { Id: "", Login: "", Password: "111111", Role: "" };
+  public teacherModel: User = { Id: "", Login: "", Password: "111111", Role: "", CathedraId:"" };
 
   constructor(public router: Router,
     private userService: UserService, private logService: LogService) { }
