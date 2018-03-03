@@ -46,13 +46,9 @@ export class CathedrasComponent implements OnInit {
   }
   public addCathedra():void{
 
-      //this.groupsArr.push({
-      //  gName: this.groupName,
-        
-    //});
     this.cathedraService.addCathedra(this.newCathedra).subscribe(responce => {
       this.newCathedra = new Cathedra();
-      console.log("Group create successfully");
+      console.log("Cathedra create successfully");
       this.loadCathedras();
     })
       //this.groupName = '';

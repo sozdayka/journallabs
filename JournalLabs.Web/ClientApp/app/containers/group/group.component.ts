@@ -23,22 +23,12 @@ export class GroupComponent implements OnInit {
   groupInfo: Group = new Group();
   student: AddStudentToGroup = new AddStudentToGroup();
   groupStudents: Student[] = [];
-  GroupName: string;
-  StudentCount: number;
+
+
 
   groupId:string = "";
   StudentName = '';
-  
- 
-  public stugentArr: [{sName: string}] = [{
-    sName: 'Igor Rosliakov'
-  }, {
-    sName: 'Vlad Sas'
-  }, {
-    sName: 'Artem Swenton'
-  }, {
-    sName: 'Taras Ziza'
-  }];
+
 
 
 
@@ -61,8 +51,8 @@ export class GroupComponent implements OnInit {
     });    
   }
 
-  public loadGroupInfo(goripId: string) {
-    this.groupService.getGroup(goripId).subscribe(data => {
+  public loadGroupInfo(groupId: string) {
+    this.groupService.getGroup(groupId).subscribe(data => {
       this.groupInfo = data;
       console.log("Group loaded successfully");
     });
@@ -91,7 +81,7 @@ export class GroupComponent implements OnInit {
   }
   public changeGroupName() {
     this.groupService.updateGroup(this.groupInfo).subscribe(response => {
-      console.log("Change group Name: " + this.GroupName);
+      console.log("Change group Name: " + this.groupInfo.Name);
     });
   }
   public changeStudentName(student: Student) {
