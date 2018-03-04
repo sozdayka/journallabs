@@ -6,12 +6,16 @@ import { StudentJournal } from '../../models/studentJournal';
 import { LogService } from '../../shared/log.service';
 
 import { FilterPipe } from '../../shared/filter.pipe';
-
+class FilterClass {
+  name: string;
+  selected: boolean = true;
+}
 @Component({
   selector: 'nav-menu',
   templateUrl: './navmenu.component.html',
   styleUrls: ['./navmenu.component.css']
 })
+
 
 
 export class NavMenuComponent implements OnInit {
@@ -20,10 +24,11 @@ export class NavMenuComponent implements OnInit {
   currentRole: string = "";
 
   public searchText: Journal[];
-  public predmetsArr: string[] = [];
-  public groupsArr: string[] = [];
+  public lessonArray: FilterClass[] = [];
+  public groupsArray: FilterClass[] = [];
 
   public teacherJournals: Journal[] = [];
+  public filteredJournals: Journal[] = [];
   public studentJournals: StudentJournal[] = [];
   public studentName: string = "";
   constructor(public router: Router,
@@ -54,23 +59,20 @@ export class NavMenuComponent implements OnInit {
           //console.log(response);
           this.teacherJournals = JSON.parse(response._body);
           // console.log("***  ****");
-          this.teacherJournals.forEach(el => {
-            el.Selected = true;
-          });
+          this.filteredJournals = Object.assign([], this.teacherJournals);
           //this.predmetsArr.push(this.teacherJournals.map(item => item.Id));
-          this.predmetsArr = this.teacherJournals.map(item => item.LessonName);
-          this.groupsArr = this.teacherJournals.map(item => item.GroupName);
-          // // this.predmetsArr = this.teacherJournals.filter(item => {
-          // //   if(ids.indexOf(item.Id) === -1)return item.LessonName;
-          // // });
-          // this.groupsArr = this.groupsArr.filter(function(elem, index, self) {
-          //   return index === self.indexOf(elem);
-          // });
-
-
-          //  console.log(this.predmetsArr);
-          //  console.log(this.groupsArr);
-          //  console.log("***  ****");
+          var lessons = this.teacherJournals.map(x => x.LessonName).filter((value, index, self)=> { 
+            return self.indexOf(value) === index;
+          });
+          var groups = this.teacherJournals.map(x => x.GroupName).filter((value, index, self) => {
+            return self.indexOf(value) === index;
+          });
+          lessons.forEach(el => {
+            this.lessonArray.push({ name:el, selected:true })
+          });
+          groups.forEach(el => {
+            this.groupsArray.push({ name: el, selected: true })
+          });
           this.router.navigate(['journal'], { queryParams: { journalId: this.teacherJournals[0].Id } });
           return;
         }
@@ -132,22 +134,12 @@ export class NavMenuComponent implements OnInit {
     }
     return null;
   }
-  public getFilterSelected(SelectedVal) {
-    // console.log("selected");
-    //console.log(key);
-    // this.searchText.push(SelectedVal);
-    // console.log(this.searchText);
-    this.searchText = this.teacherJournals.filter(s => {
-      return s.Selected;
+  public getFilterSelected() {
+    this.filteredJournals = this.teacherJournals.filter(s => {
+      return this.groupsArray.some(x => x.name === s.GroupName && x.selected == true)
+        || this.lessonArray.some(x => x.name === s.LessonName && x.selected == true);
     });
-    //  if(this.searchText.length){
-    //     var index = this.functiontofindIndexByKeyValue(this.searchText, "LessonName", SelectedVal.LessonName);
-    //     this.searchText.splice(index, 1);
 
-    //   }else{
-    //       this.searchText.push(SelectedVal);
-
-    //   }
     console.log(this.searchText);
 
 

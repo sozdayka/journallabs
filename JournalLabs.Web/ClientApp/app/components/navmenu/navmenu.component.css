@@ -1,4 +1,4 @@
-﻿.mini-submenu{
+.mini-submenu{
     /*display:none;  */
     background-color: rgba(0, 0, 0, 0);  
     border: 1px solid rgba(0, 0, 0, 0.9);
@@ -130,8 +130,8 @@ li.link-active a:focus {
     /* On small screens, convert the nav menu to a vertical sidebar */
     .main-nav {
         height: 100%;
-        max-width: 330px;
-        width: calc(25% - 20px);
+        max-width: 340px;
+        width: calc(30% - 20px);
     }
     .navbar {
         border-radius: 0px;

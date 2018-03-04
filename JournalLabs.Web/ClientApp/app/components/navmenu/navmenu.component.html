@@ -64,11 +64,11 @@
           </div></li>
         </ng-container>
         <input type="hidden">
-        <ng-container *ngIf="teacherJournals.length!=0 && (currentRole=='Teacher'||currentRole=='Assistant')">
-          <li  *ngFor="let journal of teacherJournals | filter : searchText; index as i"  id="teacher{{i}}" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="collapseMenu()">
+        <ng-container *ngIf="filteredJournals.length!=0 && (currentRole=='Teacher'||currentRole=='Assistant')">
+          <li  *ngFor="let journal of filteredJournals ; index as i"  id="teacher{{i}}" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="collapseMenu()">
             <a [routerLink]="['/journal']" [queryParams]="{ journalId: journal.Id }">
-              <span class='glyphicon glyphicon-comment'></span> Преподаватель - {{journal.LessonName}}<!--Teacher-->
-              
+              <span class='glyphicon glyphicon-comment'></span> Преподаватель - {{journal.LessonName}}({{journal.GroupName}})<!--Teacher-->
+
             </a>
           </li>
         </ng-container>
@@ -101,11 +101,10 @@
                   
                   <div class="panel panel-default">
                     <div class="panel-body">
-                      <p *ngFor=" let journal of teacherJournals;let i=index" id="teacher{{i}}" >
-                          <input  type="checkbox" name="predmaetfill" (change)="getFilterSelected(journal)"
-                          [(ngModel)]="journal.Selected" 
-                          
-                           value="{{journal.Id}}" id="predmetfilter{{i}}" /> <label for="predmetfilter{{i}}"> {{journal.LessonName}} </label>
+                      <p *ngFor=" let lesson of lessonArray;let i=index" id="teacher{{i}}" >
+                          <input  type="checkbox" name="predmaetfill" (change)="getFilterSelected()"
+                                 [(ngModel)]="lesson.selected"
+                           value="{{lesson.name}}" id="predmetfilter{{i}}" /> <label for="predmetfilter{{i}}"> {{lesson.name}} </label>
                       </p>
                     </div>
                   </div>
@@ -116,11 +115,10 @@
                 
                 <div class="panel panel-default">
                   <div class="panel-body">
-                    <p *ngFor=" let journal of teacherJournals;let i=index" id="teacher{{i}}" >
-                        <input  type="checkbox" name="predmaetfill" (change)="getFilterSelected(journal)"
-                        [(ngModel)]="journal.Selected" 
-                        
-                         value="{{journal.Id}}" id="predmetfilter{{i}}" /> <label for="predmetfilter{{i}}"> {{journal.GroupName}} </label>
+                    <p *ngFor=" let group of groupsArray;let i=index" id="teacher{{i}}" >
+                        <input  type="checkbox" name="predmaetfill" (change)="getFilterSelected()"
+                               [(ngModel)]="group.selected"
+                         value="{{group.name}}" id="predmetfilter{{i}}" /> <label for="predmetfilter{{i}}"> {{group.name}} </label>
                     </p>
                   </div>
                 </div>
