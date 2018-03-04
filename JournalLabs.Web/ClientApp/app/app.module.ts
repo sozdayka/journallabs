@@ -41,6 +41,8 @@ import { GroupService } from './shared/group.service';
 import { CathedraService } from './shared/cathedra.service';
 import { StudentGroupService } from './shared/student-group.service';
 
+import { FilterPipe } from './shared/filter.pipe';
+
 export function createTranslateLoader(http: Http, baseHref) {
     // Temporary Azure hack
     if (baseHref === null && typeof window !== 'undefined') {
@@ -65,6 +67,8 @@ export function createTranslateLoader(http: Http, baseHref) {
       CathedrasComponent,
       GroupsComponent,
       GroupComponent,
+
+      FilterPipe,
       
     ],
     imports: [
