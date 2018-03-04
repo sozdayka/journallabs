@@ -55,7 +55,7 @@ export class NavMenuComponent implements OnInit {
             this.teacherJournals = JSON.parse(response._body);
 // console.log("***  ****");
 this.teacherJournals.forEach(el=>{
-  el.IsExam = true;
+  el.IsExam = false;
 });
 //this.predmetsArr.push(this.teacherJournals.map(item => item.Id));
 this.predmetsArr = this.teacherJournals.map(item => item.LessonName);
