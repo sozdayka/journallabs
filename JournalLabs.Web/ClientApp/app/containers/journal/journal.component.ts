@@ -263,14 +263,16 @@ export class JournalComponent implements OnInit {
       });
       return;
     }
-    this.subgroupStudents.splice(index, 1);
+    this.subgroupStudents = this.subgroupStudents.filter(obj => obj.groupName !== group.Name);
+    //this.subgroupStudents.splice(this.subgroupStudents.indexOf(x=>x.), 1);
   }
   public selectStudent(student: Student, event: any, index: number) {
     if (event.target.checked) {
       this.addStudentToJournalViewModel.Students.push(student);
       return;
     }
-    this.addStudentToJournalViewModel.Students.splice(index,1);
+    this.addStudentToJournalViewModel.Students = this.addStudentToJournalViewModel.Students.filter(obj => obj !== student);
+    //this.addStudentToJournalViewModel.Students.splice(index,1);
   }
   public addStudentToJournal() {
     if (this.isAddSudent) {
