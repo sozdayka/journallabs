@@ -23,19 +23,6 @@ export class CreateJournalComponent {
   
   public studentListSelected: AddStudentToJournalViewModel = new AddStudentToJournalViewModel();
   
-  // export class AddStudentToJournalViewModel {
-  //   JournalId: string = "";
-  //   Students: Student[] = [];
-  // }
-        //   export class Student {
-        //     Id: string = "";
-        //     StudentName: string = "";
-        //  }
- 
-
-
-
-  //public groupsArray: {Group: { Id: string,Name: string }[],selected:boolean} []= [];
   public groupsArray: Group []= [];
   public groupsSelected: {Id:string,selected:boolean}[];
 
@@ -75,14 +62,13 @@ export class CreateJournalComponent {
   public createJournal() {
     var teacherName = localStorage.getItem('TeacherName');
     this.createJournalViewModel.TeacherIds.push(localStorage.getItem('TeacherId'));
-    this.createJournalViewModel.IsExam = 'true';
     this.createJournalViewModel.Students = this.studentListSelected.Students;
-console.log(this.studentListSelected.Students);
+    console.log(this.studentListSelected.Students);
 
     this.journalService.addJournal(this.createJournalViewModel).subscribe(resp => {
 
 
-      var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} создал журнал под названием ${this.createJournalViewModel.LessonName}, с количеством студентов ${this.createJournalViewModel.StudentsCount}, и количеством видов работ ${this.createJournalViewModel.LabBlocksSettings.length}`;
+      var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} создал журнал под названием ${this.createJournalViewModel.LessonName}, и количеством видов работ ${this.createJournalViewModel.LabBlocksSettings.length}`;
       this.logService.writeTeacherLog(logText).subscribe(response => {
         alert("Журнал успешно добавлен");
         location.reload();

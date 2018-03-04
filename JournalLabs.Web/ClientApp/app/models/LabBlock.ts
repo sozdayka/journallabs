@@ -18,4 +18,5 @@ export class LabBlock {
    MarkTeacherName: string = "";
    Color: string = "";
    oldMark: number = 0;
+   Deadline: string = "";
 }

@@ -5,4 +5,5 @@ export class KindOfWork {
    isSecondBlockVisible: boolean = false;
    IsVisibleToStudent: boolean = false;
    IsSecondBlock: boolean = false;
+   Deadline: string = "";
 }

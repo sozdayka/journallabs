@@ -24,5 +24,6 @@ namespace JournalLabs.API.ViewModels
         public bool IsSecondBlock { get; set; }
         public string MarkTeacherName { get; set; }
         public string Color { get; set; }
+        public string Deadline { get; set; }
     }
 }
