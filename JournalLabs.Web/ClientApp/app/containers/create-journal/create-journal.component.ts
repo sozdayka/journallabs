@@ -8,13 +8,32 @@ import { LogService } from '../../shared/log.service';
 
 import { GroupService } from '../../shared/group.service';
 import { StudentGroupService } from '../../shared/student-group.service';
+import { StudentService } from '../../shared/student.service';
 import { Group } from '../../models/Group';
+import { Student } from '../../models/Student';
+
+import { AddStudentToJournalViewModel } from "../../models/addStudentToJournalViewModel";
 
 @Component({
   selector: 'create-journal',
   templateUrl: './create-journal.component.html'
 })
 export class CreateJournalComponent {
+  public studntOfGroupArray: {id:string, groupName:string, students: Student} []=[];
+  
+  public studentListSelected: AddStudentToJournalViewModel = new AddStudentToJournalViewModel();
+  
+  // export class AddStudentToJournalViewModel {
+  //   JournalId: string = "";
+  //   Students: Student[] = [];
+  // }
+        //   export class Student {
+        //     Id: string = "";
+        //     StudentName: string = "";
+        //  }
+ 
+
+
 
   //public groupsArray: {Group: { Id: string,Name: string }[],selected:boolean} []= [];
   public groupsArray: Group []= [];
@@ -23,7 +42,7 @@ export class CreateJournalComponent {
   public assistantList: User[] = [];
   public labBlockCount: number = 0;
   public createJournalViewModel: CreateJournalViewModel = new CreateJournalViewModel();
-  public constructor(public journalService: JournalService, public userService: UserService, public logService: LogService, public groupService: GroupService,public studentService: StudentGroupService ) {
+  public constructor(public journalService: JournalService, public userService: UserService, public logService: LogService, public groupService: GroupService,public studentGroupService: StudentGroupService ,public studentService:StudentService) {
     var assistants = this.userService.getAllAssistants().subscribe(response => {
       this.assistantList = response;
     });
@@ -39,11 +58,6 @@ export class CreateJournalComponent {
       this.groupsArray = [];
       var responseArray = JSON.stringify(data);
       this.groupsArray = JSON.parse(responseArray);
-   
-      // this.groupsArray.forEach(s => {
-      //     s.selected = false;
-      // });
-
       console.log("Groups loaded successfully");
     });
 
@@ -61,7 +75,13 @@ export class CreateJournalComponent {
   public createJournal() {
     var teacherName = localStorage.getItem('TeacherName');
     this.createJournalViewModel.TeacherIds.push(localStorage.getItem('TeacherId'));
+    this.createJournalViewModel.IsExam = 'true';
+    this.createJournalViewModel.Students = this.studentListSelected.Students;
+console.log(this.studentListSelected.Students);
+
     this.journalService.addJournal(this.createJournalViewModel).subscribe(resp => {
+
+
       var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} создал журнал под названием ${this.createJournalViewModel.LessonName}, с количеством студентов ${this.createJournalViewModel.StudentsCount}, и количеством видов работ ${this.createJournalViewModel.LabBlocksSettings.length}`;
       this.logService.writeTeacherLog(logText).subscribe(response => {
         alert("Журнал успешно добавлен");
@@ -86,7 +106,34 @@ export class CreateJournalComponent {
 
 
   // igor add
-  public getSelected(id) {
+  public functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
+    for (var i = 0; i < arraytosearch.length; i++) { 
+      if (arraytosearch[i][key] == valuetosearch) {
+        return i;
+      }
+    }
+    return null;
+  }
+
+
+  public getSelectedStudent(SelectedVal) {
+
+    if (this.studentListSelected.Students.some(elem => elem.Id.indexOf(SelectedVal.Id) > -1)) {
+      var index = this.functiontofindIndexByKeyValue(this.studentListSelected.Students, "StudentName", SelectedVal.StudentName);
+      this.studentListSelected.Students.splice(index, 1);
+
+    }else{
+        this.studentListSelected.Students.push(
+          {
+                Id: SelectedVal.Id,
+                StudentName: SelectedVal.StudentName
+            }
+          );
+      
+    }
+  }
+
+  public getSelected(SelectedVal: any) {
     this.groupselecte = true;
 
     // this.studList = [];
@@ -103,12 +150,16 @@ export class CreateJournalComponent {
     // this.selected_groups = this.groupsArray.filter(s => {
 
 
-        this.studentService.getStudentGroup(id).subscribe(data => {
-          //this.groupsArray = [];
-          console.log(data);    
+        this.studentService.getStudentsByGroupId(SelectedVal.Id).subscribe(data => {
+          this.studntOfGroupArray = [];
+ //         console.log(data);    
           var responseArray = JSON.stringify(data);
-        // this.groupsArray = JSON.parse(responseArray);
-    console.log(responseArray);
+         
+          this.studntOfGroupArray.push({
+            id:SelectedVal.Id,
+            groupName:SelectedVal.Name,
+            students: JSON.parse(responseArray)});
+   // console.log( this.studntOfGroupArray );
         // console.log("Groups loaded successfully");
         });
       

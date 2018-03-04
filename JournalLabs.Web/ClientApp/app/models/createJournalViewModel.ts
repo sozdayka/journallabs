@@ -1,4 +1,5 @@
 import { LabBlock } from "./LabBlock"
+import { Student } from "./Student";
 export class CreateJournalViewModel {
   LessonName: string = "";
   GroupName: string = "";
@@ -7,9 +8,6 @@ export class CreateJournalViewModel {
   LabBlocksSettings: LabBlock[] = [];
   TeacherIds: string[] = [];
 
-  // public Guid? Id { get; set; }
-  //       public bool IsExam { get; set; }
-  //       public string GroupName { get; set; }
-  //       public string LessonName { get; set; }
-  //       public virtual List<LabBlock> LabBlocks { get; set; }
+  Students: Student[] = [];
+
 }

@@ -20,8 +20,9 @@ export class LogService {
   }
 
   writeTeacherLog(data: string): Observable<any> {
-    //return this.transferHttp.get(`${this.baseUrl}/api/Log/WriteTeacherLog?data=` + data);
+    //return "ok";
     return this.transferHttp.get(`${this.baseUrl}/api/Group/GetGroups`);
+    //return this.transferHttp.get(`${this.baseUrl}/api/Log/WriteTeacherLog?data=` + data);
   }
 
   writeDevelopmentLog(data: string): Observable<any> {

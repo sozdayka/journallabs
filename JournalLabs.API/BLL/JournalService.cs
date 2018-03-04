@@ -41,6 +41,8 @@ namespace JournalLabs.API.BLL
             Journal journal = new Journal();
             journal.Id = journalId;
             journal.LessonName = createJournalViewModel.LessonName;
+            journal.IsExam = createJournalViewModel.IsExam;
+            journal.GroupName = createJournalViewModel.GroupName;
 
             _journalRepository.CreateJournal(journal);
 
