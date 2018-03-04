@@ -12,7 +12,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
-import { UserDetailComponent } from './components/user-detail/user-detail.component';
+import { GroupStudentsComponent } from './components/group-students/group-students.component';
 import { AdminComponent } from './containers/admin/admin.component';
 // import { ChatComponent } from './containers/chat/chat.component';
 import { NotFoundComponent } from './containers/not-found/not-found.component';
@@ -55,7 +55,7 @@ export function createTranslateLoader(http: Http, baseHref) {
         AppComponent,
         NavMenuComponent,
         AdminComponent,
-        UserDetailComponent,
+      GroupStudentsComponent,
         // ChatComponent,
         NotFoundComponent,
       CreateJournalComponent,
