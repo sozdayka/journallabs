@@ -29,6 +29,7 @@
     <None Remove="ClientApp\app\models\Remark.ts" />
     <None Remove="ClientApp\app\models\studentGroup.ts" />
     <None Remove="ClientApp\app\models\studentJournal.ts" />
+    <None Remove="ClientApp\app\models\subgroupStudents.ts" />
     <None Remove="ClientApp\app\models\teacherJournal.ts" />
     <None Remove="ClientApp\app\shared\cathedra.service.ts" />
     <None Remove="ClientApp\app\shared\group.service.ts" />
@@ -57,6 +58,7 @@
     <TypeScriptCompile Include="ClientApp\app\models\studentGroup.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\studentJournal.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\studentLabBlocksViewModel.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\subgroupStudents.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\teacherJournal.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\cathedra.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\group.service.ts" />

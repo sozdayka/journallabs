@@ -7,8 +7,7 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using JournalLabs.API.BLL;
 using JournalLabs.API.Models;
-using JournalLabs.API.BLL;
-using JournalLabs.API.Models;
+
 
 namespace StudentLabs.API.Controllers
 {
