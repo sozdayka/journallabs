@@ -42,42 +42,7 @@
 
 
 <!-- Group List -->
-<h4>Выберите группу</h4>
-<ul>
-  <li *ngFor="let key of groupsArray ">
-    <input (change)="getSelected(key)" type="checkbox"
-           name="group"
-           value="{{key.Id}}"
-           />
-    <span>{{key.Name}}</span>
-  </li>
-</ul>
-<!-- Selected Group
-<div class="selected-games-wrap">
-  <div class="selected-game" *ngFor="let s of selected_games" >
-    <span>{{s.name}} <span class="delete-game" (click)="deleteGame(s.id)" title="Click to delete">X</span></span>
-  </div>
-</div>
--->
-<ng-container *ngIf="groupselecte==true">
-  <h4>Выберите студентов</h4>
-  <ul class="game-list">
-    <li *ngFor="let g of studntOfGroupArray " class="game-item">
-      {{g.groupName}}
-      <ul>
-        <li *ngFor="let key of g.students ">
-
-          <input (change)="getSelectedStudent(key)" type="checkbox"
-                 name="student"
-                 value="{{key.Id}}"
-                 />
-          <span class="game-text">{{key.StudentName}}</span>
-
-        </li>
-      </ul>
-    </li>
-  </ul>
-</ng-container>
+<group-students (groupStudents)="StudentsChange($event)"></group-students>
 <br />
 <p>Выберите ассистентов которые будут иметь доступ к журналу:</p><!--Input count lab blocks:-->
 <ul style="width: 300px; height: 200px; overflow: auto">

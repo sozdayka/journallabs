@@ -3,7 +3,7 @@ import { Student } from "./Student";
 export class CreateJournalViewModel {
   LessonName: string = "";
   GroupName: string = "";
-  IsExam: string = "";
+  IsExam: boolean = true;
   LabBlocksSettings: LabBlock[] = [];
   TeacherIds: string[] = [];
 
