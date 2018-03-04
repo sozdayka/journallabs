@@ -5,4 +5,5 @@ export class Journal {
    TeacherId: string = "";
    LessonName: string = "";
    GroupName: string = "";
+   IsExam:boolean = false;
 }
