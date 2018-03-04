@@ -237,8 +237,8 @@ export class JournalComponent implements OnInit {
         }); 
       });
   }
-  public StudentsChange(students: AddStudentToJournalViewModel) {
-    this.addStudentToJournalViewModel.Students = students.Students;
+  public StudentsChange(students: Student[]) {
+    this.addStudentToJournalViewModel.Students = students;
   }
 
   public addStudentToJournal() {

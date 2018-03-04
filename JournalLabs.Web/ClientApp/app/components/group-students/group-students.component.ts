@@ -11,11 +11,11 @@ import { StudentService } from '../../shared/student.service';
     templateUrl: './group-students.component.html'
 })
 export class GroupStudentsComponent implements OnInit {
-    @Output() groupStudents: EventEmitter<AddStudentToJournalViewModel> = new EventEmitter<AddStudentToJournalViewModel>();;
+  @Output() groupStudents: EventEmitter<Student[]> = new EventEmitter<Student[]>();;
     public groupsArray: Group[] = [];
     public isGroupSelected: boolean = false;
     public subgroupStudents: SubgroupStudents[] = [];
-    public addStudentToJournalViewModel: AddStudentToJournalViewModel = new AddStudentToJournalViewModel();
+    public students: Student[] = [];
 
     constructor(private groupService: GroupService, private studentService: StudentService
     ) { } //private studentService: StudentService
@@ -46,12 +46,12 @@ export class GroupStudentsComponent implements OnInit {
     }
     public selectStudent(student: Student, event: any, index: number) {
       if (event.target.checked) {
-        this.addStudentToJournalViewModel.Students.push(student);
-        this.groupStudents.emit(this.addStudentToJournalViewModel);
+        this.students.push(student);
+        this.groupStudents.emit(this.students);
         return;
       }
-      this.addStudentToJournalViewModel.Students = this.addStudentToJournalViewModel.Students.filter(obj => obj !== student);
-      this.groupStudents.emit(this.addStudentToJournalViewModel);
+      this.students = this.students.filter(obj => obj !== student);
+      this.groupStudents.emit(this.students);
       //this.addStudentToJournalViewModel.Students.splice(index,1);
     }
 
