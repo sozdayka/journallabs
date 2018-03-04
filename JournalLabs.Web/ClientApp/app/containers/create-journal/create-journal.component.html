@@ -25,20 +25,19 @@
   <ng-container *ngFor=" let key of createJournalViewModel.LabBlocksSettings; let i = index">
     <tr>
       <td><span>Вид работы - {{i}}</span></td>
-      <td style="text-align: center;"><input type="text" [(ngModel)]="key.deadLine"></td>
+      <td style="text-align: center;"><input type="text" [(ngModel)]="key.Deadline"></td>
       <td style="text-align: center;"><input type="checkbox" [(ngModel)]="key.IsSecondBlock"></td>
       <td style="text-align: center;"><input type="checkbox" [(ngModel)]="key.IsKindOfWorkVisible"></td>
       <td style="text-align: center;"><input type="checkbox" [(ngModel)]="key.IsCalculateMark" [disabled]="key.IsBoolField"></td>
       <td style="text-align: center;"><input type="checkbox" [(ngModel)]="key.IsVisibleToStudent"></td>
       <td style="text-align: center;"><input type="checkbox" [ngModel]="key.IsBoolField" (ngModelChange)="selectBooleanTypeField(key,$event)"></td>
-    </tr>
   </ng-container>
 </table>
 
-<h4>Выберите тып предмета</h4>
-<input type="radio" name="typejournals" value="зачет" id="typj1"><label for="typj1">Зачет</label>
+<h4>Выберите тип предмета</h4>
+<input type="radio" name="typejournals" [value]="false" [(ngModel)]="createJournalViewModel.IsExam" id="typj1"><label for="typj1">Зачет</label>
 <br>
-<input type="radio" name="typejournals" value="экзамен" id="typj2"><label for="typj2">Экзамен</label>
+<input type="radio" name="typejournals" [value]="true" [(ngModel)]="createJournalViewModel.IsExam" id="typj2"><label for="typj2">Экзамен</label>
 <br />
 
 

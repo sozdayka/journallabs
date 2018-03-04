@@ -82,7 +82,8 @@ namespace JournalLabs.API.BLL
                         Id = kindOfWork, NameKindOfWork = $"Вид работы {j + 1}",
                         IsKindOfWorkVisible = labBlock.IsKindOfWorkVisible,
                         IsVisibleToStudent= labBlock.IsVisibleToStudent,
-                        IsSecondBlock = labBlock.IsSecondBlock
+                        IsSecondBlock = labBlock.IsSecondBlock,
+                        Deadline = labBlock.Deadline
                     });
                 }
                 var createLabBlock = new LabBlock();
