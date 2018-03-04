@@ -65,7 +65,7 @@
         </ng-container>
         <input type="hidden">
         <ng-container *ngIf="teacherJournals.length!=0 && (currentRole=='Teacher'||currentRole=='Assistant')">
-          <li  *ngFor="let journal of teacherJournals | filter : searchText:groupsArr; index as i"  id="teacher{{i}}" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="collapseMenu()">
+          <li  *ngFor="let journal of teacherJournals | filter : searchText; index as i"  id="teacher{{i}}" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}" (click)="collapseMenu()">
             <a [routerLink]="['/journal']" [queryParams]="{ journalId: journal.Id }">
               <span class='glyphicon glyphicon-comment'></span> Преподаватель - {{journal.LessonName}}<!--Teacher-->
               
@@ -103,7 +103,7 @@
                     <div class="panel-body">
                       <p *ngFor=" let journal of teacherJournals;let i=index" id="teacher{{i}}" >
                           <input  type="checkbox" name="predmaetfill" (change)="getFilterSelected(journal)"
-                          [(ngModel)]="journal.IsExam" 
+                          [(ngModel)]="journal.Selected" 
                           
                            value="{{journal.Id}}" id="predmetfilter{{i}}" /> <label for="predmetfilter{{i}}"> {{journal.LessonName}} </label>
                       </p>
@@ -118,7 +118,7 @@
                   <div class="panel-body">
                     <p *ngFor=" let journal of teacherJournals;let i=index" id="teacher{{i}}" >
                         <input  type="checkbox" name="predmaetfill" (change)="getFilterSelected(journal)"
-                        [(ngModel)]="journal.IsExam" 
+                        [(ngModel)]="journal.Selected" 
                         
                          value="{{journal.Id}}" id="predmetfilter{{i}}" /> <label for="predmetfilter{{i}}"> {{journal.GroupName}} </label>
                     </p>
