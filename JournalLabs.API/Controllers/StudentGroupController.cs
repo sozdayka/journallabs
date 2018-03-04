@@ -18,13 +18,7 @@ namespace JournalLabs.API.Controllers
         {
             _studentGroupService = new StudentGroupService();
         }
-        //[Route("GetStudentGroups")]
-        //[HttpGet]
-        //public IHttpActionResult GetStudentGroups()
-        //{
-        //    var studentGroups = _studentGroupService.GetStudentGroups();
-        //    return Ok(studentGroups);
-        //}
+
         [Route("CreateStudentGroup")]
         [HttpPost]
         public IHttpActionResult CreateStudentGroup(StudentGroup studentGroup)
