@@ -41,6 +41,10 @@ export class JournalComponent implements OnInit {
   public isAddSudent:boolean = false;
   public addStudentToJournalViewModel: AddStudentToJournalViewModel = new AddStudentToJournalViewModel();
 
+
+
+  public isTotal:boolean = false; 
+
   public constructor(public journalService: JournalService,
     public labBlockService: LabBlockService,
     public kindOfWorkService: KindOfWorkService,
@@ -327,4 +331,171 @@ export class JournalComponent implements OnInit {
         });
       });
   }
+
+
+  public totalMarkInfo(labBlocks,isexma){
+    var returnText: string =" ";
+    let sum: number = 0;
+    for (let labBlock of labBlocks) {
+      if (labBlock.IsCalculateMark) {
+        sum += labBlock.Mark;// > labBlock.SecondMark ? labBlock.FirstMark : labBlock.SecondMark;
+      }
+
+    }
+    if(!isexma){
+      if(sum<60){
+        returnText = "незарах";
+      }else{
+        returnText = "зарах";
+      }
+    }else{
+      if(90<=sum && sum<=100){
+        returnText = "отлично";
+      }else if(75<sum && sum<=89){
+        returnText = "хорошо";
+      }else if(60<sum && sum<=74){
+        returnText = "достаточно";
+      }else{
+        returnText = " ";
+      }
+      
+    }
+    //console.log(sum+" <- sum | EKTC-> "+returnText);
+    return returnText;
+  }
+
+  public VarCountA:number=0;
+  public VarCountB:number=0;
+  public VarCountC:number=0;
+  public VarCountD:number=0;
+  public VarCountE:number;
+  public VarCountFX: number = 0;
+
+  public totalMarkEKTCInfo(labBlocks,isexma){
+    var returnText: string =" ";
+    let sum: number = 0;
+
+    for (let labBlock of labBlocks) {
+      if (labBlock.IsCalculateMark) {
+        sum += labBlock.Mark;// > labBlock.SecondMark ? labBlock.FirstMark : labBlock.SecondMark;
+      }
+
+    }
+      if(90<=sum && sum<=100){
+        returnText = "A";
+        this.VarCountA+=1;
+      }else if(85<sum && sum<=89){
+        returnText = "B";
+        this.VarCountB+=1;
+      }else if(75<sum && sum<=84){
+        returnText = "C";
+        this.VarCountC+=1;
+      }else if(65<sum && sum<=74){
+        returnText = "D";
+        this.VarCountD+=1;
+      }else if(60<sum && sum<=64){
+        returnText = "E";
+        this.VarCountE+=1;
+      }else{
+        returnText = "FX";
+        this.VarCountFX+=1;
+      }
+      
+    console.log( this.VarCountA);
+    //console.log(sum+" <- sum | EKTC-> "+returnText);
+    return returnText;
+  }
+  public getCSSClassesDeadline(i,deadline,current){
+    if(deadline[i]){
+      
+      if(new Date(deadline[i].Deadline) < new Date(current)) 
+      {
+        return "deadlineend";
+      }
+    }
+  }
+
+  public EKTCLabInfo: { 
+    name: string, 
+    count: number
+  }[]=[];
+
+  public MakeLabInfo: { 
+    predmet: string, 
+    count: number
+  }[]=[];
+
+  public EndLabInfo: { 
+    predmet: string, 
+    count: number
+  }[]=[];
+  
+  public maxMarkInfo: {
+    studentName: string, 
+    predmet: string, 
+    topmark: number
+  }[]=[];
+  //{studentName: string; topmark: string; predmet: string};
+  
+
+
+  public statAvgMark(){
+    //console.log(this.journalViewModel);
+ 
+    let i = 0;
+    let sum = 0;
+    let best;
+    let maxMark = 0;
+    let countMakelab = 0;
+    let countEndLabInfo = 0;
+
+    this.MakeLabInfo=[];
+    this.maxMarkInfo=[];
+    this.EndLabInfo=[];
+
+    this.journalViewModel.StudentResultForJournal.forEach(key2=>{
+       
+      for (let labBlock of key2.StudentLabBlocks) {
+        if (labBlock.IsCalculateMark) {
+
+          if(maxMark<labBlock.Mark) {
+            this.maxMarkInfo=[];
+            maxMark = labBlock.Mark;
+              this.maxMarkInfo.push({topmark : maxMark,
+              predmet : this.journalViewModel.JournalModel.LessonName,
+              studentName : key2.StudentInfo.StudentName});
+          }
+          //i+=1;
+          
+          sum += labBlock.Mark;// > labBlock.SecondMark ? labBlock.FirstMark : labBlock.SecondMark;
+        }
+
+        if(labBlock.IsBoolField){
+          if(labBlock.Mark){
+
+            countMakelab +=1;
+          } 
+        }else{
+          if(labBlock.Mark){
+            countEndLabInfo += 1; 
+          }
+        } 
+      }
+    });
+    this.MakeLabInfo.push({
+      predmet:this.journalViewModel.JournalModel.LessonName,
+      count:countMakelab
+    })
+      this.EndLabInfo.push({
+        predmet:this.journalViewModel.JournalModel.LessonName,
+        count:countEndLabInfo
+      })
+    
+   // console.log(this.MakeLabInfo);
+    return sum;
+    //console.log("count:"+i+" sum:"+sum);
+  
+  }
+
+  
 }
