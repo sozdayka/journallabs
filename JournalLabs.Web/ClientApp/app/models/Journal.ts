@@ -5,5 +5,6 @@ export class Journal {
    TeacherId: string = "";
    LessonName: string = "";
    GroupName: string = "";
-   IsExam:boolean = false;
+   IsExam: boolean = false;
+   Selected: boolean = true;
 }
