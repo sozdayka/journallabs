@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { LogService } from '../../shared/log.service';
+import { Log } from '../../models/Log';
 @Component({
   selector: 'view-logs',
   templateUrl: 'view-logs.component.html'
@@ -9,38 +10,38 @@ export class ViewLogsComponent implements OnInit {
   public typeLogs='user'; // admin/user
   public viewLog=[];
 
-  public logsArr: {ltext: string, ldate:string, ltype:string} []= [{
-    ltext: 'Пользователь 123 авторизировался',
-    ldate: '2019-02-10 10:00',
-    ltype: 'user'
-  }, {
-    ltext: 'Admin добавил пользователя "123", и сварил борщ из мяса со вкусом мыла',
-    ldate: '2019-02-11 12:47',
-    ltype: 'admin'
-  }, {
-    ltext: 'Пользователь 123 создал журнал СЛон и пошел работать в Мак на научке',
-    ldate: '2019-02-25 20:59',
-    ltype: 'user'
-  }];
-
+  public logsArr:Log[]=[];
 
 
   public constructor(
-
+   
     public logService: LogService
   ) {
   }
 
   public ngOnInit(): void {
-    this.filterChange("user");
+    //this.filterChange("user");
+    
+    this.loadLogs();
+          
+
+  }
+
+  public loadLogs() {
+
+        
+    this.logService.getLogs(this.typeLogs).subscribe(data => {
+      this.logsArr = [];
+      var responseArray = JSON.stringify(data);
+      this.logsArr = JSON.parse(responseArray);
+      console.log(responseArray);
+      console.log("Groups loaded successfully");
+    });
   }
 
   public filterChange(view){
     this.typeLogs = view; 
-
-    this.viewLog = this.logsArr.filter(s => {
-      return s.ltype==this.typeLogs;
-    });
+    this.loadLogs();
   }
 
  

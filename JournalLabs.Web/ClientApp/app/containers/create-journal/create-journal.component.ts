@@ -50,7 +50,7 @@ export class CreateJournalComponent {
 
 
       var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} создал журнал под названием ${this.createJournalViewModel.LessonName}, и количеством видов работ ${this.createJournalViewModel.LabBlocksSettings.length}`;
-      this.logService.writeTeacherLog(logText).subscribe(response => {
+      this.logService.writeTeacherLog(logText,"user").subscribe(response => {
         alert("Журнал успешно добавлен");
         location.reload();
       });

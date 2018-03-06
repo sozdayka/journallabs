@@ -13,18 +13,17 @@
       <thead> 
         <tr> 
           <th>#</th> 
+          <th>Дата</th> 
           <th>Текст</th> 
          
-          <th>Дата</th> 
-          <th></th> 
         </tr> 
       </thead> 
       <tbody>
-        <ng-container *ngFor=" let key of viewLog;let i=index"> 
+        <ng-container *ngFor=" let key of logsArr;let i=index"> 
           <tr> 
             <th scope="row">{{i}}</th> 
-            <td>{{key.ltext}}</td> 
-            <td>{{key.ldate}}</td>
+            <td colspan="2">{{key.Text}}</td> 
+            
           </tr>
         </ng-container>
 

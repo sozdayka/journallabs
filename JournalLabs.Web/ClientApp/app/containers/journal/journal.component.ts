@@ -113,7 +113,7 @@ export class JournalComponent implements OnInit {
         result => {
           var teacherName = localStorage.getItem('TeacherName');
           var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} предоставил доступ к журналу ${this.journalViewModel.JournalModel.LessonName} ассистенту ${assistant.Name}`;
-          this.logService.writeTeacherLog(logText).subscribe(resp => {
+          this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
             console.log("success add assistant");
             this.assistantList = [];
             this.teacherJournalService.getAllJournalAssistants(this.journalId).subscribe(response => {
@@ -127,7 +127,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} предоставил заблокировал доступ к журналу ${this.journalViewModel.JournalModel.LessonName} ассистенту ${assistant.Name}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success remove assistant");
         });
       });
@@ -176,7 +176,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил имя студента под Id ${student.Id} на ${student.StudentName}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success update user name");
         });
 
@@ -188,7 +188,7 @@ export class JournalComponent implements OnInit {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил настройки Вида работы под Id ${kindOfWork.Id} на
                       название ${kindOfWork.NameKindOfWork}, видимость для ассистента ${kindOfWork.IsKindOfWorkVisible}, видимость для студента ${kindOfWork.IsVisibleToStudent}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success update kindOfWork name");
         });
       });
@@ -198,7 +198,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил блок заметок под Id ${remark.Id} на текст заметки ${remark.RemarkText}, видимость студента  ${remark.IsHideStudent}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success update remark");
         });       
       });
@@ -233,7 +233,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил блок лабораторной работы под Id ${labBlock.Id} на дату ${labBlock.Date}, оценку ${labBlock.Mark}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success update labBlock");
         });        
       });
@@ -245,7 +245,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} удалил студента под Id ${id}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success remove student");
           location.reload();
         }); 
@@ -261,7 +261,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} добавил нового студента`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           this.addStudentToJournalViewModel.Students = [];
           console.log("success add student");
           location.reload();
@@ -276,7 +276,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил видимость вида работы под Id ${idKindOfWork} на ${isChecked}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success update visible kindOfWork");
           location.reload();
         });
@@ -287,7 +287,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} удалил вид работы под Id ${idKindOfWork}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success remove kindOfWork");
           location.reload();
         }); 
@@ -298,7 +298,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} добавил новый вид работы в журнале под ID ${this.journalId}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success add kindOfWork");
           location.reload();
         }); 
@@ -325,7 +325,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил видимость вида работы для студента под Id ${idKindOfWork} на ${isChecked}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success update visible kindOfWork for student");
           location.reload();
         });
@@ -336,7 +336,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил поля в журнале ${this.journalViewModel.JournalModel.Id}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success update journal");
         });
       });

@@ -187,7 +187,7 @@ export function createTranslateLoader(http: Http, baseHref) {
                   }
               },
               {
-                path: 'view-log', component: ViewLogsComponent,
+                path: 'view-logs', component: ViewLogsComponent,
                   data: {
                       title: 'Log list',
                       meta: [{ name: 'description', content: 'Logs list' }],

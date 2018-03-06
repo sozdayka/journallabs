@@ -9,16 +9,6 @@ import { Cathedra } from '../../models/Cathedra';
 })
 export class CathedrasComponent implements OnInit {
 
-  public pulpitArr: {fName:string, sName:string}[] = [{
-    fName: 'ІТех',
-    sName: 'INTERNET-технологіі'
-  }, {
-    fName: 'Комп"ютерні мережі',
-    sName: 'КМ'
-  }, {
-    fName: 'Захист інформаціі в КСМ',
-    sName: 'ЗІКС'
-  }];
 
   //http://journallabs.pp.ua/api/Cathedra/GetCathedras
   //http://journallabs.pp.ua/api/Cathedra/GetCathedras
@@ -49,6 +39,10 @@ export class CathedrasComponent implements OnInit {
     this.cathedraService.addCathedra(this.newCathedra).subscribe(responce => {
       this.newCathedra = new Cathedra();
       console.log("Cathedra create successfully");
+      var logText = `${new Date().toLocaleString()} Администратор добавил кафедру ${this.newCathedra.FullName}`;
+      this.logService.writeTeacherLog(logText,"admin").subscribe(resp => {
+        console.log(resp);
+      });
       this.loadCathedras();
     })
       //this.groupName = '';
@@ -57,6 +51,13 @@ export class CathedrasComponent implements OnInit {
   public changeCathedraName(cathedra: Cathedra) {
     this.cathedraService.updateCathedra(cathedra).subscribe(responce => {
       console.log("Change cathedra Name: " + cathedra.FullName);
+
+      var logText = `${new Date().toLocaleString()} Администратор изменил название кафедры ${cathedra.FullName}`;
+      this.logService.writeTeacherLog(logText,"admin").subscribe(resp => {
+        console.log(resp);
+      });
+
+
     });
     
   }
