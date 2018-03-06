@@ -30,6 +30,7 @@ export class GroupStudentsComponent implements OnInit {
     ) { } //private studentService: StudentService
     ngOnInit() {
       this.loadGroups();
+      if(this.journalViewModel){
         this.journalViewModel.StudentResultForJournal.forEach(item =>{
           this.StudentList.push({
             Id:  item.StudentInfo.Id,
@@ -41,7 +42,7 @@ export class GroupStudentsComponent implements OnInit {
           Id:this.journalViewModel.JournalModel.Id, Name:this.journalViewModel.JournalModel.GroupName,StudentList:this.StudentList
         });
 
-
+      }
     }
 
    

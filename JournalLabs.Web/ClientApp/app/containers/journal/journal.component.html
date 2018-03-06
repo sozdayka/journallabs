@@ -113,7 +113,7 @@
     <br />
     <div *ngIf="isAddSudent">
       <!-- Group List -->
-      <group-students (groupStudents)="StudentsChange($event)"></group-students>
+      <group-students (groupStudents)="StudentsChange($event)" [journalViewModel]="journalViewModel"></group-students>
     </div>
     <input *ngIf="currentRole=='Teacher'" type="button" (click)="addStudentToJournal()" value="Добавить студента" />
     <input *ngIf="currentRole=='Teacher'" type="button" (click)="addKindOfWorkToJournal()" value="Добавить вид работы" />
@@ -127,25 +127,54 @@
         <li *ngFor=" let assistant of assistantList"><input type="checkbox" (click)="changeAssistant($event,assistant)" [checked]="assistant.IsAllowAccess"> {{assistant.Name}}</li>
       </ul>
     </div>
-    <br>
-    <br>
-    <p><b>Средний бал:</b> {{(statAvgMark()/journalViewModel.StudentResultForJournal.length)}}</p>
-    <p *ngIf="maxMarkInfo.length>0"><b>Лучший результат:</b> {{maxMarkInfo[0].topmark}} у студента {{maxMarkInfo[0].studentName}} по ({{maxMarkInfo[0].predmet}})</p>
-    <p><b>Кол отработок:</b> {{MakeLabInfo[0].count}} / {{journalViewModel.StudentResultForJournal.length}}</p>
-    <p><b>Кол %отработок:</b> {{(MakeLabInfo[0].count / journalViewModel.StudentResultForJournal.length)*100}}</p>
+    {{getStatisticArray()}}
 
-    <p><b>Кол здано:</b> {{EndLabInfo[0].count}} / {{journalViewModel.StudentResultForJournal.length}}</p>
-    <p><b>Кол %здано:</b> {{(EndLabInfo[0].count / journalViewModel.StudentResultForJournal.length)*100}}</p>
-<br>  
-Включите "Блок ведомости"
-<br>  
-    <p><b>Кол здано на А(ЕКТС):</b> {{VarCountA}}</p> 
+    <br>
+    <br>
+    <p><b>Средний бал:</b> {{(statAvgMark()/journalViewModel.StudentResultForJournal.length).toFixed(2)}}</p>
+    <p *ngIf="maxMarkInfo.length>0"><b>Лучший результат:</b> {{maxMarkInfo[0].topmark}} у студента {{maxMarkInfo[0].studentName}} по ({{maxMarkInfo[0].predmet}})</p>
+    <fieldset >    	
+					<legend>Количество отработавших</legend>
+					
+					<div class="panel panel-default">
+						<div class="panel-body">
+  
+              <ng-container *ngFor="let lab of getArraysForStatistic;let i=index" >
+                <p>{{lab.NameLabs}}:   <b>{{getCounOfEndLab(lab.Marks,lab.BolType,true)}}</b> из {{lab.Marks.length/2}} ( {{((getCounOfEndLab(lab.Marks,lab.BolType,true)/(lab.Marks.length/2))*100).toFixed(2)}} %)</p>
+              </ng-container>
+						</div>
+					</div>
+					
+        </fieldset>
+        <fieldset >    	
+					<legend>Количество защитивших</legend>
+					
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<ng-container *ngFor="let lab of getArraysForStatistic;let i=index" >
+                <p>{{lab.NameLabs}}:   <b>{{getCounOfEndLab(lab.Marks,lab.BolType,false)}}</b> из {{lab.Marks.length/2}} ( {{((getCounOfEndLab(lab.Marks,lab.BolType,false)/(lab.Marks.length/2))*100).toFixed(2)}} %)</p>
+              </ng-container>
+						</div>
+					</div>
+					
+				</fieldset>	
+        <fieldset >    	
+					<legend>Общее данные (нужно включить блок ведомости)</legend>
+					
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<p><b>Кол здано на А(ЕКТС):</b> {{VarCountA}}</p> 
     <p><b>Кол здано на B(ЕКТС):</b> {{VarCountB}}</p>
     <p><b>Кол здано на C(ЕКТС):</b> {{VarCountC}}</p>
     <p><b>Кол здано на D(ЕКТС):</b> {{VarCountD}}</p>
     <p><b>Кол здано на E(ЕКТС):</b> {{VarCountE}}</p>
     <p><b>Кол здано на FX(ЕКТС):</b> {{VarCountFX}}</p>
-  
+						</div>
+					</div>
+					
+				</fieldset>
+        
+        
     <br>
     <br>
   </div>
