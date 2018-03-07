@@ -42,6 +42,7 @@ import { CathedraService } from './shared/cathedra.service';
 import { StudentGroupService } from './shared/student-group.service';
 
 import { FilterPipe } from './shared/filter.pipe';
+import { ViewLogsComponent } from './containers/view-logs/view-logs.component';
 
 export function createTranslateLoader(http: Http, baseHref) {
     // Temporary Azure hack
@@ -67,6 +68,7 @@ export function createTranslateLoader(http: Http, baseHref) {
       CathedrasComponent,
       GroupsComponent,
       GroupComponent,
+      ViewLogsComponent,
 
       FilterPipe,
       
@@ -178,6 +180,17 @@ export function createTranslateLoader(http: Http, baseHref) {
                   data: {
                       title: 'Groups list',
                       meta: [{ name: 'description', content: 'Groups list' }],
+                      links: [
+                          { rel: 'canonical', href: 'http://blogs.example.com/bootstrap/something' },
+                          { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/bootstrap-demo' }
+                      ]
+                  }
+              },
+              {
+                path: 'view-logs', component: ViewLogsComponent,
+                  data: {
+                      title: 'Log list',
+                      meta: [{ name: 'description', content: 'Logs list' }],
                       links: [
                           { rel: 'canonical', href: 'http://blogs.example.com/bootstrap/something' },
                           { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/bootstrap-demo' }

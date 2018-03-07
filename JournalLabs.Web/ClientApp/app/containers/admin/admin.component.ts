@@ -31,7 +31,7 @@ export class AdminComponent implements OnInit {
       debugger;
       this.userService.addUser(this.teacherModel).subscribe(response => {
         var logText = `${new Date().toLocaleString()} Преподаватель ${this.teacherModel.Login} успешно добавлен`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"admin").subscribe(resp => {
           alert("Преподаватель успешно добавлен");
           location.reload();
         });       

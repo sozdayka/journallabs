@@ -41,6 +41,15 @@ export class JournalComponent implements OnInit {
   public isAddSudent:boolean = false;
   public addStudentToJournalViewModel: AddStudentToJournalViewModel = new AddStudentToJournalViewModel();
 
+  public getArraysForStatistic:{
+    IdLabs:string,
+    NameLabs:string,
+    BolType: boolean,
+    Marks:{
+      IdStudent:string,
+      Mark:number
+    }[]
+  }[]=[];
 
 
   public isTotal:boolean = false; 
@@ -92,6 +101,7 @@ export class JournalComponent implements OnInit {
       });
     });
 
+    this.getStatisticArray();
   }
 
   public changeAssistant(event: any, assistant: AssistantsJournalViewModel) {
@@ -103,7 +113,7 @@ export class JournalComponent implements OnInit {
         result => {
           var teacherName = localStorage.getItem('TeacherName');
           var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} предоставил доступ к журналу ${this.journalViewModel.JournalModel.LessonName} ассистенту ${assistant.Name}`;
-          this.logService.writeTeacherLog(logText).subscribe(resp => {
+          this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
             console.log("success add assistant");
             this.assistantList = [];
             this.teacherJournalService.getAllJournalAssistants(this.journalId).subscribe(response => {
@@ -117,7 +127,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} предоставил заблокировал доступ к журналу ${this.journalViewModel.JournalModel.LessonName} ассистенту ${assistant.Name}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success remove assistant");
         });
       });
@@ -166,7 +176,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил имя студента под Id ${student.Id} на ${student.StudentName}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success update user name");
         });
 
@@ -178,7 +188,7 @@ export class JournalComponent implements OnInit {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил настройки Вида работы под Id ${kindOfWork.Id} на
                       название ${kindOfWork.NameKindOfWork}, видимость для ассистента ${kindOfWork.IsKindOfWorkVisible}, видимость для студента ${kindOfWork.IsVisibleToStudent}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success update kindOfWork name");
         });
       });
@@ -188,7 +198,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил блок заметок под Id ${remark.Id} на текст заметки ${remark.RemarkText}, видимость студента  ${remark.IsHideStudent}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success update remark");
         });       
       });
@@ -223,7 +233,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил блок лабораторной работы под Id ${labBlock.Id} на дату ${labBlock.Date}, оценку ${labBlock.Mark}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success update labBlock");
         });        
       });
@@ -235,7 +245,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} удалил студента под Id ${id}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success remove student");
           location.reload();
         }); 
@@ -251,7 +261,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} добавил нового студента`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           this.addStudentToJournalViewModel.Students = [];
           console.log("success add student");
           location.reload();
@@ -266,7 +276,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил видимость вида работы под Id ${idKindOfWork} на ${isChecked}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success update visible kindOfWork");
           location.reload();
         });
@@ -277,7 +287,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} удалил вид работы под Id ${idKindOfWork}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success remove kindOfWork");
           location.reload();
         }); 
@@ -288,7 +298,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} добавил новый вид работы в журнале под ID ${this.journalId}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success add kindOfWork");
           location.reload();
         }); 
@@ -315,7 +325,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил видимость вида работы для студента под Id ${idKindOfWork} на ${isChecked}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success update visible kindOfWork for student");
           location.reload();
         });
@@ -326,7 +336,7 @@ export class JournalComponent implements OnInit {
       result => {
         var teacherName = localStorage.getItem('TeacherName');
         var logText = `${new Date().toLocaleString()} Преподаватель ${teacherName} изменил поля в журнале ${this.journalViewModel.JournalModel.Id}`;
-        this.logService.writeTeacherLog(logText).subscribe(resp => {
+        this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
           console.log("success update journal");
         });
       });
@@ -368,12 +378,13 @@ export class JournalComponent implements OnInit {
   public VarCountB:number=0;
   public VarCountC:number=0;
   public VarCountD:number=0;
-  public VarCountE:number;
+  public VarCountE:number=0;
   public VarCountFX: number = 0;
 
   public totalMarkEKTCInfo(labBlocks,isexma){
     var returnText: string =" ";
     let sum: number = 0;
+
 
     for (let labBlock of labBlocks) {
       if (labBlock.IsCalculateMark) {
@@ -415,6 +426,9 @@ export class JournalComponent implements OnInit {
     }
   }
 
+
+
+
   public EKTCLabInfo: { 
     name: string, 
     count: number
@@ -437,6 +451,97 @@ export class JournalComponent implements OnInit {
   }[]=[];
   //{studentName: string; topmark: string; predmet: string};
   
+
+  public getStatisticArray(){
+    this.getArraysForStatistic =[];
+    // console.log("**************");
+
+    // console.log(this.journalViewModel);
+    if(this.journalViewModel){
+    this.journalViewModel.KindsOfWorkForJournal.forEach(listlab=>{
+
+      let MarksOneLab:{ IdStudent:string,  Mark:number }[]=[];
+      let BolTypelab;
+
+      this.journalViewModel.StudentResultForJournal.forEach(sturdent=>{
+        sturdent.StudentLabBlocks.forEach(marklab=>{
+          if(listlab.Id== marklab.KindOfWorkId){
+            MarksOneLab.push({
+              IdStudent:sturdent.StudentInfo.Id,
+              Mark:marklab.Mark
+            });
+            BolTypelab = marklab.IsBoolField;
+          // marklab.IsBoolField,
+          // marklab.Mark
+          }
+        });
+
+      });
+      this.getArraysForStatistic.push({
+        IdLabs:listlab.Id,
+        NameLabs:listlab.NameKindOfWork,
+        BolType: BolTypelab,
+        Marks: MarksOneLab
+      });
+
+     // this.getCounOfEndLab(this.getArraysForStatistic);
+    });
+  }
+
+    // console.log(this.getArraysForStatistic);
+
+    // console.log("**************");
+  }
+
+  public findObjectByKey(array, key, value) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i][key] === value) {
+            return array[i];
+        }
+    }
+    return null;
+  }
+
+  public getCounOfEndLab(array:any,typeLab,statInfo){
+    //console.log("+++++++");
+    //console.log(array);
+    // array.Marks.forEach(mark=>{
+    //   //let t = this.findObjectByKey(array.Marks,"IdStudent",mark.IdStudent);
+    //  // let t = array.Marks.find(array, function (obj) { return obj.Marks.IdStudent === mark.IdStudent; });
+
+    //   // console.log(mark);
+    //   // console.log(mark.IdStudent);
+
+    // });
+let countOtrab = 0;
+let countZdan = 0;
+    for (let i = 0; i < array.length; i+=2) {
+      //console.log(array[i]);
+      if(typeLab){
+        if(array[i].Mark==1){
+          countOtrab ++;  
+        }
+        
+      }else{
+        if(array[i].Mark>0){
+          countZdan++;
+        }
+      }
+      
+    }
+   
+    // console.log("+++++++");
+    // console.log(countOtrab);
+    // console.log(countZdan);
+    return statInfo?countOtrab:countZdan;
+  }
+
+
+
+
+
+
+
 
 
   public statAvgMark(){

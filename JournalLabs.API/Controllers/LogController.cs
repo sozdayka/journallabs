@@ -23,6 +23,7 @@ namespace JournalLabs.API.Controllers
         [HttpPost]
         public IHttpActionResult CreateLog(Log logModel)
         {
+            logModel.Id = Guid.NewGuid();
             _logService.CreateLog(logModel);
             return Ok("Good");
         }
@@ -31,7 +32,7 @@ namespace JournalLabs.API.Controllers
         public IHttpActionResult GetLogsByType(string type)
         {
             var result = _logService.GetLogsByType(type);
-            return Ok("Good");
+            return Ok(result);
         }
     }
 }

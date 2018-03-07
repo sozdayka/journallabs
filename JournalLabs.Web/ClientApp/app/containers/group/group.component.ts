@@ -74,6 +74,10 @@ export class GroupComponent implements OnInit {
         });
         this.student.Student = new Student();
         console.log("Student create successfully");
+        var logText = `${new Date().toLocaleString()} Администратор в группу ${this.groupInfo.Name} добавил студена: ${this.student.Student.StudentName}`;
+        this.logService.writeTeacherLog(logText,"admin").subscribe(resp => {
+          
+        });
       });
     
      
@@ -82,17 +86,31 @@ export class GroupComponent implements OnInit {
   public changeGroupName() {
     this.groupService.updateGroup(this.groupInfo).subscribe(response => {
       console.log("Change group Name: " + this.groupInfo.Name);
+      var logText = `${new Date().toLocaleString()} Администратор изменил название группы ${this.groupInfo.Name}`;
+      this.logService.writeTeacherLog(logText,"admin").subscribe(resp => {
+        
+      });
     });
   }
   public changeStudentName(student: Student) {
     this.studentService.updateStudent(student).subscribe(response => {
       console.log("Change student Name: " + student.StudentName);
+      var logText = `${new Date().toLocaleString()} Администратор в группу ${this.groupInfo.Name} изменил ФИО студена на: ${student.StudentName}`;
+      this.logService.writeTeacherLog(logText,"admin").subscribe(resp => {
+        
+      });
     });
   }
   public removeStudent(studentDelete: Student,index:number) {
     //this.pulpitArr.splice(pulpitDelete.sName, 1);
     this.studentService.deleteStudent(studentDelete.Id).subscribe(response => {
       console.log("Delete from group, student Name: " + this.groupStudents[index].StudentName);
+
+      var logText = `${new Date().toLocaleString()} Администратор удалил из группу ${this.groupInfo.Name} студена: ${this.groupStudents[index].StudentName}`;
+      this.logService.writeTeacherLog(logText,"admin").subscribe(resp => {
+        
+      });
+
       this.groupStudents.splice(index, 1);
     });
   }

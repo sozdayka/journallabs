@@ -1,7 +1,9 @@
 <h4>Выберите группу</h4>
 <ul>
   <li *ngFor="let key of groupsArray;let i=index">
-    <input (change)="getGroupStudents(key,$event,i)" type="checkbox" name="group" value="{{key.Id}}" />
+    <input (change)="getGroupStudents(key,$event,i)" type="checkbox" name="group" value="{{key.Id}}" 
+    [checked]="findObjectByKey(selectedStudent, 'Name', key.Name)"
+    />
     <span>{{key.Name}}</span>
   </li>
 </ul>
@@ -21,7 +23,9 @@
         <li *ngFor="let student of subgroup.students ">
 
           <input (change)="selectStudent(student,$event,i)" type="checkbox"
-                 name="student" />
+                 name="student" 
+                 [checked]="findObjectByKey(StudentList, 'StudentName', student.StudentName)"
+                 />
           <span class="game-text">{{student.StudentName}}</span>
 
         </li>

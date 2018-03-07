@@ -31,21 +31,21 @@ export class SignInComponent {
     //this.teacherModel.Role = "Teacher";
     this.userService.signInUser(this.teacherModel).subscribe(response => {
       var logText = `${new Date().toLocaleString()} Пользователь ${this.teacherModel.Login} успешно авторизирован`;
-      this.logService.writeTeacherLog(logText).subscribe(resp => {
+      this.logService.writeTeacherLog(logText,"user").subscribe(resp => {
         var result: User = JSON.parse(response._body);
         if (result.Role == "Teacher" || result.Role == "Assistant") {
           localStorage.setItem('Role', result.Role);
           localStorage.setItem('TeacherId', result.Id);
           localStorage.setItem('TeacherName', result.Login);
-          location.reload();
-          //this.router.navigate(['teacher-journals']);
-          return;
+         location.reload();
+          this.router.navigate(['teacher-journals']);
+         return;
         }
         if (result.Role == "Admin") {
           localStorage.setItem('Role', result.Role);
-          location.reload();
-          this.router.navigate(['admin']);
-          return;
+         location.reload();
+         this.router.navigate(['admin']);
+         return;
         }
       });
     });

@@ -46,6 +46,11 @@ export class GroupsComponent implements OnInit {
     this.groupService.addGroup(this.newGroup).subscribe(responce => {
       this.newGroup = new Group();
       console.log("Group create successfully");
+      var logText = `${new Date().toLocaleString()} Администратор дабавил группу: ${this.newGroup}`;
+        this.logService.writeTeacherLog(logText,"admin").subscribe(resp => {
+          
+        });
+
       this.loadGroups();
     })
       //this.groupName = '';
@@ -62,7 +67,12 @@ export class GroupsComponent implements OnInit {
     this.groupService.deleteGroup(group.Id).subscribe(responce => {
       console.log("Delete group : " + group.Name);
       this.groupsArray.splice(groupDelrow, 1);
-    })
+
+      var logText = `${new Date().toLocaleString()} Администратор удалил группу: ${group.Name}`;
+        this.logService.writeTeacherLog(logText,"admin").subscribe(resp => {
+          console.log("success update kindOfWork name");
+        });
+    });
     
     
   }

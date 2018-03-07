@@ -10,7 +10,9 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 .deadlineend{
   color:red;
 }
-
+.col-sm-9{
+  padding-left: 50px;
+}
 /* *** Overall APP Styling can go here ***
    --------------------------------------------
    Note: This Component has ViewEncapsulation.None so the styles will bleed out
