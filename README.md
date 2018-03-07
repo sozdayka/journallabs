@@ -1,4 +1,4 @@
-# ASP.NET Core 2.0 & Angular 4 (+) advanced starter - with Server-side prerendering (for Angular SEO)!
+# JournalLabs - Журнал лабораторных работ
 
 > [(upcoming) Angular 5.0 demo Branch Here](https://github.com/MarkPieszak/aspnetcore-angular2-universal/tree/angular-5.0-updates)
 
