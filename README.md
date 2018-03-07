@@ -6,6 +6,12 @@
     <img src="./docs/architecture.png" alt="ASP.NET Core 2.0 Angular 4+ Starter" title="ASP.NET Core 2.0 Angular 4+ Starter">
 </p>
 
+### Выгрузка на Heroku 
+<a href="https://dashboard.heroku.com/new?template=https://github.com/sozdayka/journallabs.git">
+<img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy on Heroku">
+</a>
+
+
 ### Harness the power of Angular 4+, ASP.NET Core 2.0, now with SEO !
 
 Angular SEO in action:
