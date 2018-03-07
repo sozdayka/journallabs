@@ -1,6 +1,6 @@
-# README #
+# JournalLabs v.c2bb3f0 #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+JournalLabs - Журнал лабораторных работ
 
 ### What is this repository for? ###
 
